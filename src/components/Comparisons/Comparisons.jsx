@@ -7,3 +7,5 @@ const Comparisons = () => {
     </div>
     );
   }
+
+export default Comparisons;
