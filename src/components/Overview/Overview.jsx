@@ -19,6 +19,6 @@ class Overview extends React.component {
 }
 
 
-
+export default Overview;
 
 
