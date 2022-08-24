@@ -1,2 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
+const Comparisons = () => {
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+    );
+  }
