@@ -1,15 +1,23 @@
 import React from 'react';
+import RelatedList from './RelatedItem.jsx';
+import OutfitList from './OutfitList.jsx';
 
-const Comparisons = () => {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-    );
+// this could might be a stateless component just for passing down props (main product being displayd) and organization purposes?
+
+class Comparisons extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
-export default Comparisons;
+  render (){
+    return (
+      <div>
+        <RelatedList/>
+        <OutfitList/>
+      </div>
+    )
+  }
+}
 
-//hello
-//test
-//test
+export default Comparisons;
