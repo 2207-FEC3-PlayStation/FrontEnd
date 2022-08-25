@@ -17,7 +17,7 @@ class RelatedItem extends React.Component {
     return (
       <div>
       <button>Star</button>
-        <p>Product Image<p>
+        <p>Product Image</p>
         <p>Product Category</p>
         <p>Product Name</p>
         <p>Product Price</p>
