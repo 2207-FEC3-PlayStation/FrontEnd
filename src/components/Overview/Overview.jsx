@@ -1,11 +1,11 @@
 import React from 'react'
 
 
-class Overview extends React.component {
+class Overview extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state{
+    this.state = {
       list: []
     }
   }
