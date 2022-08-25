@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class QandA extends Component {
-  state = {
-    test: ''
-  };
+class QandA extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: ''
+    }
 
-  render() {
+  }
+
+  render () {
     return (
-      <p>This is Q and A</p>
+      <div>
+        <h2>Welcome to Q and A</h2>
+      </div>
     )
   }
-}
+};
 
 export default QandA;
