@@ -23,7 +23,6 @@ class RelatedList extends React.Component {
     return (
       <div>
         <RelatedItem/>
-        {modal}
       </div>
     )
   }
