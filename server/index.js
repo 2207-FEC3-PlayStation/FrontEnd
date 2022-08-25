@@ -14,9 +14,11 @@ app.get('/products', (req, res) => {
   db.getProducts()
     .then((result) => {
       console.log('results: ', result);
+      res.status(200).send(results)
     })
     .catch((err) => {
       console.log('This is the error: ', err);
+      res.status(400).send(err);
     })
 })
 
