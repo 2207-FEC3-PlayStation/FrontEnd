@@ -1,10 +1,11 @@
 import React from 'react';
+import OutfitItem from './OutfitItem.jsx';
 
 class OutfitList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfitItems: [];
+      outfitItems: [],
     };
   }
   // check session/cookie...
@@ -19,11 +20,11 @@ class OutfitList extends React.Component {
 
     return (
       <div>
-        <button>Add to Outfit with + icon / card not button?</button>
+        <button>Add to Outfit</button>
         <OutfitItem/>
       </div>
     )
   }
 }
 
-export default OutfitsList;
+export default OutfitList;
