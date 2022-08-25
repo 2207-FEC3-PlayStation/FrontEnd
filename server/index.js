@@ -11,13 +11,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
 app.get('/products', (req, res) => {
-  console.log(db.getProducts);
   db.getProducts()
     .then((result) => {
       console.log('results: ', result);
     })
-    .err((err) => {
-      console.log(err);
+    .catch((err) => {
+      console.log('This is the error: ', err);
     })
 })
 
