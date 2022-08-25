@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingBreakdown from './RatingBreakdown.jsx';
 
 class RandR extends React.Component {
   constructor(props) {
@@ -9,8 +10,7 @@ class RandR extends React.Component {
   render (){
     return (
       <div>
-        <h1>Ratings!</h1>
-        <h2>Reviews!</h2>
+        <RatingBreakdown style={{width: "33%"}}/>
       </div>
     )
   }
