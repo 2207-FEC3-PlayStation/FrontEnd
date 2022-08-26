@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
 
-
+//test?
 class QandA extends React.Component {
   constructor(props) {
     super(props);
