@@ -3,7 +3,7 @@ import ComparisonsModal from './ComparisonsModal.jsx';
 import RelatedItem from './RelatedItem.jsx';
 import styled from 'styled-components';
 
-const Cards = styled.div`
+const Carousel = styled.div`
 align-items: left;
 display: flex;
 flex-direction: row;
@@ -20,13 +20,13 @@ const Button = styled.button`
 var RelatedList = (props) => (
   <div>
     <h4>RELATED PRODUCTS</h4>
-    <Cards>
+    <Carousel>
     <Button>&laquo;</Button>
     {props.product.map((item) => (
     <RelatedItem item={item} key={item.id}/>
     ))}
     <Button>&raquo;</Button>
-  </Cards>
+  </Carousel>
   </div>
 )
 

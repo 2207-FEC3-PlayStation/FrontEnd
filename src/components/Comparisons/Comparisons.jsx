@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 // this could might be a stateless component just for passing down props (main product being displayd) and organization purposes?
 
-const Carousel = styled.div`
+const Container = styled.div`
   align-items: left;
   display: flex;
   flex-direction: column;
@@ -108,13 +108,13 @@ class Comparisons extends React.Component {
   render (){
     return (
       <div>
-        <Carousel>
+        <Container>
           <p>Comparisons Section</p>
           <Related>
           <RelatedList product={this.state.product}/>
           </Related>
         <OutfitList product={this.state.product}/>
-        </Carousel>
+        </Container>
       </div>
     )
   }

@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import starbutton from '../../assets/starbutton.png';
 
+const CarouselItem= styled.div`
+display: flex;
+transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+`
 
 const Card = styled.div`
   border: 1px solid gray;
@@ -59,6 +63,7 @@ class RelatedItem extends React.Component {
   render (){
     return (
       // <div>
+      <CarouselItem>
         <Card>
         <Button onClick={this.handleClick.bind(this)}></Button>
         <Img src={this.props.item.style} alt="product image"/><br></br>
@@ -68,6 +73,7 @@ class RelatedItem extends React.Component {
         <Text>${this.props.item.default_price}</Text><br></br>
         <Text>Average Star Rating</Text>
         </Card>
+      </CarouselItem>
       // </div>
 
     )
