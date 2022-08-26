@@ -14,7 +14,7 @@ const Container = styled.div`
   border: 1px dotted purple;
   margin-left: auto;
   margin-right: auto;
-  width: 1000px;
+  width: 1100px;
 `
 const Related = styled.a`
   color: black;
