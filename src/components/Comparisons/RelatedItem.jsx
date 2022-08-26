@@ -46,6 +46,8 @@ class RelatedItem extends React.Component {
     }
   };
 
+
+
   handleClick () {
     console.log('Clicked Star Button')
     // open comparison modal
