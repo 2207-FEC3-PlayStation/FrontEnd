@@ -7,10 +7,13 @@ const Carousel = styled.div`
 align-items: left;
 display: flex;
 flex-direction: row;
-justify-content: space-evenly;
+justify-content: center;
 flex-wrap: nowrap;
 overflow: hidden;
 padding: 10px;
+margin-left: auto;
+margin-right: auto;
+width: 1000px;
 `
 const Button = styled.button`
   background: transparent;

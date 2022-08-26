@@ -11,8 +11,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   padding: 10px;
-  width: calc(100% - 20px);
   border: 1px dotted purple;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
 `
 const Related = styled.a`
   color: black;
