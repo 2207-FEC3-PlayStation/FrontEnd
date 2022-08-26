@@ -1,5 +1,6 @@
 import React from 'react';
-import RatingBreakdown from './RatingBreakdown.jsx';
+import RatingBreakdown from './RatingBreakdown/RatingBreakdown.jsx';
+import Reviews from './Reviews/Reviews.jsx';
 
 class RandR extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class RandR extends React.Component {
   render (){
     return (
       <div>
-        <RatingBreakdown style={{width: "33%"}}/>
+        <RatingBreakdown />
+        <Reviews />
       </div>
     )
   }

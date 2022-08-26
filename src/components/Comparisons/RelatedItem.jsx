@@ -1,33 +1,57 @@
 import React from 'react';
+import styled from 'styled-components';
+import starbutton from '../../assets/starbutton.png';
+
+const CarouselItem= styled.div`
+display: flex;
+transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+`
+
+const Card = styled.div`
+  border: 1px solid gray;
+  color: black;
+  font-size: 20px;
+  margin: 3%;
+  padding: 0;
+  display: inline-block;
+  position: relative;
+`
+
+const Button = styled.button`
+  background: transparent url(${starbutton}) no-repeat top;
+  height: 25px;
+  width: 25px;
+  border: none;
+  position: absolute;
+  top: 2%;
+  right: 5%;
+`
+const Text = styled.span`
+  color: rgb(57, 57, 57);
+  padding: 5%;
+`
+
+const Img = styled.img`
+  width:100%;
+  height:70%;
+  opacity: 0.4;
+`
 
 class RelatedItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedItemInfo: {
-        "id": 66644,
-        "campus": "hr-rfc",
-        "name": "Morning Joggers",
-        "slogan": "Make yourself a morning person",
-        "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
-        "category": "Pants",
-        "default_price": "40.00",
-        "created_at": "2022-03-31T21:13:15.875Z",
-        "updated_at": "2022-03-31T21:13:15.875Z",
-        "features": [
-            {
-                "feature": "Fabric",
-                "value": "100% Cotton"
-            },
-            {
-                "feature": "Cut",
-                "value": "Skinny"
-            }
-        ]
-      },
-      style: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+      style: ""
+
     }
   };
+
+
+
+  handleClick () {
+    console.log('Clicked Star Button')
+    // open comparison modal
+  }
 
 
   // get request to get related Item info and set that to this.state.relatedItemInfo
@@ -39,17 +63,21 @@ class RelatedItem extends React.Component {
   // on click of star button render the comparison modal
 
   render (){
-
     return (
-      <div>
-        <button>Star</button>
-        <img src={this.state.style}
-          alt="header image"
-        />
-        <p>{this.state.relatedItemInfo.category}</p>
-        <p>{this.state.relatedItemInfo.name}</p>
-        <p>${this.state.relatedItemInfo.default_price}</p>
-      </div>
+      // <div>
+      <CarouselItem>
+        <Card>
+        <Button onClick={this.handleClick.bind(this)}></Button>
+        <Img src={this.props.item.style} alt="product image"/><br></br>
+        <Text>{this.props.item.category.toUpperCase()}</Text>
+        <br></br>
+        <Text>{this.props.item.name}</Text><br></br>
+        <Text>${this.props.item.default_price}</Text><br></br>
+        <Text>Average Star Rating</Text>
+        </Card>
+      </CarouselItem>
+      // </div>
+
     )
   }
 }
