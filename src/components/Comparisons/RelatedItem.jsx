@@ -8,8 +8,8 @@ const Card = styled.div`
   color: black;
   font-size: 20px;
   margin: 0;
-  padding: 0%;
-  display:inline-block;
+  padding: 0;
+  display: inline-block;
   position: relative;
 `
 
@@ -22,9 +22,15 @@ const Button = styled.button`
   top: 2%;
   right: 5%;
 `
-const Text = styled.p`
+const Text = styled.span`
+  color: rgb(57, 57, 57);
   padding: 5%;
-  margin: 0;
+`
+
+const Img = styled.img`
+  width:100%;
+  height:70%;
+  opacity: 0.4;
 `
 
 class RelatedItem extends React.Component {
@@ -52,18 +58,17 @@ class RelatedItem extends React.Component {
 
   render (){
     return (
-      <div>
+      // <div>
         <Card>
         <Button onClick={this.handleClick.bind(this)}></Button>
-        <img src={this.props.item.style}
-          alt="product image"
-        /><br></br>
-        <Text>{this.props.item.category}</Text>
-        <Text>{this.props.item.name}</Text>
-        <Text>${this.props.item.default_price}</Text>
+        <Img src={this.props.item.style} alt="product image"/><br></br>
+        <Text>{this.props.item.category.toUpperCase()}</Text>
+        <br></br>
+        <Text>{this.props.item.name}</Text><br></br>
+        <Text>${this.props.item.default_price}</Text><br></br>
         <Text>Average Star Rating</Text>
         </Card>
-      </div>
+      // </div>
 
     )
   }

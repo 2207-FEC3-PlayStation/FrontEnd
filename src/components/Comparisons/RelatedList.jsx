@@ -8,18 +8,24 @@ align-items: left;
 display: flex;
 flex-direction: row;
 justify-content: space-evenly;
+flex-wrap: nowrap;
+overflow: hidden;
 padding: 10px;
+`
+const Button = styled.button`
+  background: transparent;
+  border: none;
 `
 
 var RelatedList = (props) => (
   <div>
     <h4>RELATED PRODUCTS</h4>
     <Cards>
-    <button>&laquo;</button>
+    <Button>&laquo;</Button>
     {props.product.map((item) => (
     <RelatedItem item={item} key={item.id}/>
     ))}
-    <button>&raquo;</button>
+    <Button>&raquo;</Button>
   </Cards>
   </div>
 )
