@@ -1,5 +1,5 @@
 import React from 'react';
-//hello
+
 const QuestionList = props => {
   console.log('props = ', props)
   return (

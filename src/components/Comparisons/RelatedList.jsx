@@ -1,31 +1,40 @@
 import React from 'react';
-import ComparisonsModal from './ComparisonsModal.jsx'
+import ComparisonsModal from './ComparisonsModal.jsx';
 import RelatedItem from './RelatedItem.jsx';
+import styled from 'styled-components';
 
-class RelatedList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      relatedItems: [],
-      cardClicked: false
-    };
-  }
+const Carousel = styled.div`
+align-items: left;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+flex-wrap: nowrap;
+overflow: hidden;
+padding: 10px;
+`
+const Button = styled.button`
+  background: transparent;
+  border: none;
+`
 
-  // sends a get request for related products for the current product when it's mounted
+var RelatedList = (props) => (
+  <div>
+    <h4>RELATED PRODUCTS</h4>
+    <Carousel>
+    <Button>&laquo;</Button>
+    {props.product.map((item) => (
+    <RelatedItem item={item} key={item.id}/>
+    ))}
+    <Button>&raquo;</Button>
+  </Carousel>
+  </div>
+)
 
-  render (){
-    // conditionally render comparisons modal if clicked
-    // let modal;
-    // if clicked
-    // modal = </ComparisonsModal> ?
+  //66643 seems to be out of stock... so will have to check if there are any in stock first because thumbnail and other properties are null
 
-    // use map function to render all products as a card
-    return (
-      <div>
-        <RelatedItem/>
-      </div>
-    )
-  }
-}
+  // sends a get request for related products for the current product (props.product) when it's mounted (useEffect)
+  // for now just dummy data
+
+
 
 export default RelatedList;
