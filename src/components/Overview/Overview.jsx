@@ -3,6 +3,7 @@ import ImageGallery from './ImageGallery.jsx'
 import ProductInfo from './ProductInfo.jsx'
 import StyleSelect from './StyleSelect.jsx'
 import CheckOut from './CheckOut.jsx'
+import axios from 'axios'
 
 class Overview extends React.Component {
   constructor(props) {
@@ -12,6 +13,10 @@ class Overview extends React.Component {
       list: []
     }
   }
+
+
+
+
 
   render() {
     return (

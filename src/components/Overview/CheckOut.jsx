@@ -4,8 +4,8 @@ import React from 'react'
 var CheckOut = (props) => {
   return (
     <div className='buttons'>
-      <button className='size'>SELECT SIZE</button>
-      <button className='quantity'>-</button>
+      <select className='size'>SELECT SIZE</select>
+      <select className='quantity'>-</select>
       <button className='addToCart'>Add To Cart</button>
     </div>
   )
