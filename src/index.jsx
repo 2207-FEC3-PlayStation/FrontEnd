@@ -12,18 +12,19 @@ const App = () => {
 
   useEffect(() => {
     if (prod === null) {
-      var idParam = {product_id: 66646};
+      var idParam = 66646;
     } else {
-      var idParam = {product_id: prod.id}
+      var idParam = prod.id;
     }
     server.get('/products', idParam)
       .then((data) => {
-        setProd(data)
+        console.log(data);
+        setProd(data.data)
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [prod]);
+  }, []);
 
   return (
     <div>
