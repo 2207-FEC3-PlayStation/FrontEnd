@@ -20,6 +20,7 @@ class OutfitList extends React.Component {
 
     return (
       <div>
+        <h4>YOUR OUTFIT</h4>
         <button>Add to Outfit</button>
         <OutfitItem/>
       </div>
