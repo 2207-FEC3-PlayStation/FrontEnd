@@ -10,7 +10,7 @@ class Overview extends React.Component {
     super(props)
 
     this.state = {
-      list: []
+      list: [],
     }
   }
 
