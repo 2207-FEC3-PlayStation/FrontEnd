@@ -7,7 +7,7 @@ const Card = styled.div`
   border: 1px solid gray;
   color: black;
   font-size: 20px;
-  margin: 0;
+  margin: 3%;
   padding: 0;
   display: inline-block;
   position: relative;
