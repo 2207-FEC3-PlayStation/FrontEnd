@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
 import server from './serverRequests.js';
 import Overview from './components/Overview/Overview.jsx';
+import QandA from './components/QandA/QandA.jsx';
 import RandR from './components/RandR/RandR.jsx';
 import Comparisons from './components/Comparisons/Comparisons.jsx';
 
@@ -31,6 +32,7 @@ const App = () => {
       <h1>Hello World</h1>
       <Overview/>
       <Comparisons/>
+      <QandA />
       <RandR/>
     </div>
     );
