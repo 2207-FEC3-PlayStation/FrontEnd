@@ -19,7 +19,6 @@ const App = () => {
     }
     server.get('/products', idParam)
       .then((data) => {
-        console.log(data);
         setProd(data.data)
       })
       .catch((err) => {
@@ -39,7 +38,7 @@ const App = () => {
       <h1>Hello World</h1>
       <Overview/>
       <Comparisons/>
-      <RandR/>
+      <RandR reviews={reviews}/>
     </div>
     );
 }

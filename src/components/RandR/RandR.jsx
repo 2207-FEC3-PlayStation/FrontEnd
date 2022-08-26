@@ -1,6 +1,6 @@
 import React from 'react';
-import RatingBreakdown from './RatingBreakdown/RatingBreakdown.jsx';
-import Reviews from './Reviews/Reviews.jsx';
+import RatingBreakdown from './RatingBreakdown.jsx';
+import Reviews from './Reviews.jsx';
 
 class RandR extends React.Component {
   constructor(props) {
@@ -11,8 +11,8 @@ class RandR extends React.Component {
   render (){
     return (
       <div>
-        <RatingBreakdown />
-        <Reviews />
+        <RatingBreakdown reviews={this.props.reviews}/>
+        <Reviews/>
       </div>
     )
   }
