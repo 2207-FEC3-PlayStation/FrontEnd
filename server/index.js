@@ -11,10 +11,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
 app.get('/products', (req, res) => {
-  db.getProducts()
+  //the first parameter is the endpoint path desired, the second is taking the passed parameters {key: value} and passing the value into the API request string
+  db.getProducts(req._parsedUrl.pathname, Object.values(req.query)[0])
     .then((result) => {
-      console.log('results: ', result);
-      res.status(200).send(results)
+      res.status(200).send(result.data)
     })
     .catch((err) => {
       console.log('This is the error: ', err);
@@ -23,6 +23,6 @@ app.get('/products', (req, res) => {
 })
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT);
 console.log(`Server listening at http://localhost:${PORT}`);
