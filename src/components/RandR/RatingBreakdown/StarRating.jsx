@@ -2,7 +2,7 @@ import React from 'react';
 
 function StarRating(props) {
   return (
-    <div>
+    <div style={{display: 'inline-block', verticalAlign: 'center'}}>
       <p>Star Star Star Star Star</p>
     </div>
   )
