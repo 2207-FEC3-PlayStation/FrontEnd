@@ -4,20 +4,28 @@ import starbutton from '../../assets/starbutton.png';
 
 
 const Card = styled.div`
-  border: 1px solid purple;
+  border: 1px solid gray;
   color: black;
   font-size: 20px;
-  margin: 0 15px 20px 0;
-  padding: 10px;
+  margin: 0;
+  padding: 0%;
+  display:inline-block;
+  position: relative;
 `
 
 const Button = styled.button`
   background: transparent url(${starbutton}) no-repeat top;
-  height: 45px;
-  width: 45px;
+  height: 25px;
+  width: 25px;
   border: none;
+  position: absolute;
+  top: 2%;
+  right: 5%;
 `
-
+const Text = styled.p`
+  padding: 5%;
+  margin: 0;
+`
 
 class RelatedItem extends React.Component {
   constructor(props) {
@@ -29,7 +37,7 @@ class RelatedItem extends React.Component {
   };
 
   handleClick () {
-    console.log('hey')
+    console.log('Clicked Star Button')
     // open comparison modal
   }
 
@@ -45,16 +53,15 @@ class RelatedItem extends React.Component {
   render (){
     return (
       <div>
-
         <Card>
-
-        <img src={this.props.item.style}
-          alt="header image"
-        />
         <Button onClick={this.handleClick.bind(this)}></Button>
-        <p>{this.props.item.category}</p>
-        <p>{this.props.item.name}</p>
-        <p>${this.props.item.default_price}</p>
+        <img src={this.props.item.style}
+          alt="product image"
+        /><br></br>
+        <Text>{this.props.item.category}</Text>
+        <Text>{this.props.item.name}</Text>
+        <Text>${this.props.item.default_price}</Text>
+        <Text>Average Star Rating</Text>
         </Card>
       </div>
 

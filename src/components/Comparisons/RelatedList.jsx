@@ -9,7 +9,6 @@ display: flex;
 flex-direction: row;
 justify-content: space-evenly;
 padding: 10px;
-width: calc(100% - 20px);
 `
 
 var RelatedList = (props) => (
