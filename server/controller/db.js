@@ -7,8 +7,9 @@ const URI = process.env.DB_API;
 const GIT = process.env.GIT_TOKEN;
 
 //-------will need to update with passed info-----
-let getProducts = () => {
-  return axios.get(process.env.DB_API + '/products', {
+let getProducts = (path, param) => {
+  console.log('api request path: ', process.env.DB_API + path + '/' + param)
+  return axios.get(process.env.DB_API + path + '/' + param, {
     headers: {'Authorization': process.env.GIT_TOKEN}
 })
 };
@@ -16,5 +17,3 @@ let getProducts = () => {
 module.exports = {
   getProducts: getProducts
 };
-
-// path.join(process.env.DB_API, '/products')
