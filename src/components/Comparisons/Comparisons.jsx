@@ -105,6 +105,9 @@ class Comparisons extends React.Component {
     };
   }
 
+  // send a get request for related products
+  // send a get request for styles of those related products
+
 
 
   render (){

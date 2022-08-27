@@ -67,8 +67,8 @@ class RelatedItem extends React.Component {
       // <div>
       // <CarouselItem>
         <Card>
-        <Button onClick={this.handleClick.bind(this)}></Button>
         <Img src={this.props.item.style} alt="product image"/><br></br>
+        <Button onClick={this.handleClick.bind(this)}></Button>
         <Text>{this.props.item.category.toUpperCase()}</Text>
         <br></br>
         <Text>{this.props.item.name}</Text><br></br>
