@@ -6,17 +6,17 @@ import rightArrow from '../../assets/rightarrow.png';
 import leftArrow from '../../assets/leftarrow.png';
 
 const Carousel = styled.div`
-align-items: left;
-display: flex;
-flex-direction: row;
-justify-content: center;
-flex-wrap: nowrap;
-overflow: hidden;
-padding: 10px;
-margin-left: auto;
-margin-right: auto;
-width: 100%;
-position: relative;
+  align-items: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  position: relative;
 `
 const LeftButton = styled.button`
   background: transparent url(${leftArrow}) no-repeat top;
@@ -28,14 +28,9 @@ const LeftButton = styled.button`
   border: none;
 `
 
-const RightButton = styled.button`
+const RightButton = styled(LeftButton)`
   background: transparent url(${rightArrow}) no-repeat top;
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  top: 48%;
-  right: 5%;
-  border: none;
+  left: 92%;
 `
 
 var RelatedList = (props) => (
