@@ -2,8 +2,7 @@ import React from 'react';
 import ComparisonsModal from './ComparisonsModal.jsx';
 import RelatedItem from './RelatedItem.jsx';
 import styled from 'styled-components';
-import rightArrow from '../../assets/rightarrow.png';
-import leftArrow from '../../assets/leftarrow.png';
+
 
 const Carousel = styled.div`
   align-items: left;
@@ -11,38 +10,25 @@ const Carousel = styled.div`
   flex-direction: row;
   justify-content: center;
   flex-wrap: nowrap;
-  overflow: hidden;
-  padding: 10px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 957px;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
-  position: relative;
-`
-const LeftButton = styled.button`
-  background: transparent url(${leftArrow}) no-repeat top;
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  top: 48%;
-  left: 5%;
-  border: none;
 `
 
-const RightButton = styled(LeftButton)`
-  background: transparent url(${rightArrow}) no-repeat top;
-  left: 92%;
-`
 
 var RelatedList = (props) => (
   <div>
     <h4>RELATED PRODUCTS</h4>
-    <Carousel>
-    <LeftButton></LeftButton>
+
+    <Carousel id="RelatedListCarousel">
     {props.product.map((item) => (
     <RelatedItem item={item} key={item.id}/>
     ))}
-    <RightButton></RightButton>
-  </Carousel>
+    </Carousel>
+
   </div>
 )
 

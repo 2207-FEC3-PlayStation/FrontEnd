@@ -2,19 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import starbutton from '../../assets/starbutton.png';
 
-const CarouselItem = styled.div`
-display: flex;
-transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
-`
+// const CarouselItem = styled.div`
+// display: flex;
+// transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+// `
 
 const Card = styled.div`
   border: 1px solid gray;
   color: black;
   font-size: 20px;
   margin: 3%;
-  padding: 0;
-  display: inline-block;
+  margin-bottom: 0;
   position: relative;
+  padding-bottom: 2%;
+  /* word-wrap: break-word; */
 `
 
 const Button = styled.button`
@@ -26,14 +27,14 @@ const Button = styled.button`
   top: 2%;
   right: 5%;
 `
-const Text = styled.span`
+const Text = styled.small`
   color: rgb(57, 57, 57);
   padding: 5%;
 `
 
 const Img = styled.img`
-  width:100%;
-  height:70%;
+  width:180px;
+  height:220px;
   opacity: 0.4;
 `
 

@@ -2,6 +2,8 @@ import React from 'react';
 import RelatedList from './RelatedList.jsx';
 import OutfitList from './OutfitList.jsx';
 import styled from 'styled-components';
+import rightArrow from '../../assets/rightarrow.png';
+import leftArrow from '../../assets/leftarrow.png';
 
 // this could might be a stateless component just for passing down props (main product being displayd) and organization purposes?
 
@@ -14,7 +16,9 @@ const Container = styled.div`
   border: 1px dotted purple;
   margin-left: auto;
   margin-right: auto;
-  width: 1100px;
+  width: 957px;
+  /* overflow: visible; */
+  position: relative;
 `
 const Related = styled.a`
   color: black;
@@ -22,11 +26,51 @@ const Related = styled.a`
   padding: 10px;
 `
 
+const LeftButton = styled.button`
+  background: transparent url(${leftArrow}) no-repeat center;
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  top: 19%;
+  left: 0%;
+  border: none;
+  padding-top: 17%;
+  padding-bottom: 17.5%;
+`
+
+const RightButton = styled(LeftButton)`
+  background: transparent url(${rightArrow}) no-repeat center;
+  left: 97.5%;
+`
+
 class Comparisons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       product: [
+          {
+            "id": 66642,
+            "campus": "hr-rfc",
+            "name": "Camo Onesie",
+            "slogan": "Blend in to your crowd",
+            "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+            "category": "Jackets",
+            "default_price": "140.00",
+            "created_at": "2022-03-31T21:13:15.875Z",
+            "updated_at": "2022-03-31T21:13:15.875Z",
+            "features": [
+                {
+                    "feature": "Fabric",
+                    "value": "Canvas"
+                },
+                {
+                    "feature": "Buttons",
+                    "value": "Brass"
+                }
+            ],
+            "style": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+        }
+        ,
         {
           "id": 66644,
           "campus": "hr-rfc",
@@ -100,7 +144,37 @@ class Comparisons extends React.Component {
             }
         ],
         "style": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
-    }
+    },
+    {
+      "id": 66646,
+      "campus": "hr-rfc",
+      "name": "Heir Force Ones",
+      "slogan": "A sneaker dynasty",
+      "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+      "category": "Kicks",
+      "default_price": "99.00",
+      "created_at": "2022-03-31T21:13:15.875Z",
+      "updated_at": "2022-03-31T21:13:15.875Z",
+      "features": [
+          {
+              "feature": "Sole",
+              "value": "Rubber"
+          },
+          {
+              "feature": "Material",
+              "value": "FullControlSkin"
+          },
+          {
+              "feature": "Mid-Sole",
+              "value": "ControlSupport Arch Bridge"
+          },
+          {
+              "feature": "Stitching",
+              "value": "Double Stitch"
+          }
+      ],
+      "style": "https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+  }
     ]
     };
   }
@@ -108,6 +182,17 @@ class Comparisons extends React.Component {
   // send a get request for related products
   // send a get request for styles of those related products
 
+  scrollL () {
+    console.log('clicked on left button')
+    const element = document.getElementById("RelatedListCarousel");
+    element.scrollLeft -= 100;
+  }
+
+  scrollR () {
+    console.log('clicked on right button')
+    const element = document.getElementById("RelatedListCarousel");
+    element.scrollLeft += 100;
+  }
 
 
   render (){
@@ -115,10 +200,12 @@ class Comparisons extends React.Component {
       <div>
         <Container>
           <p>Comparisons Section</p>
+          <LeftButton onClick={this.scrollL.bind(this)}></LeftButton>
           <Related>
-          <RelatedList product={this.state.product}/>
+          <RelatedList id="RelatedList"product={this.state.product}/>
           </Related>
-        <OutfitList product={this.state.product}/>
+          <RightButton onClick={this.scrollR.bind(this)}></RightButton>
+          <OutfitList product={this.state.product}/>
         </Container>
       </div>
     )
