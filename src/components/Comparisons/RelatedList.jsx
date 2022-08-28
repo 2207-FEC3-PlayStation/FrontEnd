@@ -8,7 +8,7 @@ const Carousel = styled.div`
   align-items: left;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   flex-wrap: nowrap;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -16,6 +16,7 @@ const Carousel = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  scroll-behavior: smooth;
 `
 
 

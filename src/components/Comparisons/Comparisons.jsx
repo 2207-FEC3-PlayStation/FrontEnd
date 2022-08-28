@@ -12,18 +12,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 10px;
-  border: 1px dotted purple;
   margin-left: auto;
   margin-right: auto;
   width: 957px;
-  /* overflow: visible; */
   position: relative;
-`
-const Related = styled.a`
   color: black;
-  margin: 0 15px 20px 0;
-  padding: 10px;
+  scroll-behavior: smooth;
 `
 
 const LeftButton = styled.button`
@@ -36,6 +30,7 @@ const LeftButton = styled.button`
   border: none;
   padding-top: 17%;
   padding-bottom: 17.5%;
+  /* scroll-behavior: smooth; */
 `
 
 const RightButton = styled(LeftButton)`
@@ -185,13 +180,13 @@ class Comparisons extends React.Component {
   scrollL () {
     console.log('clicked on left button')
     const element = document.getElementById("RelatedListCarousel");
-    element.scrollLeft -= 100;
+    element.scrollLeft -= 250;
   }
 
   scrollR () {
     console.log('clicked on right button')
     const element = document.getElementById("RelatedListCarousel");
-    element.scrollLeft += 100;
+    element.scrollLeft += 250;
   }
 
 
@@ -200,10 +195,9 @@ class Comparisons extends React.Component {
       <div>
         <Container>
           <p>Comparisons Section</p>
-          <LeftButton onClick={this.scrollL.bind(this)}></LeftButton>
-          <Related>
+
           <RelatedList id="RelatedList"product={this.state.product}/>
-          </Related>
+          <LeftButton onClick={this.scrollL.bind(this)}></LeftButton>
           <RightButton onClick={this.scrollR.bind(this)}></RightButton>
           <OutfitList product={this.state.product}/>
         </Container>
