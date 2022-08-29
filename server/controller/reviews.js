@@ -13,7 +13,9 @@ module.exports = {
 
   getReviews: (params) => {
     var paramString = '?';
-    if (!params.product_id)
+    if (!params.product_id) {
+      throw new Error('No product_id provided');
+    }
     for (key in params) {
       paramString += key + '=' + params[key] + '&'
     }

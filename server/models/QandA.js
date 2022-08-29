@@ -2,7 +2,7 @@ const controller = require('../controller/controllerIndex.js').QandA;
 
 module.exports = {
   getQuestions: (req, res) => {
-    controller.getQuestions()
+    controller.getQuestions(req.query)
       .then((result) => {
         res.status(200).send(result.data)
       })
