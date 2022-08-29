@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Modal = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -11,9 +11,9 @@ const Modal = styled.div`
   display: flex;
   align-items: left;
   justify-content: center;
-  z-index: 9998;
-  width: 10000px;
-  height: 1000px;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
 `
 
 const ModalContent = styled.div`
