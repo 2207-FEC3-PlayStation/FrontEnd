@@ -32,7 +32,6 @@ function RandR ({prod}) {
         sum += thisVal * thisKey;
       }
       let average = (Math.round(4 * sum / count) / 4).toFixed(2);
-      console.log(average);
       setAvgRating(average);
     }
   }, [reviews])
