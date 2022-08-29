@@ -10,6 +10,7 @@ display: flex;
 align-items: center;
 width: 100%;
 height: 70px;
+z-index: 9999;
 background-color: #ffe6b8;
 `
 
