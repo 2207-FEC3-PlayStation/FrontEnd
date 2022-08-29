@@ -1,33 +1,35 @@
 import React from 'react';
-import ComparisonsModal from './ComparisonsModal.jsx';
 import RelatedItem from './RelatedItem.jsx';
 import styled from 'styled-components';
 
-const Carousel = styled.div`
-align-items: left;
-display: flex;
-flex-direction: row;
-justify-content: space-evenly;
-flex-wrap: nowrap;
-overflow: hidden;
-padding: 10px;
+const Related = styled.div`
+  margin-bottom: 4%;
 `
-const Button = styled.button`
-  background: transparent;
-  border: none;
+const Carousel = styled.div`
+  align-items: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 957px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  scroll-behavior: smooth;
 `
 
+
 var RelatedList = (props) => (
-  <div>
+  <Related>
     <h4>RELATED PRODUCTS</h4>
-    <Carousel>
-    <Button>&laquo;</Button>
+    <Carousel id="RelatedListCarousel">
     {props.product.map((item) => (
-    <RelatedItem item={item} key={item.id}/>
+      <RelatedItem item={item} key={item.id}/>
     ))}
-    <Button>&raquo;</Button>
-  </Carousel>
-  </div>
+    </Carousel>
+  </Related>
 )
 
   //66643 seems to be out of stock... so will have to check if there are any in stock first because thumbnail and other properties are null
