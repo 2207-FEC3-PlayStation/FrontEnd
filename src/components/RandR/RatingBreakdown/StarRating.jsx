@@ -21,11 +21,11 @@ function StarRating({reviews}) {
 
 export default StarRating;
 
-function executeRatings(stars) {
+// const ratingStars = [...document.getElementsByClassName('rating__star')];
+// function executeRatings(stars) {
 
-  const ratingStars = [...document.getElementByClassName('rating_start')];
-  const starClassActive = 'rating__star fas fa-star';
-  const starClassInactive = 'rating__star far fa-star';
-  const starsLength = stars.length;
-  let i;
-}
+//   const starClassActive = 'rating__star fas fa-star';
+//   const starClassInactive = 'rating__star far fa-star';
+//   const starsLength = stars.length;
+//   let i;
+// }
