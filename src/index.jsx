@@ -9,7 +9,6 @@ import Comparisons from './components/Comparisons/Comparisons.jsx';
 const App = () => {
 
   const [prod, setProd] = useState(null);
-  const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
     if (prod === null) {
@@ -24,13 +23,6 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
-      server.get('/reviews/meta', {'product_id': idParam})
-        .then((data) => {
-          setReviews(data.data)
-        })
-        .catch((err) => {
-          console.log(err);
-        })
   }, []);
 
   return (
@@ -38,7 +30,7 @@ const App = () => {
       <h1>Hello World</h1>
       <Overview/>
       <Comparisons/>
-      <RandR reviews={reviews}/>
+      <RandR prod={prod}/>
     </div>
     );
 }
