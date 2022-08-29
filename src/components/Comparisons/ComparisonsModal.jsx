@@ -19,6 +19,7 @@ const Modal = styled.div`
 const ModalContent = styled.div`
   position: fixed;
   background: white;
+  border: 1px solid gray;
   top: 35%;
   left: 50%;
   padding: 10px;
