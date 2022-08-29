@@ -1,17 +1,63 @@
 import React from 'react';
+import styled from 'styled-components';
 
-class ComparisonsModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const Modal = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  z-index: 9998;
+  width: 10000px;
+  height: 1000px;
+`
+
+const ModalContent = styled.div`
+  position: fixed;
+  background: white;
+  top: 35%;
+  left: 50%;
+  padding: 10px;
+  z-index: 9999;
+`
+
+const ModalBody = styled.div`
+  padding: 10px;
+`
+
+const ComparisonsModal = (props) => {
+  if (!props.show || !props.close) {
+    return null;
   }
 
-  render (){
-    return (
-      <div>
-      </div>
-    )
-  }
+  return (
+    <Modal onClick={props.handleClose}>
+      <ModalContent onClick={e => e.stopPropagation()}>
+      <ModalBody>
+        <h4>COMPARING</h4>
+            <table>
+              <tbody>
+              <tr>
+                <th>Product 1 Name</th>
+                <th></th>
+                <th>Product 2 Name</th>
+              </tr>
+              <tr>
+                <td>✓</td>
+                <td>Characteristic</td>
+                <td></td>
+              </tr>
+              </tbody>
+            </table>
+        {/* <button onClick={props.handleClose}>Close</button> */}
+      </ModalBody>
+      </ModalContent>
+    </Modal>
+  )
 }
 
 export default ComparisonsModal;

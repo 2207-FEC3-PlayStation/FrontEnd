@@ -1,5 +1,4 @@
 import React from 'react';
-import ComparisonsModal from './ComparisonsModal.jsx';
 import RelatedItem from './RelatedItem.jsx';
 import styled from 'styled-components';
 
@@ -23,13 +22,11 @@ const Carousel = styled.div`
 var RelatedList = (props) => (
   <div>
     <h4>RELATED PRODUCTS</h4>
-
     <Carousel id="RelatedListCarousel">
     {props.product.map((item) => (
-    <RelatedItem item={item} key={item.id}/>
+      <RelatedItem item={item} key={item.id} close={props.close}/>
     ))}
     </Carousel>
-
   </div>
 )
 

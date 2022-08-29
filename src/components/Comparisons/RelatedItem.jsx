@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import starbutton from '../../assets/starbutton.png';
-
+import ComparisonsModal from './ComparisonsModal.jsx';
 
 const Card = styled.div`
   border: 1px solid gray;
@@ -39,9 +39,19 @@ class RelatedItem extends React.Component {
     }
   };
 
-  handleClick () {
+  showModal () {
     console.log('Clicked Star Button');
     // open comparison modal
+    this.setState({
+      starClick: true
+    })
+  }
+
+  hideModal () {
+    console.log('close')
+    this.setState({
+      starClick: false
+    })
   }
 
   // get request to get related Item info and set that to this.state.relatedItemInfo
@@ -60,13 +70,15 @@ class RelatedItem extends React.Component {
   render (){
     return (
         <Card>
-        <Img src={this.props.item.style} alt="product image"/><br></br>
-        <Button onClick={this.handleClick.bind(this)}></Button>
-        <Text>{this.props.item.category.toUpperCase()}</Text>
-        <br></br>
-        <Text>{this.props.item.name}</Text><br></br>
-        <Text>${this.props.item.default_price}</Text><br></br>
-        <Text>Average Star Rating</Text>
+          <ComparisonsModal show={this.state.starClick} handleClose={this.hideModal.bind(this)} close={this.props.close}>
+          </ComparisonsModal>
+          <Img src={this.props.item.style} alt="product image"/><br></br>
+          <Button onClick={this.showModal.bind(this)}></Button>
+          <Text>{this.props.item.category.toUpperCase()}</Text>
+          <br></br>
+          <Text>{this.props.item.name}</Text><br></br>
+          <Text>${this.props.item.default_price}</Text><br></br>
+          <Text>Average Star Rating</Text>
         </Card>
     )
   }
