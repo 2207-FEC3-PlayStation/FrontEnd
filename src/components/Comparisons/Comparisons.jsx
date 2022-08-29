@@ -22,22 +22,23 @@ const Container = styled.div`
 
 const LeftButton = styled.button`
   position: absolute;
-  font-size: 30px;
+  font-size: 25px;
+  color: grey;
   height: 25px;
-  width: 25px;
+  width: 120px;
   top: 19%;
-  left: 2.5%;
+  left: 0%;
   border: none;
   padding-top: 17%;
   padding-bottom: 18.5%;
   background: transparent;
-  background-image: linear-gradient(to left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%);
+  background-image: linear-gradient(to left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%);
 `
 
 const RightButton = styled(LeftButton)`
   background: transparent;
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%);
-  left: 94.5%;
+  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%);
+  left: 88%;
 `
 
 class Comparisons extends React.Component {
