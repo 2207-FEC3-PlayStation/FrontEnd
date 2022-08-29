@@ -42,6 +42,8 @@ class Comparisons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hideR: false,
+      clickedR: false,
       product: [
           {
             "id": 66642,
@@ -180,25 +182,53 @@ class Comparisons extends React.Component {
   scrollL () {
     console.log('clicked on left button')
     const element = document.getElementById("RelatedListCarousel");
+    console.log('before', element.scrollLeft);
     element.scrollLeft -= 250;
+    console.log('after', element.scrollLeft);
+    this.setState({
+      clickedR: false,
+      hideR: false
+    })
   }
 
   scrollR () {
     console.log('clicked on right button')
     const element = document.getElementById("RelatedListCarousel");
-    element.scrollLeft += 250;
+    console.log(element.scrollLeft);
+
+    if (element.scrollLeft === 0) {
+      console.log('before R', element.scrollLeft);
+      element.scrollLeft += 250;
+      console.log('before R', element.scrollLeft);
+      this.setState({
+        clickedR : true
+      })
+    } else {
+      this.setState({
+        hideR: true
+      })
+    }
   }
 
 
   render (){
+    let left, right;
+    const element = document.getElementById("RelatedListCarousel");
+    if (this.state.clickedR) {
+      left = <LeftButton onClick={this.scrollL.bind(this)}></LeftButton>
+    }
+    if (!this.state.hideR) {
+      right = <RightButton onClick={this.scrollR.bind(this)}></RightButton>
+    }
     return (
       <div>
         <Container>
           <p>Comparisons Section</p>
-
           <RelatedList id="RelatedList"product={this.state.product}/>
-          <LeftButton onClick={this.scrollL.bind(this)}></LeftButton>
-          <RightButton onClick={this.scrollR.bind(this)}></RightButton>
+          {/* <LeftButton onClick={this.scrollL.bind(this)}></LeftButton> */}
+          {left}
+          {/* <RightButton onClick={this.scrollR.bind(this)}></RightButton> */}
+          {right}
           <OutfitList product={this.state.product}/>
         </Container>
       </div>
