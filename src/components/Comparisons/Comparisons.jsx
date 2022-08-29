@@ -24,9 +24,9 @@ const LeftButton = styled.button`
   position: absolute;
   font-size: 25px;
   color: #5d5c5c;
-  height: 25px;
+  height: 80px;
   width: 120px;
-  top: 13%;
+  top: 10.8%;
   left: 0%;
   border: none;
   padding-top: 17%;
@@ -211,14 +211,6 @@ class Comparisons extends React.Component {
     }
   }
 
-  closeModal () {
-    console.log('close')
-    this.setState({
-      closeModal: false
-    })
-  }
-
-
   render (){
     let left, right;
     const element = document.getElementById("RelatedListCarousel");
@@ -231,7 +223,7 @@ class Comparisons extends React.Component {
     return (
       <div>
         <Container>
-          <RelatedList id="RelatedList"product={this.state.product} close={this.state.closeModal}/>
+          <RelatedList id="RelatedList"product={this.state.product}/>
           {left}
           {right}
           <OutfitList product={this.state.product}/>

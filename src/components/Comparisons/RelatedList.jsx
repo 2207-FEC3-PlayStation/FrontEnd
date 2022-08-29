@@ -2,7 +2,9 @@ import React from 'react';
 import RelatedItem from './RelatedItem.jsx';
 import styled from 'styled-components';
 
-
+const Related = styled.div`
+  margin-bottom: 4%;
+`
 const Carousel = styled.div`
   align-items: left;
   display: flex;
@@ -20,14 +22,14 @@ const Carousel = styled.div`
 
 
 var RelatedList = (props) => (
-  <div>
+  <Related>
     <h4>RELATED PRODUCTS</h4>
     <Carousel id="RelatedListCarousel">
     {props.product.map((item) => (
-      <RelatedItem item={item} key={item.id} close={props.close}/>
+      <RelatedItem item={item} key={item.id}/>
     ))}
     </Carousel>
-  </div>
+  </Related>
 )
 
   //66643 seems to be out of stock... so will have to check if there are any in stock first because thumbnail and other properties are null

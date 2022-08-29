@@ -43,7 +43,7 @@ const TR = styled.td`
 `
 
 const ComparisonsModal = (props) => {
-  if (!props.show || !props.close) {
+  if (!props.show) {
     return null;
   }
 

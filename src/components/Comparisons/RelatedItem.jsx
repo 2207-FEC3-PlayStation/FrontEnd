@@ -70,7 +70,7 @@ class RelatedItem extends React.Component {
   render (){
     return (
         <Card>
-          <ComparisonsModal show={this.state.starClick} handleClose={this.hideModal.bind(this)} close={this.props.close}>
+          <ComparisonsModal show={this.state.starClick} handleClose={this.hideModal.bind(this)}>
           </ComparisonsModal>
           <Img src={this.props.item.style} alt="product image"/><br></br>
           <Button onClick={this.showModal.bind(this)}></Button>
