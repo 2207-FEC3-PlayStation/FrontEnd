@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewList from './ReviewList.jsx';
+import ReviewList from './Reviews/ReviewList.jsx';
 
 function Reviews(props) {
   return (

@@ -12,7 +12,12 @@ let getProducts = (path, param) => {
     headers: {'Authorization': process.env.GIT_TOKEN}
 })
 };
+let getReviews = (path) => {
+  return axios.get(process.env.DB_API + path, {
+   headers: {'Authorization': process.env.GIT_TOKEN}
+  })
+}
 
 module.exports = {
-  getProducts: getProducts
+  getProducts, getReviews
 };
