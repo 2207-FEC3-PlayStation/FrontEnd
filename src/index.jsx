@@ -5,6 +5,8 @@ import Overview from './components/Overview/Overview.jsx';
 import QandA from './components/QandA/QandA.jsx';
 import RandR from './components/RandR/RandR.jsx';
 import Comparisons from './components/Comparisons/Comparisons.jsx';
+// import styled from 'styled-components'
+
 
 
 const App = () => {
@@ -29,7 +31,6 @@ const App = () => {
 
   return (
     <div>
-      <h1>Hello World</h1>
       <Overview/>
       <Comparisons/>
       <QandA />

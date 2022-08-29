@@ -3,14 +3,53 @@ import ImageGallery from './ImageGallery.jsx'
 import ProductInfo from './ProductInfo.jsx'
 import StyleSelect from './StyleSelect.jsx'
 import CheckOut from './CheckOut.jsx'
+import Title from './Title.jsx'
 import axios from 'axios'
 import styled from 'styled-components'
+
+const FlexContainer = styled.div`
+background-color: #d4b37711;
+display: flex;
+margin-top: 70px;
+`;
+
+const Glossary = styled.div`
+`;
+
+const ProdInfo = styled.div`
+display: flex;
+flex-direction: column;
+margin-left: 20px;
+`;
 
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      info: [
+        {
+          "id": 66642,
+          "campus": "hr-rfc",
+          "name": "Camo Onesie",
+          "slogan": "Blend in to your crowd",
+          "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+          "category": "Jackets",
+          "default_price": "140.00",
+          "created_at": "2022-03-31T21:13:15.875Z",
+          "updated_at": "2022-03-31T21:13:15.875Z",
+          "features": [
+            {
+              "feature": "Fabric",
+              "value": "Canvas"
+            },
+            {
+              "feature": "Buttons",
+              "value": "Brass"
+            }
+          ]
+        }
+      ],
       dummy: {
         "product_id": "66642",
         "results": [
@@ -72,6 +111,65 @@ class Overview extends React.Component {
                 "size": "XL"
               }
             }
+          },
+          {
+            "style_id": 411535,
+            "name": "Desert Brown & Tan",
+            "original_price": "140.00",
+            "sale_price": null,
+            "default?": false,
+            "photos": [
+              {
+                "thumbnail_url": "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+              },
+              {
+                "thumbnail_url": "https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+              },
+              {
+                "thumbnail_url": "https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+              },
+              {
+                "thumbnail_url": "https://images.unsplash.com/photo-1422557379185-474fa15bf770?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1422557379185-474fa15bf770?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+              },
+              {
+                "thumbnail_url": "https://images.unsplash.com/photo-1490723286627-4b66e6b2882a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1490723286627-4b66e6b2882a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+              },
+              {
+                "thumbnail_url": "https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2800&q=80"
+              }
+            ],
+            "skus": {
+              "2390363": {
+                "quantity": 8,
+                "size": "XS"
+              },
+              "2390364": {
+                "quantity": 16,
+                "size": "S"
+              },
+              "2390365": {
+                "quantity": 17,
+                "size": "M"
+              },
+              "2390366": {
+                "quantity": 10,
+                "size": "L"
+              },
+              "2390367": {
+                "quantity": 15,
+                "size": "XL"
+              },
+              "2390368": {
+                "quantity": 6,
+                "size": "XXL"
+              }
+            }
           }]
       }
     }
@@ -83,12 +181,18 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
-        <h1>Image Gallery</h1>
-        <ImageGallery images={this.state.dummy} />
-        <ProductInfo />
-        <StyleSelect />
-        <CheckOut />
-      </div >
+        <Title />
+        <FlexContainer>
+          <Glossary>
+            <ImageGallery images={this.state.dummy} />
+          </Glossary>
+          <ProdInfo>
+            <ProductInfo info={this.state.info} />
+            <StyleSelect images={this.state.dummy} />
+            <CheckOut />
+          </ProdInfo>
+        </FlexContainer>
+      </div>
     )
   }
 }
