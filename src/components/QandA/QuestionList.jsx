@@ -4,18 +4,18 @@ const QuestionList = props => {
   //console.log('props = ', props)
 
   let qs = [];
+  let aa = [];
   let as = [];
   for (let i = 0; i < props.count; i++) {
-    qs.push(<h3>Q: {props.combos.questions[i]}</h3>);
-    as.push(<h3 style={{display: 'inline'}}>A: </h3><p style={{display: 'inline'}}>{props.combos.answers[i]}</p>);
+    qs.push(props.combos.questions[i]);
+    aa.push(<h3 style={{display: 'inline'}}>A: </h3>);
+    as.push(<p style={{display: 'inline'}}>{props.combos.answers[i]}</p>);
   }
 
   return (
       <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
         <form>
-          <h3>Q: {props.combos.questions[i]}</h3>
-          <h3 style={{display: 'inline'}}>A: </h3>
-          <p style={{display: 'inline'}}>{props.combos.answers[i]}</p>
+          <h3>Q: {}</h3>
         </form>
       </div>
   );
