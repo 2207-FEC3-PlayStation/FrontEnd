@@ -1,0 +1,35 @@
+.QandA {
+  border: thin dashed black;
+}
+.Search{
+  border: medium solid black;
+  background-color: aqua;
+  width: 98%;
+  display: block;
+  margin: auto;
+}
+.search-bar{
+  height: 30px;
+  width: 90%;
+  display: block;
+  margin: 20px;
+}
+#load {
+  border: none;
+  background: none;
+}
+#load:hover {
+  color: lightslategrey;
+}
+#moreQA{
+  margin: 10px;
+  background-color: white;
+  width: 230px;
+  height: 50px;
+}
+#addQ{
+  margin: 10px;
+  background-color: white;
+  width: 150px;
+  height: 50px;
+}
