@@ -23,7 +23,7 @@ const Container = styled.div`
 const LeftButton = styled.button`
   position: absolute;
   font-size: 25px;
-  color: grey;
+  color: #5d5c5c;
   height: 25px;
   width: 120px;
   top: 19%;
