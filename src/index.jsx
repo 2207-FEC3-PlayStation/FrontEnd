@@ -32,7 +32,7 @@ const App = () => {
       <Overview/>
       <Comparisons/>
       <QandA />
-      <RandR/>
+      <RandR prod={prod}/>
     </div>
     );
 }
