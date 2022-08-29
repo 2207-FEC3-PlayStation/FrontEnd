@@ -12,7 +12,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
 //-------Product Handlers-------
-app.get('/products', (req, res) => {models.Products.getProduct(req, res)});
+app.get('/products', (req, res) => {models.Products.getProducts(req, res)});
+
+app.get('/products/styles', (req, res) => {models.Products.getStyles(req, res)});
+
 
 
 //-------Reviews Handlers-------
