@@ -13,8 +13,12 @@ module.exports = {
     })
   },
   getStyles: (id) => {
-    console.log(id);
     return axios.get(process.env.DB_API + '/products/' + id + '/styles', {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
+  },
+  getRelated: (id) => {
+    return axios.get(process.env.DB_API + '/products/' + id + '/related', {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
   }

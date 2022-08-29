@@ -16,6 +16,8 @@ app.get('/products', (req, res) => {models.Products.getProducts(req, res)});
 
 app.get('/products/styles', (req, res) => {models.Products.getStyles(req, res)});
 
+app.get('/products/related', (req, res) => {models.Products.getRelated(req, res)});
+
 
 
 //-------Reviews Handlers-------

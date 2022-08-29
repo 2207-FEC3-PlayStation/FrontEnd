@@ -9,21 +9,26 @@ module.exports = {
           res.status(200).send(result.data)
         })
         .catch((err) => {
-          console.log('This is the error: ', err);
           res.status(400).send(err);
         })
   },
   getStyles: (req, res) => {
-    console.log('query ', req.query);
     controller.Products.getStyles(Object.values(req.query)[0])
       .then((result) => {
         res.status(200).send(result.data)
       })
       .catch((err) => {
-        // console.log('This is the error: ', err);
         res.status(400).send(err);
       })
   },
-  getRelated: ''
+  getRelated: (req, res) => {
+    controller.Products.getRelated(Object.values(req.query)[0])
+      .then((result) => {
+        res.status(200).send(result.data)
+      })
+      .catch((err) => {
+        res.status(400).send(err);
+      })
+  }
 
 };
