@@ -2,8 +2,8 @@ import React from 'react';
 import RelatedList from './RelatedList.jsx';
 import OutfitList from './OutfitList.jsx';
 import styled from 'styled-components';
-import rightArrow from '../../assets/rightarrow.png';
-import leftArrow from '../../assets/leftarrow.png';
+// import rightArrow from '../../assets/rightarrow.png';
+// import leftArrow from '../../assets/leftarrow.png';
 
 // this could might be a stateless component just for passing down props (main product being displayd) and organization purposes?
 
@@ -21,21 +21,23 @@ const Container = styled.div`
 `
 
 const LeftButton = styled.button`
-  background: transparent url(${leftArrow}) no-repeat center;
   position: absolute;
+  font-size: 30px;
   height: 25px;
   width: 25px;
   top: 19%;
-  left: 0%;
+  left: 2.5%;
   border: none;
   padding-top: 17%;
-  padding-bottom: 17.5%;
-  /* scroll-behavior: smooth; */
+  padding-bottom: 18.5%;
+  background: transparent;
+  background-image: linear-gradient(to left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%);
 `
 
 const RightButton = styled(LeftButton)`
-  background: transparent url(${rightArrow}) no-repeat center;
-  left: 97.5%;
+  background: transparent;
+  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%);
+  left: 94.5%;
 `
 
 class Comparisons extends React.Component {
@@ -198,6 +200,7 @@ class Comparisons extends React.Component {
       element.scrollLeft += 250;
       this.setState({
         clickedR: true,
+        hideR: true
       })
     } else {
       this.setState({
@@ -211,10 +214,10 @@ class Comparisons extends React.Component {
     let left, right;
     const element = document.getElementById("RelatedListCarousel");
     if (this.state.clickedR) {
-      left = <LeftButton onClick={this.scrollL.bind(this)}></LeftButton>
+      left = <LeftButton onClick={this.scrollL.bind(this)}>‹</LeftButton>
     }
     if (!this.state.hideR) {
-      right = <RightButton onClick={this.scrollR.bind(this)}></RightButton>
+      right = <RightButton onClick={this.scrollR.bind(this)}>›</RightButton>
     }
     return (
       <div>
