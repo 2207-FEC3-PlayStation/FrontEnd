@@ -36,7 +36,21 @@ app.put('/reviews/report', (req, res) => {models.Reviews.report(req, res)});
 //-------QandA Handlers-------
 app.get('/qa/questions', (req, res) => {models.QandA.getQuestions(req, res)});
 
-app.get('/qa/answers', (req, res) => {models.QandA.getAnswers(req, res)})
+app.get('/qa/answers', (req, res) => {models.QandA.getAnswers(req, res)});
+
+app.post('qa/questions', (req, res) => {models.QandA.addQuestion});
+
+app.post('/qa/answers', (req, res) => {models.QandA.addAnswer(req, res)})
+
+app.put('/qa/questions/helpful'), (req, res) => {models.QandA.helpful('/questions', req, res)};
+
+app.put('/qa/answers/helpful'), (req, res) => {models.QandA.helpful('/answers', req, res)};
+
+app.put('/qa/questions/report'), (req, res) => {models.QandA.report('/questions', req, res)};
+
+app.put('/qa/answers/report'), (req, res) => {models.QandA.report('/answers', req, res)};
+
+
 
 //-------Cart Handlers-------
 
