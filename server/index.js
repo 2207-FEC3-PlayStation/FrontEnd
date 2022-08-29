@@ -12,6 +12,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
 //-------Product Handlers-------
+app.get('/product', (req, res) => {models.Products.getProduct(req, res)});
+
 app.get('/products', (req, res) => {models.Products.getProducts(req, res)});
 
 app.get('/products/styles', (req, res) => {models.Products.getStyles(req, res)});
@@ -21,10 +23,20 @@ app.get('/products/related', (req, res) => {models.Products.getRelated(req, res)
 
 
 //-------Reviews Handlers-------
-app.get('/reviews/meta', (req, res) => {models.Reviews.getReviews(req, res)})
+app.get('/reviews', (req, res) => {models.Reviews.getReviews(req, res)});
+
+app.get('/reviews/meta', (req, res) => {models.Reviews.getReviewData(req, res)});
+
+app.post('/reviews', (req, res) => {models.Reviews.addReview(req, res)});
+
+app.put('/reviews/helpful', (req, res) => {models.Reviews.helpful(req, res)});
+
+app.put('/reviews/report', (req, res) => {models.Reviews.report(req, res)});
 
 //-------QandA Handlers-------
+app.get('/qa/questions', (req, res) => {models.QandA.getQuestions(req, res)});
 
+app.get('/qa/answers', (req, res) => {models.QandA.getAnswers(req, res)})
 
 //-------Cart Handlers-------
 

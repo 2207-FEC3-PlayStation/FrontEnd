@@ -17,7 +17,7 @@ const App = () => {
     } else {
       var idParam = prod.id;
     }
-    server.get('/products', idParam)
+    server.get('/product', {product_id: idParam})
       .then((data) => {
         setProd(data.data)
       })

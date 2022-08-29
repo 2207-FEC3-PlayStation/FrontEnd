@@ -7,8 +7,18 @@ const GIT = process.env.GIT_TOKEN;
 //-------will need to update with passed info-----
 module.exports = {
 
-  getProduct: (param) => {
-    return axios.get(process.env.DB_API + '/products/' + param, {
+  getProduct: (id) => {
+    return axios.get(process.env.DB_API + '/products/' + id, {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
+  },
+  getProducts: (params) => {
+    var paramString = '?';
+    for (key in params) {
+      paramString += key + '=' + params[key] + '&'
+    }
+    paramString = paramString.substring(0, paramString.length - 1);
+    return axios.get(process.env.DB_API + '/products' + paramString, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
   },

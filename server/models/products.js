@@ -1,10 +1,18 @@
-const controller = require('../controller/controllerIndex.js');
+const controller = require('../controller/controllerIndex.js').Products;
 
 module.exports = {
 
+  getProduct: (req, res) => {
+    controller.getProduct(req.query.product_id)
+        .then((result) => {
+          res.status(200).send(result.data)
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        })
+  },
   getProducts: (req, res) => {
-    //this currently only works using one parameter, like product_id. Might need to adjust if getting multiple products using page/count as parameters
-      controller.Products.getProduct(Object.values(req.query)[0])
+      controller.getProducts(req.query)
         .then((result) => {
           res.status(200).send(result.data)
         })
@@ -13,7 +21,7 @@ module.exports = {
         })
   },
   getStyles: (req, res) => {
-    controller.Products.getStyles(Object.values(req.query)[0])
+    controller.getStyles(Object.values(req.query)[0])
       .then((result) => {
         res.status(200).send(result.data)
       })
@@ -22,7 +30,7 @@ module.exports = {
       })
   },
   getRelated: (req, res) => {
-    controller.Products.getRelated(Object.values(req.query)[0])
+    controller.getRelated(Object.values(req.query)[0])
       .then((result) => {
         res.status(200).send(result.data)
       })
