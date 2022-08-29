@@ -194,14 +194,10 @@ class Comparisons extends React.Component {
   scrollR () {
     console.log('clicked on right button')
     const element = document.getElementById("RelatedListCarousel");
-    console.log(element.scrollLeft);
-
     if (element.scrollLeft === 0) {
-      console.log('before R', element.scrollLeft);
       element.scrollLeft += 250;
-      console.log('before R', element.scrollLeft);
       this.setState({
-        clickedR : true
+        clickedR: true,
       })
     } else {
       this.setState({
@@ -225,9 +221,7 @@ class Comparisons extends React.Component {
         <Container>
           <p>Comparisons Section</p>
           <RelatedList id="RelatedList"product={this.state.product}/>
-          {/* <LeftButton onClick={this.scrollL.bind(this)}></LeftButton> */}
           {left}
-          {/* <RightButton onClick={this.scrollR.bind(this)}></RightButton> */}
           {right}
           <OutfitList product={this.state.product}/>
         </Container>
