@@ -29,6 +29,18 @@ const ModalBody = styled.div`
   padding: 10px;
 `
 
+const TC = styled.td`
+  text-align: center;
+`
+
+const TL = styled.td`
+  text-align: left;
+`
+
+const TR = styled.td`
+  text-align: right;
+`
+
 const ComparisonsModal = (props) => {
   if (!props.show || !props.close) {
     return null;
@@ -38,18 +50,23 @@ const ComparisonsModal = (props) => {
     <Modal onClick={props.handleClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
       <ModalBody>
-        <h4>COMPARING</h4>
+        <small>COMPARING</small>
             <table>
               <tbody>
               <tr>
-                <th>Product 1 Name</th>
+                <th>Camo Onesie</th>
                 <th></th>
-                <th>Product 2 Name</th>
+                <th>Morning Joggers</th>
               </tr>
               <tr>
-                <td>✓</td>
-                <td>Characteristic</td>
-                <td></td>
+                <TL>✓</TL>
+                <TC>Canvas</TC>
+                <TR></TR>
+              </tr>
+              <tr>
+                <TL></TL>
+                <TC>100% Cotton</TC>
+                <TR>✓</TR>
               </tr>
               </tbody>
             </table>
