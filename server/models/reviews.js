@@ -22,11 +22,12 @@ module.exports = {
   },
 
   addReview: (req, res) => {
-    controller.addReview()
+    controller.addReview(req.data)
       .then((result) => {
         res.status(200).send(result.data)
       })
       .catch((err) => {
+        console.log('err: ', err);
         res.status(400).send(err);
       })
   },

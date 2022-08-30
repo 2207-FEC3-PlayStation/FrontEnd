@@ -2,9 +2,9 @@ import React from 'react';
 
 function RatingsBar(props) {
   return (
-    <div>
+    <React.Fragment>
       <p>Ratings</p>
-    </div>
+    </React.Fragment>
   )
 }
 

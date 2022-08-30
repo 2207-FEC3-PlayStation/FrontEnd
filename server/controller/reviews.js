@@ -5,15 +5,11 @@ const URI = process.env.DB_API;
 const GIT = process.env.GIT_TOKEN;
 
 module.exports = {
-  getReviewData: (path) => {
-    return axios.get(process.env.DB_API + path, {
-      headers: {'Authorization': process.env.GIT_TOKEN}
-    })
-  },
-
   getReviews: (params) => {
     var paramString = '?';
-    if (!params.product_id)
+    if (!params.product_id) {
+      throw new Error('No product_id provided');
+    }
     for (key in params) {
       paramString += key + '=' + params[key] + '&'
     }
@@ -23,8 +19,17 @@ module.exports = {
     })
   },
 
-  addReview: () => {
 
+  getReviewData: (path) => {
+    return axios.get(process.env.DB_API + path, {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
+  },
+
+  addReview: (data) => {
+    return axios.post(process.env.DB_API + '/review', {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
   },
 
   helpful: () => {

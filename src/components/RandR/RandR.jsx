@@ -7,6 +7,8 @@ function RandR ({prod}) {
 
   const [reviews, setReviews] = useState({});
   const [avgRating, setAvgRating] = useState(0);
+  const [ratingToTenth, setRatingToTenth] = useState(0);
+  const [recommendedPerc, setRecommendedPerc] = useState();
 
   useEffect(() => {
     if (prod) {
@@ -32,15 +34,27 @@ function RandR ({prod}) {
         sum += thisVal * thisKey;
       }
       let average = (Math.round(4 * sum / count) / 4).toFixed(2);
+      let tenth = (Math.round(4 * sum / count) / 4).toFixed(1);
       setAvgRating(average);
+      setRatingToTenth(tenth);
+
     }
   }, [reviews])
 
+  useEffect(() => {
+    if (reviews.recommended) {
+      let recc = parseInt(reviews.recommended.true);
+      let noRecc = parseInt(reviews.recommended.false);
+      let recommended =  100 * (recc / (recc  + noRecc));
+      setRecommendedPerc(recommended.toFixed(0));
+    }
+  }, [reviews.recommended])
+
   return (
-    <div>
-      <RatingBreakdown reviews={reviews} avgRating={avgRating}/>
+    <React.Fragment>
+      <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc}/>
       <Reviews/>
-    </div>
+    </React.Fragment>
   )
 }
 

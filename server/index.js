@@ -54,6 +54,10 @@ app.put('/qa/answers/report'), (req, res) => {models.QandA.report('/answers', re
 
 //-------Cart Handlers-------
 
+
+app.get('/cart', (req, res) => {models.Cart.getCart(req, res)});
+
+app.post('/cart', (req, res) => {models.Cart.addToCart(req, res)});
 //-------Interactions Handlers-------
 
 const PORT = process.env.PORT || 3000;
