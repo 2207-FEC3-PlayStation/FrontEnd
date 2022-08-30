@@ -3,9 +3,9 @@ import ReviewTile from './ReviewTile.jsx';
 
 function ReviewList(props) {
   return (
-    <div>
+    <React.Fragment>
       <ReviewTile/>
-    </div>
+    </React.Fragment>
   )
 }
 

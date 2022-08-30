@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import StarRating from '../RandR/RatingBreakdown/StarRating.jsx'
 
 const Block = styled.div`
 
@@ -33,7 +34,8 @@ var ProductInfo = (props) => {
   return (
     <Block>
       <ProductName>{props.info[0].name}</ProductName>
-      <Reviews>***** Read all reviews</Reviews>
+      <StarRating/>
+      <Reviews>Read all reviews</Reviews>
       <Category>{props.info[0].category}</Category>
       <Price>{'$' + props.info[0].default_price}</Price>
       <Line></Line>
