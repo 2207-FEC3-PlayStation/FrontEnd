@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack --mode=development",
     "build": "webpack --mode=production",
     "client-dev": "npx webpack --watch",
@@ -32,6 +32,7 @@
     "font-awesome": "^4.7.0",
     "jest": "^29.0.1",
     "jest-environment-jsdom": "^29.0.1",
+    "jest-module-name-mapper": "0.1.5",
     "nodemon": "^2.0.19",
     "path": "^0.12.7",
     "react": "^18.2.0",
