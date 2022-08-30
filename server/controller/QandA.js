@@ -33,6 +33,7 @@ module.exports = {
     return axios.get(process.env.DB_API +  '/qa/questions' + paramString, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
+
   },
 
   addQuestion: () => {

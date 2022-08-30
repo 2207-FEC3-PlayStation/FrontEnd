@@ -19,6 +19,7 @@ module.exports = {
     })
   },
 
+
   getReviewData: (path) => {
     return axios.get(process.env.DB_API + path, {
       headers: {'Authorization': process.env.GIT_TOKEN}
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   addReview: (data) => {
-    return axios.post(process.env.DB_API + '/revieww', {
+    return axios.post(process.env.DB_API + '/review', {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
   },

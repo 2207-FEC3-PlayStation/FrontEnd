@@ -10,5 +10,9 @@ module.exports = {
     return axios.get(process.env.DB_API + '/cart', {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
+  },
+
+  addToCart: () => {
+
   }
 }
