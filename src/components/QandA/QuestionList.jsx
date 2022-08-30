@@ -2,26 +2,36 @@ import React from 'react';
 
 const QuestionList = props => {
   //console.log('props = ', props)
+  console.log('props = ', props);
+  console.log('props.questions = ', props.questions);
+  console.log('props.count = ', props.count);   // default: 4
 
-  let qs = [];
-  let aa = [];
-  let as = [];
-  for (let i = 0; i < props.count; i++) {
-    qs.push(props.combos.questions[i]);
-    aa.push(<h3 style={{display: 'inline'}}>A: </h3>);
-    as.push(<p style={{display: 'inline'}}>{props.combos.answers[i]}</p>);
-  }
+  const last = props.count;
 
   return (
       <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
-        <form>
-          <h3>Q: {}</h3>
-        </form>
+          {props.questions.slice(0, last).map((e, i) => {
+            return (
+              <form>
+                <h3>Q: {e}</h3>
+                <h3 style={{display: 'inline'}}>A: </h3>
+                <p style={{display: 'inline'}}>{props.answers[i]}</p>
+              </form>
+            )
+          })}
       </div>
   );
 
 };
 export default QuestionList;
+
+/*
+<form>
+<h3>Q: {props.combos.questions}</h3>
+<h3 style={{display: 'inline'}}>A: </h3>
+<p style={{display: 'inline'}}>{props.combos.answers}</p>
+</form>
+*/
 
 
 /*
