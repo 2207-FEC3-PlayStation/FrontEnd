@@ -12,7 +12,7 @@ module.exports = {
   },
 
   getAnswers: (req, res) => {
-    controller.getAnswers()
+    controller.getAnswers(req.query)
       .then((result) => {
         res.status(200).send(result.data)
       })
