@@ -2,9 +2,9 @@ import React from 'react';
 
 function CharsBreakdown(props) {
   return (
-    <div>
+    <React.Fragment>
       <p>Characteristic Breakdwon</p>
-    </div>
+    </React.Fragment>
   )
 }
 

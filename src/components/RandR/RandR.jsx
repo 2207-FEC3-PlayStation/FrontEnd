@@ -37,10 +37,10 @@ function RandR ({prod}) {
   }, [reviews])
 
   return (
-    <div>
+    <React.Fragment>
       <RatingBreakdown reviews={reviews} avgRating={avgRating}/>
       <Reviews/>
-    </div>
+    </React.Fragment>
   )
 }
 
