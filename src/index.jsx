@@ -28,6 +28,10 @@ const App = () => {
       });
   }, []);
 
+  if (!prod) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div>
       <Overview/>
