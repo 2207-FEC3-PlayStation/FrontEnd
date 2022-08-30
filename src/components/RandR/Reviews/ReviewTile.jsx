@@ -4,7 +4,7 @@ import StarRating from '../RatingBreakdown/StarRating.jsx';
 function ReviewTile(props) {
   return (
     <div style={{borderBottom: '1px solid black', padding: '5px'}}>
-      <StarRating/>
+      <StarRating rating={3.0}/>
       <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right'}}>User</h6>
       <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right'}}>Date</h6>
       <p style={{fontWeight: 'bold'}}>Review Summary</p>
