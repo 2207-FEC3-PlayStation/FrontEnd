@@ -8,7 +8,7 @@ class QandA extends React.Component {
     super(props);
     this.state = {
       search: '',
-      count: 1,
+      count: 4,
       questions: ['What is life?', 'When was was gum invented?', 'Why are there so many chickens?', 'Who are you?'],
       answers: ['Life is everything.', 'Gum was invented in 1923.', 'Because KFC is delicious!', 'I am no one.'],
       users: ['User1234', 'User2222', 'User4343', 'User0203'],
