@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from '../RatingBreakdown/StarRating.jsx';
 
-function ReviewTile({data}) {
+function ReviewTile({data, icon}) {
 
   const [date, setDate] = useState();
 
@@ -23,11 +23,10 @@ function ReviewTile({data}) {
 
       <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right'}}>{date}</h6>
 
-      <p style={{fontWeight: 'bold'}}>Review Summary</p>
+      <p style={{fontWeight: 'bold'}}>{data.summary}</p>
 
-      <p>Review Body</p>
-
-      <h5>I recommend this product</h5>
+      <p>{data.body}</p>
+      <h4 className='checkMark'>'I recommend this product!'</h4>
 
       <p style={{paddingLeft: '15px'}}>Seller Response</p>
 

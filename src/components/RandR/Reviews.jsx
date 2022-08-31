@@ -22,7 +22,7 @@ function Reviews({product_id}) {
           console.log(err);
         })
     }
-  }, [product_id ,sortedBy])
+  }, [product_id, sortedBy])
 
   return (
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
