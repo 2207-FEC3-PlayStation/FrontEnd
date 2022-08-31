@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from '../RatingBreakdown/StarRating.jsx';
+import server from '../../../serverRequests.js'
 
 function ReviewTile({data}) {
 
   const [date, setDate] = useState();
+  const [helpfulness, setHelpfulness] = useState();
 
   let recommend = 'none';
   if (data.recommend === true) {
@@ -23,7 +25,20 @@ function ReviewTile({data}) {
     date = date.toLocaleString('en-US');
     date = date.split(',');
     setDate(date[0])
-  }, [data])
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      setHelpfulness(data.helpfulness);
+    }
+    }, [data, data.helpfulness]);
+
+  let increaseHelpful = (e) => {
+    //uncomment when put request is functioning.
+    //server.put('/reviews/helpful', {review_id: data.review_id});
+    setHelpfulness(helpfulness + 1)
+  }
+
 
   return (
     <div style={{borderBottom: '1px solid black', padding: '5px'}}>
@@ -41,7 +56,9 @@ function ReviewTile({data}) {
 
       <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Seller Response:{'\n' + data.response}</p>
 
-      <button style={{display: 'inline-block', margin: '10px'}}>Helpful?</button>
+      <h6 style={{display: 'inline-block'}}>Helpful?</h6>
+      <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '10px'}}>Yes</h6>
+      <h6 style={{display: 'inline-block', marginLeft: '3px'}}>{helpfulness}</h6>
 
       <button style={{display: 'inline-block', margin: '10px'}}>Report</button>
 
