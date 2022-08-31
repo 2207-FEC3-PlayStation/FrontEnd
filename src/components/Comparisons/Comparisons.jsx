@@ -77,7 +77,6 @@ function Comparisons (props) {
           if (product !== props.prod.id) {
             server.get('/product', {product_id: product})
             .then((data) => {
-              console.log('getting request for: ', product);
               finalArray.push(data.data);
             })
             .catch((err) => {

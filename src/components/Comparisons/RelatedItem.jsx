@@ -47,18 +47,13 @@ function RelatedItem (props) {
   // gets styles of the related product and adds the default thumbnail picture to the image source
   // if there is no default style, it grabs the first picture in the list
   useEffect(() => {
-    console.log('related item');
     var thumbnail = '';
     if (props.item) {
       server.get('/products/styles', {product_id: props.item.id})
         .then((data)=> {
-
-          console.log('getting styles results');
           var results = data.data.results;
-          console.log('results', results);
           for (var i = 0; i < results.length; i++) {
             if (results[i]['default?'] === true) {
-              console.log('found default image: ', results[i].photos[0].thumbnail_url)
               thumbnail = results[i].photos[0].thumbnail_url;
               setImage(thumbnail);
             }
