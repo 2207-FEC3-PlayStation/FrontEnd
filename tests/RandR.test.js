@@ -15,7 +15,7 @@ describe('Ratings and Reviews Tests', () => {
 
   it('Overall Product review rating should be 4.0 for default product 66646', () => {
     setTimeout(() => {
-      expect(screen.getByTestId('ReviewNum').toHaeTextContent('4.0'))
+      expect(screen.getByTestId('ReviewNum').toHaveTextContent('4.0'))
     })
   })
 })

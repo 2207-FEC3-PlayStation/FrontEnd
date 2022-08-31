@@ -5,6 +5,7 @@ import server from '../../serverRequests.js';
 
 function RandR ({prod}) {
 
+  const [product_id, setProduct_id] = useState(null);
   const [reviews, setReviews] = useState({});
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
@@ -12,16 +13,22 @@ function RandR ({prod}) {
 
   useEffect(() => {
     if (prod) {
-      server.get('/reviews/meta', {'product_id': prod.id})
+      setProduct_id(prod.id)
+    }
+  }, [prod]);
+
+  useEffect(() => {
+    if (product_id) {
+      setProduct_id
+      server.get('/reviews/meta', {'product_id': product_id})
       .then((data) => {
         setReviews(data.data);
-        return reviews
       })
       .catch((err) => {
         console.log(err);
       })
     }
-  }, [prod])
+  }, [product_id])
 
   useEffect(() => {
     if (reviews) {
@@ -53,7 +60,7 @@ function RandR ({prod}) {
   return (
     <React.Fragment>
       <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc}/>
-      <Reviews/>
+      <Reviews product_id={product_id}/>
     </React.Fragment>
   )
 }
