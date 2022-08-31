@@ -14,12 +14,14 @@ margin-top: 70px;
 `;
 
 const Glossary = styled.div`
+margin: 3%;
 `;
 
 const ProdInfo = styled.div`
 display: flex;
 flex-direction: column;
-margin-left: 20px;
+margin-left: 10px;
+margin-right: 10px;
 `;
 
 

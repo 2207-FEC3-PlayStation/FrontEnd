@@ -14,6 +14,8 @@ const Card = styled.div`
   margin-bottom: 0;
   position: relative;
   padding-bottom: 2%;
+  margin-left: 0;
+  margin-right: 4%
 `
 const Button = styled.button`
   background: transparent url(${starbutton}) no-repeat top;
@@ -31,7 +33,7 @@ const Text = styled.small`
 const Img = styled.img`
   width:180px;
   height:220px;
-  opacity: 0.4;
+  opacity: 0.75;
 `
 function RelatedItem (props) {
 

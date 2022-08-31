@@ -11,7 +11,7 @@ margin-top: 40px;
 const SizeSelect = styled.select`
 background-color: #d2d2d2;
 color: white;
-padding: 20px 40px;
+padding: 20px 20px;
 margin-right: 10px;
 border:none;
 `
@@ -24,6 +24,7 @@ background-color: #d2d2d2;
 color: white;
 padding: 20px 20px;
 border:none;
+margin-left: 10px;
 `
 
 const QuantityOptions = styled.option`

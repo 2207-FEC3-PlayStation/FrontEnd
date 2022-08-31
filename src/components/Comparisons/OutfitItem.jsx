@@ -10,6 +10,8 @@ const Card = styled.div`
   position: relative;
   padding-bottom: 2%;
   margin-bottom: 15px;
+  margin-left: 0;
+  margin-right: 4%;
 `
 const Text = styled.small`
   color: rgb(57, 57, 57);
@@ -19,7 +21,7 @@ const Text = styled.small`
 const Img = styled.img`
   width:180px;
   height:220px;
-  opacity: 0.4;
+  opacity: 0.75;
 `
 const Button = styled.button`
   background: transparent url(${xbutton}) no-repeat top;
@@ -46,8 +48,8 @@ class OutfitItem extends React.Component {
   render (){
     return (
         <Card>
-        <Button></Button>
         <Img src={this.props.item.style}></Img><br></br>
+        <Button></Button>
         <Text>{this.props.item.category.toUpperCase()}</Text><br></br>
         <Text>{this.props.item.name}</Text><br></br>
         <Text>{this.props.item.default_price}</Text><br></br>
