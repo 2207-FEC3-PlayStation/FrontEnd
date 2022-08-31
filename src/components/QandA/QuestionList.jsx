@@ -2,9 +2,9 @@ import React from 'react';
 
 const QuestionList = props => {
   //console.log('props = ', props)
-  console.log('props = ', props);
-  console.log('props.questions = ', props.questions);
-  console.log('props.count = ', props.count);   // default: 4
+  // console.log('props = ', props);
+  // console.log('props.questions = ', props.questions);
+  // console.log('props.count = ', props.count);   // default: 4
 
   const last = props.count;
 
@@ -12,7 +12,7 @@ const QuestionList = props => {
       <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
           {props.questions.slice(0, last).map((e, i) => {
             return (
-              <form>
+              <form key={i}>
                 <h3>Q: {e}</h3>
                 <h3 style={{display: 'inline'}}>A: </h3>
                 <p style={{display: 'inline'}}>{props.answers[i]}</p>
