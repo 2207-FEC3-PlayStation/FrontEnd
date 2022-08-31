@@ -46,13 +46,17 @@ function Comparisons (props) {
 
 
 
-  // gets related products for the current product
+  // gets related products for the current product and removes any duplicates and if it also contains itself as related
   useEffect(() => {
     if (props.prod) {
       var finalArray = [];
       server.get('/products/related', {product_id: props.prod.id})
       .then((data) => {
         var relatedProducts = data.data;
+        if (relatedProducts.includes(props.prod.id)) {
+          var index = relatedProducts.indexOf(props.prod.id);
+          relatedProducts.splice(index, 1);
+        }
         let uniqueRelated = [...new Set(relatedProducts)];
         setRelated(uniqueRelated);
       })
@@ -65,51 +69,58 @@ function Comparisons (props) {
   // gets product info for each related product
   useEffect(() => {
     if (related) {
-      var finalArray = [];
-      related.forEach((product) => {
-        server.get('/product', {product_id: product})
-          .then((data) => {
-            finalArray.push(data.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .then(()=> {
-            if (finalArray.length === related.length) {
-              setProducts(finalArray);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      })
+      if (related.length === 0) {
+        setProducts([]);
+      } else {
+        var finalArray = [];
+        related.forEach((product) => {
+          if (product !== props.prod.id) {
+            server.get('/product', {product_id: product})
+            .then((data) => {
+              console.log('getting request for: ', product);
+              finalArray.push(data.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .then(()=> {
+              if (finalArray.length === related.length) {
+                setProducts(finalArray);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+          }
+        })
+      }
     }
   }, [related])
 
   // checks if related item is out of stock. If it is, delete that item from related products
-  // works but if you click on too many items it'll max out the requests to the API... works for some products but not others...
-  // useEffect(() => {
-  //   if (products) {
-  //     related.forEach((item) => {
-  //       server.get('/products/styles', {product_id: item})
-  //       .then((data)=> {
-  //         if (data.data.results[0].skus.null) {
-  //           if (data.data.results[0].skus.null.quantity === null) {
-  //             console.log(`${item} is out of stock`);
-  //             var index = related.indexOf(item);
-  //             var copy = related.slice();
-  //             copy.splice(1, index);
-  //             setRelated(copy);
-  //           }
-  //           console.log('all related items in stock')
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       })
-  //     })
-  //   }
-  // }, [products])
+  // works but if you click on too many items it'll max out the requests to the API... don't click on too many related products in a short time fram.
+  useEffect(() => {
+    if (products) {
+      related.forEach((item) => {
+        server.get('/products/styles', {product_id: item})
+        .then((data)=> {
+          if (data.data.results[0].skus.null) {
+            if (data.data.results[0].skus.null.quantity === null) {
+              console.log(`${item} is out of stock`);
+              var index = related.indexOf(item);
+              var copy = related.slice();
+              copy.splice(index, 1);
+              setRelated(copy);
+            }
+            console.log('all related items in stock')
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+  }, [products])
 
   //66643 seems to be out of stock... so may have to check if there are any in stock first because thumbnail and other properties are null
 
@@ -124,7 +135,7 @@ function Comparisons (props) {
   function scrollL () {
     console.log('clicked on left button')
     const element = document.getElementById("RelatedListCarousel");
-    element.scrollLeft -= 250;
+    element.scrollLeft -= 350;
     setHideR(false);
     setClickedR(false);
   }
@@ -133,7 +144,7 @@ function Comparisons (props) {
     console.log('clicked on right button')
     const element = document.getElementById("RelatedListCarousel");
     if (element.scrollLeft === 0) {
-      element.scrollLeft += 250;
+      element.scrollLeft += 350;
       setHideR(true);
       setClickedR(true);
     } else {

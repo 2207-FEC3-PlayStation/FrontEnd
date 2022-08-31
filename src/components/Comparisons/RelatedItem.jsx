@@ -90,6 +90,7 @@ function RelatedItem (props) {
     }
   }, [reviews])
 
+
   function showModal () {
     console.log('Clicked Star Button');
     setStarClick(true);
