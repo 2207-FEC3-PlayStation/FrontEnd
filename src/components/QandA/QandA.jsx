@@ -17,7 +17,7 @@ const QandA = ({prod}) => {
     if (prod) {
       server.get('/qa/questions', {'product_id': prod.id})
       .then((data) => {
-        setReviews(data.data);
+        setQuestions(data.data);
       })
       .catch((err) => {
         console.log(err);
