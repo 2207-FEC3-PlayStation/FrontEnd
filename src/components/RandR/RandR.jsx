@@ -5,39 +5,47 @@ import server from '../../serverRequests.js';
 
 function RandR ({prod}) {
 
+  const [product_id, setProduct_id] = useState(null);
   const [reviews, setReviews] = useState({});
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
   const [recommendedPerc, setRecommendedPerc] = useState();
+  const [count, setCount] = useState();
 
   useEffect(() => {
     if (prod) {
-      server.get('/reviews/meta', {'product_id': prod.id})
+      setProduct_id(prod.id)
+    }
+  }, [prod]);
+
+  useEffect(() => {
+    if (product_id) {
+      setProduct_id
+      server.get('/reviews/meta', {'product_id': product_id})
       .then((data) => {
         setReviews(data.data);
-        return reviews
       })
       .catch((err) => {
         console.log(err);
       })
     }
-  }, [prod])
+  }, [product_id])
 
   useEffect(() => {
     if (reviews) {
       let sum = 0;
-      let count = 0;
+      let reviewCount = 0;
       for(var key in reviews.ratings) {
         let thisKey = parseInt(key);
         let thisVal = parseInt(reviews.ratings[key]);
-        count += thisVal;
+        reviewCount += thisVal;
         sum += thisVal * thisKey;
       }
-      let average = (Math.round(4 * sum / count) / 4).toFixed(2);
-      let tenth = (Math.round(4 * sum / count) / 4).toFixed(1);
+      let average = (Math.round(4 * sum / reviewCount) / 4).toFixed(2);
+      let tenth = (Math.round(4 * sum / reviewCount) / 4).toFixed(1);
       setAvgRating(average);
       setRatingToTenth(tenth);
-
+      setCount(reviewCount);
     }
   }, [reviews])
 
@@ -53,7 +61,7 @@ function RandR ({prod}) {
   return (
     <React.Fragment>
       <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc}/>
-      <Reviews/>
+      <Reviews product_id={product_id} count={count}/>
     </React.Fragment>
   )
 }
