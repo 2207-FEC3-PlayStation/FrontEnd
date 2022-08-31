@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from '../RatingBreakdown/StarRating.jsx';
 
-function ReviewTile({data, icon}) {
+function ReviewTile({data}) {
 
   const [date, setDate] = useState();
+
+  let recommend = 'none'
+  if (data.recommend === true) {
+    recommend = 'inline';
+  }
 
   useEffect(() => {
     let year = data.date.substring(0, 4);
@@ -26,7 +31,8 @@ function ReviewTile({data, icon}) {
       <p style={{fontWeight: 'bold'}}>{data.summary}</p>
 
       <p>{data.body}</p>
-      <h4 className='checkMark'>'I recommend this product!'</h4>
+
+      <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
 
       <p style={{paddingLeft: '15px'}}>Seller Response</p>
 
