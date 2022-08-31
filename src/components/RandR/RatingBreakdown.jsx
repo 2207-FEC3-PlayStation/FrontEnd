@@ -8,7 +8,7 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended}) {
   return (
     <div style={{width: "30%", display: 'inline-block', verticalAlign: 'top'}}>
       <h3>Ratings and Reviews</h3>
-      <h1 style={{display: 'inline-block', verticalAlign: 'top'}}>{ratingToTenth}</h1>
+      <h1 data-testid="Review-Num" style={{display: 'inline-block', verticalAlign: 'top'}}>{ratingToTenth}</h1>
       <StarRating avgRating={avgRating}/>
       <p>{recommended}% of reviews recommend this product</p>
       <RatingsBar/>
