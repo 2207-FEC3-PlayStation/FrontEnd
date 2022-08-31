@@ -1,7 +1,9 @@
 import React from 'react';
 
-const QuestionList = props => {
-  //console.log('props = ', props)
+const QuestionList = (props) => {
+
+
+  // console.log('props = ', props)
   // console.log('props = ', props);
   // console.log('props.questions = ', props.questions);
   // console.log('props.count = ', props.count);   // default: 4
@@ -14,8 +16,6 @@ const QuestionList = props => {
             return (
               <form key={i}>
                 <h3>Q: {e}</h3>
-                <h3 style={{display: 'inline'}}>A: </h3>
-                <p style={{display: 'inline'}}>{props.answers[i]}</p>
               </form>
             )
           })}

@@ -1,69 +1,64 @@
-import React from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import QuestionList from './QuestionList.jsx';
 import './QAstyles/QandA.css';
+import server from '../../serverRequests.js';
 
+const QandA = ({prod}) => {
+  const [search, setSearch] = useState('');
+  const [count, setCount] = useState(1);
+  const [questions, setQuestions] = useState(['Question_1', 'Question_2', 'Question_3', 'Question_4'])
 
-class QandA extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: '',
-      count: 1,
-      questions: ['What is life?', 'When was was gum invented?', 'Why are there so many chickens?', 'Who are you?'],
-      answers: ['Life is everything.', 'Gum was invented in 1923.', 'Because KFC is delicious!', 'I am no one.'],
-      users: ['User1234', 'User2222', 'User4343', 'User0203'],
-      seller: [false, true, false, false],
-      date: ['Jan']
+  //axios
+  const data = () => {
+    return console.log('prod = ', prod)
+  }
+
+  useEffect(() => {
+    if (prod) {
+      server.get('/qa/questions', {'product_id': prod.id})
+      .then((data) => {
+        setQuestions(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     }
-    this.handleSearch = this.handleSearch.bind(this)
-    this.loadMoreAnswers = this.loadMoreAnswers.bind(this)
+  }, [prod])
+
+
+  const searchBar = (event) => {
+    setSearch(event.target.value)
   }
 
-  handleSearch(event) {
-    this.setState({
-      search: event.target.value
-    })
-  }
-
-  loadMoreAnswers(event) {
-    event.preventDefault();
-    if (this.state.questions.length === this.state.count) {
+  const loadMoreAnswers = () => {
+    if (questions.length === count) {
       return console.log('No more answers!')
     }
-    this.setState({
-      count: this.state.count + 1
-    })
-    console.log('You clicked!');
-  }
-
-  addQuestion(event) {
-    event.preventDefault();
-
+    setCount(count + 1);
   }
 
 
-  render() {
-    return (
-      <div className="QandA">
-        <div className="Search">
-        <h2> QUESTIONS & ANSWERS (count = {this.state.count})</h2>
-        <input
-          className="search-bar"
-          type="Text"
-          onChange={this.handleSearch}
-          placeholder="Have a question? Search for answers ..."
-        />
-        </div>
-        <QuestionList {...this.state}/><br></br>
-        <button id="load" onClick={this.loadMoreAnswers}>
-          <b>LOAD MORE ANSWERS</b></button><br></br>
-        <button id="moreQA">
-          <b>MORE ANSWERED QUESTIONS</b></button>
-        <button id="addQ">
-          <b>ADD A QUESTION +</b></button>
+  return (
+    <div className="QandA">
+      <div className="Search">
+      <h2> QUESTIONS & ANSWERS (count = {count})</h2>
+      <input
+        className="search-bar"
+        type="Text"
+        onChange={data}
+        placeholder="Have a question? Search for answers ..."
+      />
       </div>
-    )
-  }
-}
+      <QuestionList count={count} questions={questions}/>
+      <br></br>
+      <button id="load" onClick={loadMoreAnswers}>
+        <b>LOAD MORE ANSWERS</b></button><br></br>
+      <button id="moreQA">
+        <b>MORE ANSWERED QUESTIONS</b></button>
+      <button id="addQ">
+        <b>ADD A QUESTION +</b></button>
+    </div>
+  )
+};
 
 export default QandA;
