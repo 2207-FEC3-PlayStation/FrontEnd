@@ -2,25 +2,28 @@ import React, { useState, useEffect} from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
 import server from '../../serverRequests.js';
 
-function Reviews({product_id}) {
+function Reviews({product_id, count}) {
 
   const [totalReviews, setTotalReviews] = useState();
   const [showReviews, setShowReviews] = useState(2);
   const [sortedBy, setSortedBy] = useState({relevant: 'relevance'});
   const [reviews, setReviews] = useState([]);
+  const [showMoreReviews, setShowMoreReviews] = useState('inline-block')
 
-  let showMoreReviews = 'inline-block';
-
-  if (totalReviews <= 2) {
-    showMoreReviews = 'none';
-  }
+  useEffect(() => {
+    if (totalReviews <= 2 || showReviews >= totalReviews) {
+      setShowMoreReviews('none');
+    }
+  }, [totalReviews, showReviews])
 
 
   useEffect(() => {
-    if (product_id) {
+    if (product_id && count) {
       let sort = Object.keys(sortedBy)[0];
-      server.get('/reviews', {'sort': sort, 'product_id': product_id})
+      console.log(count);
+      server.get('/reviews', {'sort': sort, 'product_id': product_id, 'count': count})
         .then((res) => {
+          console.log(res);
           setTotalReviews(res.data.count);
           setReviews(res.data.results)
         })
@@ -28,7 +31,7 @@ function Reviews({product_id}) {
           console.log(err);
         })
     }
-  }, [product_id, sortedBy])
+  }, [product_id, sortedBy, count])
 
   let moreReviews = (e) => {
     e.preventDefault();
@@ -38,9 +41,12 @@ function Reviews({product_id}) {
   return (
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
       <h3>{totalReviews} reviews, sorted by {Object.values(sortedBy)[0]}</h3>
+
       <ReviewList reviews={reviews.slice(0, showReviews)}/>
-      <button style={{display: 'inline-block', margin: '10px'}}>More Reviews</button>
-      <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px'}}>Add a Review</button>
+
+      <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px'}}>More Reviews</button>
+
+      <button  style={{display: 'inline-block', margin: '10px'}}>Add a Review</button>
     </div>
   )
 }

@@ -62,8 +62,11 @@ function ReviewTile({data}) {
       <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Seller Response:{'\n' + data.response}</p>
 
       <h6 style={{display: 'inline-block'}}>Helpful?</h6>
+
       <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '10px'}}>Yes</h6>
       <h6 style={{display: 'inline-block'}}>{'(' + helpfulness + ')'}</h6>
+
+      {/* do we need a no button?????*/}
 
       <button style={{display: 'inline-block', margin: '4px'}}>Report</button>
 
