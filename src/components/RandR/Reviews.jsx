@@ -20,10 +20,8 @@ function Reviews({product_id, count}) {
   useEffect(() => {
     if (product_id && count) {
       let sort = Object.keys(sortedBy)[0];
-      console.log(count);
       server.get('/reviews', {'sort': sort, 'product_id': product_id, 'count': count})
         .then((res) => {
-          console.log(res);
           setTotalReviews(res.data.count);
           setReviews(res.data.results)
         })

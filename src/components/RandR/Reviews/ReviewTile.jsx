@@ -7,6 +7,7 @@ function ReviewTile({data}) {
   const [date, setDate] = useState();
   const [helpfulness, setHelpfulness] = useState();
   const [addedHelpful, setAddedHelpful] = useState(false);
+  const [report, setReport] = useState('Report')
 
   let recommend = 'none';
   if (data.recommend === true) {
@@ -23,9 +24,9 @@ function ReviewTile({data}) {
     let month = data.date.substring(6, 7);
     let day = data.date.substring(9, 10);
     let date = new Date(Date.UTC(year, month, day, 0, 0, 0));
-    date = date.toLocaleString('en-US');
+    date = date.toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'});
     date = date.split(',');
-    setDate(date[0])
+    setDate(date[0] + ',' + date[1])
   }, [data]);
 
   useEffect(() => {
@@ -66,9 +67,9 @@ function ReviewTile({data}) {
       <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '10px'}}>Yes</h6>
       <h6 style={{display: 'inline-block'}}>{'(' + helpfulness + ')'}</h6>
 
-      {/* do we need a no button?????*/}
+      {/* do we need a 'no' button?????*/}
 
-      <button style={{display: 'inline-block', margin: '4px'}}>Report</button>
+      <h6 onClick={report} style={{display: 'inline-block', margin: '4px'}}>{report}</h6>
 
     </div>
   )
