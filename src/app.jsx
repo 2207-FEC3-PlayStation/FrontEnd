@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div>
       <Overview/>
-      <Comparisons/>
+      <Comparisons prod={prod}/>
       <QandA />
       <RandR prod={prod}/>
     </div>
