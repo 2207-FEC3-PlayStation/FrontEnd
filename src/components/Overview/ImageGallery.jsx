@@ -9,18 +9,17 @@ flex-direction: row;
 const ThumbnailList = styled.div`
 display: flex;
 flex-direction: column;
-align-items: flex-end;
-margin-right: 25px;
+align-items: center;
 `;
 const Thumbnail1 = styled.img`
 margin-bottom: 10px;
-max-width: 25%;
-max-height: 25%;
+max-width: 60%;
+max-height: 60%;
 `;
 
 const MainImage = styled.img`
-max-width: 558px;
-max-height: 837px;
+max-width: 75%;
+max-height: 75%;
 `;
 
 var ImageGallery = (props) => { //images={this.state.dummy}
