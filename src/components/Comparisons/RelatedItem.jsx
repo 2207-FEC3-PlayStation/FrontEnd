@@ -76,7 +76,7 @@ class RelatedItem extends React.Component {
           <Button onClick={this.showModal.bind(this)}></Button>
           <Text>{this.props.item.category.toUpperCase()}</Text>
           <br></br>
-          <Text>{this.props.item.name}</Text><br></br>
+          <Text data-testid="relatedItemName">{this.props.item.name}</Text><br></br>
           <Text>${this.props.item.default_price}</Text><br></br>
           <Text>Average Star Rating</Text>
         </Card>
