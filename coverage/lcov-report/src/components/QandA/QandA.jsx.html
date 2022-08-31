@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -54,12 +54,6 @@
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
-        <template id="filterTemplate">
-            <div class="quiet">
-                Filter:
-                <input oninput="onInput()" type="search" id="fileSearch">
-            </div>
-        </template>
     </div>
     <div class='status-line low'></div>
     <pre><table class="coverage">
@@ -139,8 +133,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,8 +143,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,7 +171,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,19 +201,19 @@ import './QAstyles/QandA.css';
 &nbsp;
 &nbsp;
 class QandA extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state = {</span>
       search: '',
-      count: 1,
+      count: 4,
       questions: ['What is life?', 'When was was gum invented?', 'Why are there so many chickens?', 'Who are you?'],
       answers: ['Life is everything.', 'Gum was invented in 1923.', 'Because KFC is delicious!', 'I am no one.'],
       users: ['User1234', 'User2222', 'User4343', 'User0203'],
       seller: [false, true, false, false],
       date: ['Jan']
     }
-    this.handleSearch = this.handleSearch.bind(this)
-    this.loadMoreAnswers = this.loadMoreAnswers.bind(this)
+<span class="cstat-no" title="statement not covered" >    this.handleSearch = this.handleSearch.bind(this)</span>
+<span class="cstat-no" title="statement not covered" >    this.loadMoreAnswers = this.loadMoreAnswers.bind(this)</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  ha</span>ndleSearch(event) {
@@ -245,8 +239,8 @@ class QandA extends React.Component {
   }
 &nbsp;
 &nbsp;
-  render() {
-    return (
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+<span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div className="QandA"&gt;
         &lt;div className="Search"&gt;
         &lt;h2&gt; QUESTIONS &amp; ANSWERS (count = {this.state.count})&lt;/h2&gt;
@@ -276,9 +270,10 @@ export default QandA;
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-31T00:58:00.016Z
+                <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
+                at Tue Aug 30 2022 21:11:08 GMT-0500 (Central Daylight Time)
             </div>
+        </div>
         <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
