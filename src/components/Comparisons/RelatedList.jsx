@@ -26,16 +26,14 @@ var RelatedList = (props) => (
     <h4>RELATED PRODUCTS</h4>
     <Carousel id="RelatedListCarousel">
     {props.products.map((item) => (
-      <RelatedItem item={item} key={item.id}/>
+      <RelatedItem item={item} key={item.id} prod={props.prod}/>
     ))}
     </Carousel>
   </Related>
 )
 
-  //66643 seems to be out of stock... so will have to check if there are any in stock first because thumbnail and other properties are null
 
-  // sends a get request for related products for the current product (props.product) when it's mounted (useEffect)
-  // for now just dummy data
+
 
 
 
