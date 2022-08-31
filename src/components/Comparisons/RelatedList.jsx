@@ -27,7 +27,7 @@ var RelatedList = (props) => (
     <h4>RELATED PRODUCTS</h4>
     <Carousel id="RelatedListCarousel">
     {props.products.map((item) => (
-      <RelatedItem item={item} key={item.id} prod={props.prod}/>
+      <RelatedItem item={item} key={item.id} prod={props.prod} handleProduct={props.handleProduct} />
     ))}
     </Carousel>
   </Related>

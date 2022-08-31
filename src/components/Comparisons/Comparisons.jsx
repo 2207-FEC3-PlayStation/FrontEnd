@@ -43,7 +43,7 @@ function Comparisons (props) {
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState(props.prod);
   const [related, setRelated] = useState([]);
-  const [stylesUpdated, setstylesUpdated] = useState(false);
+
 
 
   // gets related products for the current product
@@ -86,25 +86,22 @@ function Comparisons (props) {
     }
   }, [related])
 
-  // gets styles of the related product and adds the thumbnail picture to each products info
-  // is there a better way to do something after a request has finished than chaining .thens?
+  // checks if related item is out of stock. If it is, delete that item from related products
+  // works but if you click on too many items it'll max out the requests to the API
   useEffect(() => {
     if (products) {
-      var photos = [];
-      related.forEach((product) => {
-        server.get('/products/styles', {product_id: product})
-        .then((data) => {
-          photos.push(data.data.results[0].photos[0].thumbnail_url);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then(() => {
-          if (photos.length === products.length) {
-            for (let i = 0; i < products.length; i++) {
-              products[i].style = photos[i]
+      related.forEach((item) => {
+        server.get('/products/styles', {product_id: item})
+        .then((data)=> {
+          if (data.data.results[0].skus.null) {
+            if (data.data.results[0].skus.null.quantity === null) {
+              console.log(`${item} is out of stock`);
+              var index = related.indexOf(item);
+              var copy = related.slice();
+              copy.splice(1, index);
+              setRelated(copy);
             }
-            setstylesUpdated(true);
+            console.log('all related items in stock')
           }
         })
         .catch((err) => {
@@ -113,7 +110,6 @@ function Comparisons (props) {
       })
     }
   }, [products])
-
 
   //66643 seems to be out of stock... so may have to check if there are any in stock first because thumbnail and other properties are null
 
@@ -147,7 +143,7 @@ function Comparisons (props) {
 
   return (
       <Container>
-        {stylesUpdated && <RelatedList id="RelatedList" products={products} prod={props.prod}/>}
+        <RelatedList id="RelatedList" products={products} prod={props.prod} handleProduct={props.handleProduct}/>
         {clickedR && (
           <LeftButton onClick={() => scrollL()}>‹</LeftButton>
         )}

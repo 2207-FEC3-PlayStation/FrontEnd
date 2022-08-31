@@ -15,7 +15,7 @@ const Card = styled.div`
   position: relative;
   padding-bottom: 2%;
   margin-left: 0;
-  margin-right: 4%
+  margin-right: 4%;
 `
 const Button = styled.button`
   background: transparent url(${starbutton}) no-repeat top;
@@ -41,9 +41,26 @@ function RelatedItem (props) {
   const [reviews, setReviews] = useState({});
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
+  const [image, setImage] = useState();
 
+
+  // gets styles of the related product and adds the thumbnail picture to the image source
+  // needs to loop through styles and get the default picture
   useEffect(() => {
-    console.log(props);
+    if (props.item) {
+      server.get('/products/styles', {product_id: props.item.id})
+        .then((data)=> {
+          var thumbnail = data.data.results[0].photos[0].thumbnail_url
+          setImage(thumbnail);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [props.item])
+
+  //gets all review star data for the related item
+  useEffect(() => {
     if (props.item) {
       server.get('/reviews/meta', {'product_id': props.item.id})
       .then((data) => {
@@ -55,6 +72,7 @@ function RelatedItem (props) {
     }
   }, [props.item])
 
+  //calculates the average star rating for the related item
   useEffect(() => {
     if (reviews) {
       let sum = 0;
@@ -83,10 +101,10 @@ function RelatedItem (props) {
   }
 
   return (
-      <Card>
+      <Card onClick={props.handleProduct}>
         <ComparisonsModal show={starClick} handleClose={hideModal}>
         </ComparisonsModal>
-        <Img src={props.item.style} alt="product image"/><br></br>
+        <Img src={image} alt={props.item.id}/><br></br>
         <Button onClick={showModal}></Button>
         <Text>{props.item.category.toUpperCase()}</Text>
         <br></br>
