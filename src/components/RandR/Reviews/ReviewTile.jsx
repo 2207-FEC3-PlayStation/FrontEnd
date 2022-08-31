@@ -6,6 +6,7 @@ function ReviewTile({data}) {
 
   const [date, setDate] = useState();
   const [helpfulness, setHelpfulness] = useState();
+  const [addedHelpful, setAddedHelpful] = useState(false);
 
   let recommend = 'none';
   if (data.recommend === true) {
@@ -34,9 +35,13 @@ function ReviewTile({data}) {
     }, [data, data.helpfulness]);
 
   let increaseHelpful = (e) => {
-    //uncomment when put request is functioning.
-    //server.put('/reviews/helpful', {review_id: data.review_id});
-    setHelpfulness(helpfulness + 1)
+    if (addedHelpful === false) {
+
+      //uncomment when put request is functioning.
+      //server.put('/reviews/helpful', {review_id: data.review_id});
+      setHelpfulness(helpfulness + 1);
+      setAddedHelpful(true);
+    }
   }
 
 
@@ -58,9 +63,9 @@ function ReviewTile({data}) {
 
       <h6 style={{display: 'inline-block'}}>Helpful?</h6>
       <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '10px'}}>Yes</h6>
-      <h6 style={{display: 'inline-block', marginLeft: '3px'}}>{helpfulness}</h6>
+      <h6 style={{display: 'inline-block'}}>{'(' + helpfulness + ')'}</h6>
 
-      <button style={{display: 'inline-block', margin: '10px'}}>Report</button>
+      <button style={{display: 'inline-block', margin: '4px'}}>Report</button>
 
     </div>
   )

@@ -9,6 +9,12 @@ function Reviews({product_id}) {
   const [sortedBy, setSortedBy] = useState({relevant: 'relevance'});
   const [reviews, setReviews] = useState([]);
 
+  let showMoreReviews = 'inline-block';
+
+  if (totalReviews <= 2) {
+    showMoreReviews = 'none';
+  }
+
 
   useEffect(() => {
     if (product_id) {
@@ -24,15 +30,17 @@ function Reviews({product_id}) {
     }
   }, [product_id, sortedBy])
 
+  let moreReviews = (e) => {
+    e.preventDefault();
+    setShowReviews(showReviews + 2);
+  }
+
   return (
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
       <h3>{totalReviews} reviews, sorted by {Object.values(sortedBy)[0]}</h3>
       <ReviewList reviews={reviews.slice(0, showReviews)}/>
-      {/* {reviews.slice(0, showReviews).map((review) => {
-        return <ReviewList key={review.review_id} data={review} />
-      })} */}
       <button style={{display: 'inline-block', margin: '10px'}}>More Reviews</button>
-      <button style={{display: 'inline-block', margin: '10px'}}>Add a Review</button>
+      <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px'}}>Add a Review</button>
     </div>
   )
 }
