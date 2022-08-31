@@ -10,7 +10,7 @@ function RandR ({prod}) {
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
   const [recommendedPerc, setRecommendedPerc] = useState();
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState();
 
   useEffect(() => {
     if (prod) {
