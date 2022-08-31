@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import starbutton from '../../assets/starbutton.png';
 import ComparisonsModal from './ComparisonsModal.jsx';
+import StarRating from '../../components/RandR/RatingBreakdown/StarRating.jsx';
+import server from '../../serverRequests.js';
+
 
 const Card = styled.div`
   border: 1px solid gray;
@@ -11,6 +14,8 @@ const Card = styled.div`
   margin-bottom: 0;
   position: relative;
   padding-bottom: 2%;
+  margin-left: 0;
+  margin-right: 4%;
 `
 const Button = styled.button`
   background: transparent url(${starbutton}) no-repeat top;
@@ -28,60 +33,86 @@ const Text = styled.small`
 const Img = styled.img`
   width:180px;
   height:220px;
-  opacity: 0.4;
+  opacity: 0.75;
 `
-class RelatedItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      style: "",
-      starClick: false
+function RelatedItem (props) {
+
+  const [starClick, setStarClick] = useState(false);
+  const [reviews, setReviews] = useState({});
+  const [avgRating, setAvgRating] = useState(0);
+  const [ratingToTenth, setRatingToTenth] = useState(0);
+  const [image, setImage] = useState();
+
+
+  // gets styles of the related product and adds the thumbnail picture to the image source
+  // needs to loop through styles and get the default picture
+  useEffect(() => {
+    if (props.item) {
+      server.get('/products/styles', {product_id: props.item.id})
+        .then((data)=> {
+          var thumbnail = data.data.results[0].photos[0].thumbnail_url
+          setImage(thumbnail);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     }
-  };
+  }, [props.item])
 
-  showModal () {
+  //gets all review star data for the related item
+  useEffect(() => {
+    if (props.item) {
+      server.get('/reviews/meta', {'product_id': props.item.id})
+      .then((data) => {
+        setReviews(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, [props.item])
+
+  //calculates the average star rating for the related item
+  useEffect(() => {
+    if (reviews) {
+      let sum = 0;
+      let count = 0;
+      for(var key in reviews.ratings) {
+        let thisKey = parseInt(key);
+        let thisVal = parseInt(reviews.ratings[key]);
+        count += thisVal;
+        sum += thisVal * thisKey;
+      }
+      let average = (Math.round(4 * sum / count) / 4).toFixed(2);
+      let tenth = (Math.round(4 * sum / count) / 4).toFixed(1);
+      setAvgRating(average);
+      setRatingToTenth(tenth);
+    }
+  }, [reviews])
+
+  function showModal () {
     console.log('Clicked Star Button');
-    // open comparison modal
-    this.setState({
-      starClick: true
-    })
+    setStarClick(true);
   }
 
-  hideModal () {
+  function hideModal () {
     console.log('close')
-    this.setState({
-      starClick: false
-    })
+    setStarClick(false);
   }
 
-  // get request to get related Item info and set that to this.state.relatedItemInfo
-
-  // get request to styles to get all the images
-  // for now just use the first style for this.state.style
-
-  // clicking the card will navigate to the product detail page
-
-  // sale prices should be in red with original crossed out
-
-  // star rating. if no reviews - should be hidden.
-
-  // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
-
-  render (){
-    return (
-        <Card>
-          <ComparisonsModal show={this.state.starClick} handleClose={this.hideModal.bind(this)}>
-          </ComparisonsModal>
-          <Img src={this.props.item.style} alt="product image"/><br></br>
-          <Button onClick={this.showModal.bind(this)}></Button>
-          <Text>{this.props.item.category.toUpperCase()}</Text>
-          <br></br>
-          <Text data-testid="relatedItemName">{this.props.item.name}</Text><br></br>
-          <Text>${this.props.item.default_price}</Text><br></br>
-          <Text>Average Star Rating</Text>
-        </Card>
-    )
-  }
+  return (
+      <Card onClick={props.handleProduct}>
+        <ComparisonsModal show={starClick} handleClose={hideModal}>
+        </ComparisonsModal>
+        <Img src={image} alt={props.item.id}/><br></br>
+        <Button onClick={showModal}></Button>
+        <Text>{props.item.category.toUpperCase()}</Text>
+        <br></br>
+        <Text data-testid="relatedItemName">{props.item.name}</Text><br></br>
+        <Text>${props.item.default_price}</Text><br></br>
+        <Text><StarRating avgRating={avgRating}/></Text>
+      </Card>
+  )
 }
 
 export default RelatedItem;

@@ -11,7 +11,7 @@ margin-top: 40px;
 const SizeSelect = styled.select`
 background-color: #d2d2d2;
 color: white;
-padding: 20px 40px;
+padding: 20px 20px;
 margin-right: 10px;
 border:none;
 `
@@ -24,14 +24,15 @@ background-color: #d2d2d2;
 color: white;
 padding: 20px 20px;
 border:none;
+margin-left: 10px;
 `
 
 const QuantityOptions = styled.option`
 `
 
 const AddToCart = styled.button`
-width: 280px;
-padding: 20px 40px;
+width: 255px;
+padding: 20px 30px;
 margin-top: 30px;
 background-color: #207420;
 color: white;
