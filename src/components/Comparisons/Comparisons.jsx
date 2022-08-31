@@ -41,77 +41,6 @@ function Comparisons (props) {
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
   const [products, setProducts] = useState([
-//     {
-//       "id": 66642,
-//       "campus": "hr-rfc",
-//       "name": "Camo Onesie",
-//       "slogan": "Blend in to your crowd",
-//       "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
-//       "category": "Jackets",
-//       "default_price": "140.00",
-//       "created_at": "2022-03-31T21:13:15.875Z",
-//       "updated_at": "2022-03-31T21:13:15.875Z",
-//       "features": [
-//           {
-//               "feature": "Fabric",
-//               "value": "Canvas"
-//           },
-//           {
-//               "feature": "Buttons",
-//               "value": "Brass"
-//           }
-//       ],
-//       "style": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
-//   }
-//   ,
-//   {
-//     "id": 66644,
-//     "campus": "hr-rfc",
-//     "name": "Morning Joggers",
-//     "slogan": "Make yourself a morning person",
-//     "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
-//     "category": "Pants",
-//     "default_price": "40.00",
-//     "created_at": "2022-03-31T21:13:15.875Z",
-//     "updated_at": "2022-03-31T21:13:15.875Z",
-//     "features": [
-//         {
-//             "feature": "Fabric",
-//             "value": "100% Cotton"
-//         },
-//         {
-//             "feature": "Cut",
-//             "value": "Skinny"
-//         }
-//     ],
-//     "style": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
-//   },
-//   {
-//     "id": 66649,
-//     "campus": "hr-rfc",
-//     "name": "YEasy 350",
-//     "slogan": "Just jumped over jumpman",
-//     "description": "These stretchy knit shoes show off asymmetrical lacing and a big sculpted rubber midsole. In a nod to adidas soccer heritage.",
-//     "category": "Kicks",
-//     "default_price": "450.00",
-//     "created_at": "2022-03-31T21:13:15.875Z",
-//     "updated_at": "2022-03-31T21:13:15.875Z",
-//     "features": [
-//         {
-//             "feature": "Sole",
-//             "value": "Rubber"
-//         },
-//         {
-//             "feature": "Material",
-//             "value": "FullControlSkin"
-//         },
-//         {
-//             "feature": "Stitching",
-//             "value": "Double Stitch"
-//         }
-//     ],
-//     "style": "https://images.unsplash.com/photo-1551489186-cf8726f514f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
-// },
 // {
 //   "id": 66648,
 //   "campus": "hr-rfc",
@@ -171,69 +100,75 @@ function Comparisons (props) {
 ]);
 const [product, setProduct] = useState(props.prod);
 const [related, setRelated] = useState([]);
+const [stylesUpdated, setstylesUpdated] = useState(false);
 
-  // send a get request for related products
-    // returns an array of product ids
-
+  // gets related products for the current product
   useEffect(() => {
-    // if (!props.prod) {
-    //   return <div>Loading...</div>
-    // }
-    loadRelated();
-  }, [product]);
-
-  function loadRelated() {
-    console.log('props now', props);
-    var finalArray = [];
-    server.get('/products/related', {product_id: props.prod.id})
+    if (props.prod) {
+      var finalArray = [];
+      server.get('/products/related', {product_id: props.prod.id})
       .then((data) => {
         var relatedProducts = data.data;
-        setRelated(relatedProducts);
-        // relatedProducts.forEach((product) => {
-        //   server.get('/product', {product_id: product})
-        //   .then((data) => {
-        //     finalArray.push(data.data);
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   })
-        //   .then(()=> {
-        //     setProducts(finalArray);
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   })
-        // })
+        let uniqueRelated = [...new Set(relatedProducts)];
+        setRelated(uniqueRelated);
       })
       .catch((err) => {
         console.log(err);
       })
-  }
+    }
+  }, [props.prod]);
 
+  // gets product info for each related product
   useEffect(() => {
-    loadData();
+    if (related) {
+      var finalArray = [];
+      related.forEach((product) => {
+        server.get('/product', {product_id: product})
+          .then((data) => {
+            finalArray.push(data.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .then(()=> {
+            if (finalArray.length === related.length) {
+              setProducts(finalArray);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      })
+    }
   }, [related])
 
-  function loadData () {
-    var finalArray = [];
-    related.forEach((product) => {
-      server.get('/product', {product_id: product})
-      .then((data) => {
-        finalArray.push(data.data);
+  // gets styles of the related product and adds the thumbnail picture to each products info
+  // is there a better way to do something after a request has finished than chaining .thens?
+  useEffect(() => {
+    if (products) {
+      var photos = [];
+      related.forEach((product) => {
+        server.get('/products/styles', {product_id: product})
+        .then((data) => {
+          photos.push(data.data.results[0].photos[0].thumbnail_url);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then(() => {
+          if (photos.length === products.length) {
+            for (let i = 0; i < products.length; i++) {
+              products[i].style = photos[i]
+            }
+            setstylesUpdated(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
       })
-      .catch((err) => {
-        console.log(err);
-      })
-      .then(()=> {
-        setProducts(finalArray);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    })
-  }
-
-  // send a get request for styles of those related products
+    }
+  }, [products])
 
   function scrollL () {
     console.log('clicked on left button')
@@ -255,17 +190,10 @@ const [related, setRelated] = useState([]);
     }
   }
 
-  // if (products.length < 5) {
-  //   return <div>Loading...</div>
-  // }
-  // if (!props.prod) {
-  //   return <div>Loading...</div>
-  // }
-
   return (
       <div>
         <Container>
-          <RelatedList id="RelatedList"products={products}/>
+          {stylesUpdated && <RelatedList id="RelatedList" products={products}/>}
           {clickedR && (
             <LeftButton onClick={() => scrollL()}>‹</LeftButton>
           )}
