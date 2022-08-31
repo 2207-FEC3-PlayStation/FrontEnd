@@ -10,6 +10,8 @@ function Reviews({product_id, count}) {
   const [reviews, setReviews] = useState([]);
   const [showMoreReviews, setShowMoreReviews] = useState('inline-block')
 
+  //--------useEffect methods--------
+
   useEffect(() => {
     if (totalReviews <= 2 || showReviews >= totalReviews) {
       setShowMoreReviews('none');
@@ -31,6 +33,20 @@ function Reviews({product_id, count}) {
     }
   }, [product_id, sortedBy, count])
 
+//---------event Handlers---------
+
+  let changeSort = (e) => {
+    let choice = e.target.value;
+    if (choice === 'relevance') {
+      setSortedBy({relevant: choice})
+    } else if (choice === 'most helpful')  {
+      setSortedBy({helpful: choice})
+    } else if (choice === 'newest') {
+      setSortedBy({newest: choice})
+    }
+    // setSortedBy(e.target)
+  }
+
   let moreReviews = (e) => {
     e.preventDefault();
     setShowReviews(showReviews + 2);
@@ -38,7 +54,14 @@ function Reviews({product_id, count}) {
 
   return (
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
-      <h3>{totalReviews} reviews, sorted by {Object.values(sortedBy)[0]}</h3>
+      <h3 style={{display: 'inline-block'}}>{totalReviews} reviews, sorted by </h3>
+
+      <label style={{display: 'none'}}></label>
+      <select onChange={changeSort} style={{display: 'inline-block'}}>{Object.values(sortedBy)[0]}
+        <option value='relevance'>relevance</option>
+        <option value='most helpful'>most helpful</option>
+        <option value='newest'>newest</option>
+      </select>
 
       <ReviewList reviews={reviews.slice(0, showReviews)}/>
 
