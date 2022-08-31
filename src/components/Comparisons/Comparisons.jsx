@@ -144,10 +144,10 @@ function Comparisons (props) {
   return (
       <Container>
         <RelatedList id="RelatedList" products={products} prod={props.prod} handleProduct={props.handleProduct}/>
-        {clickedR && products.length > 4 &&(
+        {clickedR && (
           <LeftButton onClick={() => scrollL()}>‹</LeftButton>
         )}
-        {!hideR && (
+        {!hideR && (products.length > 4) && (
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
         <OutfitList products={products}/>
