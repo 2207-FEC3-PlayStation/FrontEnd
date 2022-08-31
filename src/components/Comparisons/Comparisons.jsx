@@ -88,28 +88,28 @@ function Comparisons (props) {
 
   // checks if related item is out of stock. If it is, delete that item from related products
   // works but if you click on too many items it'll max out the requests to the API... works for some products but not others...
-  useEffect(() => {
-    if (products) {
-      related.forEach((item) => {
-        server.get('/products/styles', {product_id: item})
-        .then((data)=> {
-          if (data.data.results[0].skus.null) {
-            if (data.data.results[0].skus.null.quantity === null) {
-              console.log(`${item} is out of stock`);
-              var index = related.indexOf(item);
-              var copy = related.slice();
-              copy.splice(1, index);
-              setRelated(copy);
-            }
-            console.log('all related items in stock')
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-      })
-    }
-  }, [products])
+  // useEffect(() => {
+  //   if (products) {
+  //     related.forEach((item) => {
+  //       server.get('/products/styles', {product_id: item})
+  //       .then((data)=> {
+  //         if (data.data.results[0].skus.null) {
+  //           if (data.data.results[0].skus.null.quantity === null) {
+  //             console.log(`${item} is out of stock`);
+  //             var index = related.indexOf(item);
+  //             var copy = related.slice();
+  //             copy.splice(1, index);
+  //             setRelated(copy);
+  //           }
+  //           console.log('all related items in stock')
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       })
+  //     })
+  //   }
+  // }, [products])
 
   //66643 seems to be out of stock... so may have to check if there are any in stock first because thumbnail and other properties are null
 
@@ -144,7 +144,7 @@ function Comparisons (props) {
   return (
       <Container>
         <RelatedList id="RelatedList" products={products} prod={props.prod} handleProduct={props.handleProduct}/>
-        {clickedR && (
+        {clickedR && (products.length > 4) && (
           <LeftButton onClick={() => scrollL()}>‹</LeftButton>
         )}
         {!hideR && (products.length > 4) && (
