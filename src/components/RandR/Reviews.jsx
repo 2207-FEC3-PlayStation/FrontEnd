@@ -1,13 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
+import server from '../../serverRequests.js';
 
-function Reviews(props) {
+function Reviews({product_id, count}) {
+
+  const [totalReviews, setTotalReviews] = useState();
+  const [showReviews, setShowReviews] = useState(2);
+  const [sortedBy, setSortedBy] = useState({relevant: 'relevance'});
+  const [reviews, setReviews] = useState([]);
+  const [showMoreReviews, setShowMoreReviews] = useState('inline-block')
+
+  useEffect(() => {
+    if (totalReviews <= 2 || showReviews >= totalReviews) {
+      setShowMoreReviews('none');
+    }
+  }, [totalReviews, showReviews])
+
+
+  useEffect(() => {
+    if (product_id && count) {
+      let sort = Object.keys(sortedBy)[0];
+      server.get('/reviews', {'sort': sort, 'product_id': product_id, 'count': count})
+        .then((res) => {
+          setTotalReviews(res.data.count);
+          setReviews(res.data.results)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [product_id, sortedBy, count])
+
+  let moreReviews = (e) => {
+    e.preventDefault();
+    setShowReviews(showReviews + 2);
+  }
+
   return (
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
-      <h3>X reviews, sorted by :relevance:</h3>
-      <ReviewList/>
-      <button style={{display: 'inline-block', margin: '10px'}}>More Reviews</button>
-      <button style={{display: 'inline-block', margin: '10px'}}>Add a Review</button>
+      <h3>{totalReviews} reviews, sorted by {Object.values(sortedBy)[0]}</h3>
+
+      <ReviewList reviews={reviews.slice(0, showReviews)}/>
+
+      <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px'}}>More Reviews</button>
+
+      <button  style={{display: 'inline-block', margin: '10px'}}>Add a Review</button>
     </div>
   )
 }

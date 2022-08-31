@@ -20,9 +20,9 @@ const LeftButton = styled.button`
   position: absolute;
   font-size: 25px;
   color: #5d5c5c;
-  height: 80px;
+  height: 100px;
   width: 120px;
-  top: 9.27%;
+  top: 9.3%;
   left: 0%;
   border: none;
   padding-top: 17%;
@@ -40,67 +40,11 @@ function Comparisons (props) {
 
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
-  const [products, setProducts] = useState([
-// {
-//   "id": 66648,
-//   "campus": "hr-rfc",
-//   "name": "Blues Suede Shoes",
-//   "slogan": "2019 Stanley Cup Limited Edition",
-//   "description": "Touch down in the land of the Delta Blues in the middle of the pouring rain",
-//   "category": "Dress Shoes",
-//   "default_price": "120.00",
-//   "created_at": "2022-03-31T21:13:15.875Z",
-//   "updated_at": "2022-03-31T21:13:15.875Z",
-//   "features": [
-//       {
-//           "feature": "Sole",
-//           "value": "Rubber"
-//       },
-//       {
-//           "feature": "Material",
-//           "value": "FullControlSkin"
-//       },
-//       {
-//           "feature": "Stitching",
-//           "value": "Double Stitch"
-//       }
-//   ],
-//   "style": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
-// },
-// {
-// "id": 66646,
-// "campus": "hr-rfc",
-// "name": "Heir Force Ones",
-// "slogan": "A sneaker dynasty",
-// "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
-// "category": "Kicks",
-// "default_price": "99.00",
-// "created_at": "2022-03-31T21:13:15.875Z",
-// "updated_at": "2022-03-31T21:13:15.875Z",
-// "features": [
-//     {
-//         "feature": "Sole",
-//         "value": "Rubber"
-//     },
-//     {
-//         "feature": "Material",
-//         "value": "FullControlSkin"
-//     },
-//     {
-//         "feature": "Mid-Sole",
-//         "value": "ControlSupport Arch Bridge"
-//     },
-//     {
-//         "feature": "Stitching",
-//         "value": "Double Stitch"
-//     }
-// ],
-// "style": "https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
-// }
-]);
-const [product, setProduct] = useState(props.prod);
-const [related, setRelated] = useState([]);
-const [stylesUpdated, setstylesUpdated] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState(props.prod);
+  const [related, setRelated] = useState([]);
+
+
 
   // gets related products for the current product
   useEffect(() => {
@@ -142,33 +86,40 @@ const [stylesUpdated, setstylesUpdated] = useState(false);
     }
   }, [related])
 
-  // gets styles of the related product and adds the thumbnail picture to each products info
-  // is there a better way to do something after a request has finished than chaining .thens?
-  useEffect(() => {
-    if (products) {
-      var photos = [];
-      related.forEach((product) => {
-        server.get('/products/styles', {product_id: product})
-        .then((data) => {
-          photos.push(data.data.results[0].photos[0].thumbnail_url);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then(() => {
-          if (photos.length === products.length) {
-            for (let i = 0; i < products.length; i++) {
-              products[i].style = photos[i]
-            }
-            setstylesUpdated(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-      })
-    }
-  }, [products])
+  // checks if related item is out of stock. If it is, delete that item from related products
+  // works but if you click on too many items it'll max out the requests to the API... works for some products but not others...
+  // useEffect(() => {
+  //   if (products) {
+  //     related.forEach((item) => {
+  //       server.get('/products/styles', {product_id: item})
+  //       .then((data)=> {
+  //         if (data.data.results[0].skus.null) {
+  //           if (data.data.results[0].skus.null.quantity === null) {
+  //             console.log(`${item} is out of stock`);
+  //             var index = related.indexOf(item);
+  //             var copy = related.slice();
+  //             copy.splice(1, index);
+  //             setRelated(copy);
+  //           }
+  //           console.log('all related items in stock')
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       })
+  //     })
+  //   }
+  // }, [products])
+
+  //66643 seems to be out of stock... so may have to check if there are any in stock first because thumbnail and other properties are null
+
+  // clicking the card will navigate to the product detail page
+
+  // sale prices should be in red with original crossed out
+
+  // star rating. if no reviews - should be hidden.
+
+  // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
 
   function scrollL () {
     console.log('clicked on left button')
@@ -191,18 +142,16 @@ const [stylesUpdated, setstylesUpdated] = useState(false);
   }
 
   return (
-      <div>
-        <Container>
-          {stylesUpdated && <RelatedList id="RelatedList" products={products}/>}
-          {clickedR && (
-            <LeftButton onClick={() => scrollL()}>‹</LeftButton>
-          )}
-          {!hideR && (
-            <RightButton onClick={() => scrollR()}>›</RightButton>
-          )}
-          <OutfitList products={products}/>
-        </Container>
-      </div>
+      <Container>
+        <RelatedList id="RelatedList" products={products} prod={props.prod} handleProduct={props.handleProduct}/>
+        {clickedR && (products.length > 4) && (
+          <LeftButton onClick={() => scrollL()}>‹</LeftButton>
+        )}
+        {!hideR && (products.length > 4) && (
+          <RightButton onClick={() => scrollR()}>›</RightButton>
+        )}
+        <OutfitList products={products}/>
+      </Container>
     )
 }
 

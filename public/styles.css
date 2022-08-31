@@ -32,3 +32,15 @@ body {
   content: "\f005 \f005 \f005 \f005 \f005";
   color: #f8ce0b;
 }
+
+.checkMark {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.checkMark::before {
+  content: "\f00c";
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  color: green;
+}
