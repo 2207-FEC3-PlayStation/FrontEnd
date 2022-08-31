@@ -7,7 +7,9 @@ function ReviewTile({data}) {
   const [date, setDate] = useState();
   const [helpfulness, setHelpfulness] = useState();
   const [addedHelpful, setAddedHelpful] = useState(false);
-  const [report, setReport] = useState('Report')
+  const [report, setReport] = useState({text: 'Report', reported: false})
+
+//-----------conditional rendering variables-----
 
   let recommend = 'none';
   if (data.recommend === true) {
@@ -18,6 +20,8 @@ function ReviewTile({data}) {
   if (data.response !== null) {
     response = 'block';
   }
+
+//------------useEffect methods -------
 
   useEffect(() => {
     let year = data.date.substring(0, 4);
@@ -33,7 +37,10 @@ function ReviewTile({data}) {
     if (data) {
       setHelpfulness(data.helpfulness);
     }
-    }, [data, data.helpfulness]);
+  }, [data, data.helpfulness]);
+
+
+//----------Event Handlers--------------
 
   let increaseHelpful = (e) => {
     if (addedHelpful === false) {
@@ -43,6 +50,12 @@ function ReviewTile({data}) {
       setHelpfulness(helpfulness + 1);
       setAddedHelpful(true);
     }
+  }
+
+  let reportReview = (e) => {
+    //uncomment when put request is functioning
+    //server.put('/reviews/report', {review_id: data.review_id});
+    setReport({text: 'Reported', reported: true});
   }
 
 
@@ -69,7 +82,7 @@ function ReviewTile({data}) {
 
       {/* do we need a 'no' button?????*/}
 
-      <h6 onClick={report} style={{display: 'inline-block', margin: '4px'}}>{report}</h6>
+      <h6 onClick={reportReview} style={{display: 'inline-block', margin: '4px'}}>{report.text}</h6>
 
     </div>
   )
