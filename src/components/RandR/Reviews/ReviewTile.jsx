@@ -5,9 +5,14 @@ function ReviewTile({data}) {
 
   const [date, setDate] = useState();
 
-  let recommend = 'none'
+  let recommend = 'none';
   if (data.recommend === true) {
-    recommend = 'inline';
+    recommend = 'block';
+  }
+
+  let response = 'none';
+  if (data.response !== null) {
+    response = 'block';
   }
 
   useEffect(() => {
@@ -34,7 +39,7 @@ function ReviewTile({data}) {
 
       <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
 
-      <p style={{paddingLeft: '15px'}}>Seller Response</p>
+      <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Seller Response:{'\n' + data.response}</p>
 
       <button style={{display: 'inline-block', margin: '10px'}}>Helpful?</button>
 
