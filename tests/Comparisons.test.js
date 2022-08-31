@@ -15,7 +15,7 @@ describe('Comparisons Test', function() {
 
   it('should should have the correct name for our first product in dummy data 66642', () => {
   setTimeout(()=>{
-      expect.(screen.getByTestId('relatedItemName').toHaveTextContent('Camo Onesie'))
+      expect(screen.getByTestId('relatedItemName').toHaveTextContent('Camo Onesie'))
     })
   });
 
