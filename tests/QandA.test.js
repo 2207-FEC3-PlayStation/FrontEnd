@@ -8,9 +8,13 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
-describe('Q&A - Check for text', () => {
-  it('should show correct text (QUESTIONS & ANSWERS)', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.text().includes('QUESTIONS & ANSWERS')).toBe(true);
+describe('Q & A - Jest Test', function() {
+  const user = userEvent.setup();
+  render(<App />)
+  it('should show the correct title on the first div block', () => {
+  setTimeout(()=>{
+      expect(screen.getByTestId('Search').toHaveTextContent('QUESTIONS & ANSWERS'))
+    })
   });
+
 });
