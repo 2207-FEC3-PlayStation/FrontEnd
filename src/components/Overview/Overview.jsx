@@ -20,8 +20,8 @@ margin: 3%;
 const ProdInfo = styled.div`
 display: flex;
 flex-direction: column;
-margin-left: 10px;
-margin-right: 10px;
+
+margin-right: 30px;
 `;
 
 

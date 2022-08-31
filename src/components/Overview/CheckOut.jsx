@@ -31,7 +31,7 @@ const QuantityOptions = styled.option`
 `
 
 const AddToCart = styled.button`
-width: 260px;
+width: 255px;
 padding: 20px 30px;
 margin-top: 30px;
 background-color: #207420;
