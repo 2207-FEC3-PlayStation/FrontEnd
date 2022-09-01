@@ -1,16 +1,19 @@
 import React from 'react';
 
-const QuestionList = (props) => {
+function QuestionList ({count, questions}) {
 
+  //console.log('questions = ', questions);
+  //console.log('questions.results = ', questions.results);   // default: 4
 
-  // console.log('props = ', props)
-  // console.log('props = ', props);
-  // console.log('props.questions = ', props.questions);
-  // console.log('props.count = ', props.count);   // default: 4
-
-  const last = props.count;
+  const last = count;
 
   return (
+    <div>
+      <h2>I have no idea what I'm doing</h2>
+      <img src={require('./idkwhatimdoing.gif')} />
+      <h2>lol 🤣 jk! Widget under maintenance!</h2>
+    </div>
+    /*
       <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
           {props.questions.slice(0, last).map((e, i) => {
             return (
@@ -20,7 +23,8 @@ const QuestionList = (props) => {
             )
           })}
       </div>
-  );
+      */
+  )
 
 };
 export default QuestionList;
