@@ -44,14 +44,24 @@ function RelatedItem (props) {
   const [image, setImage] = useState();
 
 
-  // gets styles of the related product and adds the thumbnail picture to the image source
-  // needs to loop through styles and get the default picture
+  // gets styles of the related product and adds the default thumbnail picture to the image source
+  // if there is no default style, it grabs the first picture in the list
   useEffect(() => {
+    var thumbnail = '';
     if (props.item) {
       server.get('/products/styles', {product_id: props.item.id})
         .then((data)=> {
-          var thumbnail = data.data.results[0].photos[0].thumbnail_url
-          setImage(thumbnail);
+          var results = data.data.results;
+          for (var i = 0; i < results.length; i++) {
+            if (results[i]['default?'] === true) {
+              thumbnail = results[i].photos[0].thumbnail_url;
+              setImage(thumbnail);
+            }
+          }
+          if (thumbnail === '') {
+            thumbnail = data.data.results[0].photos[0].thumbnail_url
+            setImage(thumbnail);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -90,19 +100,18 @@ function RelatedItem (props) {
     }
   }, [reviews])
 
+
   function showModal () {
-    console.log('Clicked Star Button');
     setStarClick(true);
   }
 
   function hideModal () {
-    console.log('close')
     setStarClick(false);
   }
 
   return (
       <Card onClick={props.handleProduct}>
-        <ComparisonsModal show={starClick} handleClose={hideModal}>
+        <ComparisonsModal show={starClick} handleClose={hideModal} item={props.item} prod={props.prod}>
         </ComparisonsModal>
         <Img src={image} alt={props.item.id}/><br></br>
         <Button onClick={showModal}></Button>

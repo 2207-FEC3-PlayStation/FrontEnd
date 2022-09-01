@@ -1,42 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-const OuterDiv = styled.div`
-display: flex;
-flex-direction: row;
-`;
+import server from '../../serverRequests.js';
+import Thumbnail from './Thumbnail.jsx'
 
 const ThumbnailList = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
-`;
-const Thumbnail1 = styled.img`
-margin-bottom: 10px;
-max-width: 60%;
-max-height: 60%;
+align-items: left;
+margin-top: 30px;
+margin-bottom: 0;
+margin-left: 30px;
+height: 500px;
+overflow-y: hidden;
+overflow-x: hidden;
+position: relative;
 `;
 
 const MainImage = styled.img`
-max-width: 75%;
-max-height: 75%;
+display: block;
+position: absolute;
+max-width: 530px;
+max-height: 520px;
+padding-top: 30px;
+padding-left: 30px;
 `;
 
-var ImageGallery = (props) => { //images={this.state.dummy}
-  return (
-    <OuterDiv>
+// add buttons to scroll through thumbnails
+// need to work on CSS for main image to size it correctly
+
+function ImageGallery (props) {
+  if (props.photos) return (
+    <React.Fragment>
       <ThumbnailList>
-        <Thumbnail1
-          src={props.images.results[0].photos[0].thumbnail_url}>
-        </Thumbnail1>
-        <Thumbnail1
-          src={props.images.results[0].photos[1].thumbnail_url}>
-        </Thumbnail1>
+        {props.photos.map((photo) => {
+          return <Thumbnail key={photo.url} url={photo.url}/>
+          photo
+        })}
       </ThumbnailList>
       <MainImage
-        src={props.images.results[0].photos[1].url}>
+        src={props.image}>
       </MainImage>
-    </OuterDiv>
+      </React.Fragment>
   )
 }
 
