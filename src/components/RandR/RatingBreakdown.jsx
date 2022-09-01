@@ -1,17 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import StarRating from './RatingBreakdown/StarRating.jsx';
 import RatingsBar from './RatingBreakdown/RatingsBar.jsx';
-import CharsBreakdown from './RatingBreakdown/CharsBreakdown.jsx';
+import CharsBar from './RatingBreakdown/CharsBar.jsx';
 
 function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}) {
 
   const [ratings, setRatings] = useState([]);
   const [ratingsVals, setRatingsVals] = useState([]);
+  const [chars, setChars] = useState([]);
+  const [charsVals, setCharsVals] = useState([]);
 
   useEffect(() => {
-    if (reviews.ratings) {
+    if (reviews.ratings && reviews.characteristics) {
       setRatings(Object.keys(reviews.ratings).reverse())
       setRatingsVals(Object.values(reviews.ratings).reverse())
+      setChars(Object.keys(reviews.characteristics))
+      setCharsVals(Object.values(reviews.characteristics))
     }
   }, [reviews])
 
@@ -24,7 +28,9 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}
       {ratings.map((star) => {
         return <RatingsBar key={star}starCount={star} totalReviews={count} thisRating={parseInt(ratingsVals[ratings.indexOf(star)])} />
       })}
-      <CharsBreakdown/>
+      {chars.map((char) => {
+        return <CharsBar key={char} char={char} thisRating={Number(charsVals[chars.indexOf(char)].value).toFixed(2)} />
+      })}
       <p>{recommended}% of reviews recommend this product</p>
     </div>
   )
