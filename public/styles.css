@@ -25,7 +25,6 @@ body {
   left: 0;
   white-space: nowrap;
   overflow: hidden;
-  width: 80%;
 }
 
 .stars-inner::before {
@@ -43,4 +42,28 @@ body {
   font-family: 'FontAwesome';
   font-weight: normal;
   color: green;
+}
+
+
+.OutterBar {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  width: 100%;
+}
+
+.OutterBar::before {
+  background-color: gray;
+}
+
+.InnerBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 80%
+}
+
+.InnerBar::before {
+  background-color: green;
 }

@@ -34,7 +34,7 @@ var ProductInfo = (props) => {
   return (
     <Block>
       <ProductName>{props.info[0].name}</ProductName>
-      <StarRating/>
+      <StarRating product_id={props.info[0].id}/>
       <Reviews>Read all reviews</Reviews>
       <Category>{props.info[0].category}</Category>
       <Price>{'$' + props.info[0].default_price}</Price>

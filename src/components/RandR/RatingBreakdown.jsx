@@ -21,11 +21,11 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}
       <h1 data-testid="Review-Num" style={{display: 'inline-block', verticalAlign: 'top'}}>{ratingToTenth}</h1>
       <StarRating avgRating={avgRating}/>
       <p style={{fontWeight: 'bold'}}>{count} total reviews</p>
-      <p>{recommended}% of reviews recommend this product</p>
       {ratings.map((star) => {
-        return <RatingsBar key={star}starCount={star} totalReviews={count} thisRating={ratingsVals[ratings.indexOf(star)]} />
+        return <RatingsBar key={star}starCount={star} totalReviews={count} thisRating={parseInt(ratingsVals[ratings.indexOf(star)])} />
       })}
       <CharsBreakdown/>
+      <p>{recommended}% of reviews recommend this product</p>
     </div>
   )
 }
