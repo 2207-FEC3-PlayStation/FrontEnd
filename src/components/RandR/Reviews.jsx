@@ -56,7 +56,7 @@ function Reviews({product_id, count}) {
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
       <h3 style={{display: 'inline-block'}}>{totalReviews} reviews, sorted by </h3>
 
-      <label style={{display: 'none'}}></label>
+      <label style={{display: 'none'}}>Sort on</label>
       <select onChange={changeSort} style={{display: 'inline-block'}}>{Object.values(sortedBy)[0]}
         <option value='relevance'>relevance</option>
         <option value='most helpful'>most helpful</option>

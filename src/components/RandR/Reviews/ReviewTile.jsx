@@ -71,18 +71,25 @@ function ReviewTile({data}) {
 
       <p>{data.body}</p>
 
+      <span style={{display: 'block'}}>
+        {data.photos.map((photo) => {
+          return <img src={photo.url} style={{height: '35px', width: 'auto', margin: '3px'}}></img>
+        })}
+      </span>
+
       <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
 
-      <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Seller Response:{'\n' + data.response}</p>
+      <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Response from seller:{'\n' + data.response}</p>
 
-      <h6 style={{display: 'inline-block'}}>Helpful?</h6>
 
-      <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '10px'}}>Yes</h6>
+      <h6 style={{display: 'inline-block'}}>Was this review helpful?</h6>
+
+      <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '3px'}}>Yes</h6>
       <h6 style={{display: 'inline-block'}}>{'(' + helpfulness + ')'}</h6>
 
       {/* do we need a 'no' button?????*/}
 
-      <h6 onClick={reportReview} style={{display: 'inline-block', margin: '4px'}}>{report.text}</h6>
+      <h6 onClick={reportReview} style={{display: 'inline-block', textDecoration: 'underline',  margin: '4px'}}>{report.text}</h6>
 
     </div>
   )
