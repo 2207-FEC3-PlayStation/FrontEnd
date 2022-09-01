@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import StarRating from '../RandR/RatingBreakdown/StarRating.jsx'
+import React from 'react';
+import styled from 'styled-components';
+import StarRating from '../RandR/RatingBreakdown/StarRating.jsx';
 
 const Block = styled.div`
 
@@ -29,15 +29,14 @@ height: 1px;
 width: 65%;
 `
 
-//info={this.state.info}
 var ProductInfo = (props) => {
   return (
     <Block>
-      <ProductName>{props.info[0].name}</ProductName>
+      <ProductName>{props.info.name}</ProductName>
       <StarRating/>
       <Reviews>Read all reviews</Reviews>
-      <Category>{props.info[0].category}</Category>
-      <Price>{'$' + props.info[0].default_price}</Price>
+      <Category>{props.info.category}</Category>
+      <Price>{'$' + props.info.default_price}</Price>
       <Line></Line>
     </Block>
   )
