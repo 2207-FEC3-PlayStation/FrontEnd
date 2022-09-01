@@ -30,7 +30,7 @@ margin-bottom: 0px;
 var ProductInfo = (props) => {
   return (
       <React.Fragment>
-      <StarRating product_id={props.info[0].id}/>
+      <StarRating product_id={props.info.id}/>
       <Reviews>Read all reviews</Reviews>
       <Category>{props.info.category.toUpperCase()}</Category>
       <ProductName>{props.info.name}</ProductName>
