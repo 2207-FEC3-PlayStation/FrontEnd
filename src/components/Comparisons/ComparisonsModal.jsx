@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Modal = styled.div`
@@ -41,11 +41,28 @@ const TL = styled.td`
 const TR = styled.td`
   text-align: right;
 `
+const Span = styled.span`
+`
 
-const ComparisonsModal = (props) => {
+function ComparisonsModal (props) {
   if (!props.show) {
     return null;
   }
+  const [characteristics, setCharacteristics] = useState([]);
+
+  //props.prod = current product being viewed
+  //props.item = related item clicked on
+
+  //sets characteristics to the features of both the current product being viewed and the related item the user clicked on (with no duplicates)
+  useEffect(() => {
+    var combinedChar = props.prod.features.concat(props.item.features);
+    console.log(combinedChar);
+    const key = 'feature';
+    const unique = [...new Map(combinedChar.map(item =>
+      [item[key], item])).values()];
+    console.log(unique);
+    setCharacteristics(unique);
+  }, [props.prod])
 
   return (
     <Modal onClick={props.handleClose}>
@@ -55,11 +72,25 @@ const ComparisonsModal = (props) => {
             <table>
               <tbody>
               <tr>
-                <th>Camo Onesie</th>
+                <th>{props.prod.name}</th>
                 <th></th>
-                <th>Morning Joggers</th>
+                <th>{props.item.name}</th>
               </tr>
-              <tr>
+              {characteristics.map((feature, index) => {
+                return <tr key={index}>
+                  <TL></TL>
+                  <TC> {feature.value} {feature.feature} </TC>
+                  <TR></TR>
+                </tr>
+              })}
+              {/* {props.item.features.map((feature) => {
+                return <tr key={feature.value}>
+                  <TL></TL>
+                  <TC> {feature.value} {feature.feature} </TC>
+                  <TR></TR>
+                </tr>
+              })} */}
+              {/* <tr>
                 <TL>✓</TL>
                 <TC>Canvas</TC>
                 <TR></TR>
@@ -68,7 +99,7 @@ const ComparisonsModal = (props) => {
                 <TL></TL>
                 <TC>100% Cotton</TC>
                 <TR>✓</TR>
-              </tr>
+              </tr> */}
               </tbody>
             </table>
         {/* <button onClick={props.handleClose}>Close</button> */}

@@ -228,7 +228,10 @@ function Overview (props) {
       </ProdDescr>
       <ProdChar>
         <h4>Features</h4>
-        <span>{props.prod.features[0].feature}: {props.prod.features[0].value}</span>
+        {props.prod.features.map((feature) => {
+          return <React.Fragment key={feature.value}><span>✓ {feature.value} {feature.feature}</span><br></br></React.Fragment>
+        })}
+        {/* <span>{props.prod.features[0].feature}: {props.prod.features[0].value}</span> */}
       </ProdChar>
     </ProdDet>}
   </div>

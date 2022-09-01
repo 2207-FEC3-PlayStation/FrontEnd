@@ -17,8 +17,9 @@ position: relative;
 `;
 
 const MainImage = styled.img`
+display: block;
 position: absolute;
-max-width: 580px;
+max-width: 530px;
 max-height: 520px;
 padding-top: 30px;
 padding-left: 30px;
@@ -34,8 +35,6 @@ function ImageGallery (props) {
           return <Thumbnail key={photo.url} url={photo.url}/>
           photo
         })}
-        {console.log(props.photos)}
-        {console.log(<Thumbnail url={props.photos[0].url}/>)}
       </ThumbnailList>
       <MainImage
         src={props.image}>

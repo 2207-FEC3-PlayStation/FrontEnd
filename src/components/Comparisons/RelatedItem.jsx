@@ -113,7 +113,7 @@ function RelatedItem (props) {
 
   return (
       <Card onClick={props.handleProduct}>
-        <ComparisonsModal show={starClick} handleClose={hideModal}>
+        <ComparisonsModal show={starClick} handleClose={hideModal} item={props.item} prod={props.prod}>
         </ComparisonsModal>
         <Img src={image} alt={props.item.id}/><br></br>
         <Button onClick={showModal}></Button>
