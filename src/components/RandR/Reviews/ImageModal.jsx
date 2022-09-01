@@ -46,7 +46,7 @@ function ImageModal ({display, image, closeImg}) {
     if (image) {
       setImageURL(image);
     }
-  })
+  }, [image])
 
   if (display) {
     return (
