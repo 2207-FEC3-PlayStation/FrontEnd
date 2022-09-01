@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from '../RatingBreakdown/StarRating.jsx';
 import server from '../../../serverRequests.js'
+import ImageModal from './ImageModal.jsx';
 
 function ReviewTile({data}) {
 
@@ -8,6 +9,9 @@ function ReviewTile({data}) {
   const [helpfulness, setHelpfulness] = useState();
   const [addedHelpful, setAddedHelpful] = useState(false);
   const [report, setReport] = useState({text: 'Report', reported: false})
+  const [modalImg, setModalImg] = useState()
+  const [modalImgDisplay, setModalImageDisplay] = useState(false)
+
 
 //-----------conditional rendering variables-----
 
@@ -58,9 +62,20 @@ function ReviewTile({data}) {
     setReport({text: 'Reported', reported: true});
   }
 
+  let displayImg = (e) => {
+    setModalImageDisplay(true);
+    setModalImg(e.target.src);
+  }
+
+  let closeImg = (e) => {
+    setModalImageDisplay(false);
+    setModalImg();
+  }
+
 
   return (
     <div style={{borderBottom: '1px solid black', padding: '5px'}}>
+      <ImageModal image={modalImg} display={ modalImgDisplay} closeImg={closeImg}></ImageModal>
       <StarRating rating={data.rating}/>
 
       <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right', marginLeft: '5px'}}>{data.reviewer_name}</h6>
@@ -73,7 +88,7 @@ function ReviewTile({data}) {
 
       <span style={{display: 'block'}}>
         {data.photos.map((photo) => {
-          return <img src={photo.url} style={{height: '35px', width: 'auto', margin: '3px'}}></img>
+          return <img key={photo.id} src={photo.url} onClick={displayImg} style={{height: '35px', width: 'auto', margin: '3px'}}></img>
         })}
       </span>
 
