@@ -11,7 +11,7 @@ const Modal = styled.div`
   background-color: transparent;
   display: flex;
   justify-content: flex-start;
-  z-index: 9999;
+  z-index: 9990;
   max-width: 60vw;
   max-height: 60vh;
   margin-left: auto;
