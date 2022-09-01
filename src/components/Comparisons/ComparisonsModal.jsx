@@ -56,11 +56,9 @@ function ComparisonsModal (props) {
   //sets characteristics to the features of both the current product being viewed and the related item the user clicked on (with no duplicates)
   useEffect(() => {
     var combinedChar = props.prod.features.concat(props.item.features);
-    console.log(combinedChar);
     const key = 'feature';
     const unique = [...new Map(combinedChar.map(item =>
       [item[key], item])).values()];
-    console.log(unique);
     setCharacteristics(unique);
   }, [props.prod])
 
