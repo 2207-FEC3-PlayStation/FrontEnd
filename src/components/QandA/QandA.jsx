@@ -8,26 +8,9 @@ const QandA = ({prod}) => {
   const [count, setCount] = useState(1);
   const [questions, setQuestions] = useState(['Question_1', 'Question_2', 'Question_3', 'Question_4'])
 
-<<<<<<< HEAD
-class QandA extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: '',
-      count: 4,
-      questions: ['What is life?', 'When was was gum invented?', 'Why are there so many chickens?', 'Who are you?'],
-      answers: ['Life is everything.', 'Gum was invented in 1923.', 'Because KFC is delicious!', 'I am no one.'],
-      users: ['User1234', 'User2222', 'User4343', 'User0203'],
-      seller: [false, true, false, false],
-      date: ['Jan']
-    }
-    this.handleSearch = this.handleSearch.bind(this)
-    this.loadMoreAnswers = this.loadMoreAnswers.bind(this)
-=======
   //axios
   const data = () => {
     return console.log('prod = ', prod)
->>>>>>> f6dfe051849cfda1a20799ff174867f36537abe6
   }
 
   useEffect(() => {
