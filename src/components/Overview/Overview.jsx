@@ -8,23 +8,53 @@ import axios from 'axios';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
 
+const Announce = styled.div`
+text-align: center;
+padding: 20px;
+`
+
 const FlexContainer = styled.div`
 background-color: #d4b37711;
 display: flex;
-margin-top: 70px;
-`;
-
-const Glossary = styled.div`
-margin: 3%;
+flex-direction: row;
+margin-bottom: 0;
+justify-content: flex-start;
 `;
 
 const ProdInfo = styled.div`
 display: flex;
 flex-direction: column;
-
-margin-right: 30px;
+justify-content: flex-start;
+margin-right: 0px;
+margin-top: 30px;
+position: absolute;
+left: 650px;
 `;
 
+const ProdDet = styled.div`
+background-color: #d4b37711;
+display: flex;
+flex-direction: row;
+margin: 0px;
+padding-top: 20px;
+justify-content: flex-start;
+`;
+
+const ProdDescr = styled.div`
+padding: 10px;
+padding-left: 30px;
+margin-top: 30px;
+margin-bottom: 30px;
+width: 60%;
+`;
+
+const ProdChar = styled.div`
+padding: 10px;
+margin-top: 30px;
+margin-bottom: 30px;
+padding-left: 30px;
+border-left: 3px solid grey;
+`;
 
 function Overview (props) {
   const [dummy, setDummy] = useState({
@@ -154,7 +184,6 @@ function Overview (props) {
   const [finished, setFinished] = useState(false);
 
   useEffect(() => {
-    console.log('image gallery');
     var mainPhoto = '';
     if (props.prod) {
       server.get('/products/styles', {product_id: props.prod.id})
@@ -165,7 +194,6 @@ function Overview (props) {
               mainPhoto = results[i].photos[0].url;
               setImage(mainPhoto);
               setdefaultPhotos(results[i].photos);
-              console.log('set default to true default')
             }
           }
           if (mainPhoto === '') {
@@ -173,9 +201,7 @@ function Overview (props) {
             setImage(mainPhoto);
             setdefaultPhotos(data.data.results[0].photos);
             setFinished(true);
-            console.log('set default to first photo')
           }
-          console.log('rendered photos');
         })
         .catch((err) => {
           console.log(err);
@@ -183,23 +209,28 @@ function Overview (props) {
     }
   }, [props.prod, finished])
 
-  // useEffect(()=> {
-  //   console.log('Overview')
-  // })
-
   return (
   <div>
     <Title />
+    <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
-      <Glossary>
-        <ImageGallery image={image} prod={props.prod} photos={defaultPhotos}/>
-      </Glossary>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} />}
         <StyleSelect images={dummy} />
         <CheckOut />
       </ProdInfo>
     </FlexContainer>
+    {props.prod && <ProdDet>
+      <ProdDescr>
+        <h4>Description</h4>
+        <p>{props.prod.description}</p>
+      </ProdDescr>
+      <ProdChar>
+        <h4>Features</h4>
+        <span>{props.prod.features[0].feature}: {props.prod.features[0].value}</span>
+      </ProdChar>
+    </ProdDet>}
   </div>
   )
 }
