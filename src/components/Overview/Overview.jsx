@@ -6,6 +6,7 @@ import CheckOut from './CheckOut.jsx';
 import Title from './Title.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
+import server from '../../serverRequests.js';
 
 const FlexContainer = styled.div`
 background-color: #d4b37711;
@@ -148,22 +149,59 @@ function Overview (props) {
         }
       }]
   });
+  const [image, setImage] = useState();
+  const [defaultPhotos, setdefaultPhotos] = useState(null);
+  const [finished, setFinished] = useState(false);
 
-    return (
-    <div>
-      <Title />
-      <FlexContainer>
-        <Glossary>
-          <ImageGallery images={dummy} prod={props.prod}/>
-        </Glossary>
-        <ProdInfo>
-          {props.prod && <ProductInfo info={props.prod} />}
-          <StyleSelect images={dummy} />
-          <CheckOut />
-        </ProdInfo>
-      </FlexContainer>
-    </div>
-    )
+  useEffect(() => {
+    console.log('image gallery');
+    var mainPhoto = '';
+    if (props.prod) {
+      server.get('/products/styles', {product_id: props.prod.id})
+        .then((data)=> {
+          var results = data.data.results;
+          for (var i = 0; i < results.length; i++) {
+            if (results[i]['default?'] === true) {
+              mainPhoto = results[i].photos[0].url;
+              setImage(mainPhoto);
+              setdefaultPhotos(results[i].photos);
+              console.log('set default to true default')
+            }
+          }
+          if (mainPhoto === '') {
+            mainPhoto = data.data.results[0].photos[0].url;
+            setImage(mainPhoto);
+            setdefaultPhotos(data.data.results[0].photos);
+            setFinished(true);
+            console.log('set default to first photo')
+          }
+          console.log('rendered photos');
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [props.prod, finished])
+
+  // useEffect(()=> {
+  //   console.log('Overview')
+  // })
+
+  return (
+  <div>
+    <Title />
+    <FlexContainer>
+      <Glossary>
+        <ImageGallery image={image} prod={props.prod} photos={defaultPhotos}/>
+      </Glossary>
+      <ProdInfo>
+        {props.prod && <ProductInfo info={props.prod} />}
+        <StyleSelect images={dummy} />
+        <CheckOut />
+      </ProdInfo>
+    </FlexContainer>
+  </div>
+  )
 }
 
 export default Overview;
