@@ -4,20 +4,20 @@ import styled from 'styled-components';
 const RatingsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 80%;
+  justify-content: flex-start;
+  height: 20%
 `
 
 const StarLabel = styled.p`
   text-decoration: underline;
   display: flex;
-  flex-grow: 1;
 `
 const OutterBar = styled.div`
   background: gray;
   display: flex;
   justify-content: flex-start;
   flex-basis: 40%;
-  margin: 8%;
+  margin: 8%
 `
 
 const InnerBar = styled.div`
@@ -28,9 +28,9 @@ const InnerBar = styled.div`
 
 const ReviewCount = styled.p`
   display: flex;
-  flex-grow: 1;
   font-size: 10px;
   align-items: center;
+  justifiy-content: flex-start
 `
 
 function RatingsBar({starCount, totalReviews, thisRating}) {
@@ -40,7 +40,7 @@ function RatingsBar({starCount, totalReviews, thisRating}) {
       <OutterBar>
         <InnerBar style={{width: (100 * thisRating / totalReviews) + '%'}}></InnerBar>
       </OutterBar>
-      <ReviewCount>{thisRating + ' reviews'}</ReviewCount>
+      <ReviewCount>{thisRating + ((thisRating === 1) ? ' review' : ' reviews')}</ReviewCount>
     </RatingsContainer>
   )
 }
