@@ -60,7 +60,7 @@ function RandR ({prod}) {
 
   return (
     <React.Fragment>
-      <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc}/>
+      <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
       <Reviews product_id={product_id} count={count}/>
     </React.Fragment>
   )
