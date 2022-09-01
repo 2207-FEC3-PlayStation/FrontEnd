@@ -105,13 +105,11 @@ function Comparisons (props) {
         .then((data)=> {
           if (data.data.results[0].skus.null) {
             if (data.data.results[0].skus.null.quantity === null) {
-              console.log(`${item} is out of stock`);
               var index = related.indexOf(item);
               var copy = related.slice();
               copy.splice(index, 1);
               setRelated(copy);
             }
-            console.log('all related items in stock')
           }
         })
         .catch((err) => {
@@ -130,7 +128,6 @@ function Comparisons (props) {
   // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
 
   function scrollL () {
-    console.log('clicked on left button')
     const element = document.getElementById("RelatedListCarousel");
     element.scrollLeft -= 350;
     setHideR(false);
@@ -138,7 +135,6 @@ function Comparisons (props) {
   }
 
   function scrollR () {
-    console.log('clicked on right button')
     const element = document.getElementById("RelatedListCarousel");
     if (element.scrollLeft === 0) {
       element.scrollLeft += 350;
