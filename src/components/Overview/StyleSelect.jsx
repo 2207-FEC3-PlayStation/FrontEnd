@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const OuterDiv = styled.div`
-margin-top: 40px;
+margin-top: 10px;
 `
 
 const Style1 = styled.img`
@@ -17,6 +17,7 @@ width: 8%;
 `
 
 const StyleSelected = styled.div`
+margin-top: 0px;
 margin-bottom: 10px;
 `
 
@@ -43,7 +44,6 @@ var StyleSelect = (props) => {//images={this.state.dummy}
           src={props.images.results[1].photos[0].thumbnail_url}>
         </Style2>
       </Styles>
-      <Line></Line>
     </OuterDiv>
   )
 }

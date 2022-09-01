@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <div>
-      <Overview/>
+      <Overview prod={prod}/>
       <Comparisons prod={prod} handleProduct={handleProduct}/>
       <QandA />
       <RandR prod={prod}/>

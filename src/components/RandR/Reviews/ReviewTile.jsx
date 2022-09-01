@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from '../RatingBreakdown/StarRating.jsx';
 import server from '../../../serverRequests.js'
+import ImageModal from './ImageModal.jsx';
 
 function ReviewTile({data}) {
 
@@ -8,6 +9,9 @@ function ReviewTile({data}) {
   const [helpfulness, setHelpfulness] = useState();
   const [addedHelpful, setAddedHelpful] = useState(false);
   const [report, setReport] = useState({text: 'Report', reported: false})
+  const [modalImg, setModalImg] = useState()
+  const [modalImgDisplay, setModalImageDisplay] = useState(false)
+
 
 //-----------conditional rendering variables-----
 
@@ -58,9 +62,20 @@ function ReviewTile({data}) {
     setReport({text: 'Reported', reported: true});
   }
 
+  let displayImg = (e) => {
+    setModalImageDisplay(true);
+    setModalImg(e.target.src);
+  }
+
+  let closeImg = (e) => {
+    setModalImageDisplay(false);
+    setModalImg();
+  }
+
 
   return (
     <div style={{borderBottom: '1px solid black', padding: '5px'}}>
+      <ImageModal image={modalImg} display={ modalImgDisplay} closeImg={closeImg}></ImageModal>
       <StarRating rating={data.rating}/>
 
       <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right', marginLeft: '5px'}}>{data.reviewer_name}</h6>
@@ -71,18 +86,25 @@ function ReviewTile({data}) {
 
       <p>{data.body}</p>
 
+      <span style={{display: 'block'}}>
+        {data.photos.map((photo) => {
+          return <img key={photo.id} src={photo.url} onClick={displayImg} style={{height: '35px', width: 'auto', margin: '3px'}}></img>
+        })}
+      </span>
+
       <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
 
-      <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Seller Response:{'\n' + data.response}</p>
+      <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Response from seller:{'\n' + data.response}</p>
 
-      <h6 style={{display: 'inline-block'}}>Helpful?</h6>
 
-      <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '10px'}}>Yes</h6>
+      <h6 style={{display: 'inline-block'}}>Was this review helpful?</h6>
+
+      <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '3px'}}>Yes</h6>
       <h6 style={{display: 'inline-block'}}>{'(' + helpfulness + ')'}</h6>
 
       {/* do we need a 'no' button?????*/}
 
-      <h6 onClick={reportReview} style={{display: 'inline-block', margin: '4px'}}>{report.text}</h6>
+      <h6 onClick={reportReview} style={{display: 'inline-block', textDecoration: 'underline',  margin: '4px'}}>{report.text}</h6>
 
     </div>
   )
