@@ -10,8 +10,8 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}
 
   useEffect(() => {
     if (reviews.ratings) {
-      setRatings(Object.keys(reviews.ratings))
-      setRatingsVals(Object.values(reviews.ratings))
+      setRatings(Object.keys(reviews.ratings).reverse())
+      setRatingsVals(Object.values(reviews.ratings).reverse())
     }
   }, [reviews])
 

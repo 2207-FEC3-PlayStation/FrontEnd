@@ -1,9 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 
-function RatingsBar(props) {
+const StarLabel = styled.p`
+  text-decoration: underline;
+  `
+
+function RatingsBar({starCount, totalReviews, thisRating}) {
   return (
     <React.Fragment>
-      <p>Ratings</p>
+      <StarLabel>{starCount + '-stars'}</StarLabel>
+      <p>{thisRating}</p>
     </React.Fragment>
   )
 }
