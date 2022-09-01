@@ -26,6 +26,7 @@ padding-left: 30px;
 `;
 
 // add buttons to scroll through thumbnails
+// need to work on CSS for main image to size it correctly
 
 function ImageGallery (props) {
   if (props.photos) return (

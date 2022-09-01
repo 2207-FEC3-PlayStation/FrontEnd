@@ -64,6 +64,8 @@ function ComparisonsModal (props) {
     setCharacteristics(unique);
   }, [props.prod])
 
+  // still need to add checkmarks to the comparisons table if it true for the current or related product
+
   return (
     <Modal onClick={props.handleClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
@@ -83,23 +85,6 @@ function ComparisonsModal (props) {
                   <TR></TR>
                 </tr>
               })}
-              {/* {props.item.features.map((feature) => {
-                return <tr key={feature.value}>
-                  <TL></TL>
-                  <TC> {feature.value} {feature.feature} </TC>
-                  <TR></TR>
-                </tr>
-              })} */}
-              {/* <tr>
-                <TL>✓</TL>
-                <TC>Canvas</TC>
-                <TR></TR>
-              </tr>
-              <tr>
-                <TL></TL>
-                <TC>100% Cotton</TC>
-                <TR>✓</TR>
-              </tr> */}
               </tbody>
             </table>
         {/* <button onClick={props.handleClose}>Close</button> */}

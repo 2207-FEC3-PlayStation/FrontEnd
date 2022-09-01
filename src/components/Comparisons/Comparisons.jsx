@@ -121,11 +121,9 @@ function Comparisons (props) {
     }
   }, [products])
 
-  //66643 seems to be out of stock... so may have to check if there are any in stock first because thumbnail and other properties are null
-
   // clicking the card will navigate to the product detail page
 
-  // sale prices should be in red with original crossed out
+  // sale prices should be in red with original crossed out - I haven't seen any sale prices in the API request?
 
   // star rating. if no reviews - should be hidden.
 

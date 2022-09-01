@@ -183,6 +183,9 @@ function Overview (props) {
   const [defaultPhotos, setdefaultPhotos] = useState(null);
   const [finished, setFinished] = useState(false);
 
+  // gets the related styles and sets the main photo as the default style's first photo
+  // if there is no default photo, it sets the main photo as the first style's first photo
+
   useEffect(() => {
     var mainPhoto = '';
     if (props.prod) {
