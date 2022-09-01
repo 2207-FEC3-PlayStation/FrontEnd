@@ -102,12 +102,10 @@ function RelatedItem (props) {
 
 
   function showModal () {
-    console.log('Clicked Star Button');
     setStarClick(true);
   }
 
   function hideModal () {
-    console.log('close')
     setStarClick(false);
   }
 
