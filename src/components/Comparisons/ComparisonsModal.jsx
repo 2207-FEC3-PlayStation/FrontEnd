@@ -25,8 +25,8 @@ const ModalContent = styled.div`
   left: 15%;
   padding: 10px;
   z-index: 9998;
-  height: 45%;
-  width: 36%;
+  height: 500px;
+  width: 600px;
 `
 
 const ModalBody = styled.div`
@@ -35,37 +35,39 @@ const ModalBody = styled.div`
 
 const TC = styled.td`
   text-align: center;
-  padding: 15px;
+  padding: 15px 0px 15px 0px;
 `
 
-const TL = styled(TC)`
+const TL = styled.td`
   text-align: left;
+  padding: 15px 120px 15px 50px;
 `
 
-const TR = styled(TC)`
+const TR = styled.td`
   text-align: right;
+  padding: 15px 120px 15px 50px;
 `
 const Span = styled.span`
 `
 const CL = styled.div`
-height: 57px;
-z-index: 9998;
+height: 61px;
+/* z-index: 9998; */
 `
 const Column = styled.div`
 display: flex;
 justify-content: space-between;
 flex-direction: column;
 position: absolute;
-margin-left: 10px;
-margin-top: 38px;
+margin-left: 42px;
+margin-top: 43px;
 `
 const Column2 = styled.div`
 display: flex;
 justify-content: space-between;
 flex-direction: column;
 position: absolute;
-margin-left: 510px;
-margin-top: 38px;
+margin-left: 490px;
+margin-top: 43px;
 `
 
 const Table = styled.table`
@@ -143,7 +145,7 @@ function ComparisonsModal (props) {
         <Table>
           <tbody>
           <tr>
-            <th>{props.prod.name}</th>
+            <th >{props.prod.name}</th>
             <th></th>
             <th>{props.item.name}</th>
           </tr>
