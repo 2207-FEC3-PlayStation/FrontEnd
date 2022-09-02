@@ -5,10 +5,14 @@ import server from '../../serverRequests.js';
 
 function QandA ({prod}) {
   const [search, setSearch] = useState('');
-  const [count, setCount] = useState(1);
+  const [qCount, setQCount] = useState(2);
+  const [aCount, setACount] = useState(1);
   const [productID, setProductID] = useState('');
+  const [answersID, setAnswersID] = useState([]);
   const [results, setResults] = useState([]);
+  const [questionID, setQuestionID] = useState('642440');
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [questionHelp, setQuestionHelp] = useState(0);
   const [reported, setReported] = useState(false);
   const [questionAnswer, setQuestionAnswer] = useState({
@@ -22,7 +26,7 @@ function QandA ({prod}) {
 
   // test (console)
   const data = () => {
-    return console.log('results = ', results)
+    return console.log('answers = ', answers)
   }
 
   useEffect(() => {
@@ -37,12 +41,17 @@ function QandA ({prod}) {
     }
   }, [prod])
 
+  // ==================================== QUESTIONS ====================================
+
   useEffect(() => {
     if (prod) {
       server.get('/qa/questions', {'product_id': prod.id})
       .then((data) => {
         for (let i = 0; i < data.data.results.length; i++) {
           setResults(results => [...results, data.data.results[i]]);
+          for (const key in data.data.results[i].answers) {
+          setAnswersID(answersID => [...answersID, `${key}`])
+          }
         }
       })
       .catch((err) => {
@@ -52,37 +61,60 @@ function QandA ({prod}) {
   }, [prod])
 
 
+  // ==================================== ANSWERS ====================================
+
+  useEffect(() => {
+    //console.log('useEffect-answers')
+    if (prod) {
+      server.get('/qa/questions', {'product_id': questionID})
+      .then((data) => {
+        //console.log('...results', data.data)
+        for (let i = 0; i < data.data.results.length; i++) {
+          setAnswers(answers => [...answers, data.data.results[i].body]);
+          // for (const key in data.data.results[i].answers) {
+          // setAnswersID(answersID => [...answersID, `${key}`])
+          // }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, [prod])
+
+  // =================================================================================
+
   const searchBar = (event) => {
     setSearch(event.target.value)
   }
 
   const loadMoreAnswers = () => {
-    if (questions.length === count) {
+    if (results.length === qCount) {
       return console.log('No more answers!')
     }
-    setCount(count + 1);
+    setQCount(qCount + 1);
   }
 
 
   return (
     <div className="QandA">
       <div className="Search">
-      <h2> {'QUESTIONS & ANSWERS'} (count = {count})</h2>
-      <input
-        className="search-bar"
-        type="Text"
-        onChange={data}
-        placeholder="Have a question? Search for answers ..."
-      />
+        <h2> {'QUESTIONS & ANSWERS'}</h2>
+          <input
+            className="search-bar"
+            type="Text"
+            onChange={data}
+            placeholder="Have a question? Search for answers ..."
+          />
       </div>
-      <QuestionList count={count} results={results}/>
+      <QuestionList aCount={aCount} qCount={qCount} results={results} answersID={answersID}/>
       <br></br>
       <button id="load" onClick={loadMoreAnswers}>
-        <b>LOAD MORE ANSWERS</b></button><br></br>
+      <b>LOAD MORE ANSWERS</b></button><br></br>
       <button id="moreQA">
-        <b>MORE ANSWERED QUESTIONS</b></button>
+      <b>MORE ANSWERED QUESTIONS</b></button>
       <button id="addQ">
-        <b>ADD A QUESTION +</b></button>
+      <b>ADD A QUESTION +</b></button>
     </div>
   )
 };

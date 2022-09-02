@@ -8,19 +8,27 @@ const QuestionList = (props) => {
   // console.log('props.questions = ', props.questions);
   // console.log('props.count = ', props.count);   // default: 4
 
-  let last = props.count;
+  let qLast = props.qCount;
+  let aLast = props.aCount;
+  let ans = [];
+  for (let i = 0; i < props.aCount; i++) {
+    ans.push(props.answersID[i]);
+  }
+  //console.log('ans = ', ans);
 
-  return (
-      <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
-        {props.results.map((e, i) => {
+    return (
+        <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
+          {props.results.slice(0, qLast).map((e, i) => {
             return (
               <form key={i}>
                 <h3>Q: {props.results[i].question_body}</h3>
+                <h3 style={{display: 'inline'}}>A: </h3>
+                <p style={{display: 'inline'}}>answer</p>
               </form>
-            )
-          })}
-      </div>
-  );
+            )})
+          }
+        </div>
+    )
   } else {
     return (
       <div>loading...</div>
