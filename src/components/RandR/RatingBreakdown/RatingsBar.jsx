@@ -5,20 +5,31 @@ const RatingsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 20%
+  height: 50px;
 `
 
 const StarLabel = styled.p`
   text-decoration: underline;
   display: flex;
+  flex-basis: 20%
 `
+
+const BarHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%
+`
+const BarSpacer = styled.div`
+flex-basis: 42.5%
+`
+
 const OutterBar = styled.div`
   background: gray;
   display: flex;
   justify-content: flex-start;
-  flex-basis: 40%;
-  margin: 8%
+  flex-basis: 15%
 `
+
 
 const InnerBar = styled.div`
   display: flex;
@@ -30,16 +41,21 @@ const ReviewCount = styled.p`
   display: flex;
   font-size: 10px;
   align-items: center;
-  justifiy-content: flex-start
+  box-sizing: border-box;
+  padding-left: 5px;
 `
 
 function RatingsBar({starCount, totalReviews, thisRating}) {
   return (
     <RatingsContainer>
       <StarLabel>{starCount + '-stars'}</StarLabel>
-      <OutterBar>
-        <InnerBar style={{width: (100 * thisRating / totalReviews) + '%'}}></InnerBar>
-      </OutterBar>
+      <BarHolder>
+        <BarSpacer/>
+        <OutterBar>
+          <InnerBar style={{width: (100 * thisRating / totalReviews) + '%'}}></InnerBar>
+        </OutterBar>
+        <BarSpacer/>
+      </BarHolder>
       <ReviewCount>{thisRating + ((thisRating === 1) ? ' review' : ' reviews')}</ReviewCount>
     </RatingsContainer>
   )
