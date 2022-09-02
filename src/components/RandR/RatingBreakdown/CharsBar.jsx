@@ -37,13 +37,15 @@ const OutterBar = styled.div`
   background: gray;
   display: flex;
   justify-content: flex-start;
-  flex-basis: 10px;
+  flex-basis: 15%;
 `
 
 const Indicator = styled.div`
+  position: absolute;
+  top: 0;
   display: flex;
-  background: green;
   z-index: 10;
+  box-sizing: border-box;
 `
 const Endpoints = styled.div`
   display: flex;
@@ -61,7 +63,7 @@ const CharEndpoint = styled.h6`
 function CharsBar({char, thisRating}) {
 
 const [endpoints, setEndpoints] = useState([]);
-const [ratingWidth, setRatingWidth] =useState('0%');
+const [ratingWidth, setRatingWidth] =useState(0);
 
 useEffect(() => {
   if (char) {
@@ -75,7 +77,8 @@ useEffect(() => {
 
 useEffect(() => {
   if (thisRating) {
-    setRatingWidth(((thisRating / 5) * 100).toFixed(1) + '%');
+    //252 is the width of the bar
+    setRatingWidth(((thisRating / 5) * 252).toFixed(1));
   }
 }, [thisRating])
 
@@ -87,7 +90,9 @@ useEffect(() => {
       <SliderHolder>
         <SubHolder>
           <OutterBar>
-            <Indicator style={{width: ratingWidth}}></Indicator>
+            <div className='indicator'  style={{left: ratingWidth}}></div>
+
+            {/* <Indicator className='indicator' style={{left: ratingWidth}}></Indicator> */}
           </OutterBar>
           <Endpoints>
             {endpoints.map((endpoint) => {

@@ -44,3 +44,15 @@ body {
   font-weight: normal;
   color: green;
 }
+
+.indicator {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.indicator::before {
+  content: "\f00c";
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  color: green;
+}
