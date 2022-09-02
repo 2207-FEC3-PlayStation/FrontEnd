@@ -13,6 +13,7 @@ body {
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
+
 }
 
 .stars-outer::before {
