@@ -58,7 +58,6 @@ function OutfitList (props) {
   function handleAdd() {
     var outfits = outfitItems.slice();
     outfits.push(props.prod);
-    // let uniqueOutfits = [...new Set(outfits)];
     const key = 'id';
     const uniqueOutfits = [...new Map(outfits.map(item =>
       [item[key], item])).values()];
