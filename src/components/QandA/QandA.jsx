@@ -3,21 +3,47 @@ import QuestionList from './QuestionList.jsx';
 import './QAstyles/QandA.css';
 import server from '../../serverRequests.js';
 
-const QandA = ({prod}) => {
+function QandA ({prod}) {
   const [search, setSearch] = useState('');
   const [count, setCount] = useState(1);
-  const [questions, setQuestions] = useState(['Question_1', 'Question_2', 'Question_3', 'Question_4'])
+  const [productID, setProductID] = useState('');
+  const [results, setResults] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [questionHelp, setQuestionHelp] = useState(0);
+  const [reported, setReported] = useState(false);
+  const [questionAnswer, setQuestionAnswer] = useState({
+    id: '',
+    body: '',
+    date: '',
+    answerName: '',
+    helpfulness: '',
+    photos: []
+  })
 
-  //axios
+  // test (console)
   const data = () => {
-    return console.log('prod = ', prod)
+    return console.log('results = ', results)
   }
 
   useEffect(() => {
     if (prod) {
       server.get('/qa/questions', {'product_id': prod.id})
       .then((data) => {
-        setQuestions(data.data);
+        setProductID(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, [prod])
+
+  useEffect(() => {
+    if (prod) {
+      server.get('/qa/questions', {'product_id': prod.id})
+      .then((data) => {
+        for (let i = 0; i < data.data.results.length; i++) {
+          setResults(results => [...results, data.data.results[i]]);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +67,7 @@ const QandA = ({prod}) => {
   return (
     <div className="QandA">
       <div className="Search">
-      <h2> QUESTIONS & ANSWERS (count = {count})</h2>
+      <h2> {'QUESTIONS & ANSWERS'} (count = {count})</h2>
       <input
         className="search-bar"
         type="Text"
@@ -49,7 +75,7 @@ const QandA = ({prod}) => {
         placeholder="Have a question? Search for answers ..."
       />
       </div>
-      <QuestionList count={count} questions={questions}/>
+      <QuestionList count={count} results={results}/>
       <br></br>
       <button id="load" onClick={loadMoreAnswers}>
         <b>LOAD MORE ANSWERS</b></button><br></br>

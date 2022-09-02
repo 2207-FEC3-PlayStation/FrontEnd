@@ -1,26 +1,32 @@
 import React from 'react';
 
 const QuestionList = (props) => {
-
-
-  // console.log('props = ', props)
+  if(props.results.length !== 0) {
+  // console.log('QuestionsList.jsx');
+  // console.log('props.results = ', props.results);
   // console.log('props = ', props);
   // console.log('props.questions = ', props.questions);
   // console.log('props.count = ', props.count);   // default: 4
 
-  const last = props.count;
+  let last = props.count;
 
   return (
       <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
-          {props.questions.slice(0, last).map((e, i) => {
+        {props.results.map((e, i) => {
             return (
               <form key={i}>
-                <h3>Q: {e}</h3>
+                <h3>Q: {props.results[i].question_body}</h3>
               </form>
             )
           })}
       </div>
   );
+  } else {
+    return (
+      <div>loading...</div>
+    )
+  }
+
 
 };
 export default QuestionList;
@@ -31,6 +37,15 @@ export default QuestionList;
 <h3 style={{display: 'inline'}}>A: </h3>
 <p style={{display: 'inline'}}>{props.combos.answers}</p>
 </form>
+
+{props.questions.slice(0, last).map((e, i) => {
+            return (
+              <form key={i}>
+                <h3>Q: {e}</h3>
+              </form>
+            )
+          })}
+
 */
 
 
