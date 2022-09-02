@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Modal = styled.div`
@@ -41,11 +41,28 @@ const TL = styled.td`
 const TR = styled.td`
   text-align: right;
 `
+const Span = styled.span`
+`
 
-const ComparisonsModal = (props) => {
+function ComparisonsModal (props) {
   if (!props.show) {
     return null;
   }
+  const [characteristics, setCharacteristics] = useState([]);
+
+  //props.prod = current product being viewed
+  //props.item = related item clicked on
+
+  //sets characteristics to the features of both the current product being viewed and the related item the user clicked on (with no duplicates)
+  useEffect(() => {
+    var combinedChar = props.prod.features.concat(props.item.features);
+    const key = 'feature';
+    const unique = [...new Map(combinedChar.map(item =>
+      [item[key], item])).values()];
+    setCharacteristics(unique);
+  }, [props.prod])
+
+  // still need to add checkmarks to the comparisons table if it true for the current or related product
 
   return (
     <Modal onClick={props.handleClose}>
@@ -55,20 +72,17 @@ const ComparisonsModal = (props) => {
             <table>
               <tbody>
               <tr>
-                <th>Camo Onesie</th>
+                <th>{props.prod.name}</th>
                 <th></th>
-                <th>Morning Joggers</th>
+                <th>{props.item.name}</th>
               </tr>
-              <tr>
-                <TL>✓</TL>
-                <TC>Canvas</TC>
-                <TR></TR>
-              </tr>
-              <tr>
-                <TL></TL>
-                <TC>100% Cotton</TC>
-                <TR>✓</TR>
-              </tr>
+              {characteristics.map((feature, index) => {
+                return <tr key={index}>
+                  <TL></TL>
+                  <TC> {feature.value} {feature.feature} </TC>
+                  <TR></TR>
+                </tr>
+              })}
               </tbody>
             </table>
         {/* <button onClick={props.handleClose}>Close</button> */}
