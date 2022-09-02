@@ -22,7 +22,7 @@ const LeftButton = styled.button`
   color: #5d5c5c;
   height: 100px;
   width: 120px;
-  top: 12.8%;
+  top: 13.3%;
   left: 0%;
   border: none;
   padding-top: 17%;
@@ -154,7 +154,7 @@ function Comparisons (props) {
         {!hideR && (products.length > 4) && (
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
-        <OutfitList products={products}/>
+        <OutfitList prod={props.prod}/>
       </Container>
     )
 }
