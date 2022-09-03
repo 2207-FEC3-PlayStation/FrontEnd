@@ -8,7 +8,7 @@ function StarRating({avgRating, rating}) {
   useEffect(() => {
     if (avgRating) {
       setAvg(avgRating)
-    } else if (rating) {
+    } else if (rating || rating === 0) {
       setAvg(rating)
     }
   }, [avgRating, rating])

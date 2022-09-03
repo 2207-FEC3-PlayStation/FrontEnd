@@ -28,7 +28,6 @@ function ReviewTile({data}) {
 //------------useEffect methods -------
 
   useEffect(() => {
-    console.log(data.date);
     let year = data.date.substring(0, 4);
     //because of the weird way JS handles months 0-11
     let month = parseInt(data.date.substring(5, 7));
@@ -45,7 +44,6 @@ function ReviewTile({data}) {
     let date = new Date(Date.UTC(year, month, day, 0, 0, 0));
     date = date.toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'});
     date = date.split(',');
-    console.log(date);
     setDate(date[0] + ',' + date[1])
   }, [data]);
 
@@ -88,7 +86,7 @@ function ReviewTile({data}) {
 
   return (
     <div style={{borderBottom: '1px solid black', padding: '5px'}}>
-      <ImageModal image={modalImg} display={ modalImgDisplay} closeImg={closeImg}></ImageModal>
+      <ImageModal image={modalImg} display={modalImgDisplay} closeImg={closeImg}></ImageModal>
       <StarRating rating={data.rating}/>
 
       <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right', marginLeft: '5px'}}>{data.reviewer_name}</h6>

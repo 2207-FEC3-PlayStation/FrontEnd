@@ -34,7 +34,7 @@ const OutterBar = styled.div`
 const InnerBar = styled.div`
   display: flex;
   background: green;
-  z-index: 10;
+  z-index: 1;
 `
 
 const ReviewCount = styled.p`

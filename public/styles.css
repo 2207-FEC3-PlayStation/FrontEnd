@@ -56,3 +56,28 @@ body {
   font-weight: normal;
   color: green;
 }
+
+.singleStar {
+  position: absolute;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'FontAwesome';
+  font-weight: normal;
+}
+
+.singleStar::before {
+  content: "\f006"
+}
+
+.singleStarFilled {
+  position: absolute;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'FontAwesome';
+  font-weight: normal;
+}
+
+.singleStarFilled::before {
+  content: "\f005";
+  color: #f8ce0b;
+}
