@@ -28,12 +28,24 @@ function ReviewTile({data}) {
 //------------useEffect methods -------
 
   useEffect(() => {
+    console.log(data.date);
     let year = data.date.substring(0, 4);
-    let month = data.date.substring(6, 7);
-    let day = data.date.substring(9, 10);
+    //because of the weird way JS handles months 0-11
+    let month = parseInt(data.date.substring(5, 7));
+    month = JSON.stringify(month - 1);
+    if (month.length === 1) {
+      month = '0' + month
+    }
+    //same issue with days but apparently opposite?
+    let day = parseInt(data.date.substring(8, 10));
+    day = JSON.stringify(day + 1);
+    if (day.length === 1) {
+      day = "0" + day
+    }
     let date = new Date(Date.UTC(year, month, day, 0, 0, 0));
     date = date.toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'});
     date = date.split(',');
+    console.log(date);
     setDate(date[0] + ',' + date[1])
   }, [data]);
 
