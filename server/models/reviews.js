@@ -33,9 +33,9 @@ module.exports = {
   },
 
   helpful: (req, res) => {
-    controller.helpful()
+    controller.helpful(req.query.review_id)
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(204).end()
       })
       .catch((err) => {
         res.status(400).send(err);
@@ -44,7 +44,7 @@ module.exports = {
   report: (req, res) => {
     controller.report()
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(204).end();
       })
       .catch((err) => {
         res.status(400).send(err);

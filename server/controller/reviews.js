@@ -33,7 +33,7 @@ module.exports = {
   },
 
   helpful: (reviewID) => {
-
+    return axios.put(process.env.DB_API + '/reviews/' + reviewID + '/helpful', null, {headers: {'Authorization': process.env.GIT_TOKEN}})
   },
 
   report: () => {

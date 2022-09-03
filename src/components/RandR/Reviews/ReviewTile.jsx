@@ -50,7 +50,11 @@ function ReviewTile({data}) {
     if (addedHelpful === false) {
 
       //uncomment when put request is functioning.
-      //server.put('/reviews/helpful', {review_id: data.review_id});
+      server.put('/reviews/helpful', {review_id: data.review_id})
+        .then(() => {})
+        .catch((err) => {
+          console.log('error: ', err)
+        })
       setHelpfulness(helpfulness + 1);
       setAddedHelpful(true);
     }
