@@ -103,7 +103,16 @@ function AddReview({display, product_id, close}) {
     if (product) {
       server.get('/reviews/meta', {'product_id': product.id})
         .then((res) => {
-          setCharacteristics(Object.keys(res.data.characteristics))
+          console.log(res.data.characteristics);
+          let chars = res.data.characteristics;
+          let charArray = [];
+          for (var char in chars) {
+            let charObj = {}
+            charObj[char] = 0;
+            charArray.push(charObj);
+          }
+          console.log(charArray);
+          setCharacteristics(charArray)
         })
         .catch((err) => {
           console.log(err)
@@ -168,8 +177,8 @@ function AddReview({display, product_id, close}) {
             <label htmlFor='no'>No</label>
           </RecHolder>
           <h5>Characteristics</h5>
-          {characteristics.map((char) => {
-            return <RateCharacteristics key={char} char={char}></RateCharacteristics>
+          {characteristics.map((char, index) => {
+            return <RateCharacteristics key={char[index]} char={char}></RateCharacteristics>
           })}
           <ButtonHolder>
             <button style={{display: 'inline-block'}}>Submit</button>
