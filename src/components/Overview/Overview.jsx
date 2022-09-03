@@ -219,7 +219,7 @@ function Overview (props) {
     <FlexContainer>
       <ImageGallery prod={props.prod} photos={defaultPhotos} image={image}/>
       <ProdInfo>
-        {props.prod && <ProductInfo info={props.prod} />}
+        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating}/>}
         <StyleSelect images={dummy} />
         <CheckOut />
       </ProdInfo>
