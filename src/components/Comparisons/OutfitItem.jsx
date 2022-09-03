@@ -44,7 +44,7 @@ function OutfitItem (props) {
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
 
-  // on click of delete button, call the handleDelete function from OutfitList
+
   useEffect(() => {
     var thumbnail = '';
     if (props.item) {
