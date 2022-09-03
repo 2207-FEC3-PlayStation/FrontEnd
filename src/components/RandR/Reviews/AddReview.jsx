@@ -68,7 +68,7 @@ const ButtonHolder = styled.div`
 function AddReview({display, product_id, close}) {
 
   const [product, setProduct] = useState();
-  const [characteristics, setCharacteristics] = useState();
+  const [characteristics, setCharacteristics] = useState({});
   const [rating, setRating] = useState(0);
   const [ratingDesc, setRatingDesc] = useState(' ');
   const [starFills, setStarFills] = useState(['singleStar', 'singleStar', 'singleStar', 'singleStar', 'singleStar'])
@@ -177,8 +177,8 @@ function AddReview({display, product_id, close}) {
             <label htmlFor='no'>No</label>
           </RecHolder>
           <h5>Characteristics</h5>
-          {characteristics.map((char, index) => {
-            return <RateCharacteristics key={char[index]} char={char}></RateCharacteristics>
+          {characteristics.map((char) => {
+            return <RateCharacteristics key={Object.keys(char)[0]} char={Object.keys(char)[0]}></RateCharacteristics>
           })}
           <ButtonHolder>
             <button style={{display: 'inline-block'}}>Submit</button>
