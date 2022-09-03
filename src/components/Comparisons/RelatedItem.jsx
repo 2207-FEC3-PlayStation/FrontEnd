@@ -109,6 +109,8 @@ function RelatedItem (props) {
     setStarClick(false);
   }
 
+  // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
+
   return (
       <Card onClick={props.handleProduct}>
         <ComparisonsModal show={starClick} handleClose={hideModal} item={props.item} prod={props.prod}>

@@ -13,7 +13,7 @@ const Card = styled.div`
   padding-bottom: 2%;
   margin-bottom: 15px;
   margin-left: 0px;;
-  margin-right: 4%;
+  margin-right: 5%;
   margin-top: 0px;
 `
 const Text = styled.small`
@@ -32,7 +32,7 @@ const Button = styled.button`
   width: 25px;
   border: none;
   position: absolute;
-  top: 2%;
+  top: 3%;
   right: 5%;
 `
 

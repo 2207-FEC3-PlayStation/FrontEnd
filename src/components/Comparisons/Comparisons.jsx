@@ -35,7 +35,13 @@ const RightButton = styled(LeftButton)`
   background-image: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%);
   left: 88%;
 `
-
+// const LeftButton2 = styled(LeftButton)`
+//   top: 59%;
+//   left: 0%;
+// `
+// const RightButton2 = styled(LeftButton2)`
+//   left: 88%;
+// `
 function Comparisons (props) {
 
   const [hideR, setHideR] = useState(false);
@@ -123,10 +129,6 @@ function Comparisons (props) {
 
   // sale prices should be in red with original crossed out - I haven't seen any sale prices in the API request?
 
-  // star rating. if no reviews - should be hidden.
-
-  // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
-
   function scrollL () {
     const element = document.getElementById("RelatedListCarousel");
     element.scrollLeft -= 350;
@@ -155,6 +157,12 @@ function Comparisons (props) {
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
         <OutfitList prod={props.prod}/>
+        {/* {clickedR && (products.length > 4) && (
+          <LeftButton2 onClick={() => scrollL()}>‹</LeftButton2>
+        )}
+        {!hideR && (products.length > 4) && (
+          <RightButton2 onClick={() => scrollR()}>›</RightButton2>
+        )} */}
       </Container>
     )
 }
