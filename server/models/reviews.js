@@ -42,7 +42,7 @@ module.exports = {
       })
   },
   report: (req, res) => {
-    controller.report()
+    controller.report(req.query.review_id)
       .then((result) => {
         res.status(204).end();
       })

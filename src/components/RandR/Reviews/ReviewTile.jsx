@@ -48,8 +48,6 @@ function ReviewTile({data}) {
 
   let increaseHelpful = (e) => {
     if (addedHelpful === false) {
-
-      //uncomment when put request is functioning.
       server.put('/reviews/helpful', {review_id: data.review_id})
         .then(() => {})
         .catch((err) => {
@@ -61,8 +59,7 @@ function ReviewTile({data}) {
   }
 
   let reportReview = (e) => {
-    //uncomment when put request is functioning
-    //server.put('/reviews/report', {review_id: data.review_id});
+    server.put('/reviews/report', {review_id: data.review_id});
     setReport({text: 'Reported', reported: true});
   }
 

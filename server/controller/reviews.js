@@ -36,7 +36,7 @@ module.exports = {
     return axios.put(process.env.DB_API + '/reviews/' + reviewID + '/helpful', null, {headers: {'Authorization': process.env.GIT_TOKEN}})
   },
 
-  report: () => {
-
+  report: (reviewID) => {
+    return axios.put(process.env.DB_API + '/reviews/' + reviewID + '/report', null, {headers: {'Authorization': process.env.GIT_TOKEN}})
   }
 }
