@@ -12,7 +12,7 @@ const server = {
   },
 
   put: (endpoint, data, params) => {
-    return axios.post(endpoint, data, {'params': params})
+    return axios.put(endpoint, data, {'params': params})
   }
 };
 

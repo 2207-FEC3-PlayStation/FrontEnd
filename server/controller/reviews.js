@@ -27,12 +27,12 @@ module.exports = {
   },
 
   addReview: (data) => {
-    return axios.post(process.env.DB_API + '/review', {
+    return axios.post(process.env.DB_API + '/reviews', {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
   },
 
-  helpful: () => {
+  helpful: (reviewID) => {
 
   },
 
