@@ -25,12 +25,15 @@ const ModalContent = styled.div`
   left: 15%;
   padding: 10px;
   z-index: 9998;
-  height: 500px;
+  height: 350px;
   width: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 const ModalBody = styled.div`
   padding: 10px;
+  background: white;
 `
 
 const TC = styled.td`

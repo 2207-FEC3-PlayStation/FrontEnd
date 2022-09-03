@@ -97,7 +97,7 @@ function Comparisons (props) {
   }, [related])
 
   // checks if related item is out of stock. If it is, delete that item from related products
-  // works but if you click on too many items it'll max out the requests to the API... don't click on too many related products in a short time fram.
+  // works but if you click on too many items it'll max out the requests to the API... don't click on too many related products in a short time frame.
   useEffect(() => {
     if (products) {
       related.forEach((item) => {
