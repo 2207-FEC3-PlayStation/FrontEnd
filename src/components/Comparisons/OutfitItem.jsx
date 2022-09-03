@@ -47,6 +47,7 @@ function OutfitItem (props) {
 
   useEffect(() => {
     var thumbnail = '';
+    console.log('props.item: ', props.item)
     if (props.item) {
       server.get('/products/styles', {product_id: props.item.id})
         .then((data)=> {
@@ -102,7 +103,7 @@ function OutfitItem (props) {
   return (
       <Card>
       <Img src={image}></Img><br></br>
-      <Button onClick={props.handleDelete} value={props.item}></Button>
+      <Button onClick={props.handleDelete} value={props.item} name={props.item.name}></Button>
       <Text>{props.item.category.toUpperCase()}</Text><br></br>
       <Text>{props.item.name}</Text><br></br>
       <Text>{props.item.default_price}</Text><br></br>

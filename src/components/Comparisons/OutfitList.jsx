@@ -77,6 +77,10 @@ function OutfitList (props) {
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
 
+  useEffect(() => {
+    // need this use effect to re-render the outfitItems after one has been deleted
+  }, [outfitItems])
+
   // check session/cookie...
 
   // adds the current product to the outfit list. removes any duplicates (if the user tries to add the same product again)
@@ -89,12 +93,16 @@ function OutfitList (props) {
     setOutfitItems(uniqueOutfits);
   }
 
+  // searches a copy of the outfititems by name for an index since I can't use indexof with objects. then I use that index to splice a copy of outfititems and set outfititems to that copy.
   function handleDelete(e) {
+    var original = outfitItems.slice();
     var outfits = outfitItems.slice();
-    console.log(e.target);
-    var index = outfits.indexOf(e.target.value);
-    outfits.splice(index, 1);
-    setOutfitItems(outfits);
+    outfits.forEach((object, index) => {
+      outfits[index] = object.name;
+    })
+    var index = outfits.indexOf(e.target.name);
+    original.splice(index, 1);
+    setOutfitItems(original);
   }
 
   function scrollL () {
