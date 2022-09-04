@@ -103,16 +103,12 @@ function AddReview({display, product_id, close}) {
     if (product) {
       server.get('/reviews/meta', {'product_id': product.id})
         .then((res) => {
-          console.log(res.data.characteristics);
           let chars = res.data.characteristics;
-          let charArray = [];
+          let charObj = {};
           for (var char in chars) {
-            let charObj = {}
-            charObj[char] = 0;
-            charArray.push(charObj);
+            charObj[char] = 6;
           }
-          console.log(charArray);
-          setCharacteristics(charArray)
+          setCharacteristics(charObj)
         })
         .catch((err) => {
           console.log(err)
@@ -155,6 +151,17 @@ function AddReview({display, product_id, close}) {
     }
   }
 
+  let updateChar = (e) => {
+    let currentChars = {};
+    for (var key in characteristics) {
+      currentChars[key] = characteristics[key]
+    }
+    let clickedChar = e.target.name;
+    let clickedVal = e.target.value;
+    currentChars[clickedChar] = parseInt(clickedVal);
+    setCharacteristics(currentChars);
+  }
+
   if (display) {
     return (
       <Modal>
@@ -177,8 +184,10 @@ function AddReview({display, product_id, close}) {
             <label htmlFor='no'>No</label>
           </RecHolder>
           <h5>Characteristics</h5>
-          {characteristics.map((char) => {
-            return <RateCharacteristics key={Object.keys(char)[0]} char={Object.keys(char)[0]}></RateCharacteristics>
+          {Object.keys(characteristics).map((char) => {
+            return (
+              <RateCharacteristics key={char} char={char} selected={characteristics[char]} updateChar={updateChar}></RateCharacteristics>
+            )
           })}
           <ButtonHolder>
             <button style={{display: 'inline-block'}}>Submit</button>

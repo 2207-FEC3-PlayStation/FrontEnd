@@ -13,7 +13,7 @@ const Box = styled.div`
 `
 
 
-function RateCharacteristics({char}) {
+function RateCharacteristics({char, updateChar, selected}) {
 
   const [selection, setSelection] = useState([]);
 
@@ -22,22 +22,22 @@ function RateCharacteristics({char}) {
       let selections;
       switch (char) {
         case 'Size':
-          selections = ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide'];
+          selections = ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide', 'None Selected'];
           break;
         case 'Width':
-          selections = ['Too Narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'];
+          selections = ['Too Narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide', 'None Selected'];
           break;
         case 'Comfort':
-          selections = ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'];
+          selections = ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect', 'None Selected'];
           break;
         case 'Quality':
-          selections = ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'];
+          selections = ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect', 'None Selected'];
           break;
         case 'Length':
-          selections = ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'];
+          selections = ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long', 'None Selected'];
           break;
         case 'Fit':
-          selections = ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'];
+          selections = ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long', 'None Selected'];
           break;
       }
       setSelection(selections);
@@ -45,31 +45,36 @@ function RateCharacteristics({char}) {
   }, [char])
 
   return (
-    <Row>
-      <Box>
-        <p>{char}</p>
-      </Box>
-      <Box>
-      <input style={{display: 'inline-block'}} type='radio' id={selection[0]} name={char} value='yes'></input>
-      <label htmlFor={selection[0]}></label>
-      </Box>
-      <Box>
-      <input style={{display: 'inline-block'}} type='radio' id={selection[1]} name={char} value='yes'></input>
-      <label htmlFor={selection[0]}></label>
-      </Box>
-      <Box>
-      <input style={{display: 'inline-block'}} type='radio' id={selection[2]} name={char} value='yes'></input>
-      <label htmlFor={selection[0]}></label>
-      </Box>
-      <Box>
-      <input style={{display: 'inline-block'}} type='radio' id={selection[3]} name={char} value='yes'></input>
-      <label htmlFor={selection[0]}></label>
-      </Box>
-      <Box>
-      <input style={{display: 'inline-block'}} type='radio' id={selection[4]} name={char} value='yes'></input>
-      <label htmlFor={selection[0]}></label>
-      </Box>
-    </Row>
+    <React.Fragment>
+      <Row style={{justifyContent: 'center'}}>
+        <p style={{marginBottom: '2px'}}>{selection[selected - 1]}</p>
+      </Row>
+      <Row>
+        <Box>
+          <p>{char}</p>
+        </Box>
+        <Box>
+          <input style={{display: 'inline-block'}} type='radio' id={selection[0]} name={char} value={1} onClick={updateChar}></input>
+          <label htmlFor={selection[0]}></label>
+        </Box>
+        <Box>
+          <input style={{display: 'inline-block'}} type='radio' id={selection[1]} name={char} value={2} onClick={updateChar}></input>
+          <label htmlFor={selection[0]}></label>
+        </Box>
+        <Box>
+          <input style={{display: 'inline-block'}} type='radio' id={selection[2]} name={char} value={3} onClick={updateChar}></input>
+          <label htmlFor={selection[0]}></label>
+        </Box>
+        <Box>
+          <input style={{display: 'inline-block'}} type='radio' id={selection[3]} name={char} value={4} onClick={updateChar}></input>
+          <label htmlFor={selection[0]}></label>
+        </Box>
+        <Box>
+          <input style={{display: 'inline-block'}} type='radio' id={selection[4]} name={char} value={5} onClick={updateChar}></input>
+          <label htmlFor={selection[0]}></label>
+        </Box>
+      </Row>
+    </React.Fragment>
   )
 }
 
