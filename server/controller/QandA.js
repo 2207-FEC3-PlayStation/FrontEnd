@@ -14,7 +14,7 @@ module.exports = {
       paramString += key + '=' + params[key] + '&'
     }
     paramString = paramString.substring(0, paramString.length - 1);
-    console.log('paramString: ', paramString);
+    // console.log('paramString: ', paramString);
     return axios.get(process.env.DB_API +  '/qa/questions' + paramString, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
@@ -29,8 +29,9 @@ module.exports = {
       paramString += key + '=' + params[key] + '&'
     }
     paramString = paramString.substring(0, paramString.length - 1);
-    console.log('paramString: ', paramString);
-    return axios.get(process.env.DB_API +  '/qa/questions' + paramString, {
+    var ques_id = paramString.substring(13, paramString.length);
+    // console.log('ques_id: ', ques_id);
+    return axios.get(process.env.DB_API +  '/qa/questions/' + ques_id + '/answers' + paramString, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
 

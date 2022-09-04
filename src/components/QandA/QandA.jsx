@@ -1,54 +1,61 @@
 import React, { Component, useState, useEffect } from 'react';
+import axios from 'axios';
 import QuestionList from './QuestionList.jsx';
 import './QAstyles/QandA.css';
 import server from '../../serverRequests.js';
 
 function QandA ({prod}) {
   const [search, setSearch] = useState('');
-  const [qCount, setQCount] = useState(2);
+  const [qCount, setQCount] = useState(1);
   const [aCount, setACount] = useState(1);
   const [productID, setProductID] = useState('');
   const [answersID, setAnswersID] = useState([]);
   const [results, setResults] = useState([]);
   const [questionID, setQuestionID] = useState('642440');
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
+  // ------------- get answers --------------------
+  const [answers, setAnswers] = useState({
+    answersBody: [],
+    answersName: [],
+    answersDate: [],
+    answersHelp: [],
+    answersPhoto: []
+  })
+  // ----------------------------------------------
+
   const [questionHelp, setQuestionHelp] = useState(0);
   const [reported, setReported] = useState(false);
-  const [questionAnswer, setQuestionAnswer] = useState({
-    id: '',
-    body: '',
-    date: '',
-    answerName: '',
-    helpfulness: '',
-    photos: []
-  })
 
   // test (console)
   const data = () => {
-    return console.log('answers = ', answers)
+    return (
+      // console.log('questions = ', questions)
+      // console.log('questions = ', questions)
+      console.log('body = ', answers.answersBody[0]),
+      console.log('name = ', answers.answersName[0]),
+      console.log('date = ', answers.answersDate[0]),
+      console.log('help = ', answers.answersHelp[0]),
+      console.log('photo = ', answers.answersPhoto[0])
+      )
   }
+
+  // ==================================== PRODUCT_ID ====================================
 
   useEffect(() => {
     if (prod) {
-      server.get('/qa/questions', {'product_id': prod.id})
-      .then((data) => {
-        setProductID(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      setProductID(prod.id);
     }
-  }, [prod])
+  }, [prod]);
 
   // ==================================== QUESTIONS ====================================
 
   useEffect(() => {
-    if (prod) {
-      server.get('/qa/questions', {'product_id': prod.id})
+    if (productID) {
+      server.get('/qa/questions', {'product_id': productID})
       .then((data) => {
         for (let i = 0; i < data.data.results.length; i++) {
-          setResults(results => [...results, data.data.results[i]]);
+          setResults(results => [...results, data.data.results[i]])
+          setQuestions(questions => [...questions, data.data.results[i].question_body])
           for (const key in data.data.results[i].answers) {
           setAnswersID(answersID => [...answersID, `${key}`])
           }
@@ -58,29 +65,33 @@ function QandA ({prod}) {
         console.log(err);
       })
     }
-  }, [prod])
-
+  }, [productID])
 
   // ==================================== ANSWERS ====================================
 
   useEffect(() => {
-    //console.log('useEffect-answers')
-    if (prod) {
-      server.get('/qa/questions', {'product_id': questionID})
+    if (productID) {
+      server.get('/qa/answers', {'question_id': questionID})
       .then((data) => {
-        //console.log('...results', data.data)
         for (let i = 0; i < data.data.results.length; i++) {
-          setAnswers(answers => [...answers, data.data.results[i].body]);
-          // for (const key in data.data.results[i].answers) {
-          // setAnswersID(answersID => [...answersID, `${key}`])
-          // }
+
+          console.log('data = ', data.data.results[i].body)
+          var date = data.data.results[i].date
+          date = date.slice(0, 10)
+
+          setAnswers({
+            ...answers,
+            answersBody: [
+              ...answers.answersBody,
+               data.data.results[i].body] })
+          setAnswers({ ...answers, answersName: data.data.results[i].answerer_name})
+          setAnswers({ ...answers, answersData: date})
+          setAnswers({ ...answers, answersHelp: data.data.results[i].helpfulness})
+          setAnswers({ ...answers, answersPhoto: data.data.results[i].photos})
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
     }
-  }, [prod])
+  }, [productID])
 
   // =================================================================================
 
@@ -107,7 +118,8 @@ function QandA ({prod}) {
             placeholder="Have a question? Search for answers ..."
           />
       </div>
-      <QuestionList aCount={aCount} qCount={qCount} results={results} answersID={answersID}/>
+      <QuestionList
+        aCount={aCount} qCount={qCount} questions={questions} answers={answers}/>
       <br></br>
       <button id="load" onClick={loadMoreAnswers}>
       <b>LOAD MORE ANSWERS</b></button><br></br>

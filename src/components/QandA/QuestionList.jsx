@@ -1,29 +1,22 @@
 import React from 'react';
 
 const QuestionList = (props) => {
-  if(props.results.length !== 0) {
-  // console.log('QuestionsList.jsx');
-  // console.log('props.results = ', props.results);
-  // console.log('props = ', props);
-  // console.log('props.questions = ', props.questions);
-  // console.log('props.count = ', props.count);   // default: 4
+  if(props.questions.length !== 0) {
 
-  let qLast = props.qCount;
-  let aLast = props.aCount;
-  let ans = [];
-  for (let i = 0; i < props.aCount; i++) {
-    ans.push(props.answersID[i]);
-  }
-  //console.log('ans = ', ans);
+    console.log('props = ', props);
+
+    let qLast = props.qCount;
+    let aLast = props.aCount;
 
     return (
         <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
-          {props.results.slice(0, qLast).map((e, i) => {
+          {props.questions.slice(0, qLast).map((e, i) => {
             return (
               <form key={i}>
-                <h3>Q: {props.results[i].question_body}</h3>
+                <h3>Q: {props.questions[i]}</h3>
                 <h3 style={{display: 'inline'}}>A: </h3>
-                <p style={{display: 'inline'}}>answer</p>
+                <p style={{display: 'inline'}}>{props.answers.answersBody[i]}</p>
+                <p>by {props.answers.answersName[i]}, {props.answers.answersDate[i]} | Helpful? <u>Yes</u>({props.answers.answersHelp[i]}) | <u>Report</u></p>
               </form>
             )})
           }
