@@ -21,8 +21,6 @@ const Carousel = styled.div`
   scroll-behavior: smooth;
   padding-left: 0;
 `
-
-
 var RelatedList = (props) => (
   <Related>
     <h4>RELATED PRODUCTS</h4>
@@ -33,10 +31,5 @@ var RelatedList = (props) => (
     </Carousel>
   </Related>
 )
-
-
-
-
-
 
 export default RelatedList;

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import bag from '../../assets/bag.png';
+import search from '../../assets/search.png';
 
 const Header = styled.header`
 top: 0px;
@@ -16,25 +16,29 @@ background-color: #ffe6b8;
 const Titled = styled.h1`
 margin-left: 30px;
 flex-grow: 1;
-font-family: cursive;
 color: white;
 `
 
 const SearchBar = styled.input`
+background: transparent;
+border: none;
+border-bottom: 2px solid white;
+color: white;
 `
 
-const BagImage = styled.img`
-max-width: 50%;
-max-height: 50%;
+const Img = styled.img`
+padding: 10px;
+max-width: 30%;
+max-height: 30%;
 `
 
 
 var Title = (props) => {
   return (
     <Header>
-      <Titled><u>FEC</u></Titled>
-        <SearchBar placeholder='Search...'></SearchBar>
-        <BagImage src={bag}></BagImage>
+      <Titled><u><em>FEC</em></u></Titled>
+        <SearchBar></SearchBar>
+        <Img src={search}></Img>
     </Header>
   )
 }

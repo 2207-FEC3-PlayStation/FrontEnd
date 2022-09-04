@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import OutfitItem from './OutfitItem.jsx';
 import styled from 'styled-components';
 import plusbutton from '../../assets/plusbutton.png';
 
 const Carousel = styled.div`
-  align-items: left;
+  align-items: start;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -25,13 +25,17 @@ const Outfits = styled.div`
 const AddCard = styled.div`
   background-color: white;
   border: 1px solid gray;
-  margin: 3%;
   position: relative;
-  padding-bottom: 2%;
+  padding-top: 7.68%;
+  padding-bottom: 7.68%;
   margin-bottom: 15px;
   width: 180px;
   text-align: center;
-  line-height: 250px;
+  line-height: 170px;
+`
+
+const Addtext = styled.h3`
+margin-block-start: 0em;
 `
 
 const PlusButton = styled.button`
@@ -40,63 +44,48 @@ const PlusButton = styled.button`
   width: 50px;
   border: none;
   position: absolute;
-  top: 50%;
+  top: 60%;
   right: 35%;
 `
 
-class OutfitList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      outfitItems: [{
-        "id": 66642,
-        "campus": "hr-rfc",
-        "name": "Camo Onesie",
-        "slogan": "Blend in to your crowd",
-        "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
-        "category": "Jackets",
-        "default_price": "140.00",
-        "created_at": "2022-03-31T21:13:15.875Z",
-        "updated_at": "2022-03-31T21:13:15.875Z",
-        "features": [
-            {
-                "feature": "Fabric",
-                "value": "Canvas"
-            },
-            {
-                "feature": "Buttons",
-                "value": "Brass"
-            }
-        ],
-        "style": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
-    }]
-    };
-  }
+function OutfitList (props) {
+
+  const [outfitItems, setOutfitItems] = useState([]);
+
   // check session/cookie...
 
-  // add to outfit method on click
-
-  // delete function
-
-  render (){
-    // if outfitItems.length is 1 or more
-    // conditionally render items using map
-
-    return (
-      <Outfits>
-        <h4>YOUR OUTFIT</h4>
-        <Carousel>
-        {this.state.outfitItems.map((item) => (
-          <OutfitItem item={item} key={item.id}/>
-        ))}
-        <AddCard>
-          <h3>Add To Outfit</h3>
-          <PlusButton></PlusButton>
-        </AddCard>
-        </Carousel>
-      </Outfits>
-    )
+  // adds the current product to the outfit list. removes any duplicates (if the user tries to add the same product again)
+  function handleAdd() {
+    var outfits = outfitItems.slice();
+    outfits.push(props.prod);
+    const key = 'id';
+    const uniqueOutfits = [...new Map(outfits.map(item =>
+      [item[key], item])).values()];
+    setOutfitItems(uniqueOutfits);
   }
+
+  function handleDelete(e) {
+    var outfits = outfitItems.slice();
+    var index = outfits.indexOf(e.target.value);
+    outfits.splice(index, 1);
+    setOutfitItems(outfits);
+  }
+
+  return (
+    <Outfits>
+      <h4>YOUR OUTFIT</h4>
+      <Carousel>
+      {outfitItems.map((item) => (
+        <OutfitItem item={item} key={item.id} handleDelete={handleDelete}/>
+      ))}
+      <AddCard>
+        <Addtext>Add To Outfit</Addtext>
+        <PlusButton onClick={handleAdd}></PlusButton>
+      </AddCard>
+      </Carousel>
+    </Outfits>
+  )
 }
+
 
 export default OutfitList;
