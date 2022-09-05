@@ -1,50 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const OuterDiv = styled.div`
-margin-top: 10px;
-`
-
 const Style1 = styled.img`
-border-radius: 50%;
+border-radius: 90%;
 margin-right: 10px;
-width: 8%;
-`
-const Style2 = styled.img`
-border-radius: 50%;
-margin-right: 10px;
-width: 8%;
+width: 70px;;
+height: 70px;
+border: solid 1px black;
+margin: 10px 20px 10px 0px;;
 `
 
-const StyleSelected = styled.div`
-margin-top: 0px;
-margin-bottom: 10px;
-`
-
-const Styles = styled.div`
-display: flex;
-flex-direction: row;
-`
-const Line = styled.div`
-background-color: black;
-margin-top: 20px;
-height: 1px;
-width: 65%;
-`
-
-var StyleSelect = (props) => {//images={this.state.dummy}
+var StyleSelect = (props) => {
   return (
-    <OuterDiv>
-      <StyleSelected>Style Selected > {props.images.results[0].name}</StyleSelected>
-      <Styles>
-        <Style1
-          src={props.images.results[0].photos[0].thumbnail_url}>
-        </Style1>
-        <Style2
-          src={props.images.results[1].photos[0].thumbnail_url}>
-        </Style2>
-      </Styles>
-    </OuterDiv>
+    <Style1
+      src={props.images.photos[0].thumbnail_url}>
+    </Style1>
   )
 }
 

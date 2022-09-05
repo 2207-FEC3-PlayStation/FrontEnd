@@ -17,7 +17,7 @@ flex-direction: row;
 
 const Category = styled.p`
 font-family: "Gill Sans", sans-serif;
-font-size: 25px;
+font-size: 20px;
 margin-bottom: 0px;
 `
 
@@ -31,7 +31,8 @@ padding-left: 15px;
 const Price = styled.p`
 font-family: "Gill Sans", sans-serif;
 font-size: 25px;
-margin-bottom: 0px;
+margin-top: 10px;
+margin-bottom: 10px;
 `
 
 

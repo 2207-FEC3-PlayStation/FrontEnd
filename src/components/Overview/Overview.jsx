@@ -8,6 +8,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
 
+const Top = styled.div`
+max-width: 1200;
+`
 const Announce = styled.div`
 text-align: center;
 padding: 20px;
@@ -19,6 +22,7 @@ display: flex;
 flex-direction: row;
 margin-bottom: 0;
 justify-content: flex-start;
+
 `;
 
 const ProdInfo = styled.div`
@@ -27,9 +31,11 @@ flex-direction: column;
 justify-content: flex-start;
 margin-right: 0px;
 margin-top: 30px;
+margin-left: 70px;
 position: absolute;
-left: 650px;
+left: 750px;
 word-wrap: break-word;
+max-width: 400px;
 `;
 
 const ProdDet = styled.div`
@@ -55,7 +61,19 @@ margin-top: 30px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
-`;
+`
+
+const StyleSelected = styled.div`
+margin-top: 15px;
+margin-bottom: 15px;
+`
+
+const Styles = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+`
+
 
 function Overview (props) {
   const [dummy, setDummy] = useState({
@@ -183,6 +201,8 @@ function Overview (props) {
   const [image, setImage] = useState();
   const [defaultPhotos, setdefaultPhotos] = useState(null);
   const [finished, setFinished] = useState(false);
+  const [styles, setStyles] = useState(false);
+  const [currentStyle, setCurrentStyle] = useState({});
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -193,6 +213,8 @@ function Overview (props) {
       server.get('/products/styles', {product_id: props.prod.id})
         .then((data)=> {
           var results = data.data.results;
+          setStyles(results);
+          setCurrentStyle(results[0]);
           for (var i = 0; i < results.length; i++) {
             if (results[i]['default?'] === true) {
               mainPhoto = results[i].photos[0].url;
@@ -218,14 +240,20 @@ function Overview (props) {
   }
 
   return (
-  <div>
+  <Top>
     <Title />
     <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
       <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating}/>}
-        <StyleSelect images={dummy} />
+        {styles && currentStyle &&
+        <React.Fragment>
+        <StyleSelected><strong>STYLE > </strong>{currentStyle.name}</StyleSelected>
+        <Styles>
+        {styles.map((style, index) => (<StyleSelect images={style} key={index}/>))}
+        </Styles>
+        </React.Fragment>}
         <CheckOut />
       </ProdInfo>
     </FlexContainer>
@@ -239,10 +267,9 @@ function Overview (props) {
         {props.prod.features.map((feature) => {
           return <React.Fragment key={feature.value}><span>✓ {feature.value} {feature.feature}</span><br></br></React.Fragment>
         })}
-        {/* <span>{props.prod.features[0].feature}: {props.prod.features[0].value}</span> */}
       </ProdChar>
     </ProdDet>}
-  </div>
+  </Top>
   )
 }
 

@@ -5,11 +5,12 @@ import Thumbnail from './Thumbnail.jsx';
 
 const Carousel = styled.div`
 background-color: #d9d5d5;
-width: 620px;
+width: 770px;
 height: 600px;
 display: flex;
-justify-content: center;
+justify-content: flex-end;
 align-items: center;
+margin-right: 50px;
 `
 
 const Thumbnails = styled.div`
@@ -23,26 +24,27 @@ display: flex;
 flex-direction: column;
 align-items: left;
 margin-bottom: 0;
-margin-left: 30px;
+margin-left: 10px;
 margin-top: 40px;
 height: 500px;
 overflow-y: hidden;
 overflow-x: hidden;
-position: relative;
-left: -640px;
+position: absolute;
+left: 5px;
 scroll-behavior: smooth;
 `;
 
 const MainImage = styled.img`
 display: block;
 position: absolute;
-max-width: 530px;
-max-height: 520px;
+max-width: 460px;
+max-height: 540px;
+margin-right: 90px;;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
 const DownButton = styled.button`
-left: 30px;
+left: 25px;
 top: 640px;
 position: absolute;
 background: transparent;
@@ -60,6 +62,18 @@ position: absolute;
 z-index: 9999;
 `
 
+const LeftArrow = styled.button`
+background: transparent;
+position: relative;
+left: -520px;
+font-size: 40px;
+border: none;
+`
+const RightArrow = styled(LeftArrow)`
+background: transparent;
+position: relative;
+left: -13px;
+`
 
 function ImageGallery (props) {
 
@@ -86,17 +100,16 @@ function ImageGallery (props) {
     }
   }
 
-
-
   if (props.photos) return (
     <React.Fragment>
       <Carousel>
+      <LeftArrow>←</LeftArrow>
       <MainImage
         src={props.image}>
       </MainImage>
+      <RightArrow>→</RightArrow>
       </Carousel>
       <Thumbnails>
-
       <ThumbnailList id ="ThumbnailList">
         {props.photos.map((photo) => {
           return <Thumbnail key={photo.url} url={photo.url} handleImage={props.handleImage}/>
