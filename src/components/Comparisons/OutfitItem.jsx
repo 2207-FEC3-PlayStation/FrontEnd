@@ -47,7 +47,6 @@ function OutfitItem (props) {
 
   useEffect(() => {
     var thumbnail = '';
-    console.log('props.item: ', props.item)
     if (props.item) {
       server.get('/products/styles', {product_id: props.item.id})
         .then((data)=> {

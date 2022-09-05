@@ -72,16 +72,24 @@ const RightButton = styled(LeftButton)`
 `
 
 function OutfitList (props) {
-
+  // const [cookie, setCookie] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [outfitItems, setOutfitItems] = useState([]);
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
 
+  // retrieves the outfitlist from the user's local storage which is saved on the client side and will persist until deleted by the user such as clearing the cache (I think!)
   useEffect(() => {
-    // need this use effect to re-render the outfitItems after one has been deleted
-  }, [outfitItems])
+    var outfitlist = JSON.parse(localStorage.getItem("outfits"));
+    outfitlist = outfitlist || []
+    setOutfitItems(outfitlist);
+  }, [loaded])
 
-  // check session/cookie...
+  // need this use effect to re-render the outfitItems after one has been deleted and saves the outfitItems to the local storage any time there is a change.
+  useEffect(() => {
+    var list = JSON.stringify(outfitItems);
+    localStorage.setItem("outfits", `${list}`);
+  }, [outfitItems])
 
   // adds the current product to the outfit list. removes any duplicates (if the user tries to add the same product again)
   function handleAdd() {
