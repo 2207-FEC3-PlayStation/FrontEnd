@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Thumbnail1 = styled.img`
-margin-top: 30px;
-max-width: 20%;
-max-height: 35%;
-margin: 15px;
+/* margin-top: 10px; */
+max-width: 25%;
+max-height: 40%;
+margin: 10px;
 z-index: 9991;
 border: #302f2f 1px solid;
 `;
 
 function Thumbnail (props) {
   return(
-    <Thumbnail1 src={props.url}></Thumbnail1>
+    <Thumbnail1 src={props.url} onClick={props.handleImage}></Thumbnail1>
   )
 }
 

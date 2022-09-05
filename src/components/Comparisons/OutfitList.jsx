@@ -122,6 +122,7 @@ function OutfitList (props) {
 
   function scrollR () {
     const element = document.getElementById("OutfitList");
+    console.log(element);
     if (element.scrollLeft === 0) {
       element.scrollLeft += 350;
       setHideR(true);

@@ -12,18 +12,25 @@ justify-content: center;
 align-items: center;
 `
 
+const Thumbnails = styled.div`
+display: flex;
+flex-direction: column;
+left: -650px;
+`
+
 const ThumbnailList = styled.div`
 display: flex;
 flex-direction: column;
 align-items: left;
-/* margin-top: 30px; */
 margin-bottom: 0;
 margin-left: 30px;
+margin-top: 40px;
 height: 500px;
 overflow-y: hidden;
 overflow-x: hidden;
 position: relative;
-left: -650px;
+left: -640px;
+scroll-behavior: smooth;
 `;
 
 const MainImage = styled.img`
@@ -31,31 +38,74 @@ display: block;
 position: absolute;
 max-width: 530px;
 max-height: 520px;
-/* padding-top: 30px;
-padding-left: 30px; */
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-/* top: 150px;
-left: 45px; */
 `;
 
-// add buttons to scroll through thumbnails
-// need to work on CSS for main image to size it correctly
+const DownButton = styled.button`
+left: 20px;
+top: 640px;
+position: absolute;
+background: transparent;
+border: none;
+width: 50px;
+font-size: 50px;
+padding: 0px;
+`
+
+const UpButton = styled(DownButton)`
+top: 140px;
+left: 20px;
+font-size: 50px;
+position: absolute;
+z-index: 9999;
+`
+
 
 function ImageGallery (props) {
+
+  const [hideR, setHideR] = useState(false);
+  const [clickedR, setClickedR] = useState(false);
+
+  // add buttons to scroll through thumbnails
+  function scrollUp () {
+    const element = document.getElementById("ThumbnailList");
+    element.scrollBy(0, -600);
+    setHideR(false);
+    setClickedR(false);
+  }
+
+  function scrollDown () {
+    const element = document.getElementById("ThumbnailList");
+    console.log(element.scrollTop);
+    if (element.scrollTop === 0) {
+      element.scrollBy(0, 600);
+      setHideR(true);
+      setClickedR(true);
+    } else {
+      setHideR(true);
+    }
+  }
+
+
+
   if (props.photos) return (
     <React.Fragment>
-
       <Carousel>
       <MainImage
         src={props.image}>
       </MainImage>
       </Carousel>
-      <ThumbnailList>
+      <Thumbnails>
+
+      <ThumbnailList id ="ThumbnailList">
         {props.photos.map((photo) => {
-          return <Thumbnail key={photo.url} url={photo.url}/>
+          return <Thumbnail key={photo.url} url={photo.url} handleImage={props.handleImage}/>
           photo
         })}
       </ThumbnailList>
+      {clickedR && <UpButton onClick={() => scrollUp()}>ˆ</UpButton>}
+      {!hideR && <DownButton onClick={() => scrollDown()}>ˬ</DownButton>}
+      </Thumbnails>
       </React.Fragment>
 
   )

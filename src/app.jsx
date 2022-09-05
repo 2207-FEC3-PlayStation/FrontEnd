@@ -51,8 +51,6 @@ const App = () => {
   }, [prod])
 
   function handleProduct (event) {
-    console.log('clicked on card');
-    console.log(event.target.alt);
     server.get('/product', {product_id: event.target.alt})
       .then((data) => {
         setProd(data.data)

@@ -213,12 +213,16 @@ function Overview (props) {
     }
   }, [props.prod, finished])
 
+  function handleImage(e) {
+    setImage(e.target.src);
+  }
+
   return (
   <div>
     <Title />
     <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating}/>}
         <StyleSelect images={dummy} />
