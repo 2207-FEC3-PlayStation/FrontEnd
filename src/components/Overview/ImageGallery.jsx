@@ -42,7 +42,7 @@ filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
 const DownButton = styled.button`
-left: 20px;
+left: 30px;
 top: 640px;
 position: absolute;
 background: transparent;
@@ -54,7 +54,7 @@ padding: 0px;
 
 const UpButton = styled(DownButton)`
 top: 140px;
-left: 20px;
+left: 30px;
 font-size: 50px;
 position: absolute;
 z-index: 9999;
