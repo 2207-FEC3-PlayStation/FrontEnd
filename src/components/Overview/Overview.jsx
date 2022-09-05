@@ -29,6 +29,7 @@ margin-right: 0px;
 margin-top: 30px;
 position: absolute;
 left: 650px;
+word-wrap: break-word;
 `;
 
 const ProdDet = styled.div`

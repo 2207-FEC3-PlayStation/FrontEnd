@@ -67,7 +67,7 @@ const App = () => {
       <Overview prod={prod} avgRating={avgRating}/>
       <Comparisons prod={prod} handleProduct={handleProduct}/>
       <QandA />
-      <RandR prod={prod} avgRating={avgRating}/>
+      <div id="reviews"><RandR  prod={prod} avgRating={avgRating}/></div>
     </div>
     );
 }
