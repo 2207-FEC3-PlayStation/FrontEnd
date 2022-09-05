@@ -37,9 +37,9 @@ scroll-behavior: smooth;
 const MainImage = styled.img`
 display: block;
 position: absolute;
-max-width: 460px;
+max-width: 420px;
 max-height: 540px;
-margin-right: 90px;;
+margin-right: 125px;;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
@@ -65,14 +65,14 @@ z-index: 9999;
 const LeftArrow = styled.button`
 background: transparent;
 position: relative;
-left: -520px;
+left: -66%;
 font-size: 40px;
 border: none;
 `
 const RightArrow = styled(LeftArrow)`
 background: transparent;
 position: relative;
-left: -13px;
+left: -4%;
 `
 
 function ImageGallery (props) {
@@ -112,7 +112,7 @@ function ImageGallery (props) {
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">
         {props.photos.map((photo) => {
-          return <Thumbnail key={photo.url} url={photo.url} handleImage={props.handleImage}/>
+          return <Thumbnail key={photo.url} url={photo.url} handleImage={props.handleImage} changeStyle={props.changeStyle}/>
           photo
         })}
       </ThumbnailList>
