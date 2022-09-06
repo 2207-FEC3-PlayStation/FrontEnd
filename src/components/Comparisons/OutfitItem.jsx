@@ -12,8 +12,7 @@ const Card = styled.div`
   position: relative;
   padding-bottom: 2%;
   margin-bottom: 15px;
-  margin-left: 0px;;
-  margin-right: 4%;
+  margin-right: 5%;
   margin-top: 0px;
 `
 const Text = styled.small`
@@ -21,10 +20,14 @@ const Text = styled.small`
   padding: 5%;
 `
 
+const SmallText = styled(Text)`
+font-size: 13px;
+`
+
 const Img = styled.img`
   width:180px;
   height:220px;
-  opacity: 0.75;
+  opacity: 0.9;
 `
 const Button = styled.button`
   background: transparent url(${xbutton}) no-repeat top;
@@ -32,7 +35,7 @@ const Button = styled.button`
   width: 25px;
   border: none;
   position: absolute;
-  top: 2%;
+  top: 3%;
   right: 5%;
 `
 
@@ -44,7 +47,7 @@ function OutfitItem (props) {
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
 
-  // on click of delete button, call the handleDelete function from OutfitList
+
   useEffect(() => {
     var thumbnail = '';
     if (props.item) {
@@ -102,10 +105,10 @@ function OutfitItem (props) {
   return (
       <Card>
       <Img src={image}></Img><br></br>
-      <Button onClick={props.handleDelete} value={props.item}></Button>
-      <Text>{props.item.category.toUpperCase()}</Text><br></br>
+      <Button onClick={props.handleDelete} value={props.item} name={props.item.name}></Button>
+      <SmallText>{props.item.category.toUpperCase()}</SmallText><br></br>
       <Text>{props.item.name}</Text><br></br>
-      <Text>{props.item.default_price}</Text><br></br>
+      <SmallText>${props.item.default_price}</SmallText><br></br>
       <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )

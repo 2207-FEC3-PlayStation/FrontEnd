@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import search from '../../assets/search.png';
+import logo from '../../assets/playstation.png';
 
 const Header = styled.header`
 top: 0px;
@@ -10,7 +11,7 @@ align-items: center;
 width: 100%;
 height: 70px;
 z-index: 9999;
-background-color: #ffe6b8;
+background-color: #44423f;
 `
 
 const Titled = styled.h1`
@@ -36,7 +37,7 @@ max-height: 30%;
 var Title = (props) => {
   return (
     <Header>
-      <Titled><u><em>FEC</em></u></Titled>
+      <Titled><img src={logo}></img><u><em>Playstation</em></u></Titled>
         <SearchBar></SearchBar>
         <Img src={search}></Img>
     </Header>

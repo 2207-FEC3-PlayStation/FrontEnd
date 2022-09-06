@@ -2,17 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Thumbnail1 = styled.img`
-margin-top: 30px;
-margin-bottom: 10px;
-max-width: 35%;
-max-height: 30%;
-margin: 15px;
-z-index: 9991;
+/* margin-top: 10px; */
+max-width: 25%;
+max-height: 40%;
+margin: 10px;
+z-index: 9990;
+border: #302f2f 1px solid;
+filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
 function Thumbnail (props) {
   return(
-    <Thumbnail1 src={props.url}></Thumbnail1>
+    <Thumbnail1 src={props.url} onClick={props.handleImage}></Thumbnail1>
   )
 }
 

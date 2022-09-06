@@ -8,180 +8,84 @@ import axios from 'axios';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
 
+const Top = styled.div`
+max-width: 1200;
+`
 const Announce = styled.div`
 text-align: center;
 padding: 20px;
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const FlexContainer = styled.div`
-background-color: #d4b37711;
+/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin-bottom: 0;
 justify-content: flex-start;
+width: 1200px;
 `;
 
 const ProdInfo = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: flex-start;
+justify-content: flex-end;
 margin-right: 0px;
 margin-top: 30px;
 position: absolute;
-left: 650px;
+left: 750px;
+word-wrap: break-word;
+width: 420px;
+padding-left: 40px;
 `;
 
 const ProdDet = styled.div`
-background-color: #d4b37711;
+/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin: 0px;
-padding-top: 20px;
 justify-content: flex-start;
 `;
 
 const ProdDescr = styled.div`
 padding: 10px;
-padding-left: 30px;
-margin-top: 30px;
+padding-left: 120px;
+margin-top: 90px;
 margin-bottom: 30px;
-width: 60%;
+width: 55%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 30px;
+margin-top: 90px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
-`;
+`
+
+const StyleSelected = styled.div`
+margin-top: 15px;
+margin-bottom: 13px;
+font-family: Arial, Helvetica, sans-serif;
+`
+
+const Styles = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+max-width: 360px;
+`
+
 
 function Overview (props) {
-  const [dummy, setDummy] = useState({
-    "product_id": "66642",
-    "results": [
-      {
-        "style_id": 411534,
-        "name": "Forest Green & Black",
-        "original_price": "140.00",
-        "sale_price": null,
-        "default?": true,
-        "photos": [
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2775&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1527522883525-97119bfce82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1527522883525-97119bfce82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1556648202-80e751c133da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1556648202-80e751c133da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1532543491484-63e29b3c1f5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1532543491484-63e29b3c1f5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-          }
-        ],
-        "skus": {
-          "2390357": {
-            "quantity": 8,
-            "size": "XS"
-          },
-          "2390358": {
-            "quantity": 16,
-            "size": "S"
-          },
-          "2390359": {
-            "quantity": 17,
-            "size": "M"
-          },
-          "2390360": {
-            "quantity": 10,
-            "size": "L"
-          },
-          "2390361": {
-            "quantity": 15,
-            "size": "XL"
-          },
-          "2390362": {
-            "quantity": 4,
-            "size": "XL"
-          }
-        }
-      },
-      {
-        "style_id": 411535,
-        "name": "Desert Brown & Tan",
-        "original_price": "140.00",
-        "sale_price": null,
-        "default?": false,
-        "photos": [
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1422557379185-474fa15bf770?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1422557379185-474fa15bf770?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1490723286627-4b66e6b2882a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1490723286627-4b66e6b2882a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-          },
-          {
-            "thumbnail_url": "https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-            "url": "https://images.unsplash.com/photo-1447958272669-9c562446304f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2800&q=80"
-          }
-        ],
-        "skus": {
-          "2390363": {
-            "quantity": 8,
-            "size": "XS"
-          },
-          "2390364": {
-            "quantity": 16,
-            "size": "S"
-          },
-          "2390365": {
-            "quantity": 17,
-            "size": "M"
-          },
-          "2390366": {
-            "quantity": 10,
-            "size": "L"
-          },
-          "2390367": {
-            "quantity": 15,
-            "size": "XL"
-          },
-          "2390368": {
-            "quantity": 6,
-            "size": "XXL"
-          }
-        }
-      }]
-  });
   const [image, setImage] = useState();
   const [defaultPhotos, setdefaultPhotos] = useState(null);
   const [finished, setFinished] = useState(false);
+  const [styles, setStyles] = useState(false);
+  const [currentStyle, setCurrentStyle] = useState({});
+  const [counter, setCounter] = useState(1);
+  const [sizes, setSizes] = useState([]);
+  const [maxQuantity, setmaxQuantity] = useState([]);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -192,6 +96,15 @@ function Overview (props) {
       server.get('/products/styles', {product_id: props.prod.id})
         .then((data)=> {
           var results = data.data.results;
+          setStyles(results);
+          setCurrentStyle(results[0]);
+          var array = [];
+          for (var sku in results[0].skus) {
+            array.push(results[0].skus[sku].size)
+          }
+          setSizes(array);
+          var max = Object.values(results[0].skus)[0].quantity;
+          setmaxQuantity([...Array(max+1).keys()])
           for (var i = 0; i < results.length; i++) {
             if (results[i]['default?'] === true) {
               mainPhoto = results[i].photos[0].url;
@@ -212,16 +125,61 @@ function Overview (props) {
     }
   }, [props.prod, finished])
 
+  function handleImage(e) {
+    setImage(e.target.src);
+  }
+
+  function changeStyle(e) {
+    var style = JSON.parse(e.currentTarget.value)
+    setImage(style.photos[0].url);
+    setdefaultPhotos(style.photos);
+    setCurrentStyle(style);
+    var array = [];
+    for (var sku in style.skus) {
+        array.push(style.skus[sku].size)
+    }
+    setSizes(array);
+    var max = Object.values(style.skus)[0].quantity;
+    setmaxQuantity([...Array(max+1).keys()]);
+  }
+
+  // need to finish this function
+  function changeQuantity(e) {
+    console.log(e.target)
+  }
+
+  function leftClick() {
+    if (counter < 1) {
+      setCounter(counter => defaultPhotos.length)
+    }
+    setCounter(counter => counter - 1);
+    setImage(defaultPhotos[counter].url);
+  }
+
+  function rightClick() {
+    if (counter > defaultPhotos.length-2) {
+      setCounter(-1);
+    }
+    setCounter(counter => counter + 1);
+    setImage(defaultPhotos[counter].url);
+  }
+
   return (
-  <div>
+  <Top>
     <Title />
     <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating}/>}
-        <StyleSelect images={dummy} />
-        <CheckOut />
+        {styles && currentStyle &&
+        <React.Fragment>
+        <StyleSelected><strong>STYLE > </strong>{currentStyle.name}</StyleSelected>
+        <Styles>
+        {styles.map((style, index) => (<StyleSelect currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle}/>))}
+        </Styles>
+        </React.Fragment>}
+        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity}/>
       </ProdInfo>
     </FlexContainer>
     {props.prod && <ProdDet>
@@ -234,10 +192,9 @@ function Overview (props) {
         {props.prod.features.map((feature) => {
           return <React.Fragment key={feature.value}><span>✓ {feature.value} {feature.feature}</span><br></br></React.Fragment>
         })}
-        {/* <span>{props.prod.features[0].feature}: {props.prod.features[0].value}</span> */}
       </ProdChar>
     </ProdDet>}
-  </div>
+  </Top>
   )
 }
 
