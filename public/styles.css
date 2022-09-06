@@ -87,3 +87,8 @@ body {
   content: "\f005";
   color: #f8ce0b;
 }
+
+.inputField {
+  width: 70%;
+  margin: 10px
+}

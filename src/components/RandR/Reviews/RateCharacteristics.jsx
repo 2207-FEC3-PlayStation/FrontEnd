@@ -47,14 +47,14 @@ function RateCharacteristics({char, updateChar, selected}) {
   return (
     <React.Fragment>
       <Row style={{justifyContent: 'center'}}>
-        <p style={{marginBottom: '2px'}}>{selection[selected - 1]}</p>
+        <p style={{marginBottom: '2px'}}>{selection[selected.value - 1]}</p>
       </Row>
       <Row>
         <Box>
           <p>{char}</p>
         </Box>
         <Box>
-          <input style={{display: 'inline-block'}} type='radio' id={selection[0]} name={char} value={1} onClick={updateChar}></input>
+          <input style={{display: 'inline-block'}} type='radio' id={selection[0]} name={char} value={1} onClick={updateChar} required></input>
           <label htmlFor={selection[0]}></label>
         </Box>
         <Box>
