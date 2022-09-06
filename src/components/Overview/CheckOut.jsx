@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-
+import React from 'react';
+import styled from 'styled-components';
+import starbutton from '../../assets/starbutton.png';
 
 const OuterDiv = styled.div`
 display: flex;
@@ -14,6 +14,7 @@ color: white;
 padding: 20px 20px;
 margin-right: 10px;
 border:none;
+width: 213px;
 `
 
 const SizeOptions = styled.option`
@@ -31,35 +32,56 @@ const QuantityOptions = styled.option`
 `
 
 const AddToCart = styled.button`
-width: 255px;
+width: 230px;
 padding: 20px 30px;
 margin-top: 30px;
 background-color: #207420;
 color: white;
 border: none;
+margin-right: 10px;
 &:hover {
   background-color: #2f8d2f;
   }
 `
 
+const StarButton = styled.button`
+  background: #207420 url(${starbutton}) no-repeat center;
+  height: 70px;
+  width: 70px;
+  border: none;
+  margin-left: 10px;
+  margin-top: 30px;
+  &:hover {
+  background-color: #2f8d2f;
+  }
+`
 
+const Row = styled.div`
+display: flex;
+flex-direction: row;
+`
 var CheckOut = (props) => {
   return (
     <OuterDiv>
       <div>
-      <SizeSelect>
-        <SizeOptions>SELECT SIZE</SizeOptions>
+      <SizeSelect onChange={props.changeQuantity}>
+        <SizeOptions >SELECT SIZE</SizeOptions>
         {props.sizes.map((size, index) => {
-          return <SizeOptions key={index}>{size}</SizeOptions>
+          return <SizeOptions key={index} >{size}</SizeOptions>
         })}
 
       </SizeSelect>
       <QuantitySelect>
         <QuantityOptions>QTY</QuantityOptions>
-        <QuantityOptions>1</QuantityOptions>
+        {props.maxQuantity.map((num, index) => {
+          return <QuantityOptions key={index}>{num}</QuantityOptions>
+        })}
       </QuantitySelect>
       </div>
-      <AddToCart>Add To Cart</AddToCart>
+      <Row>
+      <AddToCart>ADD TO BAG</AddToCart>
+      <StarButton></StarButton>
+      </Row>
     </OuterDiv>
   )
 }

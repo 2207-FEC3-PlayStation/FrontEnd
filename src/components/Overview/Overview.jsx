@@ -84,6 +84,7 @@ function Overview (props) {
   const [currentStyle, setCurrentStyle] = useState({});
   const [counter, setCounter] = useState(1);
   const [sizes, setSizes] = useState([]);
+  const [maxQuantity, setmaxQuantity] = useState([]);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -98,9 +99,11 @@ function Overview (props) {
           setCurrentStyle(results[0]);
           var array = [];
           for (var sku in results[0].skus) {
-              array.push(results[0].skus[sku].size)
+            array.push(results[0].skus[sku].size)
           }
           setSizes(array);
+          var max = Object.values(results[0].skus)[0].quantity;
+          setmaxQuantity([...Array(max+1).keys()])
           for (var i = 0; i < results.length; i++) {
             if (results[i]['default?'] === true) {
               mainPhoto = results[i].photos[0].url;
@@ -135,6 +138,13 @@ function Overview (props) {
         array.push(style.skus[sku].size)
     }
     setSizes(array);
+    var max = Object.values(style.skus)[0].quantity;
+    setmaxQuantity([...Array(max+1).keys()]);
+  }
+
+  // need to finish this function
+  function changeQuantity(e) {
+    console.log(e.target)
   }
 
   function leftClick() {
@@ -168,7 +178,7 @@ function Overview (props) {
         {styles.map((style, index) => (<StyleSelect currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle}/>))}
         </Styles>
         </React.Fragment>}
-        <CheckOut sizes={sizes}/>
+        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity}/>
       </ProdInfo>
     </FlexContainer>
     {props.prod && <ProdDet>
