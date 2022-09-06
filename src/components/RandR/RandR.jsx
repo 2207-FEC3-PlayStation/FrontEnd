@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import Reviews from './Reviews.jsx';
 import server from '../../serverRequests.js';
+import styled from 'styled-components';
+
+const RandRComp = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`
+
+const RatingsComp = styled.div`
+  display: flex;
+  flex-basis: 30%
+`
+const ReviewsComp = styled.div`
+  display: flex;
+  flex-basis: 60%
+`
 
 function RandR ({prod}) {
 
@@ -59,10 +75,14 @@ function RandR ({prod}) {
   }, [reviews.recommended])
 
   return (
-    <React.Fragment>
-      <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
-      <Reviews product_id={product_id} count={count}/>
-    </React.Fragment>
+    <RandRComp>
+      <RatingsComp>
+        <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
+      </RatingsComp>
+      <ReviewsComp>
+        <Reviews product_id={product_id} count={count}/>
+      </ReviewsComp>
+    </RandRComp>
   )
 }
 

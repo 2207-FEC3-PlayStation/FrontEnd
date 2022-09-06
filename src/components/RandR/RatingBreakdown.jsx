@@ -2,6 +2,15 @@ import React, {useEffect, useState} from 'react';
 import StarRating from './RatingBreakdown/StarRating.jsx';
 import RatingsBar from './RatingBreakdown/RatingsBar.jsx';
 import CharsBar from './RatingBreakdown/CharsBar.jsx';
+import styled from 'styled-components';
+
+const Ratings = styled.div`
+  display: flex;
+  flex-direction: column;
+  vertical-align: top;
+  flex-basis: 100%
+`
+
 
 function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}) {
 
@@ -20,7 +29,7 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}
   }, [reviews])
 
   return (
-    <div style={{width: "28%", display: 'inline-block', verticalAlign: 'top', marginLeft: '2%'}}>
+    <Ratings>
       <h3>Ratings and Reviews</h3>
       <h1 data-testid="Review-Num" style={{display: 'inline-block', verticalAlign: 'top'}}>{ratingToTenth}</h1>
       <StarRating avgRating={avgRating}/>
@@ -32,7 +41,7 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}
         return <CharsBar key={char} char={char} thisRating={Number(charsVals[chars.indexOf(char)].value).toFixed(2)} />
       })}
       <p>{recommended}% of reviews recommend this product</p>
-    </div>
+    </Ratings>
   )
 }
 

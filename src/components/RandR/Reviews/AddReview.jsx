@@ -15,7 +15,7 @@ const Modal = styled.div`
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
   z-index: 20;
   max-width: 100vw;
   max-height: 100vh;
@@ -27,7 +27,6 @@ const Modal = styled.div`
 
 const ModalInput = styled.div`
   position: absolute;
-  top: 10%;
   padding: 5%;
   display: flex;
   background-color: white;
@@ -36,8 +35,8 @@ const ModalInput = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   z-index: 30;
-  width: 80%;
-  height: 80%;
+  max-width: 80%;
+  max-height: 80%;
 `
 
 const StarHolder = styled.div`
@@ -64,6 +63,12 @@ const ButtonHolder = styled.div`
   flex-direction: row;
 `
 
+const SummaryAndBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+`
+
 
 function AddReview({display, product_id, close}) {
 
@@ -73,6 +78,7 @@ function AddReview({display, product_id, close}) {
   const [ratingDesc, setRatingDesc] = useState(' ');
   const [starFills, setStarFills] = useState(['singleStar', 'singleStar', 'singleStar', 'singleStar', 'singleStar'])
   const [recommended, setRecommended] = useState(false);
+  const [minChars, setMinChars] = useState('Minimum required characters left: 50')
 
 //--------UseEffects--------
 
@@ -162,6 +168,18 @@ function AddReview({display, product_id, close}) {
     setCharacteristics(currentChars);
   }
 
+  let updateMinChars = (e) => {
+    e.preventDefault();
+    let length = e.target._valueTracker.getValue().length;
+    let defaultText = 'Minimum required characters left: ';
+    if (length >= 50) {
+      setMinChars('Minimum reached')
+    } else {
+      let remainingChars = 50 - length;
+      setMinChars(defaultText + remainingChars)
+    }
+  }
+
   if (display) {
     return (
       <Modal>
@@ -189,6 +207,13 @@ function AddReview({display, product_id, close}) {
               <RateCharacteristics key={char} char={char} selected={characteristics[char]} updateChar={updateChar}></RateCharacteristics>
             )
           })}
+          <SummaryAndBody>
+            <label htmlFor='summary'>Review Summary</label>
+            <input id='summary' type='text' maxLength='60'></input>
+            <label htmlFor='reviewBody'>Review Body</label>
+            <input id='reviewBody' type='text' minLength='50' onChange={updateMinChars}></input>
+            <p style={{fontSize: '10px'}}>{minChars}</p>
+          </SummaryAndBody>
           <ButtonHolder>
             <button style={{display: 'inline-block'}}>Submit</button>
             <button style={{display: 'inline-block'}} onClick={close}>Cancel</button>

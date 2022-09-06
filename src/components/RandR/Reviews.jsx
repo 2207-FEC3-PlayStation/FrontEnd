@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
 import AddReview from './Reviews/AddReview.jsx';
 import server from '../../serverRequests.js';
+import styled from 'styled-components';
 
 
 function Reviews({product_id, count}) {
@@ -66,7 +67,7 @@ function Reviews({product_id, count}) {
   }
 
   return (
-    <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
+    <div>
       <AddReview display={showAddReview} product_id={product_id} close={closeModal}></AddReview>
       <h3 style={{display: 'inline-block'}}>{totalReviews} reviews, sorted by </h3>
 
