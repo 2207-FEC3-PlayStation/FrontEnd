@@ -1,25 +1,13 @@
 import React from 'react';
 
 const QuestionList = (props) => {
-  if(props.questions.length !== 0) {
+  if(true) {
 
     console.log('props = ', props);
 
-    let qLast = props.qCount;
-    let aLast = props.aCount;
-
     return (
         <div id="Results" style={{border: 'medium solid black', backgroundColor: "aliceblue", width: "98%", display: "block", margin: "auto"}}>
-          {props.questions.slice(0, qLast).map((e, i) => {
-            return (
-              <form key={i}>
-                <h3>Q: {props.questions[i]}</h3>
-                <h3 style={{display: 'inline'}}>A: </h3>
-                <p style={{display: 'inline'}}>{props.answers.answersBody[i]}</p>
-                <p>by {props.answers.answersName[i]}, {props.answers.answersDate[i]} | Helpful? <u>Yes</u>({props.answers.answersHelp[i]}) | <u>Report</u></p>
-              </form>
-            )})
-          }
+
         </div>
     )
   } else {

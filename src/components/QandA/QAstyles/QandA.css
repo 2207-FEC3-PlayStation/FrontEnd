@@ -1,4 +1,4 @@
-.QandA {
+/* .QandA {
   border: thin dashed black;
 }
 .Search{
@@ -14,6 +14,7 @@
   display: block;
   margin: 20px;
 }
+*/
 #load {
   border: none;
   background: none;
@@ -21,6 +22,7 @@
 #load:hover {
   color: lightslategrey;
 }
+/*
 #moreQA{
   margin: 10px;
   background-color: white;
@@ -32,4 +34,4 @@
   background-color: white;
   width: 150px;
   height: 50px;
-}
+} */
