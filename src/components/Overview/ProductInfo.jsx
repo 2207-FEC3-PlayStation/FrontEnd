@@ -27,10 +27,22 @@ font-size: 25px;
 margin-bottom: 0px;
 `
 
+const StarHolder = styled.div`
+`
+
+const StarSpacer = styled.div`
+flex-basis: 80%;
+`
+
+
 var ProductInfo = (props) => {
+
   return (
       <React.Fragment>
-      <StarRating product_id={props.info.id}/>
+      <StarHolder>
+        <StarRating avgRating={props.avgRating}/>
+        <StarSpacer/>
+      </StarHolder>
       <Reviews>Read all reviews</Reviews>
       <Category>{props.info.category.toUpperCase()}</Category>
       <ProductName>{props.info.name}</ProductName>

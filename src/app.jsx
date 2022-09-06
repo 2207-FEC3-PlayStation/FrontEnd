@@ -12,6 +12,7 @@ import Comparisons from './components/Comparisons/Comparisons.jsx';
 const App = () => {
 
   const [prod, setProd] = useState(null);
+  const [avgRating, setAvgRating] = useState();
 
   useEffect(() => {
     if (prod === null) {
@@ -28,6 +29,27 @@ const App = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (prod) {
+      server.get('/reviews/meta', {'product_id': prod.id})
+      .then((data) => {
+        let sum = 0;
+        let reviewCount = 0;
+        for(var key in data.data.ratings) {
+          let thisKey = parseInt(key);
+          let thisVal = parseInt(data.data.ratings[key]);
+          reviewCount += thisVal;
+          sum += thisVal * thisKey;
+        }
+        let average = parseInt((Math.round(4 * sum / reviewCount) / 4).toFixed(2));
+        setAvgRating(average);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, [prod])
+
   function handleProduct (event) {
     console.log('clicked on card');
     console.log(event.target.alt);
@@ -42,10 +64,10 @@ const App = () => {
 
   return (
     <div>
-      <Overview prod={prod}/>
+      <Overview prod={prod} avgRating={avgRating}/>
       <Comparisons prod={prod} handleProduct={handleProduct}/>
       <QandA prod={prod}/>
-      <RandR prod={prod}/>
+      <RandR prod={prod} avgRating={avgRating}/>
     </div>
     );
 }
