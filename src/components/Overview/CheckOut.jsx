@@ -92,7 +92,7 @@ var CheckOut = (props) => {
       </QuantitySelect>
       </div>
       <Row>
-      <AddToCart>ADD TO BAG<img src={plus} style={{'margin-left': '60px'}}></img></AddToCart>
+      <AddToCart>ADD TO BAG<img src={plus} style={{'marginLeft': '60px'}}></img></AddToCart>
       <StarButton></StarButton>
       </Row>
     </OuterDiv>

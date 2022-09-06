@@ -37,7 +37,7 @@ const AddCard = styled.div`
   line-height: 170px;
 `
 
-const Addtext = styled.h3`
+const Addtext = styled.p`
 margin-block-start: 0em;
 `
 
@@ -122,7 +122,6 @@ function OutfitList (props) {
 
   function scrollR () {
     const element = document.getElementById("OutfitList");
-    console.log(element);
     if (element.scrollLeft === 0) {
       element.scrollLeft += 350;
       setHideR(true);

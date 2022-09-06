@@ -12,7 +12,6 @@ const Card = styled.div`
   position: relative;
   padding-bottom: 2%;
   margin-bottom: 15px;
-  margin-left: 0px;;
   margin-right: 5%;
   margin-top: 0px;
 `
