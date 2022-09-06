@@ -49,10 +49,10 @@ justify-content: flex-start;
 
 const ProdDescr = styled.div`
 padding: 10px;
-padding-left: 30px;
+padding-left: 120px;
 margin-top: 90px;
 margin-bottom: 30px;
-width: 60%;
+width: 55%;
 `;
 
 const ProdChar = styled.div`

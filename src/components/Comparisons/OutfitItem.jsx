@@ -28,7 +28,7 @@ font-size: 13px;
 const Img = styled.img`
   width:180px;
   height:220px;
-  opacity: 0.75;
+  opacity: 0.9;
 `
 const Button = styled.button`
   background: transparent url(${xbutton}) no-repeat top;
