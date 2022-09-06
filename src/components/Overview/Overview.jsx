@@ -18,7 +18,7 @@ font-family: Arial, Helvetica, sans-serif;
 `
 
 const FlexContainer = styled.div`
-background-color: #d4b37711;
+/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin-bottom: 0;
@@ -40,7 +40,7 @@ padding-left: 40px;
 `;
 
 const ProdDet = styled.div`
-background-color: #d4b37711;
+/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin: 0px;
