@@ -105,7 +105,7 @@ body {
   max-width: 25%;
   max-height: 40%;
   padding: 10px;
-  z-index: 9990;
+  z-index: 15;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
@@ -113,7 +113,7 @@ body {
   max-width: 25%;
   max-height: 40%;
   padding: 10px;
-  z-index: 9990;
+  z-index: 15;
   border-bottom: #302f2f 3px solid;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }

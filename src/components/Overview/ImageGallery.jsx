@@ -19,7 +19,7 @@ height: 650px;
 display: flex;
 justify-content: center;
 align-items: center;
-z-index: 9998;
+z-index: 15;
 overflow: hidden;
 `
 
@@ -60,7 +60,7 @@ max-width: 635px;
 max-height: 650px;
 /* margin-right: 30px; */
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-z-index:9999;
+z-index:16;
 /* &:hover {
   transform: scale(1.5);
   } */
@@ -82,7 +82,7 @@ top: 140px;
 left: 60px;
 font-size: 50px;
 position: absolute;
-z-index: 9999;
+z-index: 15;
 `
 
 const LeftArrow = styled.button`
@@ -91,7 +91,7 @@ position: relative;
 left: -58%;
 font-size: 40px;
 border: none;
-z-index: 9990;
+z-index: 15;
 `
 const RightArrow = styled(LeftArrow)`
 background: transparent;
