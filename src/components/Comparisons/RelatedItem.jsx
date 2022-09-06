@@ -30,10 +30,13 @@ const Text = styled.small`
   color: rgb(57, 57, 57);
   padding: 5%;
 `
+const SmallText = styled(Text)`
+font-size: 13px;
+`
 const Img = styled.img`
   width:180px;
   height:220px;
-  opacity: 0.75;
+  opacity: 0.9;
 `
 function RelatedItem (props) {
 
@@ -109,16 +112,18 @@ function RelatedItem (props) {
     setStarClick(false);
   }
 
+  // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
+
   return (
       <Card onClick={props.handleProduct}>
         <ComparisonsModal show={starClick} handleClose={hideModal} item={props.item} prod={props.prod}>
         </ComparisonsModal>
         <Img src={image} alt={props.item.id}/><br></br>
         <Button onClick={showModal}></Button>
-        <Text>{props.item.category.toUpperCase()}</Text>
+        <SmallText>{props.item.category.toUpperCase()}</SmallText>
         <br></br>
         <Text data-testid="relatedItemName">{props.item.name}</Text><br></br>
-        <Text>${props.item.default_price}</Text><br></br>
+        <SmallText>${props.item.default_price}</SmallText><br></br>
         <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )

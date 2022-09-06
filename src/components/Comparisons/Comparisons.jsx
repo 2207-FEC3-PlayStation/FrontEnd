@@ -97,7 +97,7 @@ function Comparisons (props) {
   }, [related])
 
   // checks if related item is out of stock. If it is, delete that item from related products
-  // works but if you click on too many items it'll max out the requests to the API... don't click on too many related products in a short time fram.
+  // works but if you click on too many items it'll max out the requests to the API... don't click on too many related products in a short time frame.
   useEffect(() => {
     if (products) {
       related.forEach((item) => {
@@ -122,10 +122,6 @@ function Comparisons (props) {
   // clicking the card will navigate to the product detail page
 
   // sale prices should be in red with original crossed out - I haven't seen any sale prices in the API request?
-
-  // star rating. if no reviews - should be hidden.
-
-  // future enhancement - on hover, load other style images in a scrollable carousel. Clicking on a thumbnail should change the preview image to display the image clicked. The selection of a different image should persist even after no longer hovering over this card. Clicking on the preview image, and anywhere on the card other than a thumbnail image carousel, will continue to navigate the user to that product’s detail page.
 
   function scrollL () {
     const element = document.getElementById("RelatedListCarousel");
@@ -155,6 +151,12 @@ function Comparisons (props) {
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
         <OutfitList prod={props.prod}/>
+        {/* {clickedR && (products.length > 4) && (
+          <LeftButton2 onClick={() => scrollL()}>‹</LeftButton2>
+        )}
+        {!hideR && (products.length > 4) && (
+          <RightButton2 onClick={() => scrollR()}>›</RightButton2>
+        )} */}
       </Container>
     )
 }

@@ -17,18 +17,17 @@ const Modal = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
-  margin-bottom: auto
+  margin-bottom: auto;
 `
 
 const ModalImg = styled.img`
   position: absolute;
   display: flex;
   flex-basis: 100%
-  flex-basis: 100%;
   justify-content: center;
   z-index: 9998;
   max-height: 100%;
-  max-width: 100%
+  max-width: 100%;
 `
 const Close = styled.button`
   position: absolute;

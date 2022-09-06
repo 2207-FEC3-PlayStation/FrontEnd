@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
+import AddReview from './Reviews/AddReview.jsx';
 import server from '../../serverRequests.js';
+
 
 function Reviews({product_id, count}) {
 
@@ -8,7 +10,8 @@ function Reviews({product_id, count}) {
   const [showReviews, setShowReviews] = useState(2);
   const [sortedBy, setSortedBy] = useState({relevant: 'relevance'});
   const [reviews, setReviews] = useState([]);
-  const [showMoreReviews, setShowMoreReviews] = useState('inline-block')
+  const [showMoreReviews, setShowMoreReviews] = useState('inline-block');
+  const [showAddReview, setShowAddReview] = useState(false);
 
   //--------useEffect methods--------
 
@@ -52,8 +55,19 @@ function Reviews({product_id, count}) {
     setShowReviews(showReviews + 2);
   }
 
+  let openAddReview = (e) => {
+    e.preventDefault();
+    setShowAddReview(true);
+  }
+
+  let closeModal = (e) => {
+    e.preventDefault();
+    setShowAddReview(false);
+  }
+
   return (
     <div style={{width: '60%', display: 'inline-block', verticalAlign: 'top'}}>
+      <AddReview display={showAddReview} product_id={product_id} close={closeModal}></AddReview>
       <h3 style={{display: 'inline-block'}}>{totalReviews} reviews, sorted by </h3>
 
       <label style={{display: 'none'}}>Sort on</label>
@@ -67,7 +81,7 @@ function Reviews({product_id, count}) {
 
       <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px'}}>More Reviews</button>
 
-      <button  style={{display: 'inline-block', margin: '10px'}}>Add a Review</button>
+      <button style={{display: 'inline-block', margin: '10px'}} onClick={openAddReview}>Add a Review</button>
     </div>
   )
 }

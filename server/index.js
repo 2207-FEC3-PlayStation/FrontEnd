@@ -38,8 +38,8 @@ app.get('/qa/questions', (req, res) => {models.QandA.getQuestions(req, res)});
 
 app.get('/qa/answers', (req, res) => {models.QandA.getAnswers(req, res)});
 
+app.post('qa/questions', (req, res) => {models.QandA.addQuestion(req, res)});
 
-app.post('qa/questions', (req, res) => {models.QandA.addQuestion});
 
 app.post('/qa/answers', (req, res) => {models.QandA.addAnswer(req, res)})
 
