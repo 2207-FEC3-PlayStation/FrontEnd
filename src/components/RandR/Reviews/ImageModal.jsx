@@ -24,7 +24,6 @@ const ModalImg = styled.img`
   position: absolute;
   display: flex;
   flex-basis: 100%
-  flex-basis: 100%;
   justify-content: center;
   z-index: 9998;
   max-height: 100%;
