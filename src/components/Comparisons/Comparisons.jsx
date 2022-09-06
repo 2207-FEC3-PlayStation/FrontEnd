@@ -35,13 +35,7 @@ const RightButton = styled(LeftButton)`
   background-image: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%);
   left: 88%;
 `
-// const LeftButton2 = styled(LeftButton)`
-//   top: 59%;
-//   left: 0%;
-// `
-// const RightButton2 = styled(LeftButton2)`
-//   left: 88%;
-// `
+
 function Comparisons (props) {
 
   const [hideR, setHideR] = useState(false);

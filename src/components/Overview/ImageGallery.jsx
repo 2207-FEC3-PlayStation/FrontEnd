@@ -5,12 +5,11 @@ import Thumbnail from './Thumbnail.jsx';
 
 const Carousel = styled.div`
 background-color: #d9d5d5;
-width: 770px;
-height: 600px;
+width: 710px;
+height: 650px;
 display: flex;
 justify-content: flex-end;
 align-items: center;
-margin-right: 50px;
 `
 
 const Thumbnails = styled.div`
@@ -39,7 +38,7 @@ display: block;
 position: absolute;
 max-width: 420px;
 max-height: 540px;
-margin-right: 125px;;
+margin-right: 105px;;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
@@ -65,7 +64,7 @@ z-index: 9999;
 const LeftArrow = styled.button`
 background: transparent;
 position: relative;
-left: -66%;
+left: -61%;
 font-size: 40px;
 border: none;
 `

@@ -22,20 +22,20 @@ display: flex;
 flex-direction: row;
 margin-bottom: 0;
 justify-content: flex-start;
-
+width: 1200px;
 `;
 
 const ProdInfo = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: flex-start;
+justify-content: flex-end;
 margin-right: 0px;
 margin-top: 30px;
-margin-left: 70px;
 position: absolute;
 left: 750px;
 word-wrap: break-word;
-max-width: 400px;
+width: 280px;
+padding-left: 30px;
 `;
 
 const ProdDet = styled.div`
@@ -43,21 +43,21 @@ background-color: #d4b37711;
 display: flex;
 flex-direction: row;
 margin: 0px;
-padding-top: 20px;
+/* padding-top: 40px; */
 justify-content: flex-start;
 `;
 
 const ProdDescr = styled.div`
 padding: 10px;
 padding-left: 30px;
-margin-top: 30px;
+margin-top: 50px;
 margin-bottom: 30px;
 width: 60%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 30px;
+margin-top: 50px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
@@ -72,6 +72,7 @@ const Styles = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
+max-width: 290px;
 `
 
 
