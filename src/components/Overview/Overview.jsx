@@ -82,6 +82,7 @@ function Overview (props) {
   const [finished, setFinished] = useState(false);
   const [styles, setStyles] = useState(false);
   const [currentStyle, setCurrentStyle] = useState({});
+  const [counter, setCounter] = useState(1);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -125,12 +126,30 @@ function Overview (props) {
     setCurrentStyle(style);
   }
 
+  function leftClick() {
+    console.log(counter);
+    if (counter < 1) {
+      setCounter(counter => defaultPhotos.length)
+    }
+    setCounter(counter => counter - 1);
+    setImage(defaultPhotos[counter].url);
+  }
+
+  function rightClick() {
+    console.log(counter);
+    if (counter > defaultPhotos.length-2) {
+      setCounter(-1);
+    }
+    setCounter(counter => counter + 1);
+    setImage(defaultPhotos[counter].url);
+  }
+
   return (
   <Top>
     <Title />
     <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating}/>}
         {styles && currentStyle &&

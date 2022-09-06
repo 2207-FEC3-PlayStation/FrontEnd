@@ -67,6 +67,7 @@ position: relative;
 left: -63%;
 font-size: 40px;
 border: none;
+z-index: 9990;
 `
 const RightArrow = styled(LeftArrow)`
 background: transparent;
@@ -89,7 +90,6 @@ function ImageGallery (props) {
 
   function scrollDown () {
     const element = document.getElementById("ThumbnailList");
-    console.log(element.scrollTop);
     if (element.scrollTop === 0) {
       element.scrollBy(0, 600);
       setHideR(true);
@@ -102,11 +102,11 @@ function ImageGallery (props) {
   if (props.photos) return (
     <React.Fragment>
       <Carousel>
-      <LeftArrow>←</LeftArrow>
+      <LeftArrow onClick={props.leftClick}>←</LeftArrow>
       <MainImage
         src={props.image}>
       </MainImage>
-      <RightArrow>→</RightArrow>
+      <RightArrow onClick={props.rightClick}>→</RightArrow>
       </Carousel>
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">
