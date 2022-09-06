@@ -49,7 +49,10 @@ var CheckOut = (props) => {
       <div>
       <SizeSelect>
         <SizeOptions>SELECT SIZE</SizeOptions>
-        <SizeOptions>Small</SizeOptions>
+        {props.sizes.map((size, index) => {
+          return <SizeOptions key={index}>{size}</SizeOptions>
+        })}
+
       </SizeSelect>
       <QuantitySelect>
         <QuantityOptions>QTY</QuantityOptions>
