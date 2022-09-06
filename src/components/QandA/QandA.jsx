@@ -184,7 +184,7 @@ function QandA({ prod }) {
     setQuestionCount(questionCount + 1);
   }
 
-
+  // for debugging purposes >.<
   if (0 === 0) {
     return (
     <>
@@ -225,9 +225,7 @@ function QandA({ prod }) {
               </div>
             )
           })}
-
         </Questions><br></br>
-
         <button id="load" onClick={loadMoreAnswers}>
           <b>LOAD MORE ANSWERS</b></button><br></br><br></br>
         <Button onClick={moreAnsweredQuestions}>
@@ -240,8 +238,6 @@ function QandA({ prod }) {
     </>
     )
   }
-
-
 };
 
 export default QandA;
