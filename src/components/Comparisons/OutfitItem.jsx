@@ -21,6 +21,10 @@ const Text = styled.small`
   padding: 5%;
 `
 
+const SmallText = styled(Text)`
+font-size: 13px;
+`
+
 const Img = styled.img`
   width:180px;
   height:220px;
@@ -103,9 +107,9 @@ function OutfitItem (props) {
       <Card>
       <Img src={image}></Img><br></br>
       <Button onClick={props.handleDelete} value={props.item} name={props.item.name}></Button>
-      <Text>{props.item.category.toUpperCase()}</Text><br></br>
+      <SmallText>{props.item.category.toUpperCase()}</SmallText><br></br>
       <Text>{props.item.name}</Text><br></br>
-      <Text>{props.item.default_price}</Text><br></br>
+      <SmallText>${props.item.default_price}</SmallText><br></br>
       <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )

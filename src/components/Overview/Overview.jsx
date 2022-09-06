@@ -14,6 +14,7 @@ max-width: 1200;
 const Announce = styled.div`
 text-align: center;
 padding: 20px;
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const FlexContainer = styled.div`
@@ -43,7 +44,6 @@ background-color: #d4b37711;
 display: flex;
 flex-direction: row;
 margin: 0px;
-/* padding-top: 40px; */
 justify-content: flex-start;
 `;
 
@@ -65,14 +65,15 @@ border-left: 3px solid grey;
 
 const StyleSelected = styled.div`
 margin-top: 15px;
-margin-bottom: 15px;
+margin-bottom: 13px;
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const Styles = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-max-width: 290px;
+max-width: 360px;
 `
 
 

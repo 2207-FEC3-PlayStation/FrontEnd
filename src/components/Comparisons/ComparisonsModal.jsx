@@ -53,7 +53,7 @@ const TR = styled.td`
 const Span = styled.span`
 `
 const CL = styled.div`
-height: 61px;
+height: 64px;
 /* z-index: 9998; */
 `
 const Column = styled.div`
@@ -62,7 +62,7 @@ justify-content: space-between;
 flex-direction: column;
 position: absolute;
 margin-left: 42px;
-margin-top: 43px;
+margin-top: 47px;
 `
 const Column2 = styled.div`
 display: flex;
@@ -70,7 +70,7 @@ justify-content: space-between;
 flex-direction: column;
 position: absolute;
 margin-left: 490px;
-margin-top: 43px;
+margin-top: 47px;
 `
 
 const Table = styled.table`

@@ -15,9 +15,11 @@ padding: 20px 20px;
 margin-right: 10px;
 border:none;
 width: 213px;
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const SizeOptions = styled.option`
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const QuantitySelect = styled.select`
@@ -26,9 +28,11 @@ color: white;
 padding: 20px 20px;
 border:none;
 margin-left: 10px;
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const QuantityOptions = styled.option`
+font-family: Arial, Helvetica, sans-serif;
 `
 
 const AddToCart = styled.button`
@@ -39,6 +43,7 @@ background-color: #207420;
 color: white;
 border: none;
 margin-right: 10px;
+font-family: Arial, Helvetica, sans-serif;
 &:hover {
   background-color: #2f8d2f;
   }

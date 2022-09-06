@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StarRating from '../RandR/RatingBreakdown/StarRating.jsx';
 
 const ProductName = styled.h2`
-font-family: "Gill Sans", sans-serif;
+font-family: Arial, Helvetica, sans-serif;
 font-size: 40px;
 margin-bottom: 0px;
 margin-top: 0px;
@@ -16,23 +16,23 @@ flex-direction: row;
 `
 
 const Category = styled.p`
-font-family: "Gill Sans", sans-serif;
-font-size: 20px;
-margin-bottom: 0px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+margin-bottom: 3px;
 `
 
 const Reviews = styled.p`
-font-family: "Gill Sans", sans-serif;
-font-size: 15px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 13px;
 margin: 0px;
-padding-left: 15px;
+padding-left: 10px;
 `
 
 const Price = styled.p`
-font-family: "Gill Sans", sans-serif;
-font-size: 25px;
-margin-top: 10px;
-margin-bottom: 10px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+margin-top: 20px;
+margin-bottom: 20px;
 `
 
 

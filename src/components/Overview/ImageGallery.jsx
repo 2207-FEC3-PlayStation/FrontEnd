@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
 import Thumbnail from './Thumbnail.jsx';
+import fullscreen from '../../assets/fullscreen.png';
 
 const Carousel = styled.div`
 background-color: #d9d5d5;
@@ -43,7 +44,7 @@ filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
 const DownButton = styled.button`
-left: 55px;
+left: 60px;
 top: 640px;
 position: absolute;
 background: transparent;
@@ -55,7 +56,7 @@ padding: 0px;
 
 const UpButton = styled(DownButton)`
 top: 140px;
-left: 55px;
+left: 60px;
 font-size: 50px;
 position: absolute;
 z-index: 9999;
@@ -64,7 +65,7 @@ z-index: 9999;
 const LeftArrow = styled.button`
 background: transparent;
 position: relative;
-left: -63%;
+left: -58%;
 font-size: 40px;
 border: none;
 z-index: 9990;
@@ -72,7 +73,16 @@ z-index: 9990;
 const RightArrow = styled(LeftArrow)`
 background: transparent;
 position: relative;
-left: -4%;
+left: -1%;
+`
+const Button = styled.button`
+  background: transparent url(${fullscreen}) no-repeat top;
+  height: 30px;
+  width: 30px;
+  border: none;
+  position: relative;
+  top: -307px;;
+  right: 2px;
 `
 
 function ImageGallery (props) {
@@ -107,6 +117,7 @@ function ImageGallery (props) {
         src={props.image}>
       </MainImage>
       <RightArrow onClick={props.rightClick}>→</RightArrow>
+      <Button></Button>
       </Carousel>
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">

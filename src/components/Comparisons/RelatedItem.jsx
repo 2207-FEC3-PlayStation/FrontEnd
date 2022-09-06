@@ -30,6 +30,9 @@ const Text = styled.small`
   color: rgb(57, 57, 57);
   padding: 5%;
 `
+const SmallText = styled(Text)`
+font-size: 13px;
+`
 const Img = styled.img`
   width:180px;
   height:220px;
@@ -117,10 +120,10 @@ function RelatedItem (props) {
         </ComparisonsModal>
         <Img src={image} alt={props.item.id}/><br></br>
         <Button onClick={showModal}></Button>
-        <Text>{props.item.category.toUpperCase()}</Text>
+        <SmallText>{props.item.category.toUpperCase()}</SmallText>
         <br></br>
         <Text data-testid="relatedItemName">{props.item.name}</Text><br></br>
-        <Text>${props.item.default_price}</Text><br></br>
+        <SmallText>${props.item.default_price}</SmallText><br></br>
         <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )
