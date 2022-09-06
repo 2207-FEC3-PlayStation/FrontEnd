@@ -12,6 +12,16 @@ display: flex;
 justify-content: flex-end;
 align-items: center;
 `
+const Carousel2 = styled.div`
+background-color: #d9d5d5;
+width: 1200px;
+height: 650px;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9998;
+overflow: hidden;
+`
 
 const Thumbnails = styled.div`
 display: flex;
@@ -41,6 +51,19 @@ width: 410px;
 max-height: 540px;
 margin-right: 98px;;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+`;
+
+const MainImage2 = styled.img`
+display: block;
+position: absolute;
+max-width: 635px;
+max-height: 650px;
+/* margin-right: 30px; */
+filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+z-index:9999;
+/* &:hover {
+  transform: scale(1.5);
+  } */
 `;
 
 const DownButton = styled.button`
@@ -89,6 +112,7 @@ function ImageGallery (props) {
 
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
+  const [extendedView, setExtendedView] = useState(false);
 
   // add buttons to scroll through thumbnails
   function scrollUp () {
@@ -109,6 +133,15 @@ function ImageGallery (props) {
     }
   }
 
+  function extendView () {
+    if (extendedView === false) {
+      setExtendedView(true);
+    } else {
+      setExtendedView(false);
+    }
+
+  }
+
   if (props.photos) return (
     <React.Fragment>
       <Carousel>
@@ -117,7 +150,12 @@ function ImageGallery (props) {
         src={props.image}>
       </MainImage>
       <RightArrow onClick={props.rightClick}>→</RightArrow>
-      <Button></Button>
+      <Button onClick={extendView}></Button>
+      {extendedView &&
+      <Carousel2>
+      <MainImage2  src={props.image}></MainImage2>
+      </Carousel2>
+      }
       </Carousel>
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">

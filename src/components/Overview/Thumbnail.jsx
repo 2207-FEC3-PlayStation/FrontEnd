@@ -6,7 +6,7 @@ const Thumbnail1 = styled.img`
 max-width: 25%;
 max-height: 40%;
 margin: 10px;
-z-index: 9991;
+z-index: 9990;
 border: #302f2f 1px solid;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
