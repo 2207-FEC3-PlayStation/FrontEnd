@@ -87,3 +87,16 @@ body {
   content: "\f005";
   color: #f8ce0b;
 }
+
+.check-circle {
+  visibility: hidden;
+  position: absolute;
+  left: 50px;
+  z-index: 1;
+  background-color: white;
+  border-radius: 50%
+}
+
+.active {
+  visibility: visible;
+}

@@ -86,6 +86,8 @@ function Overview (props) {
   const [counter, setCounter] = useState(1);
   const [sizes, setSizes] = useState([]);
   const [maxQuantity, setmaxQuantity] = useState([]);
+  const [checked, setChecked] = useState(true);
+  const [checkedID, setCheckedID] = useState();
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -97,7 +99,6 @@ function Overview (props) {
         .then((data)=> {
           var results = data.data.results;
           setStyles(results);
-          setCurrentStyle(results[0]);
           var array = [];
           for (var sku in results[0].skus) {
             array.push(results[0].skus[sku].size)
@@ -110,6 +111,7 @@ function Overview (props) {
               mainPhoto = results[i].photos[0].url;
               setImage(mainPhoto);
               setdefaultPhotos(results[i].photos);
+              setCurrentStyle(results[i]);
             }
           }
           if (mainPhoto === '') {
@@ -117,6 +119,7 @@ function Overview (props) {
             setImage(mainPhoto);
             setdefaultPhotos(data.data.results[0].photos);
             setFinished(true);
+            setCurrentStyle(results[0]);
           }
         })
         .catch((err) => {
@@ -124,6 +127,10 @@ function Overview (props) {
         })
     }
   }, [props.prod, finished])
+
+  useEffect(() => {
+    setCheckedID(currentStyle.style_id);
+  }, [currentStyle])
 
   function handleImage(e) {
     setImage(e.target.src);
@@ -137,6 +144,9 @@ function Overview (props) {
     var array = [];
     for (var sku in style.skus) {
         array.push(style.skus[sku].size)
+    }
+    if (array.length === 0) {
+
     }
     setSizes(array);
     var max = Object.values(style.skus)[0].quantity;
@@ -164,6 +174,11 @@ function Overview (props) {
     setImage(defaultPhotos[counter].url);
   }
 
+  function handleCheck(e) {
+    var style = JSON.parse(e.currentTarget.value);
+    setCheckedID(style.style_id)
+  }
+
   return (
   <Top>
     <Title />
@@ -176,7 +191,7 @@ function Overview (props) {
         <React.Fragment>
         <StyleSelected><strong>STYLE > </strong>{currentStyle.name}</StyleSelected>
         <Styles>
-        {styles.map((style, index) => (<StyleSelect currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle}/>))}
+        {styles.map((style, index) => (<StyleSelect checked={checked} handleCheck={handleCheck} currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle} prod={props.prod} checkedID={style.style_id}/>))}
         </Styles>
         </React.Fragment>}
         <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity}/>
