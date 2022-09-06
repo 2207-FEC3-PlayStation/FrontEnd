@@ -40,6 +40,7 @@ app.get('/qa/answers', (req, res) => {models.QandA.getAnswers(req, res)});
 
 app.post('qa/questions', (req, res) => {models.QandA.addQuestion(req, res)});
 
+
 app.post('/qa/answers', (req, res) => {models.QandA.addAnswer(req, res)})
 
 app.put('/qa/questions/helpful'), (req, res) => {models.QandA.helpful('/questions', req, res)};
