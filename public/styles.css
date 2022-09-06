@@ -1,8 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   margin-left: auto;
   margin-right: auto;
-  width: 1000px;
+  width: 1200px;
   position: relative;
+  font-family: Arial, Helvetica, sans-serif
 }
 
 #root {
