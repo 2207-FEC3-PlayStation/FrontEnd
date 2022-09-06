@@ -5,7 +5,7 @@ import Thumbnail from './Thumbnail.jsx';
 
 const Carousel = styled.div`
 background-color: #d9d5d5;
-width: 710px;
+width: 760px;
 height: 650px;
 display: flex;
 justify-content: flex-end;
@@ -23,7 +23,7 @@ display: flex;
 flex-direction: column;
 align-items: left;
 margin-bottom: 0;
-margin-left: 10px;
+margin-left: 40px;
 margin-top: 40px;
 height: 500px;
 overflow-y: hidden;
@@ -36,14 +36,14 @@ scroll-behavior: smooth;
 const MainImage = styled.img`
 display: block;
 position: absolute;
-max-width: 420px;
+width: 410px;
 max-height: 540px;
-margin-right: 105px;;
+margin-right: 98px;;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
 const DownButton = styled.button`
-left: 25px;
+left: 55px;
 top: 640px;
 position: absolute;
 background: transparent;
@@ -55,7 +55,7 @@ padding: 0px;
 
 const UpButton = styled(DownButton)`
 top: 140px;
-left: 30px;
+left: 55px;
 font-size: 50px;
 position: absolute;
 z-index: 9999;
@@ -64,7 +64,7 @@ z-index: 9999;
 const LeftArrow = styled.button`
 background: transparent;
 position: relative;
-left: -61%;
+left: -63%;
 font-size: 40px;
 border: none;
 `

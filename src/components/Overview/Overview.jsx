@@ -34,8 +34,8 @@ margin-top: 30px;
 position: absolute;
 left: 750px;
 word-wrap: break-word;
-width: 280px;
-padding-left: 30px;
+width: 420px;
+padding-left: 40px;
 `;
 
 const ProdDet = styled.div`
@@ -50,14 +50,14 @@ justify-content: flex-start;
 const ProdDescr = styled.div`
 padding: 10px;
 padding-left: 30px;
-margin-top: 50px;
+margin-top: 90px;
 margin-bottom: 30px;
 width: 60%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 50px;
+margin-top: 90px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
@@ -122,6 +122,7 @@ function Overview (props) {
     var style = JSON.parse(e.currentTarget.value)
     setImage(style.photos[0].url);
     setdefaultPhotos(style.photos);
+    setCurrentStyle(style);
   }
 
   return (
