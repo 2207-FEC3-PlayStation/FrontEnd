@@ -12,7 +12,7 @@ const Modal = styled.div`
   flex-direction: row;
   align-items: left;
   justify-content: center;
-  z-index: 9997;
+  z-index: 80;
   width: 100%;
   height: 100%;
 `
@@ -24,7 +24,7 @@ const ModalContent = styled.div`
   top: 25%;
   left: 15%;
   padding: 10px;
-  z-index: 9998;
+  z-index: 81;
   height: 350px;
   width: 600px;
   overflow-y: auto;
@@ -54,7 +54,6 @@ const Span = styled.span`
 `
 const CL = styled.div`
 height: 64px;
-/* z-index: 9998; */
 `
 const Column = styled.div`
 display: flex;

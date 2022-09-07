@@ -7,7 +7,7 @@ import server from '../../serverRequests.js';
 
 
 const Card = styled.div`
-  border: 1px solid gray;
+  border: #494848 2px solid;
   color: black;
   font-size: 20px;
   margin: 3%;
