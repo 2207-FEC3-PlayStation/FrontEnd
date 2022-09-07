@@ -38,41 +38,56 @@ const ModalInput = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
 `
-const SubmitButton = styled.div`
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
   margin: 10px;
 `
 
 const AddedImage = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center
+  align-items: center;
+  height: 150px;
+`
+
+const Thumbnail = styled.div`
+  height: 10%;
+  width: auto
 `
 
 function AddImg ({display, displayAddImage, addPhotos}) {
 
-  const [showFields, setShowFields] = useState(['enterImg'])
+  const [addedImages, setAddedImages] = useState(['enterImg'])
 
   let updatePhotos = (e) => {
     e.preventDefault();
     let newUrl = e.target.previousElementSibling.value;
-    let newFields = [...showFields];
-    newFields.splice(showFields.length - 1, 0, newUrl);
-    setShowFields(newFields);
+    let newFields = [...addedImages];
+    newFields.splice(addedImages.length - 1, 0, newUrl);
+    setAddedImages(newFields);
+    e.target.previousElementSibling.value = '';
   }
 
   let submit = (e) => {
     e.preventDefault();
-    addPhotos(showFields.slice(0, showFields.length - 1))
+    addPhotos(addedImages.slice(0, addedImages.length - 1))
     displayAddImage();
   }
 
   let deleteEntry = (e) => {
     e.preventDefault();
-    let thisUrl = e.target.previousSibling.firstChild.data;
-    let index = thisUrl.indexOf(showFields);
-    let newFields = [...showFields];
-    newFields.splice(showFields[index], 1);
-    setShowFields(newFields);
+    let thisUrl = e.target.previousSibling.src;
+    let index = addedImages.indexOf(thisUrl);
+    let newFields = [...addedImages];
+    newFields.splice(addedImages[index], 1);
+    setAddedImages(newFields);
+  }
+
+  let close = (e) => {
+    e.preventDefault();
+    setAddedImages(['enterImg'])
+    displayAddImage();
   }
 
   if (!display) {
@@ -82,15 +97,15 @@ function AddImg ({display, displayAddImage, addPhotos}) {
     <Modal>
       <ModalInput>
         <h2>Add up to five photos</h2>
-        {showFields.map((imageField) => {
+        {addedImages.map((imageField) => {
           if (imageField !== 'enterImg') {
             return (
               <AddedImage key={imageField}>
-                <p>{imageField}</p>
-                <button style={{height: '50%', marginLeft: '5px'}} onClick={deleteEntry}>Delete</button>
+                <img src={imageField} style={{height: '100px', width: 'auto'}}></img>
+                <button style={{height: '20%', marginLeft: '5px'}} onClick={deleteEntry}>Delete</button>
               </AddedImage>
             )
-          } else if (showFields.length === 6) {
+          } else if (addedImages.length === 6) {
             return null;
           } else {
             return (
@@ -102,9 +117,10 @@ function AddImg ({display, displayAddImage, addPhotos}) {
             )
           }
         })}
-        <SubmitButton>
-          <button  onClick={submit}>Confirm</button>
-        </SubmitButton>
+        <Buttons>
+          <button style={{marginRight: '10px'}}onClick={submit}>Confirm</button>
+          <button onClick={close}>Cancel</button>
+        </Buttons>
       </ModalInput>
     </Modal>
   )

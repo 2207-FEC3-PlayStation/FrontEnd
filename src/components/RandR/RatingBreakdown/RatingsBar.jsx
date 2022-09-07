@@ -70,7 +70,7 @@ function RatingsBar({update, starCount, totalReviews, thisRating}) {
   }
 
   return (
-    <RatingsContainer onHover={hoveredRating} onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
+    <RatingsContainer onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
       <StarLabel>{starCount + '-stars'}</StarLabel>
       <BarHolder>
         <BarSpacer/>

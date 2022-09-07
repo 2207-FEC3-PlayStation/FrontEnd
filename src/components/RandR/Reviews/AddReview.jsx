@@ -297,8 +297,8 @@ function AddReview({ display, product_id, close }) {
             <input type='email' className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' onChange={updateEmail} required></input>
             <SubText>For authentication reasons, you will not be emailed</SubText>
             <ButtonHolder>
-              <button style={{ display: 'inline-block' }} >Submit</button>
-              <button style={{ display: 'inline-block' }} onClick={close}>Cancel</button>
+              <button style={{marginRight: '10px'}} >Submit</button>
+              <button onClick={close}>Cancel</button>
             </ButtonHolder>
           </form>
         </ModalInput>
