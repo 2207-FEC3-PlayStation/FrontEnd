@@ -143,16 +143,14 @@ body {
   width: 410px;
   max-height: 540px;
   margin-right: 98px;
-  cursor: -moz-zoom-in;
-  cursor: -webkit-zoom-in;
   cursor: zoom-in;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
   z-index: 9998;
 }
 
-.main-image:hover {
+/* .main-image:hover {
     transform:scale(1.5)
-  }
+  } */
 
 .main-imageExtended {
   display: block;
@@ -160,14 +158,12 @@ body {
   max-width: 810px;
   max-height: 620px;
   padding-right: 128px;
-  cursor: -moz-zoom-in;
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in;
+  cursor: crosshair;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
 .main-imageExtended:hover {
-  transform:scale(1.5)
+  transform:scale(2.5)
 }
 
 .wrapper {

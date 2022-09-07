@@ -174,7 +174,7 @@ function ImageGallery (props) {
       <img className={
         extendedView ? 'main-imageExtended' : 'main-image'
       }
-        src={props.image}>
+        src={props.image} onClick={extendView}>
       </img>
       </div>
       {/* </Container> */}
