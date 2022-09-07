@@ -49,7 +49,10 @@ display: block;
 position: absolute;
 width: 410px;
 max-height: 540px;
-margin-right: 98px;;
+margin-right: 98px;
+cursor: -moz-zoom-in;
+cursor: -webkit-zoom-in;
+cursor: zoom-in;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 `;
 
@@ -145,7 +148,7 @@ function ImageGallery (props) {
   if (props.photos) return (
     <React.Fragment>
       <Carousel>
-      <LeftArrow onClick={props.leftClick}>←</LeftArrow>
+      {props.counter>1 &&<LeftArrow onClick={props.leftClick}>←</LeftArrow>}
       <MainImage
         src={props.image}>
       </MainImage>

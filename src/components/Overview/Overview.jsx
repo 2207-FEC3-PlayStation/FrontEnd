@@ -141,7 +141,6 @@ function Overview (props) {
   }
 
   function changeStyle(e) {
-    console.log('changeS: ', e.currentTarget.value)
     var style = JSON.parse(e.currentTarget.value)
     setImage(style.photos[0].url);
     setdefaultPhotos(style.photos);
@@ -161,10 +160,8 @@ function Overview (props) {
   // need to finish this function
   function changeQuantity(e) {
     setQuantity(1);
-    console.log('changeQ: ', e.currentTarget.value);
     var size = e.currentTarget.value;
     var max = 0;
-    console.log(skus);
     for (var sku in skus) {
       if(skus[sku]['size'] === size) {
         max = skus[sku].quantity
@@ -202,9 +199,9 @@ function Overview (props) {
     <Title />
     <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter}/>
       <ProdInfo>
-        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating}/>}
+        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews}/>}
         {styles && currentStyle &&
         <React.Fragment>
         <StyleSelected><strong>STYLE > </strong>{currentStyle.name}</StyleSelected>
