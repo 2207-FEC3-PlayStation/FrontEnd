@@ -36,7 +36,6 @@ const Tile = styled.div`
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
-  position: absolute;
   top: 86%;
 `
 
