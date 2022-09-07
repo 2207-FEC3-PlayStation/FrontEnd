@@ -6,17 +6,17 @@ const CharsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 50px;
+  max-height: 100px;
   box-sizing: border-box;
   margin-top: 10px;
 `
 
 const CharLabel = styled.h6`
   display: flex;
-  font-size: 10px;
+  font-size: 12px;
   flex-basis: 10%
   box-sizing: border-box;
-  margin: 5px 0px 12px 0px
+  margin: 5px 0px 0px 0px
 `
 const SliderHolder = styled.div`
   display: flex;
@@ -37,14 +37,12 @@ const OutterBar = styled.div`
   background: gray;
   display: flex;
   justify-content: flex-start;
-  flex-basis: 15%;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  flex-basis: 10px
 `
 
 const Indicator = styled.div`
-  position: absolute;
-  top: 0;
-  display: flex;
-  z-index: 10;
   box-sizing: border-box;
 `
 const Endpoints = styled.div`
@@ -53,17 +51,19 @@ const Endpoints = styled.div`
   justify-content: space-between;
   box-sizing: border-box;
   flex-basis: 12px;
+
 `
 const CharEndpoint = styled.h6`
   box-sizing: border-box;
   height: 12px;
-  margin-top: 5px
+  margin-top: 5px;
+  margin-bottom: 10px;
 `
 
 function CharsBar({char, thisRating}) {
 
 const [endpoints, setEndpoints] = useState([]);
-const [ratingWidth, setRatingWidth] =useState(0);
+const [ratingWidth, setRatingWidth] = useState(0);
 
 useEffect(() => {
   if (char) {
@@ -89,10 +89,8 @@ useEffect(() => {
       <CharLabel>{char}</CharLabel>
       <SliderHolder>
         <SubHolder>
+          <Indicator className='checkMark' style={{left: `${ratingWidth}`}}></Indicator>
           <OutterBar>
-            <div className='indicator'  style={{left: ratingWidth}}></div>
-
-            {/* <Indicator className='indicator' style={{left: ratingWidth}}></Indicator> */}
           </OutterBar>
           <Endpoints>
             {endpoints.map((endpoint) => {

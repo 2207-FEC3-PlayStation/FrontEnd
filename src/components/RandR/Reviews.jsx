@@ -36,7 +36,7 @@ const Tile = styled.div`
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
-  top: 86%;
+  margin-top: 20px
 `
 
 function Reviews({product_id, count, ratingFilter}) {

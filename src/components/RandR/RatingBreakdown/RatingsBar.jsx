@@ -55,7 +55,7 @@ function RatingsBar({update, starCount, totalReviews, thisRating}) {
   let clickedRating = () => {
     update(parseInt(starCount));
     if (backgroundColor === 'transparent') {
-      setBackgroundColor('rgba(66, 66, 66, 0.5)')
+      setBackgroundColor('rgba(66, 66, 66, 0.2)')
     } else {
       setBackgroundColor('transparent');
     }
