@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 const Related = styled.div`
   margin-bottom: 4%;
-  margin-top: 4%;
+  /* margin-top: 4%; */
 `
+
 const Carousel = styled.div`
   align-items: left;
   display: flex;
