@@ -22,7 +22,6 @@ module.exports = {
   },
 
   addReview: (req, res) => {
-    console.log(req.body);
     controller.addReview(req.body)
       .then((result) => {
         res.status(200).send(result.data)

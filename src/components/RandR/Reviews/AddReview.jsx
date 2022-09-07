@@ -241,13 +241,11 @@ function AddReview({ display, product_id, close }) {
       chars[charId] = characteristics[char2].value;
     }
     data.characteristics = chars;
-    console.log(data);
     if (rating === 0) {
       alert('Please make a selection of 1-5 stars')
     } else {}
     server.post('/reviews', data)
       .then(() => {
-        alert('Thank you for your reviews!');
         close();
       })
       .catch((err) => {
@@ -260,7 +258,7 @@ function AddReview({ display, product_id, close }) {
       <Modal>
         <AddImg display={addImgDisplay} addPhotos={addPhotos} displayAddImage={displayAddImage}></AddImg>
         <ModalInput>
-          <form>
+          <form onSubmit={submit}>
 
             <h2 style={{ marginBottom: '5px' }}>Write Your Review</h2>
             <h3 style={{ marginTop: '5px' }}>About {product.name}</h3>
@@ -296,10 +294,10 @@ function AddReview({ display, product_id, close }) {
             <label htmlFor='nickname'>Nickname</label><br></br>
             <input className='inputField' id='nickname' placeholder='Example: jackson11!' maxLength='60' onChange={updateNickname} required></input>
             <label htmlFor='email'>Email</label>
-            <input className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' onChange={updateEmail} required></input>
+            <input type='email' className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' onChange={updateEmail} required></input>
             <SubText>For authentication reasons, you will not be emailed</SubText>
             <ButtonHolder>
-              <button style={{ display: 'inline-block' }} onClick={submit}>Submit</button>
+              <button style={{ display: 'inline-block' }} >Submit</button>
               <button style={{ display: 'inline-block' }} onClick={close}>Cancel</button>
             </ButtonHolder>
           </form>
