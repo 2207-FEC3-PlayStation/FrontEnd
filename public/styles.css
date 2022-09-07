@@ -173,8 +173,9 @@ body {
 .wrapper {
   overflow: hidden;
   position: absolute;
-  max-width: 810px;
+  max-width: 410px;
   max-height: 620px;
+  margin-right: 98px;
 }
 
 .wrapper-ext {
