@@ -50,14 +50,14 @@ justify-content: flex-start;
 const ProdDescr = styled.div`
 padding: 10px;
 padding-left: 120px;
-margin-top: 90px;
+margin-top: 60px;
 margin-bottom: 30px;
 width: 55%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 90px;
+margin-top: 60px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
@@ -104,8 +104,9 @@ function Overview (props) {
             array.push(results[0].skus[sku].size)
           }
           setSizes(array);
-          var max = Object.values(results[0].skus)[0].quantity;
-          setmaxQuantity([...Array(max+1).keys()])
+          // var max = Object.values(results[0].skus)[0].quantity;
+          // setmaxQuantity([...Array(max+1).keys()])
+          setmaxQuantity(['-'])
           for (var i = 0; i < results.length; i++) {
             if (results[i]['default?'] === true) {
               mainPhoto = results[i].photos[0].url;

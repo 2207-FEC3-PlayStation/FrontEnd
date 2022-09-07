@@ -22,7 +22,7 @@ const LeftButton = styled.button`
   color: #5d5c5c;
   height: 100px;
   width: 120px;
-  top: 13.3%;
+  top: 9.3%;
   left: 0%;
   border: none;
   padding-top: 17%;

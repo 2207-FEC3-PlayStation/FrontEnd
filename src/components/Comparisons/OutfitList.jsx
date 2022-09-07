@@ -20,6 +20,7 @@ const Carousel = styled.div`
 
 const Outfits = styled.div`
   margin-bottom: 4%;
+  padding-top: 35px;
   display: flex;
   flex-direction: row;
 `

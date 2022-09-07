@@ -60,7 +60,7 @@ max-width: 635px;
 max-height: 650px;
 /* margin-right: 30px; */
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-z-index:16;
+z-index:19;
 /* &:hover {
   transform: scale(1.5);
   } */
