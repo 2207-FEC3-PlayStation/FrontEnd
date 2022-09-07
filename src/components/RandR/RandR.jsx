@@ -14,8 +14,9 @@ const RandRComp = styled.div`
 
 const RatingsComp = styled.div`
   display: flex;
-  flex-basis: 30%;
+  flex-basis: 35%;
   margin-right: 60%;
+  flex-direction: column;
 `
 const ReviewsComp = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ function RandR ({prod}) {
   const [recommendedPerc, setRecommendedPerc] = useState();
   const [count, setCount] = useState();
   const [ratingFilter, setRatingFilter] = useState([]);
+  const [filtersApplied, setFiltersApplied] = useState('none');
 
   useEffect(() => {
     if (prod) {
@@ -73,6 +75,14 @@ function RandR ({prod}) {
   }, [reviews])
 
   useEffect(() => {
+    if (ratingFilter.length > 0) {
+      setFiltersApplied('flex');
+    } else {
+      setFiltersApplied('none');
+    }
+  }, [ratingFilter])
+
+  useEffect(() => {
     if (reviews.recommended) {
       let recc = parseInt(reviews.recommended.true);
       let noRecc = parseInt(reviews.recommended.false);
@@ -95,7 +105,8 @@ function RandR ({prod}) {
   return (
     <RandRComp>
       <RatingsComp>
-        <RatingBreakdown update={updateRatingFilter} reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
+        <RatingBreakdown update={updateRatingFilter} filtersApplied={filtersApplied} ratingFilter={ratingFilter} reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
+
       </RatingsComp>
       <ReviewsComp>
         <Reviews ratingFilter={ratingFilter} product_id={product_id} count={count}/>

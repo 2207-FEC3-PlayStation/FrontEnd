@@ -61,8 +61,16 @@ function RatingsBar({update, starCount, totalReviews, thisRating}) {
     }
   }
 
+  let hoveredRating = () => {
+    if (backgroundColor === 'transparent') {
+      setBackgroundColor('rgba(66, 66, 66, 0.5)')
+    } else {
+      setBackgroundColor('transparent');
+    }
+  }
+
   return (
-    <RatingsContainer onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
+    <RatingsContainer onHover={hoveredRating} onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
       <StarLabel>{starCount + '-stars'}</StarLabel>
       <BarHolder>
         <BarSpacer/>

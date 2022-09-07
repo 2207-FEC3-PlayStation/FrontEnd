@@ -9,7 +9,7 @@ const ReviewBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-height: 100%;
+  height: 100%;
   overflow: auto;
 `
 const Topper = styled.div`
@@ -24,7 +24,7 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 6%;
-  max-height: 80%;
+  height: 80%;
   flex-basis: 80%;
   overflow-y: auto;
   overflow-x: hidden;

@@ -19,12 +19,13 @@ const Overall = styled.div`
 `
 
 
-function RatingBreakdown({update, reviews, avgRating, ratingToTenth, recommended, count}) {
+function RatingBreakdown({update, filtersApplied, ratingFilter, reviews, avgRating, ratingToTenth, recommended, count}) {
 
   const [ratings, setRatings] = useState([]);
   const [ratingsVals, setRatingsVals] = useState([]);
   const [chars, setChars] = useState([]);
   const [charsVals, setCharsVals] = useState([]);
+  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     if (reviews.ratings && reviews.characteristics) {
@@ -35,6 +36,12 @@ function RatingBreakdown({update, reviews, avgRating, ratingToTenth, recommended
     }
   }, [reviews])
 
+  useEffect(() => {
+    if (ratingFilter) {
+      setFilters(ratingFilter)
+    }
+  }, [ratingFilter])
+
   return (
     <Ratings>
       <h3>Ratings and Reviews</h3>
@@ -42,10 +49,14 @@ function RatingBreakdown({update, reviews, avgRating, ratingToTenth, recommended
         <h1 data-testid="Review-Num" style={{marginRight: '30px'}}>{ratingToTenth}</h1>
         <StarRating  avgRating={avgRating}/>
       </Overall>
+
       <p style={{fontWeight: 'bold'}}>{count} total reviews</p>
       {ratings.map((star) => {
         return <RatingsBar update={update} key={star}starCount={star} totalReviews={count} thisRating={parseInt(ratingsVals[ratings.indexOf(star)])} />
       })}
+      <p style={{display: `${filtersApplied}`}}>Reviews filtered for: {
+          filters.map((filter) => {return filter + ' stars '})}
+          </p>
       {chars.map((char) => {
         return <CharsBar key={char} char={char} thisRating={Number(charsVals[chars.indexOf(char)].value).toFixed(2)} />
       })}
