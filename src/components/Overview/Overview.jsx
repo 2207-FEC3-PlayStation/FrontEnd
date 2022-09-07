@@ -173,12 +173,33 @@ function Overview (props) {
     setmaxQuantity([...Array(max+1).keys()]);
   }
 
+  function scrollUp () {
+    const element = document.getElementById("ThumbnailList");
+    element.scrollBy(0, -600);
+    setHideR(false);
+    setClickedR(false);
+  }
+
   function leftClick() {
     if (counter < 1) {
       setCounter(counter => defaultPhotos.length)
     }
     setCounter(counter => counter - 1);
     setImage(defaultPhotos[counter].url);
+    if (counter > 5) {
+      scrollUp();
+    }
+  }
+
+  function scrollDown () {
+    const element = document.getElementById("ThumbnailList");
+    if (element.scrollTop === 0) {
+      element.scrollBy(0, 600);
+      setHideR(true);
+      setClickedR(true);
+    } else {
+      setHideR(true);
+    }
   }
 
   function rightClick() {
@@ -187,6 +208,9 @@ function Overview (props) {
     }
     setCounter(counter => counter + 1);
     setImage(defaultPhotos[counter].url);
+    if (counter > 5) {
+      scrollDown();
+    }
   }
 
   function handleCheck(e) {
