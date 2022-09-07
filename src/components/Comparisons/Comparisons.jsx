@@ -20,9 +20,9 @@ const LeftButton = styled.button`
   position: absolute;
   font-size: 25px;
   color: #5d5c5c;
-  height: 100px;
+  height: 102px;
   width: 120px;
-  top: 9.3%;
+  top: 9.4%;
   left: 0%;
   border: none;
   padding-top: 17%;
