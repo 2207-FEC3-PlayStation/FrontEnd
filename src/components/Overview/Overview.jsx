@@ -88,6 +88,8 @@ function Overview (props) {
   const [maxQuantity, setmaxQuantity] = useState([]);
   const [checked, setChecked] = useState(true);
   const [checkedID, setCheckedID] = useState();
+  const [skus, setSkus] = useState();
+  const [quantity, setQuantity] = useState('-');
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -106,7 +108,8 @@ function Overview (props) {
           setSizes(array);
           // var max = Object.values(results[0].skus)[0].quantity;
           // setmaxQuantity([...Array(max+1).keys()])
-          setmaxQuantity(['-'])
+          setmaxQuantity([]);
+          setSkus(results[0].skus);
           for (var i = 0; i < results.length; i++) {
             if (results[i]['default?'] === true) {
               mainPhoto = results[i].photos[0].url;
@@ -138,25 +141,39 @@ function Overview (props) {
   }
 
   function changeStyle(e) {
+    console.log('changeS: ', e.currentTarget.value)
     var style = JSON.parse(e.currentTarget.value)
     setImage(style.photos[0].url);
     setdefaultPhotos(style.photos);
     setCurrentStyle(style);
+    setSkus(style.skus);
     var array = [];
     for (var sku in style.skus) {
         array.push(style.skus[sku].size)
     }
     if (array.length === 0) {
-
+      array.push('OUT OF STOCK')
     }
     setSizes(array);
-    var max = Object.values(style.skus)[0].quantity;
-    setmaxQuantity([...Array(max+1).keys()]);
+    setQuantity(1);
   }
 
   // need to finish this function
   function changeQuantity(e) {
-    console.log(e.target)
+    setQuantity(1);
+    console.log('changeQ: ', e.currentTarget.value);
+    var size = e.currentTarget.value;
+    var max = 0;
+    console.log(skus);
+    for (var sku in skus) {
+      if(skus[sku]['size'] === size) {
+        max = skus[sku].quantity
+      }
+    }
+    if (max > 15) {
+      max = 15;
+    }
+    setmaxQuantity([...Array(max+1).keys()]);
   }
 
   function leftClick() {
@@ -195,7 +212,7 @@ function Overview (props) {
         {styles.map((style, index) => (<StyleSelect checked={checked} handleCheck={handleCheck} currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle} prod={props.prod} checkedID={style.style_id}/>))}
         </Styles>
         </React.Fragment>}
-        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity}/>
+        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} quantity={quantity}/>
       </ProdInfo>
     </FlexContainer>
     {props.prod && <ProdDet>
