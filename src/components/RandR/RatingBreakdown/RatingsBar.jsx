@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const RatingsContainer = styled.div`
@@ -45,9 +45,24 @@ const ReviewCount = styled.p`
   padding-left: 5px;
 `
 
-function RatingsBar({starCount, totalReviews, thisRating}) {
+
+function RatingsBar({update, starCount, totalReviews, thisRating}) {
+
+
+  const [backgroundColor, setBackgroundColor] = useState('transparent')
+
+
+  let clickedRating = () => {
+    update(parseInt(starCount));
+    if (backgroundColor === 'transparent') {
+      setBackgroundColor('rgba(66, 66, 66, 0.5)')
+    } else {
+      setBackgroundColor('transparent');
+    }
+  }
+
   return (
-    <RatingsContainer>
+    <RatingsContainer onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
       <StarLabel>{starCount + '-stars'}</StarLabel>
       <BarHolder>
         <BarSpacer/>

@@ -11,8 +11,15 @@ const Ratings = styled.div`
   flex-basis: 100%
 `
 
+const Overall = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center-around;
+`
 
-function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}) {
+
+function RatingBreakdown({update, reviews, avgRating, ratingToTenth, recommended, count}) {
 
   const [ratings, setRatings] = useState([]);
   const [ratingsVals, setRatingsVals] = useState([]);
@@ -31,11 +38,13 @@ function RatingBreakdown({reviews, avgRating, ratingToTenth, recommended, count}
   return (
     <Ratings>
       <h3>Ratings and Reviews</h3>
-      <h1 data-testid="Review-Num" style={{display: 'inline-block', verticalAlign: 'top'}}>{ratingToTenth}</h1>
-      <StarRating avgRating={avgRating}/>
+      <Overall>
+        <h1 data-testid="Review-Num" style={{marginRight: '30px'}}>{ratingToTenth}</h1>
+        <StarRating  avgRating={avgRating}/>
+      </Overall>
       <p style={{fontWeight: 'bold'}}>{count} total reviews</p>
       {ratings.map((star) => {
-        return <RatingsBar key={star}starCount={star} totalReviews={count} thisRating={parseInt(ratingsVals[ratings.indexOf(star)])} />
+        return <RatingsBar update={update} key={star}starCount={star} totalReviews={count} thisRating={parseInt(ratingsVals[ratings.indexOf(star)])} />
       })}
       {chars.map((char) => {
         return <CharsBar key={char} char={char} thisRating={Number(charsVals[chars.indexOf(char)].value).toFixed(2)} />

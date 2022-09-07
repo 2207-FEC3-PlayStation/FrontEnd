@@ -40,7 +40,7 @@ const ButtonHolder = styled.div`
   top: 86%;
 `
 
-function Reviews({product_id, count}) {
+function Reviews({product_id, count, ratingFilter}) {
 
   const [totalReviews, setTotalReviews] = useState();
   const [showReviews, setShowReviews] = useState(2);
@@ -59,18 +59,24 @@ function Reviews({product_id, count}) {
 
 
   useEffect(() => {
-    if (product_id && count) {
+    if (product_id && count && ratingFilter) {
       let sort = Object.keys(sortedBy)[0];
       server.get('/reviews', {'sort': sort, 'product_id': product_id, 'count': count})
         .then((res) => {
           setTotalReviews(res.data.count);
-          setReviews(res.data.results)
+          let allReviews = res.data.results;
+          if (ratingFilter.length === 0) {
+            setReviews(allReviews);
+          } else {
+            allReviews = allReviews.filter(review => ratingFilter.indexOf(review.rating) !== -1)
+            setReviews(allReviews)
+          }
         })
         .catch((err) => {
           console.log(err);
         })
     }
-  }, [product_id, sortedBy, count])
+  }, [product_id, sortedBy, count, ratingFilter])
 
 //---------event Handlers---------
 
