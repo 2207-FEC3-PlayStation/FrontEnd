@@ -42,7 +42,7 @@ var ProductInfo = (props) => {
       <React.Fragment>
       <ReviewSection>
       <StarRating avgRating={props.avgRating}/>
-      <Reviews><a href="#reviews">Read all reviews</a></Reviews>
+      <Reviews><a href="#reviews">Read all {props.numReviews} reviews</a></Reviews>
       </ReviewSection>
       <Category>{props.info.category.toUpperCase()}</Category>
       <ProductName>{props.info.name}</ProductName>
