@@ -76,6 +76,10 @@ body {
   color: #f8ce0b;
 }
 
+.inputField {
+  width: 70%;
+  margin: 10px
+}
 
 .check-circle {
   visibility: hidden;
