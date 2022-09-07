@@ -87,7 +87,7 @@ z-index:19;
 
 const DownButton = styled.button`
 left: 60px;
-top: 640px;
+top: 670px;
 position: absolute;
 background: transparent;
 border: none;
@@ -167,7 +167,6 @@ function ImageGallery (props) {
         extendedView ? 'extended-carousel' : 'carousel'
       }>
       {props.counter>1 &&<LeftArrow onClick={props.leftClick}>←</LeftArrow>}
-      {/* <Container> */}
       <div className={
         extendedView? 'wrapper-ext' : 'wrapper'
       }>
@@ -177,14 +176,8 @@ function ImageGallery (props) {
         src={props.image} onClick={extendView}>
       </img>
       </div>
-      {/* </Container> */}
       <RightArrow onClick={props.rightClick}>→</RightArrow>
       <Button onClick={extendView}></Button>
-      {/* {extendedView &&
-      <Carousel2>
-      <MainImage2  src={props.image}></MainImage2>
-      </Carousel2>
-      } */}
       </div>
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">
