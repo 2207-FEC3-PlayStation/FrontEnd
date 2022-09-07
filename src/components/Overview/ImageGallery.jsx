@@ -12,16 +12,16 @@ display: flex;
 justify-content: flex-end;
 align-items: center;
 `
-const Carousel2 = styled.div`
-background-color: #d9d5d5;
-width: 1200px;
-height: 650px;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 15;
-overflow: hidden;
-`
+// const Carousel2 = styled.div`
+// background-color: #d9d5d5;
+// width: 1200px;
+// height: 650px;
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// z-index: 15;
+// overflow: hidden;
+// `
 
 const Thumbnails = styled.div`
 display: flex;
@@ -44,6 +44,11 @@ left: 5px;
 scroll-behavior: smooth;
 `;
 
+// const Container = styled.div`
+// display: inline-block;
+// overflow: hidden;
+// `
+
 const MainImage = styled.img`
 display: block;
 position: absolute;
@@ -54,6 +59,9 @@ cursor: -moz-zoom-in;
 cursor: -webkit-zoom-in;
 cursor: zoom-in;
 filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+&:hover{
+  transform:scale(1.5)
+}
 `;
 
 const MainImage2 = styled.img`
@@ -68,6 +76,14 @@ z-index:19;
   transform: scale(1.5);
   } */
 `;
+
+// const Wrapper = styled.div`
+// overflow: hidden;
+// position: absolute;
+// max-width: 810px;
+// max-height: 620px;
+// /* margin-right: 128px; */
+// `
 
 const DownButton = styled.button`
 left: 60px;
@@ -147,19 +163,29 @@ function ImageGallery (props) {
 
   if (props.photos) return (
     <React.Fragment>
-      <Carousel>
+      <div className={
+        extendedView ? 'extended-carousel' : 'carousel'
+      }>
       {props.counter>1 &&<LeftArrow onClick={props.leftClick}>←</LeftArrow>}
-      <MainImage
+      {/* <Container> */}
+      <div className={
+        extendedView? 'wrapper-ext' : 'wrapper'
+      }>
+      <img className={
+        extendedView ? 'main-imageExtended' : 'main-image'
+      }
         src={props.image}>
-      </MainImage>
+      </img>
+      </div>
+      {/* </Container> */}
       <RightArrow onClick={props.rightClick}>→</RightArrow>
       <Button onClick={extendView}></Button>
-      {extendedView &&
+      {/* {extendedView &&
       <Carousel2>
       <MainImage2  src={props.image}></MainImage2>
       </Carousel2>
-      }
-      </Carousel>
+      } */}
+      </div>
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">
         {props.photos.map((photo) => {

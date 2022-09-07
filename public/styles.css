@@ -117,3 +117,70 @@ body {
   border-bottom: #302f2f 3px solid;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
+
+.carousel {
+  background-color: #d9d5d5;
+  width: 760px;
+  height: 650px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.extended-carousel {
+  background-color: #d9d5d5;
+  width:1200px;
+  height: 650px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 15;
+}
+
+.main-image {
+  display: block;
+  /* position: absolute; */
+  width: 410px;
+  max-height: 540px;
+  margin-right: 98px;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  z-index: 9998;
+}
+
+.main-image:hover {
+    transform:scale(1.5)
+  }
+
+.main-imageExtended {
+  display: block;
+  /* position: absolute; */
+  max-width: 810px;
+  max-height: 620px;
+  padding-right: 128px;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+.main-imageExtended:hover {
+  transform:scale(1.5)
+}
+
+.wrapper {
+  overflow: hidden;
+  position: absolute;
+  max-width: 810px;
+  max-height: 620px;
+}
+
+.wrapper-ext {
+  overflow: hidden;
+  position: absolute;
+  max-width: 810px;
+  max-height: 620px;
+  margin-right: 128px;
+}
