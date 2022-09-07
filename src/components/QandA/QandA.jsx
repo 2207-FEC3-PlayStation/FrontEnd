@@ -2,9 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QuestionList from './QuestionList.jsx';
+import QuestionModal from './Modals/QuestionModal.jsx';
+import swal from 'sweetalert';
 import './QAstyles/QandA.css';
 import MagGlass from "./searchicon.png"
 import server from '../../serverRequests.js';
+
 
 //------------------------ styled-components ------------------------//
 const Button = styled.button`
@@ -53,7 +56,6 @@ const Input = styled.input`
   vertical-align: middle;
   font-size: 12px;
   text-align: middle;
-  border: 1px solid grey;
   height: 40px;
   width: 100%;
   &:focus {
@@ -74,21 +76,18 @@ const Icon = styled.img`
 //-------------------------------------------------------------------//
 
 function QandA({ prod }) {
-
+  const productName = 'unknown';
   const [search, setSearch] = useState('');
-  const [count, setCount] = useState({ questions: 1, answers: 1 });
-
   // ------------- product --------------------
   const [productID, setProductID] = useState('');
   const [results, setResults] = useState('');
   const [showData, setShowData] = useState([
     // {questionID: '', question: '', answers: []}
   ]);
-  const [questionCount, setQuestionCount] = useState(1);
+  const [showQModel, setShowQModel] = useState(false);
+  const [qRerender, setQRerender] = useState(0);
+  const [questionCount, setQuestionCount] = useState(4);
   const [questionID, setQuestionID] = useState('642440');
-  // ------------- get answers --------------------
-  const [answers, setAnswers] = useState([])
-  // ----------------------------------------------
 
   // test (console)
   // const data = () => {
@@ -110,7 +109,7 @@ function QandA({ prod }) {
 
   useEffect(() => {
     if (productID) {
-      server.get('/qa/questions', { 'product_id': productID })
+      server.get('/qa/questions', { 'product_id': productID , 'count': 1000})
         .then((product) => {
           setResults(product.data.results)
         })
@@ -132,7 +131,15 @@ function QandA({ prod }) {
         }])
       }
     }
-  }, [results])
+  }, [results, showQModel])
+
+  // ==================================== Question Modal =============================
+
+  if (showQModel) {
+    document.body.classList.add('active-modal');
+  } else {
+    document.body.classList.remove('active-modal');
+  }
 
   // ==================================== ANSWERS ====================================
 
@@ -151,25 +158,25 @@ function QandA({ prod }) {
   }
 
   const loadMoreAnswers = () => {
-    // console.log('count = ', count);
-    // console.log('results = ', results);
-    // console.log('showData = ', showData);
-    // get max answers number
-    var max;
-    var arr = [];
-    var len = [];
-    for (let i = 0; i < results.length; i++) {
-      arr.push(Object.values(results[i].answers))
-    }
-    for (let i = 0; i < arr.length; i++) {
-      len.push(arr[i].length)
-    }
-    max = Math.max(...len);
 
-    if (max === count.answers) {
-      return console.log('No more answers!')
-    }
-    setCount(count => ({ ...count, answers: count.answers + 1 }));
+    console.log('showData = ', showData);
+
+    // get max answers number
+    // var max;
+    // var arr = [];
+    // var len = [];
+    // for (let i = 0; i < results.length; i++) {
+    //   arr.push(Object.values(results[i].answers))
+    // }
+    // for (let i = 0; i < arr.length; i++) {
+    //   len.push(arr[i].length)
+    // }
+    // max = Math.max(...len);
+
+    // if (max === count.answers) {
+    //   return console.log('No more answers!')
+    // }
+    // setCount(count => ({ ...count, answers: count.answers + 1 }));
     // console.log('results = ', results);
     // console.log('count = ', count);
     // console.log('showData = ', showData);
@@ -184,8 +191,12 @@ function QandA({ prod }) {
     setQuestionCount(questionCount + 1);
   }
 
-  // for debugging purposes >.<
-  if (0 === 0) {
+  const showMoreQuestions = (
+    <Button onClick={moreAnsweredQuestions}>
+    <b>MORE ANSWERED QUESTIONS</b>
+    </Button>
+  )
+
     return (
     <>
       <h2> {'QUESTIONS & ANSWERS'}</h2>
@@ -198,8 +209,8 @@ function QandA({ prod }) {
               setSearch(e.target.value);
             }}
             placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-            value={search}>
-          </Input>
+            value={search}
+          ></Input>
           <Icon src={MagGlass}/>
         </Search>
         <Questions>
@@ -209,55 +220,52 @@ function QandA({ prod }) {
             } else if (question.question.toLowerCase().includes(search.toLowerCase())) {
               return question;
             }
-          }).slice(0, questionCount).map((question, index) => {
-            return (
-              <div key={index}>
-                <h3>Q: {question.question}</h3>
-                  {question.answers.map((answer, index) => {
-                    return (
-                      <div key={index}>
-                        <h3 style={{display: 'inline'}}>A: </h3>
-                        <p style={{display: 'inline'}}>{answer.body}</p>
-                        <pre>   by {answer.answerer_name}, {answer.date.slice(0, 10)}   |   Helpful? <u>Yes</u>({answer.helpfulness})   |   <u>Report</u></pre>
-                      </div>
-                    )
-                  })}
-              </div>
-            )
+          }).slice(0, questionCount).map((question) => {
+            return  <QuestionList
+                      key={question.question_id}
+                      question={question}
+                      id={productID}
+                      productName={productName}
+                      qRerender={qRerender}
+                      setQRerender={setQRerender}
+                    />
           })}
-        </Questions><br></br>
-        <button id="load" onClick={loadMoreAnswers}>
-          <b>LOAD MORE ANSWERS</b></button><br></br><br></br>
-        <Button onClick={moreAnsweredQuestions}>
-          <b>MORE ANSWERED QUESTIONS</b>
-        </Button>
-        <Button>
-          <b>ADD A QUESTION +</b>
-        </Button>
+        </Questions>
+        {search.length < 3 && (
+          questionCount < showData.length ?
+            <p>Viewing {questionCount} of {showData.length} questions</p> : <p>Viewing {showData.length} of {showData.length} questions</p>
+        )}
+        {search.length > 2 && (
+          <br/>
+        )}
+        {questionCount < showData.length && [
+          showMoreQuestions
+        ]}
+
+        <QuestionModal
+          key={productID}
+          productID={productID}
+          productName={productName}
+          onClose={() => setShowQModel(false)}
+          showQModel={showQModel}
+        />
+        {showData.length > 0 && (
+          <Button onClick={() => setShowQModel(true)}>
+            <b>ADD A QUESTION +</b>
+          </Button>
+        )}
+        <Button onClick={loadMoreAnswers}>
+            Load More Answers
+          </Button>
       </Sort>
     </>
     )
-  }
 };
 
 export default QandA;
 
 
 /*
-{showData.map((question, index) => {
-          return (
-            <div key={index}>
-              <h3>Q: {question.question}</h3>
-                {question.answers.map((answer, index) => {
-                  return (
-                    <div key={index}>
-                      <h3 style={{display: 'inline'}}>A: </h3>
-                      <p style={{display: 'inline'}}>{answer.body}</p>
-                      <pre>   by {answer.answerer_name}, {answer.date.slice(0, 10)}   |   Helpful? <u>Yes</u>({answer.helpfulness})   |   <u>Report</u></pre>
-                    </div>
-                  )
-                })}
-            </div>
-          )
-        })}
+<button id="load" onClick={loadMoreAnswers}>
+          <b>LOAD MORE ANSWERS</b></button><br></br><br></br>
 */

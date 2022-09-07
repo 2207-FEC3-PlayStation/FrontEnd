@@ -22,11 +22,13 @@ module.exports = {
   },
 
   addQuestion: (req, res) => {
-    controller.addQuestion()
+    console.log('POST?');
+    controller.addQuestion(req.body)
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(201).send(result.data)
       })
       .catch((err) => {
+        console.log('err: ', err);
         res.status(400).send(err);
       })
   },
@@ -34,7 +36,7 @@ module.exports = {
   addAnswer: (req, res) => {
     controller.addAnswer()
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(201).send(result.data)
       })
       .catch((err) => {
         res.status(400).send(err);

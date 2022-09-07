@@ -37,8 +37,10 @@ module.exports = {
 
   },
 
-  addQuestion: () => {
-
+  addQuestion: (data) => {
+    return axios.post(process.env.DB_API + '/qa/questions', data, {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
   },
 
   addAnswer: () => {
