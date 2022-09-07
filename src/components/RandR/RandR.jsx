@@ -8,15 +8,21 @@ const RandRComp = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 const RatingsComp = styled.div`
   display: flex;
-  flex-basis: 30%
+  flex-basis: 30%;
+  margin-right: 60%;
 `
 const ReviewsComp = styled.div`
   display: flex;
-  flex-basis: 60%
+  position: absolute;
+  left: 40%;
+  flex-basis: 60%;
+  max-height: 75%;
 `
 
 function RandR ({prod}) {

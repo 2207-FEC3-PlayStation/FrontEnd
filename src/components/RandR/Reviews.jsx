@@ -8,26 +8,36 @@ import styled from 'styled-components';
 const ReviewBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start
+  justify-content: flex-start;
+  max-height: 100%;
+  overflow: auto;
 `
-
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-const Tile = styled.div`
-`
-
 const Topper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: absolute;
+  flex-basis: 6%
+  `
+
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 6%;
+  max-height: 80%;
+  flex-basis: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
+const Tile = styled.div`
+`
+
 
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
-  a
+  position: absolute;
+  top: 86%;
 `
 
 function Reviews({product_id, count}) {
@@ -106,6 +116,7 @@ function Reviews({product_id, count}) {
           <option value='newest'>newest</option>
         </select>
       </Topper>
+
       <List>
         {reviews.slice(0, showReviews).map((review) => {
           return (

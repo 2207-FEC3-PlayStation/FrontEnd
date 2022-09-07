@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     if (prod === null) {
-      var idParam = 66646;
+      var idParam = 66666;
     } else {
       var idParam = prod.id;
     }
