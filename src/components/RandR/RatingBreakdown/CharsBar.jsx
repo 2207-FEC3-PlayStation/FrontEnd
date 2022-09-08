@@ -6,17 +6,16 @@ const CharsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 50px;
+  max-height: 100px;
   box-sizing: border-box;
-  margin-top: 10px;
 `
 
 const CharLabel = styled.h6`
   display: flex;
-  font-size: 10px;
+  font-size: 12px;
   flex-basis: 10%
   box-sizing: border-box;
-  margin: 5px 0px 12px 0px
+  margin: 5px 0px 0px 0px
 `
 const SliderHolder = styled.div`
   display: flex;
@@ -34,36 +33,41 @@ const SubHolder = styled.div`
 `
 
 const OutterBar = styled.div`
-  background: gray;
+  background: #646464;
   display: flex;
   justify-content: flex-start;
-  flex-basis: 15%;
+  margin-bottom: 5px;
+  flex-basis: 8px
 `
 
 const Indicator = styled.div`
-  position: absolute;
-  top: 0;
   display: flex;
-  z-index: 10;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-basis: 16px;
   box-sizing: border-box;
+  width: 100%;
 `
+
 const Endpoints = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-sizing: border-box;
   flex-basis: 12px;
+
 `
 const CharEndpoint = styled.h6`
   box-sizing: border-box;
   height: 12px;
-  margin-top: 5px
+  margin-top: 5px;
+  margin-bottom: 10px;
 `
 
 function CharsBar({char, thisRating}) {
 
 const [endpoints, setEndpoints] = useState([]);
-const [ratingWidth, setRatingWidth] =useState(0);
+const [ratingWidth, setRatingWidth] = useState(0);
 
 useEffect(() => {
   if (char) {
@@ -78,7 +82,7 @@ useEffect(() => {
 useEffect(() => {
   if (thisRating) {
     //252 is the width of the bar
-    setRatingWidth(((thisRating / 5) * 252).toFixed(1));
+    setRatingWidth(((thisRating / 5) * 100).toFixed(1) + '%');
   }
 }, [thisRating])
 
@@ -89,10 +93,11 @@ useEffect(() => {
       <CharLabel>{char}</CharLabel>
       <SliderHolder>
         <SubHolder>
+          <Indicator>
+            <div style={{flexBasis: `${ratingWidth}`}}/>
+            <div className='checkMark'></div>
+          </Indicator>
           <OutterBar>
-            <div className='indicator'  style={{left: ratingWidth}}></div>
-
-            {/* <Indicator className='indicator' style={{left: ratingWidth}}></Indicator> */}
           </OutterBar>
           <Endpoints>
             {endpoints.map((endpoint) => {

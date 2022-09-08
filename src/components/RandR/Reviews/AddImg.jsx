@@ -10,12 +10,13 @@ const Modal = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 40;
-  max-width: 50vw;
-  max-height: 50vh;
+  max-width: 100vw;
+  max-height: 100vh;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -27,52 +28,72 @@ const ModalInput = styled.div`
   padding: 5%;
   display: flex;
   background-color: white;
-  border: 1px solid black;
+  border: 3px solid #006FCD;
+  border-radius: 10px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   z-index: 50;
-  max-width: 80%;
-  min-width: 80%;
+  max-width: 50%;
+  min-width: 50%;
   max-height: 80%;
   overflow-y: auto;
   overflow-x: hidden;
 `
-const SubmitButton = styled.div`
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
   margin: 10px;
+`
+const Button = styled.button`
+  color: white;
+  background-color: #006FCD;
 `
 
 const AddedImage = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center
+  align-items: center;
+  height: 150px;
+`
+
+const Thumbnail = styled.div`
+  height: 10%;
+  width: auto
 `
 
 function AddImg ({display, displayAddImage, addPhotos}) {
 
-  const [showFields, setShowFields] = useState(['enterImg'])
+  const [addedImages, setAddedImages] = useState(['enterImg'])
 
   let updatePhotos = (e) => {
     e.preventDefault();
     let newUrl = e.target.previousElementSibling.value;
-    let newFields = [...showFields];
-    newFields.splice(showFields.length - 1, 0, newUrl);
-    setShowFields(newFields);
+    let newFields = [...addedImages];
+    newFields.splice(addedImages.length - 1, 0, newUrl);
+    setAddedImages(newFields);
+    e.target.previousElementSibling.value = '';
   }
 
   let submit = (e) => {
     e.preventDefault();
-    addPhotos(showFields.slice(0, showFields.length - 1))
+    addPhotos(addedImages.slice(0, addedImages.length - 1))
     displayAddImage();
   }
 
   let deleteEntry = (e) => {
     e.preventDefault();
-    let thisUrl = e.target.previousSibling.firstChild.data;
-    let index = thisUrl.indexOf(showFields);
-    let newFields = [...showFields];
-    newFields.splice(showFields[index], 1);
-    setShowFields(newFields);
+    let thisUrl = e.target.previousSibling.src;
+    let index = addedImages.indexOf(thisUrl);
+    let newFields = [...addedImages];
+    newFields.splice(addedImages[index], 1);
+    setAddedImages(newFields);
+  }
+
+  let close = (e) => {
+    e.preventDefault();
+    setAddedImages(['enterImg'])
+    displayAddImage();
   }
 
   if (!display) {
@@ -82,29 +103,30 @@ function AddImg ({display, displayAddImage, addPhotos}) {
     <Modal>
       <ModalInput>
         <h2>Add up to five photos</h2>
-        {showFields.map((imageField) => {
+        {addedImages.map((imageField) => {
           if (imageField !== 'enterImg') {
             return (
               <AddedImage key={imageField}>
-                <p>{imageField}</p>
-                <button style={{height: '50%', marginLeft: '5px'}} onClick={deleteEntry}>Delete</button>
+                <img src={imageField} style={{height: '100px', width: 'auto'}}></img>
+                <Button style={{height: '20%', marginLeft: '5px'}} onClick={deleteEntry}>Delete</Button>
               </AddedImage>
             )
-          } else if (showFields.length === 6) {
+          } else if (addedImages.length === 6) {
             return null;
           } else {
             return (
               <form key={imageField}>
               <label htmlFor={'image' + imageField}>Add an Image</label>
               <input type='url' className='inputField' id={'image' + imageField} placeholder='Enter image URL here' required></input>
-              <button type='submit' onClick={updatePhotos}>Add Photo</button>
+              <Button type='submit' onClick={updatePhotos}>Add Photo</Button>
               </form>
             )
           }
         })}
-        <SubmitButton>
-          <button  onClick={submit}>Confirm</button>
-        </SubmitButton>
+        <Buttons>
+          <Button style={{marginRight: '10px'}}onClick={submit}>Confirm</Button>
+          <Button onClick={close}>Cancel</Button>
+        </Buttons>
       </ModalInput>
     </Modal>
   )

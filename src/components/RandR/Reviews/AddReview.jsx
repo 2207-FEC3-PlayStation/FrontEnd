@@ -28,19 +28,21 @@ const Modal = styled.div`
 
 const ModalInput = styled.div`
   position: absolute;
-  padding: 5%;
+  padding: 3%;
   display: flex;
   background-color: white;
-  border: 1px solid black;
+  border: 3px solid #006FCD;
+  border-radius: 10px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   z-index: 30;
   max-width: 80%;
-  min-width: 50%;
+  min-width: 30%;
   max-height: 80%;
   overflow-y: auto;
   overflow-x: hidden;
+  background-color: white
 `
 
 const StarHolder = styled.div`
@@ -50,6 +52,7 @@ const StarClicks = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 30px;
 `
 
 const Star = styled.div`
@@ -72,11 +75,20 @@ const SummaryAndBody = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  width: 70%
+  margin-top: 25px;
 `
 
 const SubText = styled.div`
   font-size: 10px;
+`
+const P = styled.div`
+  font-size: 16px;
+  margin: 5px 0;
+`
+
+const Button = styled.button`
+  color: white;
+  background-color: #006FCD;
 `
 
 
@@ -260,18 +272,18 @@ function AddReview({ display, product_id, close }) {
         <ModalInput>
           <form onSubmit={submit}>
 
-            <h2 style={{ marginBottom: '5px' }}>Write Your Review</h2>
-            <h3 style={{ marginTop: '5px' }}>About {product.name}</h3>
+            <h2 style={{color: '#006FCD', margin: '8px 0' }}>Write Your Review</h2>
+            <h3 style={{color: '#006FCD', margin: '8px 0' }}>About {product.name}</h3>
             <StarClicks>
               <Star className={starFills[0]} id={1} onClick={selectStar}></Star>
               <Star className={starFills[1]} id={2} onClick={selectStar}></Star>
               <Star className={starFills[2]} id={3} onClick={selectStar}></Star>
               <Star className={starFills[3]} id={4} onClick={selectStar}></Star>
               <Star className={starFills[4]} id={5} onClick={selectStar}></Star>
-              <p style={{ alignSelf: 'flex-end' }}>{'\t' + ratingDesc}</p>
+              <P>{'\t' + ratingDesc}</P>
             </StarClicks>
             <RecHolder>
-              <p>Do you recommend this product?</p>
+              <P>Do you recommend this product?</P>
               <input style={{ display: 'inline-block' }} type='radio' id='yes' name='recommend' value='yes' required onClick={recommend}></input>
               <label htmlFor='yes'>Yes</label>
               <input style={{ display: 'inline-block' }} type='radio' id='no' name='recommend' value='no' onClick={recommend}></input>
@@ -285,20 +297,20 @@ function AddReview({ display, product_id, close }) {
             })}
             <SummaryAndBody>
               <label htmlFor='summary'>Review Summary</label>
-              <input id='summary' className='inputField' type='text' maxLength='60' onChange={updateSummary} required></input>
+              <input id='summary' className='inputField' type='text' maxLength='60' size='150' onChange={updateSummary} required></input>
               <label htmlFor='reviewBody'>Review Body</label>
-              <textarea id='reviewBody' className='inputField' rows='5' minLength='50' maxLength='1000' onChange={updateBody} required></textarea>
+              <textarea id='reviewBody' className='inputField' rows='5' minLength='50' maxLength='1000' size='150' onChange={updateBody} required></textarea>
               <SubText>{minChars}</SubText>
             </SummaryAndBody>
-            <button style={{ margin: '10px' }} onClick={displayAddImage}>Add Pictures</button><br></br>
+            <Button style={{margin: '10px'}} onClick={displayAddImage}>Add Pictures</Button><br></br>
             <label htmlFor='nickname'>Nickname</label><br></br>
-            <input className='inputField' id='nickname' placeholder='Example: jackson11!' maxLength='60' onChange={updateNickname} required></input>
-            <label htmlFor='email'>Email</label>
-            <input type='email' className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' onChange={updateEmail} required></input>
+            <input className='inputField' id='nickname' placeholder='Example: jackson11!' maxLength='60' size='150' onChange={updateNickname} required></input> <br></br>
+            <label htmlFor='email'>Email</label><br></br>
+            <input type='email' className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' size='150' onChange={updateEmail} required></input>
             <SubText>For authentication reasons, you will not be emailed</SubText>
             <ButtonHolder>
-              <button style={{ display: 'inline-block' }} >Submit</button>
-              <button style={{ display: 'inline-block' }} onClick={close}>Cancel</button>
+              <Button style={{marginRight: '10px'}} >Submit</Button>
+              <Button onClick={close}>Cancel</Button>
             </ButtonHolder>
           </form>
         </ModalInput>

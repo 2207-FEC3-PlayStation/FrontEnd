@@ -2,6 +2,51 @@ import React, { useState, useEffect } from 'react';
 import StarRating from '../RatingBreakdown/StarRating.jsx';
 import server from '../../../serverRequests.js'
 import ImageModal from './ImageModal.jsx';
+import styled from 'styled-components';
+
+const Tile = styled.div`
+  border-bottom: 1px solid black;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+`
+
+const Button = styled.div`
+  display: inline-block;
+  text-decoration: underline;
+  font-size: 11px;
+  margin: 4px;
+`
+
+const TopRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 30px;
+`
+
+const UserData = styled.div`
+  max-width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`
+const Response = styled.div`
+  background-color: #d9d5d5;
+  padding-left: 15px;
+  border-radius: 5px;
+  white-space: pre-line;
+`
+
+const BottomRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  max-height: 25px
+`
 
 function ReviewTile({data}) {
 
@@ -85,17 +130,19 @@ function ReviewTile({data}) {
 
 
   return (
-    <div style={{borderBottom: '1px solid black', padding: '5px'}}>
+    <Tile>
       <ImageModal image={modalImg} display={modalImgDisplay} closeImg={closeImg}></ImageModal>
-      <StarRating rating={data.rating}/>
+      <TopRow>
+        <StarRating rating={data.rating}/>
+        <UserData>
+        <h6 style={{marginRight: '5px'}}>{data.reviewer_name}</h6>
+        <h6>{date}</h6>
+        </UserData>
+      </TopRow>
 
-      <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right', marginLeft: '5px'}}>{data.reviewer_name}</h6>
+      <h3 style={{margin: '5px 0'}}>{data.summary}</h3>
 
-      <h6 style={{display: 'inline-block', verticalAlign: 'top', float: 'right'}}>{date}</h6>
-
-      <p style={{fontWeight: 'bold'}}>{data.summary}</p>
-
-      <p>{data.body}</p>
+      <p style={{margin: '5px, 0'}}>{data.body}</p>
 
       <span style={{display: 'block'}}>
         {data.photos.map((photo) => {
@@ -105,19 +152,16 @@ function ReviewTile({data}) {
 
       <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
 
-      <p style={{backgroundColor: 'rgba(66,66,66,0.1)', paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Response from seller:{'\n' + data.response}</p>
+      <Response style={{display: response}} >Response from seller:{'\n' + data.response}</Response>
 
+      <BottomRow>
+        <h6 style={{display: 'inline-block'}}>Was this review helpful?</h6>
+        <Button onClick={increaseHelpful} >Yes</Button>
+        <Button>{'(' + helpfulness + ')'}</Button>
+        <Button onClick={reportReview}>{report.text}</Button>
+      </BottomRow>
 
-      <h6 style={{display: 'inline-block'}}>Was this review helpful?</h6>
-
-      <h6 onClick={increaseHelpful} style={{display: 'inline-block', textDecoration: 'underline', margin: '3px'}}>Yes</h6>
-      <h6 style={{display: 'inline-block'}}>{'(' + helpfulness + ')'}</h6>
-
-      {/* do we need a 'no' button?????*/}
-
-      <h6 onClick={reportReview} style={{display: 'inline-block', textDecoration: 'underline',  margin: '4px'}}>{report.text}</h6>
-
-    </div>
+    </Tile>
   )
 }
 
