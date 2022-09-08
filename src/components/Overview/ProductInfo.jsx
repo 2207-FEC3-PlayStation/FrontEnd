@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StarRating from '../RandR/RatingBreakdown/StarRating.jsx';
 
 const ProductName = styled.h2`
-font-family: Arial, Helvetica, sans-serif;
+font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 40px;
 margin-bottom: 0px;
 margin-top: 0px;

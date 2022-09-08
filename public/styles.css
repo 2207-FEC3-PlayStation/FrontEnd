@@ -96,7 +96,7 @@ body {
 .check-circle {
   visibility: hidden;
   position: absolute;
-  left: 50px;
+  left: 40px;
   z-index: 1;
   background: transparent;
   /* border-radius: 50% */
