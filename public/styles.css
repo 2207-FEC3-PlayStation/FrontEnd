@@ -8,7 +8,12 @@ body {
   margin-right: auto;
   width: 1200px;
   position: relative;
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(66, 66, 66)
+}
+
+h1, h2, h3, h4 {
+  color: #006FCD
 }
 
 #root {
@@ -36,31 +41,17 @@ body {
 
 .stars-inner::before {
   content: "\f005 \f005 \f005 \f005 \f005";
-  color: #f8ce0b;
+  color: #006FCD;
 }
 
-.checkMark {
-  white-space: nowrap;
-  overflow: hidden;
-}
+/* .checkMark {
+} */
 
 .checkMark::before {
   content: "\f00c";
   font-family: 'FontAwesome';
   font-weight: normal;
-  color: green;
-}
-
-.indicator {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.indicator::before {
-  content: "\f00c";
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  color: green;
+  color: #006FCD;
 }
 
 .singleStar {
@@ -85,7 +76,7 @@ body {
 
 .singleStarFilled::before {
   content: "\f005";
-  color: #f8ce0b;
+  color: #006FCD;
 }
 
 .inputField {
