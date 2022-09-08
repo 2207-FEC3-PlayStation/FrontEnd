@@ -105,7 +105,7 @@ function ReviewTile({data}) {
 
       <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
 
-      <p style={{paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Response from seller:{'\n' + data.response}</p>
+      <p style={{backgroundColor: 'rgba(66,66,66,0.1)', paddingLeft: '15px', display: response, whiteSpace: 'pre-line'}}>Response from seller:{'\n' + data.response}</p>
 
 
       <h6 style={{display: 'inline-block'}}>Was this review helpful?</h6>

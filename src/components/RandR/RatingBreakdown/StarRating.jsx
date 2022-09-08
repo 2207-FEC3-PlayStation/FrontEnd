@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import server from '../../../serverRequests.js';
+import styled from 'styled-components';
+
+const Star = styled.div`
+  z-index: 0;
+`
 
 function StarRating({avgRating, rating}) {
   //if a rating props is passed in, this component will take that value. Otherwise it will default to the average rating for the overall product
@@ -15,9 +20,9 @@ function StarRating({avgRating, rating}) {
 
 
   return (
-    <div className={'stars-outer'}>
+    <Star className={'stars-outer'}>
       <div className={'stars-inner'} style={{width: (avg*20) + '%'}}></div>
-    </div>
+    </Star>
   )
 }
 

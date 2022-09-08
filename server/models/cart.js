@@ -12,7 +12,7 @@ module.exports = {
   },
 
   addToCart: (req, res) => {
-    controller.addToCart()
+    controller.addToCart(req.body)
       .then((result) => {
         res.status(200).send(result.data)
       })

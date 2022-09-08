@@ -13,6 +13,7 @@ const App = () => {
 
   const [prod, setProd] = useState(null);
   const [avgRating, setAvgRating] = useState();
+  const [numReviews, setnumReviews] = useState();
 
   useEffect(() => {
     if (prod === null) {
@@ -43,6 +44,7 @@ const App = () => {
         }
         let average = parseInt((Math.round(4 * sum / reviewCount) / 4).toFixed(2));
         setAvgRating(average);
+        setnumReviews(reviewCount);
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +64,7 @@ const App = () => {
 
   return (
     <div>
-      <Overview prod={prod} avgRating={avgRating}/>
+      <Overview prod={prod} avgRating={avgRating} numReviews={numReviews}/>
       <Comparisons prod={prod} handleProduct={handleProduct}/>
       <QandA prod={prod}/>
       <div id="reviews"><RandR  prod={prod} avgRating={avgRating}/></div>
