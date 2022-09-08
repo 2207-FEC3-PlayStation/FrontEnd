@@ -19,7 +19,6 @@ font-family: Arial, Helvetica, sans-serif;
 `
 
 const FlexContainer = styled.div`
-/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin-bottom: 0;
@@ -252,9 +251,10 @@ function Overview (props) {
   }
 
   // found out this method with js is now deprecated and doesn't work with chrome. might have to use jquery for this
+  // doesn't specify quantity correctly yet
   function handleAdd() {
     var body = {"sku_id": sku}
-    if (size && quantity && sku) {
+    if (size && sku) {
       server.post('/cart', body)
         .then((data) => {
           console.log(data);
@@ -269,7 +269,7 @@ function Overview (props) {
 
   <Top>
     <Title />
-    <Announce><strong><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT OFFER - NEW PRODUCT HIGHLIGHT</em></strong></Announce>
+    <Announce><strong><em>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT OFFER - NEW PRODUCT HIGHLIGHT</em></strong></Announce>
     <FlexContainer>
       <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter} index={index}/>
       <ProdInfo>

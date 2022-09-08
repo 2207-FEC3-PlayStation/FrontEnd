@@ -13,7 +13,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  color: #006FCD
+  color: #006FCD;
 }
 
 #root {
@@ -178,7 +178,7 @@ h1, h2, h3, h4 {
 .left-arrow {
   background: transparent;
   position: relative;
-  left: -58%;
+  left: -61%;
   font-size: 40px;
   border: none;
   z-index: 15;

@@ -65,7 +65,7 @@ const LeftButton = styled.button`
   color: #5d5c5c;
   height: 100px;
   width: 100px;
-  top: 59%;
+  top: 60%;
   left: 20%;
   border: none;
   padding-top: 17%;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import server from '../../serverRequests.js';
 import Thumbnail from './Thumbnail.jsx';
 import fullscreen from '../../assets/fullscreen.png';
+// import ReactImageMagnify from 'react-image-magnify';
 
 const Thumbnails = styled.div`
 display: flex;
@@ -34,6 +35,7 @@ border: none;
 width: 50px;
 font-size: 50px;
 padding: 0px;
+z-index: 30;
 &:hover {
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
   }
@@ -44,7 +46,6 @@ top: 140px;
 left: 60px;
 font-size: 50px;
 position: absolute;
-z-index: 15;
 &:hover {
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
   }
@@ -53,7 +54,7 @@ z-index: 15;
 const LeftArrow = styled.button`
 background: transparent;
 position: relative;
-left: -58%;
+left: -69%;
 font-size: 40px;
 border: none;
 z-index: 15;
@@ -126,6 +127,23 @@ function ImageGallery (props) {
       <div className={
         extendedView? 'wrapper-ext' : 'wrapper'
       }>
+      {/* {!extendedView && <img className={
+      extendedView ? 'main-imageExtended' : 'main-image'
+    }
+      src={props.image} onClick={extendView}>
+    </img>}
+      {extendedView && <ReactImageMagnify  {...{
+        smallImage: {
+          alt: 'main product image',
+          ifFluidWidth: true,
+          src: `${props.image}`
+        },
+        largeImage:{
+          src: props.image,
+          width: 1650,
+          height: 1100
+        }
+      }}    />} */}
       <img className={
         extendedView ? 'main-imageExtended' : 'main-image'
       }

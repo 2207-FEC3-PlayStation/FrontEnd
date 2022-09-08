@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import starbutton from '../../assets/starbutton.png';
 import plus from '../../assets/pluscart.png';
+import twitter from '../../assets/twitter.png';
+import fb from '../../assets/fb.png';
+import instagram from '../../assets/instagram.png';
+import pinterest from '../../assets/pinterest.png';
 
 const OuterDiv = styled.div`
 display: flex;
@@ -65,9 +69,6 @@ text-align: left;
   background-color: #064881;
   }
 `
-// const plus = styled.img`
-// padding-left: 15px;
-// `
 
 const StarButton = styled.button`
   background: #006FCD url(${starbutton}) no-repeat center;
@@ -88,6 +89,12 @@ const Row = styled.div`
 display: flex;
 flex-direction: row;
 `
+const Row2 = styled.div`
+display: flex;
+flex-direction: row;
+margin-top: 30px;
+`
+
 var CheckOut = (props) => {
   return (
     <OuterDiv>
@@ -97,7 +104,6 @@ var CheckOut = (props) => {
         {props.sizes.map((size, index) => {
           return <SizeOptions key={index} value={size}>{size}</SizeOptions>
         })}
-
       </SizeSelect>
       <QuantitySelect required>
         <QuantityOptions>QTY</QuantityOptions>
@@ -110,6 +116,12 @@ var CheckOut = (props) => {
       <AddToCart onClick={props.handleAdd}>ADD TO BAG<img src={plus} style={{'marginLeft': '65px'}}></img></AddToCart>
       <StarButton></StarButton>
       </Row>
+      <Row2>
+        <img src={fb} style={{"paddingRight": "43px"}}></img>
+        <img src={twitter} style={{"paddingRight": "43px"}}></img>
+        <img src={instagram} style={{"paddingRight": "43px"}}></img>
+        <img src={pinterest} style={{"paddingRight": "43px"}}></img>
+      </Row2>
     </OuterDiv>
   )
 }
