@@ -10,6 +10,9 @@ height: 70px;
 border: none;
 margin: 10px 10px 10px 0px;
 position: relative;
+&:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 const Button = styled.button`

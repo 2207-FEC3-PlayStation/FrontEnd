@@ -10,6 +10,8 @@ const RandRComp = styled.div`
   justify-content: space-evenly;
   overflow-y: auto;
   overflow-x: hidden;
+  border-top: 1px solid black;
+  padding-top: 10px;
 `
 
 const RatingsComp = styled.div`
@@ -106,7 +108,6 @@ function RandR ({prod}) {
     <RandRComp>
       <RatingsComp>
         <RatingBreakdown update={updateRatingFilter} filtersApplied={filtersApplied} ratingFilter={ratingFilter} reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
-
       </RatingsComp>
       <ReviewsComp>
         <Reviews ratingFilter={ratingFilter} product_id={product_id} count={count}/>

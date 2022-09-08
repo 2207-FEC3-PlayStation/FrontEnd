@@ -34,6 +34,9 @@ border: none;
 width: 50px;
 font-size: 50px;
 padding: 0px;
+&:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 const UpButton = styled(DownButton)`
@@ -42,6 +45,9 @@ left: 60px;
 font-size: 50px;
 position: absolute;
 z-index: 15;
+&:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 const LeftArrow = styled.button`
@@ -51,11 +57,17 @@ left: -58%;
 font-size: 40px;
 border: none;
 z-index: 15;
+&:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 const RightArrow = styled(LeftArrow)`
 background: transparent;
 position: relative;
 left: -1%;
+&:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 const Button = styled.button`
   background: transparent url(${fullscreen}) no-repeat top;
@@ -65,6 +77,9 @@ const Button = styled.button`
   position: relative;
   top: -307px;;
   right: 2px;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 function ImageGallery (props) {
