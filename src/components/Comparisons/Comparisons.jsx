@@ -151,12 +151,6 @@ function Comparisons (props) {
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
         <OutfitList prod={props.prod}/>
-        {/* {clickedR && (products.length > 4) && (
-          <LeftButton2 onClick={() => scrollL()}>‹</LeftButton2>
-        )}
-        {!hideR && (products.length > 4) && (
-          <RightButton2 onClick={() => scrollR()}>›</RightButton2>
-        )} */}
       </Container>
     )
 }
