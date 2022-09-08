@@ -31,12 +31,8 @@ a:active, a:visited {
   }
 `
 
-const Price = styled.p`
-font-family: Arial, Helvetica, sans-serif;
-font-size: 15px;
-margin-top: 20px;
-margin-bottom: 20px;
-
+const Prices = styled.p`
+display: inline-block;
 `
 
 
@@ -50,7 +46,14 @@ var ProductInfo = (props) => {
       </ReviewSection>
       <Category>{props.info.category.toUpperCase()}</Category>
       <ProductName>{props.info.name}</ProductName>
-      <Price>{'$' + props.info.default_price}</Price>
+      <Prices>
+      <span className={
+        props.onSale ? 'price-onsale': 'price'
+      }>{'$' + props.price}</span>
+      <span className={
+        props.onSale ? 'saleprice-onsale': 'saleprice'
+      }>{'$'+props.saleprice}</span>
+      </Prices>
       </React.Fragment>
   )
 }

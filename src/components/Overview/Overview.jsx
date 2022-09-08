@@ -94,6 +94,9 @@ function Overview (props) {
   const [sku, setSku] = useState();
   const [sizeSelected, setSizeSelected] = useState(false);
   let [index, setIndex] = useState(1);
+  let [price, setPrice] = useState();
+  let [saleprice, setSalePrice] = useState();
+  let [onSale, setOnSale] = useState(false);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -118,6 +121,14 @@ function Overview (props) {
               setImage(mainPhoto);
               setdefaultPhotos(results[i].photos);
               setCurrentStyle(results[i]);
+              if (results[i].sale_price === null) {
+                setPrice(results[i].original_price);
+                setSalePrice();
+              } else {
+                setPrice(results[i].original_price);
+                setSalePrice(results[i].sale_price);
+                setOnSale(true);
+              }
             }
           }
           if (mainPhoto === '') {
@@ -126,6 +137,14 @@ function Overview (props) {
             setdefaultPhotos(data.data.results[0].photos);
             setFinished(true);
             setCurrentStyle(results[0]);
+            if (results[0].sale_price === null) {
+              setPrice(results[0].original_price);
+              setSalePrice();
+            } else {
+              setPrice(results[0].original_price);
+              setSalePrice(results[0].sale_price);
+              setOnSale(true);
+            }
           }
         })
         .catch((err) => {
@@ -144,11 +163,20 @@ function Overview (props) {
   }
 
   function changeStyle(e) {
-    var style = JSON.parse(e.currentTarget.value)
+    var style = JSON.parse(e.currentTarget.value);
     setImage(style.photos[0].url);
     setdefaultPhotos(style.photos);
     setCurrentStyle(style);
     setSkus(style.skus);
+    if (style.sale_price === null) {
+      setPrice(style.original_price);
+      setSalePrice();
+      setOnSale(false);
+    } else {
+      setPrice(style.original_price);
+      setSalePrice(style.sale_price);
+      setOnSale(true);
+    }
     var array = [];
     for (var sku in style.skus) {
         array.push(style.skus[sku].size)
@@ -245,7 +273,7 @@ function Overview (props) {
     <FlexContainer>
       <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter} index={index}/>
       <ProdInfo>
-        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews}/>}
+        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews} price={price} saleprice={saleprice} onSale={onSale}/>}
         {styles && currentStyle &&
         <React.Fragment>
         <StyleSelected><strong>STYLE > </strong>{currentStyle.name}</StyleSelected>
