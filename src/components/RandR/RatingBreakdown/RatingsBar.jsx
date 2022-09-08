@@ -25,10 +25,10 @@ flex-basis: 42.5%
 `
 
 const OutterBar = styled.div`
-  background: gray;
+  background: #44423f;
   display: flex;
   justify-content: flex-start;
-  flex-basis: 15%
+  flex-basis: 8px;
 `
 
 const InnerBar = styled.div`
@@ -55,15 +55,7 @@ function RatingsBar({update, starCount, totalReviews, thisRating}) {
   let clickedRating = () => {
     update(parseInt(starCount));
     if (backgroundColor === 'transparent') {
-      setBackgroundColor('rgba(66, 66, 66, 0.2)')
-    } else {
-      setBackgroundColor('transparent');
-    }
-  }
-
-  let hoveredRating = () => {
-    if (backgroundColor === 'transparent') {
-      setBackgroundColor('rgba(66, 66, 66, 0.5)')
+      setBackgroundColor('#d9d5d5')
     } else {
       setBackgroundColor('transparent');
     }

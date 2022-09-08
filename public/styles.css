@@ -36,7 +36,7 @@ body {
 
 .stars-inner::before {
   content: "\f005 \f005 \f005 \f005 \f005";
-  color: #f8ce0b;
+  color: #44423f;
 }
 
 /* .checkMark {
@@ -71,7 +71,7 @@ body {
 
 .singleStarFilled::before {
   content: "\f005";
-  color: #f8ce0b;
+  color: #44423f;
 }
 
 .inputField {

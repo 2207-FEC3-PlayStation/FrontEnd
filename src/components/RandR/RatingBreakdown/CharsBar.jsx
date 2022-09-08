@@ -33,7 +33,7 @@ const SubHolder = styled.div`
 `
 
 const OutterBar = styled.div`
-  background: gray;
+  background: #44423f;
   display: flex;
   justify-content: flex-start;
   margin-bottom: 5px;
@@ -44,7 +44,7 @@ const Indicator = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  flex-basis: 20px;
+  flex-basis: 16px;
   box-sizing: border-box;
   width: 100%;
 `

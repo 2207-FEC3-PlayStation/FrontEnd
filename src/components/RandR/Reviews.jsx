@@ -10,6 +10,7 @@ const ReviewBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
+  min-width: 75%;
   overflow: auto;
 `
 const Topper = styled.div`
@@ -17,14 +18,16 @@ const Topper = styled.div`
   flex-direction: row;
   align-items: center;
   position: absolute;
-  flex-basis: 6%
+  flex-basis: 6%;
+  margin: 5px 0;
   `
 
 const List = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 6%;
+  margin-top: 25px;
   height: 80%;
+  min-width: 600px;
   flex-basis: 80%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -36,7 +39,6 @@ const Tile = styled.div`
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 20px
 `
 
 function Reviews({product_id, count, ratingFilter}) {
@@ -88,7 +90,6 @@ function Reviews({product_id, count, ratingFilter}) {
     } else if (choice === 'newest') {
       setSortedBy({newest: choice})
     }
-    // setSortedBy(e.target)
   }
 
   let moreReviews = (e) => {
@@ -111,9 +112,9 @@ function Reviews({product_id, count, ratingFilter}) {
   return (
     <ReviewBox>
       <AddReview display={showAddReview} product_id={product_id} close={closeModal}></AddReview>
-      <Topper>
-        <h3 style={{display: 'inline-block'}}>{totalReviews} reviews, sorted by </h3>
 
+      <Topper>
+        <h3 style={{margin: '0'}}>{totalReviews} reviews, sorted by </h3>
         <label style={{display: 'none'}}>Sort on</label>
         <select onChange={changeSort} style={{height: '50%', marginLeft: '5px'}}>{Object.values(sortedBy)[0]}
           <option value='relevance'>relevance</option>
