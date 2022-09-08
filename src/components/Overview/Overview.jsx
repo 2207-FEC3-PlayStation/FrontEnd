@@ -50,14 +50,14 @@ justify-content: flex-start;
 const ProdDescr = styled.div`
 padding: 10px;
 padding-left: 120px;
-margin-top: 60px;
+margin-top: 110px;
 margin-bottom: 30px;
 width: 55%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 60px;
+margin-top: 110px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
