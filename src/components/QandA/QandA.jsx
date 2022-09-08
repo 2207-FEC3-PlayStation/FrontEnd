@@ -85,6 +85,7 @@ function QandA({ prod }) {
   const [showData, setShowData] = useState([
     // {questionID: '', question: '', answers: []}
   ]);
+  const [shownQuestions, setShownQuestions] = useState([]);
   const [showQModel, setShowQModel] = useState(false);
   const [qRerender, setQRerender] = useState(0);
   const [questionCount, setQuestionCount] = useState(4);
@@ -123,7 +124,6 @@ function QandA({ prod }) {
 
   useEffect(() => {
     // console.log('UseEffect (data)')
-    console.log('results = ', results)
     if (results) {
       for (let i = 0; i < results.length; i++) {
         setShowData(showData => [...showData, {
@@ -135,6 +135,19 @@ function QandA({ prod }) {
       }
     }
   }, [results, showQModel])
+
+  useEffect(() => {
+    if(showData && questionCount) {
+      var questions = showData.filter((question) => {
+        if (search.length < 3) {
+          return question;
+        } else if ( question.question.toLowerCase().includes(search.toLowerCase())) {
+          return question;
+        }
+      }).slice(0, questionCount);
+    }
+    setShownQuestions(questions);
+  }, [showData, questionCount])
 
   // ==================================== Question Modal =============================
 
@@ -195,13 +208,13 @@ function QandA({ prod }) {
   }
 
   const showMoreQuestions = (
-    <Button onClick={moreAnsweredQuestions}>
-    <b>MORE ANSWERED QUESTIONS</b>
+    <Button onClick={moreAnsweredQuestions} key={'showMoreQs'}>
+      <b>MORE ANSWERED QUESTIONS</b>
     </Button>
   )
 
   return (
-    <>
+    <React.Fragment>
       <h2> {'QUESTIONS & ANSWERS'}</h2>
       <Sort>
         <Search>
@@ -218,23 +231,17 @@ function QandA({ prod }) {
         <br/>
         {showData.length > 0 ?
           <p>Click on a question to view it's respective answers.</p> :
-          [
-            <p>There are no questions yet for this product. Click "Add a Question" to be the first to add one.</p>,
+          <React.Fragment>
+            <p>There are no questions yet for this product. Click "Add a Question" to be the first to add one.</p>
             <Button onClick={() => setShowQModel(true)}>
               <b>ADD A QUESTION +</b>
             </Button>
-          ]
+          </React.Fragment>
         }
         <Questions>
-        {showData.filter((question) => {
-            if (search.length < 3) {
-              return question;
-            } else if (question.question.toLowerCase().includes(search.toLowerCase())) {
-              return question;
-            }
-          }).slice(0, questionCount).map((question) => {
-            return  <QuestionList
-                      key={question.question_id}
+        {shownQuestions.map((question) => {
+            return <QuestionList
+                      key={question.questionID}
                       question={question}
                       id={productID}
                       productName={productName}
@@ -244,13 +251,10 @@ function QandA({ prod }) {
           })}
         </Questions>
 
-        {search.length < 3 && (
-          questionCount < showData.length ?
+         {search.length < 3 && (
+          questionCount < showData.length) ?
             <p>Viewing {questionCount} of {showData.length} questions</p> : <p>Viewing {showData.length} of {showData.length} questions</p>
-        )}
-        {search.length > 2 && (
-          <br/>
-        )}
+        }
         {questionCount < showData.length && [showMoreQuestions]}
         <QuestionModal
           key={productID}
@@ -265,7 +269,7 @@ function QandA({ prod }) {
           </Button>
         )}
       </Sort>
-    </>
+    </React.Fragment>
     )
 }
 
