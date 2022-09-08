@@ -39,10 +39,8 @@ body {
   color: #f8ce0b;
 }
 
-.checkMark {
-  position: absolute;
-  left: 100px
-}
+/* .checkMark {
+} */
 
 .checkMark::before {
   content: "\f00c";

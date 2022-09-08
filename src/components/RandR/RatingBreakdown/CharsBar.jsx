@@ -38,13 +38,18 @@ const OutterBar = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-bottom: 5px;
-  margin-top: 20px;
-  flex-basis: 10px
+  flex-basis: 8px
 `
 
 const Indicator = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-basis: 20px;
   box-sizing: border-box;
+  width: 100%;
 `
+
 const Endpoints = styled.div`
   display: flex;
   flex-direction: row;
@@ -78,7 +83,7 @@ useEffect(() => {
 useEffect(() => {
   if (thisRating) {
     //252 is the width of the bar
-    setRatingWidth(((thisRating / 5) * 252).toFixed(1));
+    setRatingWidth(((thisRating / 5) * 100).toFixed(1) + '%');
   }
 }, [thisRating])
 
@@ -89,7 +94,10 @@ useEffect(() => {
       <CharLabel>{char}</CharLabel>
       <SliderHolder>
         <SubHolder>
-          <Indicator className='checkMark' style={{left: `${ratingWidth}`}}></Indicator>
+          <Indicator>
+            <div style={{flexBasis: `${ratingWidth}`}}/>
+            <div className='checkMark'></div>
+          </Indicator>
           <OutterBar>
           </OutterBar>
           <Endpoints>
