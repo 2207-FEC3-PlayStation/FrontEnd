@@ -19,7 +19,7 @@ const Card = styled.div`
   margin-right: 4%;
   background-color: #eceaea;
   &:hover {
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    box-shadow: 0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5);
   }
 `
 const Button = styled.button`

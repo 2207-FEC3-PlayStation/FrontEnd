@@ -96,6 +96,8 @@ function Overview (props) {
   let [price, setPrice] = useState();
   let [saleprice, setSalePrice] = useState();
   let [onSale, setOnSale] = useState(false);
+  const [hideR, setHideR] = useState(false);
+  const [clickedR, setClickedR] = useState(false);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
