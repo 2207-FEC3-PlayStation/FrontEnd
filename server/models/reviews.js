@@ -22,7 +22,7 @@ module.exports = {
   },
 
   addReview: (req, res) => {
-    controller.addReview(req.data)
+    controller.addReview(req.body)
       .then((result) => {
         res.status(200).send(result.data)
       })

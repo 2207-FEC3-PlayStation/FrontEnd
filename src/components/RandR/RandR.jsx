@@ -2,6 +2,29 @@ import React, { useState, useEffect } from 'react';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import Reviews from './Reviews.jsx';
 import server from '../../serverRequests.js';
+import styled from 'styled-components';
+
+const RandRComp = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  overflow-y: auto;
+  overflow-x: hidden;
+`
+
+const RatingsComp = styled.div`
+  display: flex;
+  flex-basis: 35%;
+  margin-right: 60%;
+  flex-direction: column;
+`
+const ReviewsComp = styled.div`
+  display: flex;
+  position: absolute;
+  left: 40%;
+  flex-basis: 60%;
+  max-height: 75%;
+`
 
 function RandR ({prod}) {
 
@@ -11,6 +34,8 @@ function RandR ({prod}) {
   const [ratingToTenth, setRatingToTenth] = useState(0);
   const [recommendedPerc, setRecommendedPerc] = useState();
   const [count, setCount] = useState();
+  const [ratingFilter, setRatingFilter] = useState([]);
+  const [filtersApplied, setFiltersApplied] = useState('none');
 
   useEffect(() => {
     if (prod) {
@@ -50,6 +75,14 @@ function RandR ({prod}) {
   }, [reviews])
 
   useEffect(() => {
+    if (ratingFilter.length > 0) {
+      setFiltersApplied('flex');
+    } else {
+      setFiltersApplied('none');
+    }
+  }, [ratingFilter])
+
+  useEffect(() => {
     if (reviews.recommended) {
       let recc = parseInt(reviews.recommended.true);
       let noRecc = parseInt(reviews.recommended.false);
@@ -58,11 +91,27 @@ function RandR ({prod}) {
     }
   }, [reviews.recommended])
 
+  let updateRatingFilter = (value) => {
+    let newRatingFilter = [...ratingFilter];
+    let index = newRatingFilter.indexOf(value)
+    if (index === - 1) {
+      newRatingFilter.push(value)
+    } else {
+      newRatingFilter.splice(index, 1);
+    }
+    setRatingFilter(newRatingFilter);
+  }
+
   return (
-    <React.Fragment>
-      <RatingBreakdown reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
-      <Reviews product_id={product_id} count={count}/>
-    </React.Fragment>
+    <RandRComp>
+      <RatingsComp>
+        <RatingBreakdown update={updateRatingFilter} filtersApplied={filtersApplied} ratingFilter={ratingFilter} reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
+
+      </RatingsComp>
+      <ReviewsComp>
+        <Reviews ratingFilter={ratingFilter} product_id={product_id} count={count}/>
+      </ReviewsComp>
+    </RandRComp>
   )
 }
 
