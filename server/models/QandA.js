@@ -22,7 +22,6 @@ module.exports = {
   },
 
   addQuestion: (req, res) => {
-    console.log('POST?');
     controller.addQuestion(req.body)
       .then((result) => {
         res.status(201).send(result.data)
@@ -34,11 +33,12 @@ module.exports = {
   },
 
   addAnswer: (req, res) => {
-    controller.addAnswer()
+    controller.addAnswer(req.body, req.query)
       .then((result) => {
         res.status(201).send(result.data)
       })
       .catch((err) => {
+        console.log('err: ', err);
         res.status(400).send(err);
       })
   },

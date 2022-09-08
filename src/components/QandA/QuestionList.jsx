@@ -3,13 +3,12 @@ import axios from 'axios';
 import server from '../../serverRequests.js';
 // import { format, parseISO } from 'date-fns';
 import styled from 'styled-components';
-// import AnswersList from './AnswersList.jsx';
-// import AnswerModal from './Modals/AnswerModal.jsx';
+import AnswersList from './AnswerList.jsx';
+import AnswerModal from './Modals/AnswerModal.jsx';
 import swal from 'sweetalert';
 
 const Questions = styled.div`
   display: flex;
-  text-transform: uppercase;
   border: 1px solid;
   border-radius: 5px;
   height: auto;
@@ -22,7 +21,6 @@ const Questions = styled.div`
   -moz-transition: background-color .35s ease-out;
   -o-transition: background-color .35s ease-out;
   transition: background-color .35s ease-out;
-  cursor: ns-resize;
   &:hover {
     background-color: rgba(255, 0, 0, .2);
     // transform: scale(1.03);
@@ -34,7 +32,6 @@ const Questions = styled.div`
 
 const QStyle = styled.div`
   font-size: 1em;
-  cursor: ns-resize;
   margin-left: 10px;
   display: flex;
   align-items: center;
@@ -64,7 +61,6 @@ const Container = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  cursor: ns-resize;
 `
 
 const Button = styled.button`
@@ -83,7 +79,7 @@ const Button = styled.button`
 
 const Helpful = styled.div`
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   margin-right: 5px;
   margin-top: 5px;
 `
@@ -95,7 +91,6 @@ const Yes = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  text-decoration: underline;
   &:hover {
     color: darkgreen;
     transform: scale(1.05);
@@ -107,7 +102,6 @@ const Report = styled.button`
   color: inherit;
   border: none;
   font: inherit;
-  cursor: context-menu;
   outline: inherit;
   text-decoration: underline;
   &:hover {
@@ -142,7 +136,6 @@ const AnswerList = styled.div`
 `
 
 function QuestionList ({question, id, productName, qRerender, setQRerender}) {
-  const {question_id, question_body, question_helpfulness} = question;
   const [answers, setAnswers] = useState(null);
   const [answerCount, setAnswerCount] = useState(2);
   const [questionClicked, setQuestionClicked] = useState(false);
@@ -158,23 +151,24 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
     console.log('question id = ', question.questionID)
 
     setLoading(true);
-    server.get('/qa/answers', { 'question_id': question.questionID})
+    server.get('/qa/answers', { 'question_id': question.questionID , 'count': 1000})
       .then(response => {
-        console.log('response: ', response);
+        console.log('answer response: ', response.data.results);
         setAnswers(response.data.results);
         setLoading(false);
       })
       .catch(err => {
         console.error('Unable to get answers. Sorry...', err);
       })
+
+      console.log('answers: ', answers);
   }
 
   const handleShowingAnswers = () => {
-    console.log('Q was clicked!');
+    console.log('answers = ', answers);
     if (questionClicked) {
       setQuestionClicked(!questionClicked);
     } else {
-      console.log('getting answers..');
       getAnswers();
       setQuestionClicked(!questionClicked);
     }
@@ -252,11 +246,10 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
     <Questions >
       <Container onClick={handleShowingAnswers}>
         <QStyle >
-          <ContainText><b>Q: {question_body}</b></ContainText>
+          <ContainText><b>Q: {question.question}</b></ContainText>
         </QStyle>
         <Helpful>
-          HELPFUL?
-          <br/>
+          Helpful?
           <Yes onClick={(e) => {
             // e.stopPropagation();
             // handleHelpful(
@@ -267,38 +260,27 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
             //   setQHelpful,
             //   qRerender,
             //   setQRerender)
-          }}> Yes <span>&#40;{question_helpfulness}&#41;</span>
+          }}> <u>Yes</u> <span>({question.questionHelp})&emsp;|</span>
           </Yes>
-          <Report onClick={(e) => {
-            e.stopPropagation();
-            // handleReported(
-            //   qReported,
-            //   'questions',
-            //   question_id,
-            //   'report',
-            //   setQReported)
-            }}> {qReported ? 'Reported' : 'Report'}
-          </Report>
-          <br/>
           <AddAnswer onClick={(e) => {
             e.stopPropagation();
             setShow(true);
           }}>Add Answer</AddAnswer>
         </Helpful>
       </Container>
-      {/* <AnswerModal
-        key={question_id.toString()}
+      <AnswerModal
+        key={question.questionID}
         id={id}
         productName={productName}
-        question_id={question_id}
-        question_body={question_body}
+        question_id={question.questionID}
+        question_body={question.question}
         onClose={(e) => {
           e.stopPropagation();
           setShow(false);
           getAnswers();
         }}
         show={show}
-      /> */}
+      />
       {questionClicked && answers && !loading &&
         answers.length === 0 && (
           <NoAnswers>
@@ -306,31 +288,27 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
           </NoAnswers>
         )
       }
-      {/* {loading && (
-        <h4>Loading...</h4>
-      )} */}
-      {questionClicked && answers && (<div>nothing</div>
-        // <AnswersBlock>
-        //   {answers.length !== 0 && (
-        //     <AStyle><b>A:</b></AStyle>
-        //   )}
-        //   <AnswerList>
-        //     {answers.slice(0, answerCount).map((answer) => {
-        //       // console.log(answer);
-        //       return  (
-        //         <AnswersList
-        //           key={answer.answer_id}
-        //           answer={answer}
-        //           handleHelpful={handleHelpful}
-        //           handleReported={handleReported}
-        //           question_id={question_id}
-        //           aRerender={aRerender}
-        //           setARerender={setARerender}
-        //         />
-        //       )
-        //     })}
-        //   </AnswerList>
-        // </AnswersBlock>
+      {questionClicked && answers && (
+        <AnswersBlock>
+          {answers.length !== 0 && (
+            <AStyle><b>A:</b></AStyle>
+          )}
+          <AnswerList>
+            {answers.slice(0, answerCount).map((answer) => {
+              return  (
+                <AnswersList
+                  key={answer.answer_id}
+                  answer={answer}
+                  // handleHelpful={handleHelpful}
+                  // handleReported={handleReported}
+                  question_id={question.questionID}
+                  aRerender={aRerender}
+                  setARerender={setARerender}
+                />
+              )
+            })}
+          </AnswerList>
+        </AnswersBlock>
       )}
       {questionClicked && !loading && (
         answerCount < answers.length && (

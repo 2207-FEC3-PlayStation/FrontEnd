@@ -64,7 +64,7 @@ const Input = styled.input`
   @media (max-width: 425px) {
     font-size: 10px
   }
-`;
+`
 
 const Icon = styled.img`
   position: absolute;
@@ -76,10 +76,11 @@ const Icon = styled.img`
 //-------------------------------------------------------------------//
 
 function QandA({ prod }) {
-  const productName = 'unknown';
+
   const [search, setSearch] = useState('');
   // ------------- product --------------------
   const [productID, setProductID] = useState('');
+  const [productName, setProductName] = useState('');
   const [results, setResults] = useState('');
   const [showData, setShowData] = useState([
     // {questionID: '', question: '', answers: []}
@@ -102,6 +103,7 @@ function QandA({ prod }) {
   useEffect(() => {
     if (prod) {
       setProductID(prod.id);
+      setProductName(prod.name);
     }
   }, [prod]);
 
@@ -121,11 +123,12 @@ function QandA({ prod }) {
 
   useEffect(() => {
     // console.log('UseEffect (data)')
-    // console.log('results = ', results)
+    console.log('results = ', results)
     if (results) {
       for (let i = 0; i < results.length; i++) {
         setShowData(showData => [...showData, {
           questionID: results[i].question_id,
+          questionHelp: results[i].question_helpfulness,
           question: results[i].question_body,
           answers: Object.values(results[i].answers)
         }])
@@ -197,22 +200,31 @@ function QandA({ prod }) {
     </Button>
   )
 
-    return (
+  return (
     <>
       <h2> {'QUESTIONS & ANSWERS'}</h2>
       <Sort>
         <Search>
+        <Icon src={MagGlass}/>
           <Input
-            src={MagGlass}
             type="Text"
+            value={search}
+            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
             onChange={(e) => {
               setSearch(e.target.value);
             }}
-            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-            value={search}
           ></Input>
-          <Icon src={MagGlass}/>
         </Search>
+        <br/>
+        {showData.length > 0 ?
+          <p>Click on a question to view it's respective answers.</p> :
+          [
+            <p>There are no questions yet for this product. Click "Add a Question" to be the first to add one.</p>,
+            <Button onClick={() => setShowQModel(true)}>
+              <b>ADD A QUESTION +</b>
+            </Button>
+          ]
+        }
         <Questions>
         {showData.filter((question) => {
             if (search.length < 3) {
@@ -231,6 +243,7 @@ function QandA({ prod }) {
                     />
           })}
         </Questions>
+
         {search.length < 3 && (
           questionCount < showData.length ?
             <p>Viewing {questionCount} of {showData.length} questions</p> : <p>Viewing {showData.length} of {showData.length} questions</p>
@@ -238,10 +251,7 @@ function QandA({ prod }) {
         {search.length > 2 && (
           <br/>
         )}
-        {questionCount < showData.length && [
-          showMoreQuestions
-        ]}
-
+        {questionCount < showData.length && [showMoreQuestions]}
         <QuestionModal
           key={productID}
           productID={productID}
@@ -254,13 +264,10 @@ function QandA({ prod }) {
             <b>ADD A QUESTION +</b>
           </Button>
         )}
-        <Button onClick={loadMoreAnswers}>
-            Load More Answers
-          </Button>
       </Sort>
     </>
     )
-};
+}
 
 export default QandA;
 
