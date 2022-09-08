@@ -7,6 +7,7 @@ import Title from './Title.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
+import $ from "jquery";
 
 const Top = styled.div`
 max-width: 1200;
@@ -90,6 +91,8 @@ function Overview (props) {
   const [checkedID, setCheckedID] = useState();
   const [skus, setSkus] = useState();
   const [quantity, setQuantity] = useState('-');
+  const [size, setSize] = useState();
+  const [sku, setSku] = useState();
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -106,8 +109,6 @@ function Overview (props) {
             array.push(results[0].skus[sku].size)
           }
           setSizes(array);
-          // var max = Object.values(results[0].skus)[0].quantity;
-          // setmaxQuantity([...Array(max+1).keys()])
           setmaxQuantity([]);
           setSkus(results[0].skus);
           for (var i = 0; i < results.length; i++) {
@@ -157,20 +158,23 @@ function Overview (props) {
     setQuantity(1);
   }
 
-  // need to finish this function
   function changeQuantity(e) {
     setQuantity(1);
     var size = e.currentTarget.value;
+    setSize(size);
     var max = 0;
+    var currentSku = '';
     for (var sku in skus) {
       if(skus[sku]['size'] === size) {
         max = skus[sku].quantity
+        currentSku = sku;
       }
     }
     if (max > 15) {
       max = 15;
     }
     setmaxQuantity([...Array(max+1).keys()]);
+    setSku(currentSku);
   }
 
   function scrollUp () {
@@ -218,6 +222,32 @@ function Overview (props) {
     setCheckedID(style.style_id)
   }
 
+  // found out this method with js is now deprecated and doesn't work with chrome. might have to use jquery for this
+  function handleAdd() {
+    // if (size === undefined) {
+    // //   // open size dropdown
+    // //   var dropdown = document.getElementById('size-select');
+    // //   console.log(dropdown);
+    // //   var event = new MouseEvent('mousedown')
+    // //   // console.log(event);
+    // //   // console.log(event.initMouseEvent('mousedown', true, true, window));
+    // //   dropdown.dispatchEvent(event);
+
+    // //   // show message "Please select size" above dropdown
+    // }
+
+    var body = {"sku_id": sku}
+    if (size && quantity && sku) {
+      server.post('/cart', body)
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }
+
   return (
   <Top>
     <Title />
@@ -233,7 +263,7 @@ function Overview (props) {
         {styles.map((style, index) => (<StyleSelect checked={checked} handleCheck={handleCheck} currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle} prod={props.prod} checkedID={style.style_id}/>))}
         </Styles>
         </React.Fragment>}
-        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} quantity={quantity}/>
+        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} quantity={quantity} handleAdd={handleAdd}/>
       </ProdInfo>
     </FlexContainer>
     {props.prod && <ProdDet>
