@@ -11,7 +11,10 @@ const Row = styled.div`
 const Box = styled.div`
   flex-basis: 15%;
 `
-
+const P = styled.div`
+  font-size: 16px;
+  margin: 5px 0;
+`
 
 function RateCharacteristics({char, updateChar, selected}) {
 
@@ -47,11 +50,11 @@ function RateCharacteristics({char, updateChar, selected}) {
   return (
     <React.Fragment>
       <Row style={{justifyContent: 'center'}}>
-        <p style={{marginBottom: '2px'}}>{selection[selected.value - 1]}</p>
+        <P style={{marginBottom: '2px', color: '#006FCD'}}>{selection[selected.value - 1]}</P>
       </Row>
       <Row>
         <Box>
-          <p>{char}</p>
+          <P>{char}</P>
         </Box>
         <Box>
           <input style={{display: 'inline-block'}} type='radio' id={selection[0]} name={char} value={1} onClick={updateChar} required></input>

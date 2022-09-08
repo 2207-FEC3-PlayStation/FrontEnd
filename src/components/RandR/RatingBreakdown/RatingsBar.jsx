@@ -25,7 +25,7 @@ flex-basis: 42.5%
 `
 
 const OutterBar = styled.div`
-  background: #44423f;
+  background: #646464;
   display: flex;
   justify-content: flex-start;
   flex-basis: 8px;
@@ -33,7 +33,7 @@ const OutterBar = styled.div`
 
 const InnerBar = styled.div`
   display: flex;
-  background: green;
+  background: #006FCD;
   z-index: 1;
 `
 
