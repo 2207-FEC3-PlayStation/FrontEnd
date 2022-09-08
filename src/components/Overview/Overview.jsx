@@ -90,9 +90,9 @@ function Overview (props) {
   const [checked, setChecked] = useState(true);
   const [checkedID, setCheckedID] = useState();
   const [skus, setSkus] = useState();
-  const [quantity, setQuantity] = useState('-');
   const [size, setSize] = useState();
   const [sku, setSku] = useState();
+  const [sizeSelected, setSizeSelected] = useState(false);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -155,11 +155,10 @@ function Overview (props) {
       array.push('OUT OF STOCK')
     }
     setSizes(array);
-    setQuantity(1);
   }
 
   function changeQuantity(e) {
-    setQuantity(1);
+    setSizeSelected(true);
     var size = e.currentTarget.value;
     setSize(size);
     var max = 0;
@@ -173,7 +172,7 @@ function Overview (props) {
     if (max > 15) {
       max = 15;
     }
-    setmaxQuantity([...Array(max+1).keys()]);
+    setmaxQuantity(Array.from({length: max}, (_, i) => i + 1))
     setSku(currentSku);
   }
 
@@ -263,7 +262,7 @@ function Overview (props) {
         {styles.map((style, index) => (<StyleSelect checked={checked} handleCheck={handleCheck} currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle} prod={props.prod} checkedID={style.style_id}/>))}
         </Styles>
         </React.Fragment>}
-        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} quantity={quantity} handleAdd={handleAdd}/>
+        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} handleAdd={handleAdd} sizeSelected={sizeSelected}/>
       </ProdInfo>
     </FlexContainer>
     {props.prod && <ProdDet>

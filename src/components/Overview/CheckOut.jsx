@@ -77,17 +77,17 @@ var CheckOut = (props) => {
   return (
     <OuterDiv>
       <div>
-      <SizeSelect onChange={props.changeQuantity} >
+      <SizeSelect onChange={props.changeQuantity} required>
         <SizeOptions>SELECT SIZE</SizeOptions>
         {props.sizes.map((size, index) => {
           return <SizeOptions key={index} value={size}>{size}</SizeOptions>
         })}
 
       </SizeSelect>
-      <QuantitySelect>
-        <QuantityOptions>{props.quantity}</QuantityOptions>
+      <QuantitySelect required>
+        <QuantityOptions>QTY</QuantityOptions>
         {props.maxQuantity.map((num, index) => {
-          return <QuantityOptions key={index}>{num}</QuantityOptions>
+          return <QuantityOptions key={index} selected={index === 0}>{num}</QuantityOptions>
         })}
       </QuantitySelect>
       </div>
