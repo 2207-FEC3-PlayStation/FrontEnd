@@ -122,8 +122,8 @@ function ImageGallery (props) {
       </div>
       <Thumbnails>
       <ThumbnailList id ="ThumbnailList">
-        {props.photos.map((photo) => {
-          return <Thumbnail key={photo.url} url={photo.url} handleImage={props.handleImage} changeStyle={props.changeStyle} mainUrl={props.image}/>
+        {props.photos.map((photo, index) => {
+          return <Thumbnail key={index} url={photo.url} handleImage={props.handleImage} changeStyle={props.changeStyle} mainUrl={props.image} index={index}/>
           photo
         })}
       </ThumbnailList>

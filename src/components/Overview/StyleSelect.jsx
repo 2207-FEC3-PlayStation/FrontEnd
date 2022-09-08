@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import checkmark from '../../assets/checkmark.png'
+import checkmark from '../../assets/playstation.png'
 
 const Style1 = styled.img`
 border-radius: 90%;

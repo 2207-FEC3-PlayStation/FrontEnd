@@ -28,6 +28,7 @@ const Outfits = styled.div`
 const AddCard = styled.div`
   background-color: white;
   border: #494848 2px solid;
+  border-radius: 5px;
   position: relative;
   padding-top: 7.68%;
   padding-bottom: 7.4%;

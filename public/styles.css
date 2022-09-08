@@ -8,7 +8,7 @@ body {
   margin-right: auto;
   width: 1200px;
   position: relative;
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #root {
@@ -98,8 +98,8 @@ body {
   position: absolute;
   left: 50px;
   z-index: 1;
-  background-color: white;
-  border-radius: 50%
+  background: transparent;
+  /* border-radius: 50% */
 }
 
 .active {
@@ -130,6 +130,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  border-radius: 10px;
 }
 
 .extended-carousel {
@@ -140,11 +141,11 @@ body {
   justify-content: flex-end;
   align-items: center;
   z-index: 15;
+  border-radius: 10px;
 }
 
 .main-image {
   display: block;
-  /* position: absolute; */
   width: 410px;
   max-height: 540px;
   margin-right: 98px;
@@ -153,13 +154,8 @@ body {
   z-index: 9998;
 }
 
-/* .main-image:hover {
-    transform:scale(1.5)
-  } */
-
 .main-imageExtended {
   display: block;
-  /* position: absolute; */
   max-width: 810px;
   max-height: 620px;
   padding-right: 128px;
@@ -199,7 +195,7 @@ body {
 .left-arrow-ext {
   background: transparent;
   position: relative;
-  left: -75%;
+  left: -74%;
   font-size: 40px;
   border: none;
   z-index: 15;

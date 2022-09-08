@@ -93,6 +93,7 @@ function Overview (props) {
   const [size, setSize] = useState();
   const [sku, setSku] = useState();
   const [sizeSelected, setSizeSelected] = useState(false);
+  let [index, setIndex] = useState(1);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -138,7 +139,8 @@ function Overview (props) {
   }, [currentStyle])
 
   function handleImage(e) {
-    setImage(e.target.src);
+    setImage(defaultPhotos[e.target.alt].url);
+    setIndex(e.target.alt);
   }
 
   function changeStyle(e) {
@@ -223,18 +225,6 @@ function Overview (props) {
 
   // found out this method with js is now deprecated and doesn't work with chrome. might have to use jquery for this
   function handleAdd() {
-    // if (size === undefined) {
-    // //   // open size dropdown
-    // //   var dropdown = document.getElementById('size-select');
-    // //   console.log(dropdown);
-    // //   var event = new MouseEvent('mousedown')
-    // //   // console.log(event);
-    // //   // console.log(event.initMouseEvent('mousedown', true, true, window));
-    // //   dropdown.dispatchEvent(event);
-
-    // //   // show message "Please select size" above dropdown
-    // }
-
     var body = {"sku_id": sku}
     if (size && quantity && sku) {
       server.post('/cart', body)
@@ -248,11 +238,12 @@ function Overview (props) {
   }
 
   return (
+
   <Top>
     <Title />
     <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter} index={index}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews}/>}
         {styles && currentStyle &&

@@ -10,14 +10,19 @@ margin-top: 40px;
 `
 
 const SizeSelect = styled.select`
-background-color: transparent;
+background-color: #d9d5d5;
 color: black;
 padding: 20px 20px;
 margin-right: 10px;
 border:none;
 width: 213px;
 font-family: Arial, Helvetica, sans-serif;
-border: #504e4e 2px solid;
+/* border: #504e4e 2px solid; */
+border: none;
+border-radius: 10px;
+&:hover {
+  background-color: #908c8c;
+  }
 `
 
 const SizeOptions = styled.option`
@@ -25,13 +30,18 @@ font-family: Arial, Helvetica, sans-serif;
 `
 
 const QuantitySelect = styled.select`
-background-color: transparent;
+background-color: #d9d5d5;
 color: black;
 padding: 20px 20px;
 border:none;
 margin-left: 10px;
 font-family: Arial, Helvetica, sans-serif;
-border: #504e4e 2px solid;
+/* border: #504e4e 2px solid; */
+border-radius: 10px;
+border: none;
+&:hover {
+  background-color: #908c8c;
+  }
 `
 
 const QuantityOptions = styled.option`
@@ -42,15 +52,17 @@ const AddToCart = styled.button`
 width: 230px;
 padding: 20px 30px;
 margin-top: 30px;
-background-color: transparent;
+background-color: #006FCD;
 /* background: transparent url(${plus}) no-repeat right center; */
-color: black;
-border: #504e4e 2px solid;
+color: white;
+/* border: #504e4e 2px solid; */
+border-radius: 10px;
+border: none;
 margin-right: 10px;
 font-family: Arial, Helvetica, sans-serif;
 text-align: left;
 &:hover {
-  background-color: grey;
+  background-color: #84bdef;
   }
 `
 // const plus = styled.img`
@@ -58,14 +70,17 @@ text-align: left;
 // `
 
 const StarButton = styled.button`
-  background: transparent url(${starbutton}) no-repeat center;
+  background: #006FCD url(${starbutton}) no-repeat center;
   height: 70px;
   width: 70px;
-  border: #504e4e 2px solid;
+  /* border: #504e4e 2px solid; */
+  border: none;
+  color: white;
+  border-radius: 10px;
   margin-left: 10px;
   margin-top: 30px;
   &:hover {
-  background-color: grey;
+  background-color: #84bdef;
   }
 `
 
@@ -92,7 +107,7 @@ var CheckOut = (props) => {
       </QuantitySelect>
       </div>
       <Row>
-      <AddToCart onClick={props.handleAdd}>ADD TO BAG<img src={plus} style={{'marginLeft': '60px'}}></img></AddToCart>
+      <AddToCart onClick={props.handleAdd}>ADD TO BAG<img src={plus} style={{'marginLeft': '65px'}}></img></AddToCart>
       <StarButton></StarButton>
       </Row>
     </OuterDiv>

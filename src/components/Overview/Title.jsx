@@ -11,7 +11,9 @@ align-items: center;
 width: 100%;
 height: 70px;
 z-index: 15;
-background-color: #44423f;
+/* background-color: #44423f; */
+background-color: #006FCD;
+border-radius: 10px;
 `
 
 const Titled = styled.h1`
@@ -37,7 +39,7 @@ max-height: 30%;
 var Title = (props) => {
   return (
     <Header>
-      <Titled><img src={logo}></img><u><em>Playstation</em></u></Titled>
+      <Titled><img src={logo}></img><em>PlayStation</em></Titled>
         <SearchBar></SearchBar>
         <Img src={search}></Img>
     </Header>
