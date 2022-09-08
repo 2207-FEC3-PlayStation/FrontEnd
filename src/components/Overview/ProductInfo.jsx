@@ -26,6 +26,9 @@ font-family: Arial, Helvetica, sans-serif;
 font-size: 13px;
 margin: 0px;
 padding-left: 10px;
+a:active, a:visited {
+    color: blue;
+  }
 `
 
 const Price = styled.p`
@@ -33,6 +36,7 @@ font-family: Arial, Helvetica, sans-serif;
 font-size: 15px;
 margin-top: 20px;
 margin-bottom: 20px;
+
 `
 
 
