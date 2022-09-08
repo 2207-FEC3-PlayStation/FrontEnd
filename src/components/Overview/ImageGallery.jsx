@@ -76,8 +76,8 @@ const Button = styled.button`
   width: 30px;
   border: none;
   position: relative;
-  top: -307px;;
-  right: 2px;
+  top: -300px;;
+  right: 25px;
   &:hover {
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
   }
