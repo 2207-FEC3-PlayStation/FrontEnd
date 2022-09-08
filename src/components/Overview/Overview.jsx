@@ -36,7 +36,7 @@ position: absolute;
 left: 750px;
 word-wrap: break-word;
 width: 420px;
-padding-left: 40px;
+padding-left: 60px;
 `;
 
 const ProdDet = styled.div`
@@ -50,14 +50,14 @@ justify-content: flex-start;
 const ProdDescr = styled.div`
 padding: 10px;
 padding-left: 120px;
-margin-top: 110px;
+margin-top: 100px;
 margin-bottom: 30px;
 width: 55%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 110px;
+margin-top: 100px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
