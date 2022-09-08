@@ -140,7 +140,7 @@ function ReviewTile({data}) {
         </UserData>
       </TopRow>
 
-      <p style={{fontWeight: 'bold', margin: '5px 0'}}>{data.summary}</p>
+      <h3 style={{margin: '5px 0'}}>{data.summary}</h3>
 
       <p style={{margin: '5px, 0'}}>{data.body}</p>
 

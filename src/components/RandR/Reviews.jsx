@@ -11,23 +11,24 @@ const ReviewBox = styled.div`
   justify-content: flex-start;
   height: 100%;
   min-width: 75%;
-  overflow: auto;
 `
 const Topper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   position: absolute;
-  flex-basis: 6%;
   margin: 5px 0;
+  min-width: 350px;
   `
 
 const List = styled.div`
   display: flex;
+  position: absolute;
+  top: 25;
   flex-direction: column;
   margin-top: 25px;
-  height: 80%;
   min-width: 600px;
+  max-height; 600px;
   flex-basis: 80%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -131,14 +132,14 @@ function Reviews({product_id, count, ratingFilter}) {
         </Tile>
         )
       })}
+        <ButtonHolder>
+          <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px', backgroundColor: '#006FCD', color: 'white'}}>More Reviews</button>
+
+          <button style={{display: 'inline-block', margin: '10px', backgroundColor: '#006FCD', color: 'white'}} onClick={openAddReview}>Add a Review</button>
+        </ButtonHolder>
       </List>
 
 
-      <ButtonHolder>
-        <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px', backgroundColor: '#006FCD', color: 'white'}}>More Reviews</button>
-
-        <button style={{display: 'inline-block', margin: '10px', backgroundColor: '#006FCD', color: 'white'}} onClick={openAddReview}>Add a Review</button>
-      </ButtonHolder>
     </ReviewBox>
   )
 }
