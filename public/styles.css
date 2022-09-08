@@ -186,3 +186,21 @@ body {
   max-height: 620px;
   margin-right: 128px;
 }
+
+.left-arrow {
+  background: transparent;
+  position: relative;
+  left: -58%;
+  font-size: 40px;
+  border: none;
+  z-index: 15;
+}
+
+.left-arrow-ext {
+  background: transparent;
+  position: relative;
+  left: -75%;
+  font-size: 40px;
+  border: none;
+  z-index: 15;
+}
