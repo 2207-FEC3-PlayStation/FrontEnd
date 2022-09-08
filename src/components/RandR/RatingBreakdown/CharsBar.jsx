@@ -8,7 +8,6 @@ const CharsContainer = styled.div`
   justify-content: center;
   max-height: 100px;
   box-sizing: border-box;
-  margin-top: 10px;
 `
 
 const CharLabel = styled.h6`

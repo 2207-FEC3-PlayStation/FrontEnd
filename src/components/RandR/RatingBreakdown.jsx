@@ -44,13 +44,13 @@ function RatingBreakdown({update, filtersApplied, ratingFilter, reviews, avgRati
 
   return (
     <Ratings>
-      <h3>Ratings and Reviews</h3>
+      <h3 style={{margin: '5px 0'}}>Ratings and Reviews</h3>
       <Overall>
-        <h1 data-testid="Review-Num" style={{marginRight: '30px'}}>{ratingToTenth}</h1>
+        <h1 data-testid="Review-Num" style={{margin: '10px 30px 10px 0'}}>{ratingToTenth}</h1>
         <StarRating  avgRating={avgRating}/>
       </Overall>
-
-      <p style={{fontWeight: 'bold'}}>{count} total reviews</p>
+      <p>{recommended}% of reviews recommend this product</p>
+      <p style={{fontWeight: 'bold', margin: '5px 0'}}>{count} total reviews</p>
       {ratings.map((star) => {
         return <RatingsBar update={update} key={star}starCount={star} totalReviews={count} thisRating={parseInt(ratingsVals[ratings.indexOf(star)])} />
       })}
@@ -60,7 +60,6 @@ function RatingBreakdown({update, filtersApplied, ratingFilter, reviews, avgRati
       {chars.map((char) => {
         return <CharsBar key={char} char={char} thisRating={Number(charsVals[chars.indexOf(char)].value).toFixed(2)} />
       })}
-      <p>{recommended}% of reviews recommend this product</p>
     </Ratings>
   )
 }

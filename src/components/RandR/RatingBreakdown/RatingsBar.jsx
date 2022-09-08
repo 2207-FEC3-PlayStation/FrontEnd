@@ -5,19 +5,20 @@ const RatingsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 50px;
+  height: 30px;
 `
 
 const StarLabel = styled.p`
   text-decoration: underline;
   display: flex;
-  flex-basis: 20%
+  flex-basis: 20%;
+  margin: 8px 0 8px 5px;
 `
 
 const BarHolder = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 60%
+  flex-basis: 60%;
 `
 const BarSpacer = styled.div`
 flex-basis: 42.5%
@@ -29,7 +30,6 @@ const OutterBar = styled.div`
   justify-content: flex-start;
   flex-basis: 15%
 `
-
 
 const InnerBar = styled.div`
   display: flex;
@@ -71,7 +71,7 @@ function RatingsBar({update, starCount, totalReviews, thisRating}) {
 
   return (
     <RatingsContainer onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
-      <StarLabel>{starCount + '-stars'}</StarLabel>
+      <StarLabel>{starCount + ((starCount === '1') ? '-star': '-stars')}</StarLabel>
       <BarHolder>
         <BarSpacer/>
         <OutterBar>
