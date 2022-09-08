@@ -145,7 +145,7 @@ body {
 }
 
 .main-image {
-  display: block;
+  /* display: block; */
   width: 410px;
   max-height: 540px;
   margin-right: 98px;
@@ -173,6 +173,7 @@ body {
   max-width: 410px;
   max-height: 620px;
   margin-right: 98px;
+  padding: 20px;
 }
 
 .wrapper-ext {

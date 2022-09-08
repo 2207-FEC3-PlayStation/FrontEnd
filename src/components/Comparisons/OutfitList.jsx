@@ -26,8 +26,8 @@ const Outfits = styled.div`
 `
 
 const AddCard = styled.div`
-  background-color: white;
-  border: #494848 2px solid;
+  background-color: #eceaea;
+  border: #eceaea 2px solid;
   border-radius: 5px;
   position: relative;
   padding-top: 7.68%;
@@ -37,6 +37,9 @@ const AddCard = styled.div`
   width: 234px;
   text-align: center;
   line-height: 170px;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 const Addtext = styled.p`
@@ -44,13 +47,17 @@ margin-block-start: 0em;
 `
 
 const PlusButton = styled.button`
-  background: transparent url(${plusbutton}) no-repeat top;
+  background: #eceaea url(${plusbutton}) no-repeat top;
+  border-radius: 90px;
   height: 50px;
   width: 50px;
   border: none;
   position: absolute;
-  top: 60%;
+  top: 55%;
   right: 35%;
+  &:hover {
+    background-color: #b1aeae;
+  }
 `
 const LeftButton = styled.button`
   position: absolute;
@@ -137,13 +144,13 @@ function OutfitList (props) {
     <React.Fragment>
     <h4>YOUR OUTFIT</h4>
     <Outfits>
-      <AddCard>
-        <Addtext>Add To Outfit</Addtext>
+      <AddCard onClick={handleAdd}>
+        <Addtext><strong>ADD TO OUTFIT</strong></Addtext>
         <PlusButton onClick={handleAdd}></PlusButton>
       </AddCard>
       <Carousel id="OutfitList">
       {outfitItems.map((item) => (
-        <OutfitItem item={item} key={item.id} handleDelete={handleDelete}/>
+        <OutfitItem item={item} key={item.id} handleDelete={handleDelete} prod={props.prod} handleProduct={props.handleProduct}/>
       ))}
       </Carousel>
       {clickedR && (outfitItems.length > 3) && (

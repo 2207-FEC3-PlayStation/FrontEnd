@@ -5,7 +5,7 @@ import StarRating from '../../components/RandR/RatingBreakdown/StarRating.jsx';
 import server from '../../serverRequests.js';
 
 const Card = styled.div`
-  border: #494848 2px solid;
+  border: #eceaea 2px solid;
   border-radius: 5px;
   color: black;
   font-size: 20px;
@@ -15,6 +15,10 @@ const Card = styled.div`
   margin-bottom: 15px;
   margin-right: 5%;
   margin-top: 0px;
+  background-color: #eceaea;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 const Text = styled.small`
   color: rgb(57, 57, 57);
@@ -29,6 +33,7 @@ const Img = styled.img`
   width:180px;
   height:220px;
   opacity: 0.9;
+  border-radius: 5px;
 `
 const Button = styled.button`
   background: transparent url(${xbutton}) no-repeat top;
@@ -38,6 +43,9 @@ const Button = styled.button`
   position: absolute;
   top: 3%;
   right: 5%;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 function OutfitItem (props) {
@@ -104,8 +112,8 @@ function OutfitItem (props) {
     }, [reviews])
 
   return (
-      <Card>
-      <Img src={image}></Img><br></br>
+      <Card onClick={props.handleProduct}>
+      <Img src={image} alt={props.item.id}></Img><br></br>
       <Button onClick={props.handleDelete} value={props.item} name={props.item.name}></Button>
       <SmallText>{props.item.category.toUpperCase()}</SmallText><br></br>
       <Text>{props.item.name}</Text><br></br>

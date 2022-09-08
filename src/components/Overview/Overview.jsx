@@ -241,7 +241,7 @@ function Overview (props) {
 
   <Top>
     <Title />
-    <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
+    <Announce><strong><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT OFFER - NEW PRODUCT HIGHLIGHT</em></strong></Announce>
     <FlexContainer>
       <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter} index={index}/>
       <ProdInfo>

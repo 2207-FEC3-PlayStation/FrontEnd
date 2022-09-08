@@ -150,7 +150,7 @@ function Comparisons (props) {
         {!hideR && (products.length > 4) && (
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
-        <OutfitList prod={props.prod}/>
+        <OutfitList prod={props.prod} handleProduct={props.handleProduct}/>
       </Container>
     )
 }

@@ -7,7 +7,7 @@ import server from '../../serverRequests.js';
 
 
 const Card = styled.div`
-  border: #494848 2px solid;
+  border: #eceaea 2px solid;
   border-radius: 5px;
   color: black;
   font-size: 20px;
@@ -17,6 +17,10 @@ const Card = styled.div`
   padding-bottom: 2%;
   margin-left: 0;
   margin-right: 4%;
+  background-color: #eceaea;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 const Button = styled.button`
   background: transparent url(${starbutton}) no-repeat top;
@@ -26,6 +30,9 @@ const Button = styled.button`
   position: absolute;
   top: 2%;
   right: 5%;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 const Text = styled.small`
   color: rgb(57, 57, 57);
@@ -38,6 +45,7 @@ const Img = styled.img`
   width:180px;
   height:220px;
   opacity: 0.9;
+  border-radius: 5px;
 `
 function RelatedItem (props) {
 

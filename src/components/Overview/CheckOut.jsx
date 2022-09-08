@@ -62,7 +62,7 @@ margin-right: 10px;
 font-family: Arial, Helvetica, sans-serif;
 text-align: left;
 &:hover {
-  background-color: #84bdef;
+  background-color: #064881;
   }
 `
 // const plus = styled.img`
@@ -80,7 +80,7 @@ const StarButton = styled.button`
   margin-left: 10px;
   margin-top: 30px;
   &:hover {
-  background-color: #84bdef;
+  background-color: #064881;
   }
 `
 
