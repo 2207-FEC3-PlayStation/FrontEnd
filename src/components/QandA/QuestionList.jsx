@@ -148,24 +148,20 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
 
 
   const getAnswers = () => {
-    console.log('question id = ', question.questionID)
-
     setLoading(true);
     server.get('/qa/answers', { 'question_id': question.questionID , 'count': 1000})
       .then(response => {
-        console.log('answer response: ', response.data.results);
         setAnswers(response.data.results);
         setLoading(false);
       })
       .catch(err => {
         console.error('Unable to get answers. Sorry...', err);
       })
-
-      console.log('answers: ', answers);
   }
 
   const handleShowingAnswers = () => {
-    console.log('answers = ', answers);
+    console.log('answers? = ', answers);
+    console.log('answerCount = ', answerCount);
     if (questionClicked) {
       setQuestionClicked(!questionClicked);
     } else {
@@ -225,14 +221,14 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
       LOAD MORE ANSWERS
     </Button>
   )
-  const collapseAnswers = (
+  const hideAnswers = (
     <Button onClick={() => {
       handleShowingAnswers(false);
       setLoading(false);
       setAnswerCount(2);
       setSeeMoreClicked(!seeMoreClicked);
     }}>
-      Collapse answers
+      HIDE ANSWERS
     </Button>
   )
 
@@ -263,7 +259,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
           }}> <u>Yes</u> <span>({question.questionHelp})&emsp;|</span>
           </Yes>
           <AddAnswer onClick={(e) => {
-            e.stopPropagation();
+            //e.stopPropagation();
             setShow(true);
           }}>Add Answer</AddAnswer>
         </Helpful>
@@ -275,7 +271,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
         question_id={question.questionID}
         question_body={question.question}
         onClose={(e) => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setShow(false);
           getAnswers();
         }}
@@ -317,7 +313,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
       }
       {questionClicked && (
         seeMoreClicked && (
-          collapseAnswers
+          hideAnswers
         )
       )}
     </Questions>

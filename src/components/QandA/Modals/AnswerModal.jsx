@@ -42,11 +42,12 @@ export default function AnswerModal ({id, productName, question_id, question_bod
   const handleSubmit = (e) => {
     e.preventDefault();
     server.post('/qa/answers', data, {'question_id': question_id})
-      .then((response) => {
-        swal("🎉 Success! 🎉", "success");
+      .then(response => {
+        swal("🎉 Success! 🎉", "Thank you for your answer!");
         onClose();
       })
-      .catch(() => {
+      .catch(err => {
+        console.log('err = ', err)
         swal('Uh oh...', 'We just caught an error.', 'error');
       })
   }
@@ -63,7 +64,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         placeholder="Example: john123!"
         value={username}
         onChange={e => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setUsername(e.target.value);
         }}
         required
@@ -84,7 +85,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         placeholder="Example: john@email.com"
         value={email}
         onChange={e => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setEmail(e.target.value);
         }}
         required
@@ -106,7 +107,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         placeholder="Enter your answers here..."
         value={body}
         onChange={e => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setBody(e.target.value);
         }}
         required
