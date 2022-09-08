@@ -7,6 +7,7 @@ import Title from './Title.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
+import $ from "jquery";
 
 const Top = styled.div`
 max-width: 1200;
@@ -108,8 +109,6 @@ function Overview (props) {
             array.push(results[0].skus[sku].size)
           }
           setSizes(array);
-          // var max = Object.values(results[0].skus)[0].quantity;
-          // setmaxQuantity([...Array(max+1).keys()])
           setmaxQuantity([]);
           setSkus(results[0].skus);
           for (var i = 0; i < results.length; i++) {
@@ -159,7 +158,6 @@ function Overview (props) {
     setQuantity(1);
   }
 
-  // need to finish this function
   function changeQuantity(e) {
     setQuantity(1);
     var size = e.currentTarget.value;
@@ -224,14 +222,20 @@ function Overview (props) {
     setCheckedID(style.style_id)
   }
 
+  // found out this method with js is now deprecated and doesn't work with chrome. might have to use jquery for this
   function handleAdd() {
     // if (size === undefined) {
-      // open size dropdown
-      // show message "Please select size" above dropdown
+    // //   // open size dropdown
+    // //   var dropdown = document.getElementById('size-select');
+    // //   console.log(dropdown);
+    // //   var event = new MouseEvent('mousedown')
+    // //   // console.log(event);
+    // //   // console.log(event.initMouseEvent('mousedown', true, true, window));
+    // //   dropdown.dispatchEvent(event);
+
+    // //   // show message "Please select size" above dropdown
     // }
 
-    // if both valid size and valid quantity
-      // add to cart
     var body = {"sku_id": sku}
     if (size && quantity && sku) {
       server.post('/cart', body)
