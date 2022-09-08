@@ -78,7 +78,7 @@ var CheckOut = (props) => {
     <OuterDiv>
       <div>
       <SizeSelect onChange={props.changeQuantity} >
-        <SizeOptions >SELECT SIZE</SizeOptions>
+        <SizeOptions>SELECT SIZE</SizeOptions>
         {props.sizes.map((size, index) => {
           return <SizeOptions key={index} value={size}>{size}</SizeOptions>
         })}
@@ -92,7 +92,7 @@ var CheckOut = (props) => {
       </QuantitySelect>
       </div>
       <Row>
-      <AddToCart>ADD TO BAG<img src={plus} style={{'marginLeft': '60px'}}></img></AddToCart>
+      <AddToCart onClick={props.handleAdd}>ADD TO BAG<img src={plus} style={{'marginLeft': '60px'}}></img></AddToCart>
       <StarButton></StarButton>
       </Row>
     </OuterDiv>

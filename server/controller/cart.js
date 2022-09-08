@@ -12,7 +12,9 @@ module.exports = {
     })
   },
 
-  addToCart: () => {
-
+  addToCart: (data) => {
+    return axios.post(process.env.DB_API + '/cart', data, {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
   }
 }
