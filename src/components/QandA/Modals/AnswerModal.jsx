@@ -130,7 +130,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
               {Answer}
               {photos.length < 5 &&
                 <div>
-                  <label htmlFor="photos">Not yet implemented: Upload your photos</label> <br></br>
+                  <label htmlFor="photos">Upload your photos</label> <br></br>
                   <input
                     type="file"
                     name="files"
