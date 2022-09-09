@@ -56,6 +56,8 @@ function ReviewTile({data}) {
   const [report, setReport] = useState({text: 'Report', reported: false})
   const [modalImg, setModalImg] = useState()
   const [modalImgDisplay, setModalImageDisplay] = useState(false)
+  const [showBody, setShowBody] = useState(250)
+  const [ellipsis, setEllipsis] = useState('...');
 
 
 //-----------conditional rendering variables-----
@@ -95,8 +97,11 @@ function ReviewTile({data}) {
   useEffect(() => {
     if (data) {
       setHelpfulness(data.helpfulness);
+      if (data.body.length < 250 || showBody === data.body.length) {
+        setEllipsis('');
+      }
     }
-  }, [data, data.helpfulness]);
+  }, [data, data.helpfulness, showBody]);
 
 
 //----------Event Handlers--------------
@@ -128,6 +133,11 @@ function ReviewTile({data}) {
     setModalImg();
   }
 
+  let expandBody = (e) => {
+    setShowBody(data.body.length);
+    e.target.className = 'moreShown';
+  }
+
 
   return (
     <Tile>
@@ -142,7 +152,8 @@ function ReviewTile({data}) {
 
       <h3 style={{margin: '5px 0'}}>{data.summary}</h3>
 
-      <p style={{margin: '5px, 0'}}>{data.body}</p>
+      <p style={{margin: '5px, 0'}}>{data.body.substring(0, showBody) + `${ellipsis}`}</p>
+      <Button className='showMore' onClick={expandBody}>Show More</Button>
 
       <span style={{display: 'block'}}>
         {data.photos.map((photo) => {

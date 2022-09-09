@@ -28,7 +28,7 @@ const List = styled.div`
   flex-direction: column;
   margin-top: 25px;
   min-width: 600px;
-  max-height; 600px;
+  max-height: 600px;
   flex-basis: 80%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -45,6 +45,7 @@ const ButtonHolder = styled.div`
 function Reviews({product_id, count, ratingFilter}) {
 
   const [totalReviews, setTotalReviews] = useState();
+  const [reviewsPage, setReviewsPage] = useState(1);
   const [showReviews, setShowReviews] = useState(2);
   const [sortedBy, setSortedBy] = useState({relevant: 'relevance'});
   const [reviews, setReviews] = useState([]);
@@ -63,7 +64,7 @@ function Reviews({product_id, count, ratingFilter}) {
   useEffect(() => {
     if (product_id && count && ratingFilter) {
       let sort = Object.keys(sortedBy)[0];
-      server.get('/reviews', {'sort': sort, 'product_id': product_id, 'count': count})
+      server.get('/reviews', {'sort': sort, 'product_id': product_id, 'count': count, 'page': reviewsPage})
         .then((res) => {
           setTotalReviews(res.data.count);
           let allReviews = res.data.results;
@@ -78,7 +79,7 @@ function Reviews({product_id, count, ratingFilter}) {
           console.log(err);
         })
     }
-  }, [product_id, sortedBy, count, ratingFilter])
+  }, [product_id, sortedBy, count, ratingFilter, reviewsPage])
 
 //---------event Handlers---------
 

@@ -15,7 +15,8 @@ const CharLabel = styled.h6`
   font-size: 12px;
   flex-basis: 10%
   box-sizing: border-box;
-  margin: 5px 0px 0px 0px
+  margin: 5px 0px 0px 0px;
+  color: #006FCD
 `
 const SliderHolder = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const SubHolder = styled.div`
 `
 
 const OutterBar = styled.div`
-  background: #646464;
+  background: #8a8a8a;
   display: flex;
   justify-content: flex-start;
   margin-bottom: 5px;
@@ -62,6 +63,7 @@ const CharEndpoint = styled.h6`
   height: 12px;
   margin-top: 5px;
   margin-bottom: 10px;
+  color: #006FCD
 `
 
 function CharsBar({char, thisRating}) {
@@ -90,11 +92,10 @@ useEffect(() => {
 
   return (
     <CharsContainer>
-      <CharLabel>{char}</CharLabel>
       <SliderHolder>
         <SubHolder>
           <Indicator>
-            <div style={{flexBasis: `${ratingWidth}`}}/>
+            <CharLabel style={{flexBasis: `${ratingWidth}`}}>{char}</CharLabel>
             <div className='checkMark'></div>
           </Indicator>
           <OutterBar>
