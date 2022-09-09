@@ -1,32 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import server from '../../serverRequests.js';
-// import { format, parseISO } from 'date-fns';
 import styled from 'styled-components';
 import AnswersList from './AnswerList.jsx';
 import AnswerModal from './Modals/AnswerModal.jsx';
 import swal from 'sweetalert';
 
 const Questions = styled.div`
-  display: flex;
-  border: 1px solid;
-  border-radius: 5px;
-  height: auto;
   min-width: 80%;
-  margin-top: 10px;
   transition: background-color 0.35s ease-out 0s;
-  flex-direction: column;
-  align-items: center;
   -webkit-transition: background-color .35s ease-out;
   -moz-transition: background-color .35s ease-out;
   -o-transition: background-color .35s ease-out;
   transition: background-color .35s ease-out;
+  cursor: ns-resize;
   &:hover {
-    background-color: rgba(255, 0, 0, .2);
+    background-color: #f0f8ff;
+    border: 1px solid #6495ed;
     // transform: scale(1.03);
   }
   @media {
-    width: 65vw;
+    width: 15vw;
   }
 `;
 
@@ -42,7 +36,7 @@ const AnswersBlock = styled.div`
 `
 
 const AStyle = styled.div`
-  font-size: 1.2em;
+  font-size: 1em;
   margin-bottom: 0.5em;
   margin-left: 10px;
   display: inline-block;
@@ -64,15 +58,12 @@ const Container = styled.div`
 `
 
 const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid grey;
+  background: none;
+  border: none;
   margin: 0 0 1em 1em;
   padding: 0.5em 1em;
   display: block;
   &:hover {
-    background: lightgrey;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
     transform: scale(1.05);
   }
 `;
@@ -137,6 +128,7 @@ const AnswerList = styled.div`
 
 function QuestionList ({question, id, productName, qRerender, setQRerender}) {
   const [answers, setAnswers] = useState(null);
+  const [reload, setReload] = useState(true);
   const [answerCount, setAnswerCount] = useState(2);
   const [questionClicked, setQuestionClicked] = useState(false);
   const [seeMoreClicked, setSeeMoreClicked] = useState(false);
@@ -147,7 +139,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
   const [loading, setLoading] = useState(false);
 
 
-  const getAnswers = () => {
+  useEffect(() => {
     setLoading(true);
     server.get('/qa/answers', { 'question_id': question.questionID , 'count': 1000})
       .then(response => {
@@ -157,68 +149,60 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
       .catch(err => {
         console.error('Unable to get answers. Sorry...', err);
       })
-  }
+  }, [question.questionID, id, reload]);
 
   const handleShowingAnswers = () => {
-    console.log('answers? = ', answers);
-    console.log('answerCount = ', answerCount);
     if (questionClicked) {
       setQuestionClicked(!questionClicked);
     } else {
-      getAnswers();
+      // getAnswers();
       setQuestionClicked(!questionClicked);
     }
   }
 
-  // const handleHelpful = (stateVariable, qOrA, id, helpful, setStateVariable, rerender, setRerender) => {
-  //   // console.log(`/qa/${qOrA}/${id}/${helpful}`);
-  //   if (stateVariable) {
-  //     swal("Helpful?", "We only allow one click of 'Yes'. Thank you for your feedback. It helps others in their decision making.", "error");
-  //   } else {
-  //     axios
-  //       .put(`/qa/${qOrA}/${id}/${helpful}`)
-  //       .then(() => {
-  //         // setYesCount(yesCount + 1);
-  //         setStateVariable(true);
-  //         return getAnswers();
-  //       })
-  //       .then(response => {
-  //         swal("Thank You", `Thank you for your feedback regarding this ${qOrA.slice(0, -1)}. People come to our site because of your feedback.`, "success");
-  //       })
-  //       .catch(err => console.error(err))
-  //       .then(() => {
-  //         setRerender(rerender + 1);
-  //         console.log(rerender);
-  //       });
-  //   }
-  // }
+  const handleHelpful = (stateVariable, qOrA, id, helpful, setStateVariable, rerender, setRerender) => {
+    if( qOrA === 'questions') {
+      var x = {'question_id': id};
+    } else {
+      var  x = {'answer_id': id};
+    }
+    if (stateVariable) {
+      swal("Helpful?", "You can only click 'Yes' once.", "error");
+    } else {
+      server.put(`/qa/${qOrA}/helpful`, x)
+        .then(response => {
+          swal("Thank You", 'Your feedback has been noted.', "success")
+          return setStateVariable(true)
+        })
+        .catch(err => console.error(err))
+        .then(() => {
+          setRerender(rerender + 1),
+          console.log(rerender)
+        })
+    }
+  }
 
-  // const handleReported = (stateVariable, qOrA, id, report, setStateVariable) => {
-  //   // console.log(`/qa/${qOrA}/${id}/${report}`);
-  //   if (stateVariable) {
-  //     swal("Helpful?", "We only allow fone click of 'Reported'. We will review this as soon as possible.", "error");
-  //   } else {
-
-  //     axios
-  //       .put(`/qa/${qOrA}/${id}/${report}`)
-  //       .then(() => {
-  //         setStateVariable(true);
-  //         let customerSupport = `We have marked this ${qOrA.slice(0, -1)} as "Reported" and will perform a formal review.`
-  //         swal("Thank You", `Thank you for your feedback regarding this ${qOrA.slice(0, -1)}. People come to our site because of your feedback. ${report === 'report' ?customerSupport : ''}`, "success");
-  //       })
-  //       .catch(err => {
-  //         swal('An error happened...', 'Unfortunately, there was an error on our side. Please try again in a little bit.', 'error');
-  //         // console.error(err);
-  //       })
-  //   }
-  // }
+  const handleReported = (stateVariable, qOrA, id, report, setStateVariable) => {
+    if (stateVariable) {
+      swal("Helpful?", "We only allow fone click of 'Reported'. We will review this as soon as possible.", "error");
+    } else {
+      server.put('/qa/answers/report', { 'answer_id': id })
+        .then(() => {
+          setStateVariable(true);
+          swal("Thank You", 'We have marked this answer as "Reported" and will be reviewed soon.Your report has been noted', "success");
+        })
+        .catch(err => {
+          swal('Yikes...', 'There was an error on our side. Try again later.', 'error');
+        })
+    }
+  }
 
   const seeMoreAnswers = (
     <Button onClick={() => {
       setAnswerCount(answerCount + answers.length - 2)
       setSeeMoreClicked(!seeMoreClicked);
       }}>
-      LOAD MORE ANSWERS
+      <b>SEE MORE ANSWERS</b>
     </Button>
   )
   const hideAnswers = (
@@ -228,7 +212,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
       setAnswerCount(2);
       setSeeMoreClicked(!seeMoreClicked);
     }}>
-      HIDE ANSWERS
+      <b>COLLAPSE ANSWERS</b>
     </Button>
   )
 
@@ -247,15 +231,15 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
         <Helpful>
           Helpful?
           <Yes onClick={(e) => {
-            // e.stopPropagation();
-            // handleHelpful(
-            //   qHelpful,
-            //   'questions',
-            //   question_id,
-            //   'helpful',
-            //   setQHelpful,
-            //   qRerender,
-            //   setQRerender)
+            //e.stopPropagation();
+            handleHelpful(
+              qHelpful,
+              'questions',
+              question.questionID,
+              'helpful',
+              setQHelpful,
+              qRerender,
+              setQRerender)
           }}> <u>Yes</u> <span>({question.questionHelp})&emsp;|</span>
           </Yes>
           <AddAnswer onClick={(e) => {
@@ -273,18 +257,18 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
         onClose={(e) => {
           //e.stopPropagation();
           setShow(false);
-          getAnswers();
+          setReload(!reload);
         }}
         show={show}
       />
-      {questionClicked && answers && !loading &&
+      {answers && !loading &&
         answers.length === 0 && (
           <NoAnswers>
             <b>No answers yet. Be the first to add an answer to this question!</b>
           </NoAnswers>
         )
       }
-      {questionClicked && answers && (
+      {answers && (
         <AnswersBlock>
           {answers.length !== 0 && (
             <AStyle><b>A:</b></AStyle>
@@ -295,8 +279,8 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
                 <AnswersList
                   key={answer.answer_id}
                   answer={answer}
-                  // handleHelpful={handleHelpful}
-                  // handleReported={handleReported}
+                  handleHelpful={handleHelpful}
+                  handleReported={handleReported}
                   question_id={question.questionID}
                   aRerender={aRerender}
                   setARerender={setARerender}
@@ -306,15 +290,13 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
           </AnswerList>
         </AnswersBlock>
       )}
-      {questionClicked && !loading && (
+      {answers && !loading && (
         answerCount < answers.length && (
           seeMoreAnswers
         ))
       }
-      {questionClicked && (
-        seeMoreClicked && (
+      {seeMoreClicked && (
           hideAnswers
-        )
       )}
     </Questions>
   )

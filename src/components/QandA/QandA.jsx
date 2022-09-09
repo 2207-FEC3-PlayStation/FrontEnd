@@ -16,7 +16,7 @@ const Button = styled.button`
   border: 2px solid grey;
   margin-right: 1em;
   padding: 0.5em 1em;
-  &:hover {
+  &:hover {Arial, Helvetica,
     background: lightgrey;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
     transform: scale(1.05);
@@ -83,21 +83,20 @@ function QandA({ prod }) {
   const [productName, setProductName] = useState('');
   const [results, setResults] = useState('');
   const [showData, setShowData] = useState([
-    // {questionID: '', question: '', answers: []}
+    /************************************
+    * {
+    *  questionID: '',
+    *  questionHelp: '0',
+    *  question: '',
+    *  answers: [] (do not need this)
+    * }
+    *************************************/
   ]);
   const [shownQuestions, setShownQuestions] = useState([]);
   const [showQModel, setShowQModel] = useState(false);
   const [qRerender, setQRerender] = useState(0);
   const [questionCount, setQuestionCount] = useState(4);
   const [questionID, setQuestionID] = useState('642440');
-
-  // test (console)
-  // const data = () => {
-  //   return (
-  //     // console.log('')
-  //     console.log('showData = ', showData)
-  //   )
-  // }
 
   // ==================================== PRODUCT_ID ====================================
 
@@ -136,71 +135,19 @@ function QandA({ prod }) {
     }
   }, [results, showQModel])
 
-  useEffect(() => {
-    if(showData && questionCount) {
-      var questions = showData.filter((question) => {
-        if (search.length < 3) {
-          return question;
-        } else if ( question.question.toLowerCase().includes(search.toLowerCase())) {
-          return question;
-        }
-      }).slice(0, questionCount);
-    }
-    setShownQuestions(questions);
-  }, [showData, questionCount])
-
   // ==================================== Question Modal =============================
-
   if (showQModel) {
     document.body.classList.add('active-modal');
   } else {
     document.body.classList.remove('active-modal');
   }
-
-  // ==================================== ANSWERS ====================================
-
-  // useEffect(() => {
-  //   if (productID) {
-  //     server.get('/qa/answers', { 'question_id': questionID })
-  //       .then((answersResponse) => {
-  //         console.log('===ANSWERS===')
-  //   })
-  // }, [productID])
-
-  // =================================================================================
+  // ================================================================================
 
   const searchBar = (event) => {
     setSearch(event.target.value)
   }
 
-  const loadMoreAnswers = () => {
-
-    console.log('showData = ', showData);
-
-    // get max answers number
-    // var max;
-    // var arr = [];
-    // var len = [];
-    // for (let i = 0; i < results.length; i++) {
-    //   arr.push(Object.values(results[i].answers))
-    // }
-    // for (let i = 0; i < arr.length; i++) {
-    //   len.push(arr[i].length)
-    // }
-    // max = Math.max(...len);
-
-    // if (max === count.answers) {
-    //   return console.log('No more answers!')
-    // }
-    // setCount(count => ({ ...count, answers: count.answers + 1 }));
-    // console.log('results = ', results);
-    // console.log('count = ', count);
-    // console.log('showData = ', showData);
-  }
-
   const moreAnsweredQuestions = () => {
-    // console.log('results = ', results)
-    // console.log('showData = ', showData)
     if (results.length === questionCount) {
       return console.log('No more questions!')
     }
@@ -230,16 +177,22 @@ function QandA({ prod }) {
         </Search>
         <br/>
         {showData.length > 0 ?
-          <p>Click on a question to view it's respective answers.</p> :
+          <p>Click on a question to view the answers</p> :
           <React.Fragment>
-            <p>There are no questions yet for this product. Click "Add a Question" to be the first to add one.</p>
+            <p>There are no questions for this product. Click "Add a Question" to add a question.</p>
             <Button onClick={() => setShowQModel(true)}>
               <b>ADD A QUESTION +</b>
             </Button>
           </React.Fragment>
         }
         <Questions>
-        {shownQuestions.map((question) => {
+        {showData.filter((question) => {
+            if (search.length < 3) {
+              return question;
+            } else if (question.question.toLowerCase().includes(search.toLowerCase())) {
+              return question;
+            }
+          }).slice(0, questionCount).map((question) => {
             return <QuestionList
                       key={question.questionID}
                       question={question}

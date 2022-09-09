@@ -61,7 +61,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         name="username"
         maxLength={60}
         size={36}
-        placeholder="Example: john123!"
+        placeholder="Example: jack543!"
         value={username}
         onChange={e => {
           //e.stopPropagation();
@@ -69,7 +69,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         }}
         required
       />
-      <p className="static">DO NOT use your full name or email address.</p>
+      <p className="static">For privacy reasons, do not use your full name or email address.</p>
     </label>
   )
 
@@ -82,7 +82,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         name="email"
         maxLength={60}
         size={41}
-        placeholder="Example: john@email.com"
+        placeholder="Example: jack@email.com"
         value={email}
         onChange={e => {
           //e.stopPropagation();
@@ -90,7 +90,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         }}
         required
       />
-      <p className="static">No emails will be sent...don't worry</p>
+      <p className="static">For authentication reasons, you will not be emailed.</p>
     </label>
   )
 

@@ -14,14 +14,12 @@ module.exports = {
       paramString += key + '=' + params[key] + '&'
     }
     paramString = paramString.substring(0, paramString.length - 1);
-    // console.log('paramString: ', paramString);
     return axios.get(process.env.DB_API +  '/qa/questions' + paramString, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
   },
 
   getAnswers: (params) => {
-    console.log('params = ', params);
     var paramString = '?';
     if (!params.question_id) {
       throw new Error('No question_id provided');
@@ -31,8 +29,6 @@ module.exports = {
     }
     var ques_id = paramString.substring(13, paramString.length - 12);
     var count = paramString.substring(19, paramString.length - 1);
-    console.log('ques_id: ', ques_id);
-    console.log('count: ', count);
     return axios.get(process.env.DB_API +  '/qa/questions/' + ques_id + '/answers' + count, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
@@ -46,23 +42,35 @@ module.exports = {
   },
 
   addAnswer: (data, params) => {
-    console.log('azhere --->');
-    console.log('data = ', data);
-    console.log('params = ', params);
     var qID = params.question_id;
-    console.log('qID = ', qID);
-    console.log('.pos(', process.env.DB_API + '/qa/questions/' + qID + '/answers', ')');
     return axios.post(process.env.DB_API + '/qa/questions/' + qID + '/answers', data, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })
   },
 
-  helpful: (endpoint, id) => {
-
+  helpful: (id) => {
+    var qOrA = '';
+    var val = '';
+    for (key in id) {
+      qOrA += key
+      val = id[key]
+    }
+    if (qOrA[0] === 'a') {
+      var x = 'answers/';
+    } else {
+      var x = 'questions/';
+    }
+    return axios.put(process.env.DB_API + '/qa/' + x + val + '/helpful', null, {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
   },
 
-  report: (endpoint, id) => {
-
+  report: (id) => {
+    console.log('report');
+    console.log('put(',process.env.DB_API + '/qa/answers/' + id.answer_id + '/report')
+    return axios.put(process.env.DB_API + '/qa/answers/' + id.answer_id + '/report', null, {
+      headers: {'Authorization': process.env.GIT_TOKEN}
+    })
   },
 
 }
