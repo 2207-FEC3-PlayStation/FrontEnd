@@ -134,9 +134,9 @@ function Reviews({product_id, count, ratingFilter}) {
         )
       })}
         <ButtonHolder>
-          <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px', backgroundColor: '#006FCD', color: 'white'}}>More Reviews</button>
+          <button onClick={moreReviews} style={{display: showMoreReviews, margin: '10px', backgroundColor: '#006FCD', color: 'white'}}>MORE REVIEWS</button>
 
-          <button style={{display: 'inline-block', margin: '10px', backgroundColor: '#006FCD', color: 'white'}} onClick={openAddReview}>Add a Review</button>
+          <button style={{display: 'inline-block', margin: '10px', backgroundColor: '#006FCD', color: 'white'}} onClick={openAddReview}>ADD A REVIEW</button>
         </ButtonHolder>
       </List>
 

@@ -12,7 +12,7 @@ const StarLabel = styled.p`
   text-decoration: underline;
   display: flex;
   flex-basis: 20%;
-  margin: 8px 0 8px 5px;
+  margin: 8px 0 8px;
 `
 
 const BarHolder = styled.div`
@@ -62,7 +62,7 @@ function RatingsBar({update, starCount, totalReviews, thisRating}) {
   }
 
   return (
-    <RatingsContainer onClick={clickedRating} style={{margin: '3px', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
+    <RatingsContainer onClick={clickedRating} style={{margin: '3px 0', borderRadius: '5px', backgroundColor: `${backgroundColor}`}}>
       <StarLabel>{starCount + ((starCount === '1') ? '-star': '-stars')}</StarLabel>
       <BarHolder>
         <BarSpacer/>

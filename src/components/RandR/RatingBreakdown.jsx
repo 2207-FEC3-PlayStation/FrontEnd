@@ -44,7 +44,7 @@ function RatingBreakdown({update, filtersApplied, ratingFilter, reviews, avgRati
 
   return (
     <Ratings>
-      <h3 style={{margin: '5px 0'}}>Ratings and Reviews</h3>
+      <h4 style={{margin: '5px 0'}}>RATINGS AND REVIEWS</h4>
       <Overall>
         <h1 data-testid="Review-Num" style={{margin: '10px 30px 10px 0'}}>{ratingToTenth}</h1>
         <StarRating  avgRating={avgRating}/>
