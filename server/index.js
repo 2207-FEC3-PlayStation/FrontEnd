@@ -33,24 +33,31 @@ app.put('/reviews/helpful', (req, res) => {models.Reviews.helpful(req, res)});
 
 app.put('/reviews/report', (req, res) => {models.Reviews.report(req, res)});
 
-//-------QandA Handlers-------
+//------------------------------- QandA Handlers -------------------------------
+
+// Questions List
 app.get('/qa/questions', (req, res) => {models.QandA.getQuestions(req, res)});
 
+// Answers List
 app.get('/qa/answers', (req, res) => {models.QandA.getAnswers(req, res)});
 
-app.post('qa/questions', (req, res) => {models.QandA.addQuestion(req, res)});
+// Add a Question
+app.post('/qa/questions', (req, res) => {models.QandA.addQuestion(req, res)});
 
+// Add an Answer
+app.post('/qa/answers', (req, res) => {models.QandA.addAnswer(req, res)});
 
-app.post('/qa/answers', (req, res) => {models.QandA.addAnswer(req, res)})
+// Mark Question as Helpful
+app.put('/qa/questions/helpful', (req, res) => {models.QandA.helpful(req, res)});
 
-app.put('/qa/questions/helpful'), (req, res) => {models.QandA.helpful('/questions', req, res)};
+// Report Question --------- NOT REQUIRED
+//app.put('/qa/questions/report'), (req, res) => {models.QandA.report('/questions', req, res)};
 
-app.put('/qa/answers/helpful'), (req, res) => {models.QandA.helpful('/answers', req, res)};
+// Mark Answer as Helpful
+app.put('/qa/answers/helpful', (req, res) => {models.QandA.helpful(req, res)});
 
-app.put('/qa/questions/report'), (req, res) => {models.QandA.report('/questions', req, res)};
-
-app.put('/qa/answers/report'), (req, res) => {models.QandA.report('/answers', req, res)};
-
+// Report Answer
+app.put('/qa/answers/report', (req, res) => {models.QandA.report(req, res)});
 
 
 //-------Cart Handlers-------

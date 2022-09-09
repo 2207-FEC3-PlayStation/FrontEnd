@@ -22,39 +22,41 @@ module.exports = {
   },
 
   addQuestion: (req, res) => {
-    controller.addQuestion()
+    controller.addQuestion(req.body)
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(201).send(result.data)
       })
       .catch((err) => {
+        console.log('err: ', err);
         res.status(400).send(err);
       })
   },
 
   addAnswer: (req, res) => {
-    controller.addAnswer()
+    controller.addAnswer(req.body, req.query)
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(201).send(result.data)
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+        res.status(400).send(err);
+      })
+  },
+
+  helpful: (req, res) => {
+    controller.helpful(req.query)
+      .then((result) => {
+        res.status(204).end()
       })
       .catch((err) => {
         res.status(400).send(err);
       })
   },
 
-  helpful: (path, req, res) => {
-    controller.helpful(path)
+  report: (req, res) => {
+    controller.report(req.query)
       .then((result) => {
-        res.status(200).send(result.data)
-      })
-      .catch((err) => {
-        res.status(400).send(err);
-      })
-  },
-
-  report: (path, req, res) => {
-    controller.report(path)
-      .then((result) => {
-        res.status(200).send(result.data)
+        res.status(204).send(result.data)
       })
       .catch((err) => {
         res.status(400).send(err);
