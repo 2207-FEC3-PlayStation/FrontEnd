@@ -11,7 +11,6 @@ align-items: center;
 width: 100%;
 height: 70px;
 z-index: 15;
-/* background-color: #44423f; */
 background-color: #006FCD;
 border-radius: 10px;
 `
@@ -23,10 +22,10 @@ color: white;
 `
 
 const SearchBar = styled.input`
-background: transparent;
-border: none;
-border-bottom: 2px solid white;
-color: white;
+background: #eceaea ;
+border-radius: 5px;
+border: #eceaea 2px solid;
+color: black;
 `
 
 const Img = styled.img`
@@ -34,7 +33,10 @@ padding: 10px;
 max-width: 30%;
 max-height: 30%;
 `
-
+function switchMode() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
 
 var Title = (props) => {
   return (
@@ -42,6 +44,10 @@ var Title = (props) => {
       <Titled><img src={logo}></img><em>PlayStation</em></Titled>
         <SearchBar></SearchBar>
         <Img src={search}></Img>
+        <label className="switch" style={{'marginRight': '10px'}} >
+          <input type="checkbox" onChange={switchMode}/>
+          <span className="slider round"></span>
+        </label>
     </Header>
   )
 }
