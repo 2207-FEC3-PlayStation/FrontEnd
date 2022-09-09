@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import checkmark from '../../assets/checkmark.png'
+import checkmark from '../../assets/playstation.png'
 
 const Style1 = styled.img`
 border-radius: 90%;
 margin-right: 10px;
 width: 70px;;
 height: 70px;
-border: solid 1px black;
+border: none;
 margin: 10px 10px 10px 0px;
 position: relative;
+&:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 
 const Button = styled.button`
