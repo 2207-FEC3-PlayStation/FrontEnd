@@ -137,7 +137,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
                     accept="image/png, image/jpeg"
                     multiple
                     onChange={(e) => {
-                      console.log('NOT AVAILABLE ATM');
+                      //console.log('NOT AVAILABLE ATM');
                       //let files = e.target.files;
                       //photoUrlsToArray(files, setPhotos);
                     }}
