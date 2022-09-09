@@ -288,13 +288,13 @@ function Overview (props) {
     </FlexContainer>
     {props.prod && <ProdDet>
       <ProdDescr>
-        <h4>Description</h4>
+        <h4>DESCRIPTION</h4>
         <p>{props.prod.description}</p>
       </ProdDescr>
       <ProdChar>
-        <h4>Features</h4>
+        <h4>FEATURES</h4>
         {props.prod.features.map((feature) => {
-          return <React.Fragment key={feature.value}><span>✓ {feature.value} {feature.feature}</span><br></br></React.Fragment>
+          return <React.Fragment key={feature.value}><span>✓ {feature.value.replace(/[A-Z]/g, ' $&').trim()} {feature.feature}</span><br></br></React.Fragment>
         })}
       </ProdChar>
     </ProdDet>}

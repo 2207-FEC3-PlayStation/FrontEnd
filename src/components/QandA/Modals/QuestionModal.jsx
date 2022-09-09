@@ -109,7 +109,7 @@ export default function QuestionModal ({productID, productName, onClose, showQMo
       <div className="modal-content">
         <div className="modal-header">
           <div className="modal-header">
-            <h3 className="modal-title">Ask Your Question</h3>
+            <h3 className="modal-title">ASK YOUR QUESTION</h3>
             <h4 className="modal-subtitle">about the {productName}</h4>
           </div>
           <div className="modal-body">

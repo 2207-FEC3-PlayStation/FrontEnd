@@ -10,8 +10,7 @@ const RandRComp = styled.div`
   justify-content: space-evenly;
   overflow-y: auto;
   overflow-x: hidden;
-  border-top: 1px solid black;
-  padding-top: 10px;
+  padding-top: 50px;
 `
 
 const RatingsComp = styled.div`

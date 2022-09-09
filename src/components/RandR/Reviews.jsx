@@ -27,7 +27,7 @@ const List = styled.div`
   top: 25;
   flex-direction: column;
   margin-top: 25px;
-  min-width: 600px;
+  min-width: 700px;
   max-height: 600px;
   flex-basis: 80%;
   overflow-y: auto;
