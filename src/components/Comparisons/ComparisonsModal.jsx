@@ -7,7 +7,8 @@ const Modal = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: transparent;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: row;
   align-items: left;

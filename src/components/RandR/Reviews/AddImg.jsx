@@ -43,7 +43,7 @@ const ModalInput = styled.div`
 const Buttons = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 10px;
+  margin: 10px 0;
 `
 const Button = styled.button`
   color: white;
@@ -102,7 +102,7 @@ function AddImg ({display, displayAddImage, addPhotos}) {
   return (
     <Modal>
       <ModalInput>
-        <h2>Add up to five photos</h2>
+        <h2>ADD UP TO FIVE PHOTOS</h2>
         {addedImages.map((imageField) => {
           if (imageField !== 'enterImg') {
             return (
@@ -118,14 +118,14 @@ function AddImg ({display, displayAddImage, addPhotos}) {
               <form key={imageField}>
               <label htmlFor={'image' + imageField}>Add an Image</label>
               <input type='url' className='inputField' id={'image' + imageField} placeholder='Enter image URL here' required></input>
-              <Button type='submit' onClick={updatePhotos}>Add Photo</Button>
+              <Button type='submit' onClick={updatePhotos}>ADD PHOTO</Button>
               </form>
             )
           }
         })}
         <Buttons>
-          <Button style={{marginRight: '10px'}}onClick={submit}>Confirm</Button>
-          <Button onClick={close}>Cancel</Button>
+          <Button style={{marginRight: '10px'}}onClick={submit}>CONFIRM</Button>
+          <Button onClick={close}>CANCEL</Button>
         </Buttons>
       </ModalInput>
     </Modal>

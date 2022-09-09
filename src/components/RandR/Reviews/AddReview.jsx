@@ -68,7 +68,7 @@ const RecHolder = styled.div`
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  margin: 5px 0;
 `
 
 const SummaryAndBody = styled.div`
@@ -272,7 +272,7 @@ function AddReview({ display, product_id, close }) {
         <ModalInput>
           <form onSubmit={submit}>
 
-            <h2 style={{color: '#006FCD', margin: '8px 0' }}>Write Your Review</h2>
+            <h2 style={{color: '#006FCD', margin: '8px 0' }}>WRITE YOUR REVIEW</h2>
             <h3 style={{color: '#006FCD', margin: '8px 0' }}>About {product.name}</h3>
             <StarClicks>
               <Star className={starFills[0]} id={1} onClick={selectStar}></Star>
@@ -302,15 +302,15 @@ function AddReview({ display, product_id, close }) {
               <textarea id='reviewBody' className='inputField' rows='5' minLength='50' maxLength='1000' size='150' onChange={updateBody} required></textarea>
               <SubText>{minChars}</SubText>
             </SummaryAndBody>
-            <Button style={{margin: '10px'}} onClick={displayAddImage}>Add Pictures</Button><br></br>
+            <Button style={{margin: '10px 0'}} onClick={displayAddImage}>ADD PICTURES</Button><br></br>
             <label htmlFor='nickname'>Nickname</label><br></br>
             <input className='inputField' id='nickname' placeholder='Example: jackson11!' maxLength='60' size='150' onChange={updateNickname} required></input> <br></br>
             <label htmlFor='email'>Email</label><br></br>
             <input type='email' className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' size='150' onChange={updateEmail} required></input>
             <SubText>For authentication reasons, you will not be emailed</SubText>
             <ButtonHolder>
-              <Button style={{marginRight: '10px'}} >Submit</Button>
-              <Button onClick={close}>Cancel</Button>
+              <Button style={{marginRight: '10px'}} >SUBMIT</Button>
+              <Button onClick={close}>CANCEL</Button>
             </ButtonHolder>
           </form>
         </ModalInput>

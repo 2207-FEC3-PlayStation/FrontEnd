@@ -120,7 +120,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
       <div className="modal-content">
         <div className="modal-header">
           <div className="modal-header">
-            <h3 className="modal-title">Submit Your Answer</h3>
+            <h3 className="modal-title">SUBMIT YOUR ANSWER</h3>
             <h4 className="modal-subtitle">{productName}: {question_body}</h4>
           </div>
           <div className="modal-body">
@@ -128,10 +128,10 @@ export default function AnswerModal ({id, productName, question_id, question_bod
               {Username}
               {Email}
               {Answer}
-              {photos.length < 5 &&
+              {/* {photos.length < 5 &&
                 <div>
                   <label htmlFor="photos">Upload your photos</label> <br></br>
-                  <input
+                  <input style={{color: 'white', backgroundColor: '#006FCD'}}
                     type="file"
                     name="files"
                     accept="image/png, image/jpeg"
@@ -142,18 +142,18 @@ export default function AnswerModal ({id, productName, question_id, question_bod
                     }}
                   ></input>
                 </div>
-              }
+              } */}
               {photos.length >= 5 &&
                 <div>
                   <span>Max 5 photo uploads reached</span>
                 </div>
               }
               <br/>
-              <input className="submit-button" type="submit" value="Submit"/>
+              <input className="submit-button" type="submit" value="SUBMIT"/>
             </form>
           </div>
           <div className="modal-footer">
-            <button className="close-button" onClick={onClose}>Close</button>
+            <button className="close-button" onClick={onClose}>CLOSE</button>
           </div>
         </div>
       </div>

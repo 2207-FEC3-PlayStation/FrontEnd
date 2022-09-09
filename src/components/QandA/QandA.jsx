@@ -16,6 +16,8 @@ const Button = styled.button`
   border: 2px solid grey;
   margin-right: 1em;
   padding: 0.5em 1em;
+  color: white;
+  background-color: #006FCD;
   &:hover {Arial, Helvetica,
     background: lightgrey;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
@@ -27,10 +29,11 @@ const Questions = styled.section`
   overflow: auto;
   height: 100%;
   max-height: 85vh;
-  width: auto;
+  width: 1000px;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 0;
+  border-bottom: 1px solid black ;
 `;
 
 const Sort = styled.div`
@@ -124,6 +127,7 @@ function QandA({ prod }) {
   useEffect(() => {
     // console.log('UseEffect (data)')
     if (results) {
+      setShowData([]);
       for (let i = 0; i < results.length; i++) {
         setShowData(showData => [...showData, {
           questionID: results[i].question_id,
@@ -162,7 +166,7 @@ function QandA({ prod }) {
 
   return (
     <React.Fragment>
-      <h2> {'QUESTIONS & ANSWERS'}</h2>
+      <h4 style={{marginLeft: '10px'}}> {'QUESTIONS & ANSWERS'}</h4>
       <Sort>
         <Search>
         <Icon src={MagGlass}/>
