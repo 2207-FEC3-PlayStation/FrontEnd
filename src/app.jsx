@@ -42,7 +42,7 @@ const App = () => {
           reviewCount += thisVal;
           sum += thisVal * thisKey;
         }
-        let average = parseInt((Math.round(4 * sum / reviewCount) / 4).toFixed(2));
+        let average = (Math.round(4 * sum / reviewCount) / 4).toFixed(2);
         setAvgRating(average);
         setnumReviews(reviewCount);
       })

@@ -177,3 +177,11 @@ h1, h2, h3, h4 {
   max-height: 620px;
   margin-right: 128px;
 }
+
+.showMore {
+  display: flex;
+}
+
+div .moreShown {
+  visibility: hidden;
+}
