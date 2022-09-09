@@ -17,7 +17,7 @@ const Image = styled.img`
 
 const AnswerContainer = styled.div`
   text-transform: none;
-  background-color: #EFE1CE;
+  background-color: #d9d5d5;
   border: 1px solid;
   border-radius: 5px;
   margin-bottom: 0.5em;

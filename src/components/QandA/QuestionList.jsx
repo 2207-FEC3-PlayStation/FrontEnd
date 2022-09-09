@@ -38,7 +38,7 @@ const QStyle = styled.div`
 `;
 
 const AnswersBlock = styled.div`
-
+  width: 100%;
 `
 
 const AStyle = styled.div`
@@ -47,6 +47,7 @@ const AStyle = styled.div`
   margin-left: 10px;
   display: inline-block;
   vertical-align: top;
+  color: #006FCD;
 `;
 
 const ContainText = styled.p`
