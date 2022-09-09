@@ -156,20 +156,20 @@ function QandA({ prod }) {
 
   const showMoreQuestions = (
     <Button onClick={moreAnsweredQuestions} key={'showMoreQs'}>
-      <b>MORE ANSWERED QUESTIONS</b>
+      <b>More Answered Questions</b>
     </Button>
   )
 
   return (
     <React.Fragment>
-      <h2> {'QUESTIONS & ANSWERS'}</h2>
+      <h2> {'Questions & Answers'}</h2>
       <Sort>
         <Search>
         <Icon src={MagGlass}/>
           <Input
             type="Text"
             value={search}
-            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+            placeholder="Have a question? Search for answers..."
             onChange={(e) => {
               setSearch(e.target.value);
             }}
