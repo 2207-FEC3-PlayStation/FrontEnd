@@ -106,7 +106,7 @@ export default function QuestionModal ({productID, productName, onClose, showQMo
   )
 
   return (
-    <div className={`modal ${showQModel ? 'show' : ''}`}>
+    <div className={`modal ${showQModel ? 'show' : ''}`} >
       <div className="modal-content">
         <div className="modal-header">
           <div className="modal-header">

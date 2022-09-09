@@ -22,7 +22,7 @@ const Questions = styled.div`
   -o-transition: background-color .35s ease-out;
   transition: background-color .35s ease-out;
   &:hover {
-    background-color: rgba(255, 0, 0, .2);
+    background-color: #d9d5d5;
     // transform: scale(1.03);
   }
   @media {
@@ -51,6 +51,7 @@ const AStyle = styled.div`
 
 const ContainText = styled.p`
   width: 100%;
+  color: #006FCD;
 `
 
 const Container = styled.div`

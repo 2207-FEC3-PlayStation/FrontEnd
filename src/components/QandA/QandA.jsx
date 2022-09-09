@@ -16,6 +16,8 @@ const Button = styled.button`
   border: 2px solid grey;
   margin-right: 1em;
   padding: 0.5em 1em;
+  color: white;
+  background-color: #006FCD;
   &:hover {
     background: lightgrey;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
@@ -85,7 +87,6 @@ function QandA({ prod }) {
   const [showData, setShowData] = useState([
     // {questionID: '', question: '', answers: []}
   ]);
-  const [shownQuestions, setShownQuestions] = useState([]);
   const [showQModel, setShowQModel] = useState(false);
   const [qRerender, setQRerender] = useState(0);
   const [questionCount, setQuestionCount] = useState(4);
@@ -112,7 +113,7 @@ function QandA({ prod }) {
 
   useEffect(() => {
     if (productID) {
-      server.get('/qa/questions', { 'product_id': productID , 'count': 1000})
+      server.get('/qa/questions', { 'product_id': productID, 'count': 1000 })
         .then((product) => {
           setResults(product.data.results)
         })
@@ -136,18 +137,6 @@ function QandA({ prod }) {
     }
   }, [results, showQModel])
 
-  useEffect(() => {
-    if(showData && questionCount) {
-      var questions = showData.filter((question) => {
-        if (search.length < 3) {
-          return question;
-        } else if ( question.question.toLowerCase().includes(search.toLowerCase())) {
-          return question;
-        }
-      }).slice(0, questionCount);
-    }
-    setShownQuestions(questions);
-  }, [showData, questionCount])
 
   // ==================================== Question Modal =============================
 
@@ -218,7 +207,7 @@ function QandA({ prod }) {
       <h2> {'QUESTIONS & ANSWERS'}</h2>
       <Sort>
         <Search>
-        <Icon src={MagGlass}/>
+          <Icon src={MagGlass} />
           <Input
             type="Text"
             value={search}
@@ -228,7 +217,7 @@ function QandA({ prod }) {
             }}
           ></Input>
         </Search>
-        <br/>
+        <br />
         {showData.length > 0 ?
           <p>Click on a question to view it's respective answers.</p> :
           <React.Fragment>
@@ -239,9 +228,15 @@ function QandA({ prod }) {
           </React.Fragment>
         }
         <Questions>
-        {shownQuestions.map((question) => {
-            return <QuestionList
-                      key={question.questionID}
+        {showData.filter((question) => {
+            if (search.length < 3) {
+              return question;
+            } else if (question.question.toLowerCase().includes(search.toLowerCase())) {
+              return question;
+            }
+          }).slice(0, questionCount).map((question) => {
+            return  <QuestionList
+                      key={question.question_id}
                       question={question}
                       id={productID}
                       productName={productName}
@@ -251,10 +246,15 @@ function QandA({ prod }) {
           })}
         </Questions>
 
-         {search.length < 3 && (
+        {search.length < 3 && (
           questionCount < showData.length) ?
-            <p>Viewing {questionCount} of {showData.length} questions</p> : <p>Viewing {showData.length} of {showData.length} questions</p>
+          <p>Viewing {questionCount} of {showData.length} questions</p> : <p>Viewing {showData.length} of {showData.length} questions</p>
         }
+
+        {search.length > 2 && (
+          <br />
+        )}
+
         {questionCount < showData.length && [showMoreQuestions]}
         <QuestionModal
           key={productID}
@@ -270,7 +270,7 @@ function QandA({ prod }) {
         )}
       </Sort>
     </React.Fragment>
-    )
+  )
 }
 
 export default QandA;
