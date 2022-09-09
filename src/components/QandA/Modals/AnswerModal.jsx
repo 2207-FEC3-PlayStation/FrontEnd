@@ -42,11 +42,12 @@ export default function AnswerModal ({id, productName, question_id, question_bod
   const handleSubmit = (e) => {
     e.preventDefault();
     server.post('/qa/answers', data, {'question_id': question_id})
-      .then((response) => {
-        swal("🎉 Success! 🎉", "success");
+      .then(response => {
+        swal("🏆 Success! 🏆", "Thank you for your answer!");
         onClose();
       })
-      .catch(() => {
+      .catch(err => {
+        console.log('err = ', err)
         swal('Uh oh...', 'We just caught an error.', 'error');
       })
   }
@@ -60,15 +61,15 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         name="username"
         maxLength={60}
         size={36}
-        placeholder="Example: john123!"
+        placeholder="Example: jack543!"
         value={username}
         onChange={e => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setUsername(e.target.value);
         }}
         required
       />
-      <p className="static">DO NOT use your full name or email address.</p>
+      <p className="static">For privacy reasons, do not use your full name or email address.</p>
     </label>
   )
 
@@ -81,15 +82,15 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         name="email"
         maxLength={60}
         size={41}
-        placeholder="Example: john@email.com"
+        placeholder="Example: jack@email.com"
         value={email}
         onChange={e => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setEmail(e.target.value);
         }}
         required
       />
-      <p className="static">No emails will be sent...don't worry</p>
+      <p className="static">For authentication reasons, you will not be emailed.</p>
     </label>
   )
 
@@ -106,7 +107,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         placeholder="Enter your answers here..."
         value={body}
         onChange={e => {
-          e.stopPropagation();
+          //e.stopPropagation();
           setBody(e.target.value);
         }}
         required
@@ -129,14 +130,13 @@ export default function AnswerModal ({id, productName, question_id, question_bod
               {Answer}
               {photos.length < 5 &&
                 <div>
-                  <label htmlFor="photos">Not yet implemented: Upload your photos</label> <br></br>
+                  <label htmlFor="photos">Upload your photos</label> <br></br>
                   <input
                     type="file"
                     name="files"
                     accept="image/png, image/jpeg"
                     multiple
                     onChange={(e) => {
-                      console.log('NOT AVAILABLE ATM');
                       //let files = e.target.files;
                       //photoUrlsToArray(files, setPhotos);
                     }}

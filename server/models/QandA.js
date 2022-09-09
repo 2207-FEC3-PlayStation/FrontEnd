@@ -43,20 +43,20 @@ module.exports = {
       })
   },
 
-  helpful: (path, req, res) => {
-    controller.helpful(path)
+  helpful: (req, res) => {
+    controller.helpful(req.query)
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(204).end()
       })
       .catch((err) => {
         res.status(400).send(err);
       })
   },
 
-  report: (path, req, res) => {
-    controller.report(path)
+  report: (req, res) => {
+    controller.report(req.query)
       .then((result) => {
-        res.status(200).send(result.data)
+        res.status(204).send(result.data)
       })
       .catch((err) => {
         res.status(400).send(err);

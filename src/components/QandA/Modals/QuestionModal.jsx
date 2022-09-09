@@ -42,11 +42,10 @@ export default function QuestionModal ({productID, productName, onClose, showQMo
     e.preventDefault();
     server.post('/qa/questions', data)
       .then(response => {
-        swal("🎉 Success! 🎉", "success");
+        swal("🏆 Success! 🏆", "Thank you for your question!");
         onClose();
       })
       .catch(err => {
-        console.log('data=', data);
         swal('Uh oh...', 'We just caught an error.', 'error');
       })
   }
@@ -60,12 +59,12 @@ export default function QuestionModal ({productID, productName, onClose, showQMo
         name="username"
         maxLength={60}
         size={36}
-        placeholder="Example: johnsmith12!"
+        placeholder="Example: jackson11!"
         value={username}
         onChange={e => setUsername(e.target.value)}
         required
       />
-      <p className="static">DO NOT use your full name or email address.</p>
+      <p className="static">For privacy reasons, do not use your full name or email address.</p>
     </label>
   )
 
@@ -78,12 +77,12 @@ export default function QuestionModal ({productID, productName, onClose, showQMo
         name="email"
         maxLength={60}
         size={40}
-        placeholder="Example: john@email.com"
+        placeholder="Why did you like the product or not?"
         value={email}
         onChange={e => setEmail(e.target.value)}
         required
       />
-      <p className="static">No emails will be sent...don't worry</p>
+      <p className="static">For authentication reasons, you will not be emailed</p>
     </label>
   )
 

@@ -22,7 +22,7 @@ const LeftButton = styled.button`
   color: #5d5c5c;
   height: 102px;
   width: 120px;
-  top: 9.4%;
+  top: 9.2%;
   left: 0%;
   border: none;
   padding-top: 17%;
@@ -43,6 +43,7 @@ function Comparisons (props) {
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState(props.prod);
   const [related, setRelated] = useState([]);
+
 
 
 
@@ -121,8 +122,6 @@ function Comparisons (props) {
 
   // clicking the card will navigate to the product detail page
 
-  // sale prices should be in red with original crossed out - I haven't seen any sale prices in the API request?
-
   function scrollL () {
     const element = document.getElementById("RelatedListCarousel");
     element.scrollLeft -= 350;
@@ -150,13 +149,7 @@ function Comparisons (props) {
         {!hideR && (products.length > 4) && (
           <RightButton onClick={() => scrollR()}>›</RightButton>
         )}
-        <OutfitList prod={props.prod}/>
-        {/* {clickedR && (products.length > 4) && (
-          <LeftButton2 onClick={() => scrollL()}>‹</LeftButton2>
-        )}
-        {!hideR && (products.length > 4) && (
-          <RightButton2 onClick={() => scrollR()}>›</RightButton2>
-        )} */}
+        <OutfitList prod={props.prod} handleProduct={props.handleProduct}/>
       </Container>
     )
 }

@@ -9,8 +9,8 @@ import swal from 'sweetalert';
 const Image = styled.img`
   border-radius: 8px;
   display: inline-block;
-  max-height: 100px;
-  max-width: 100%;
+  max-height: 80px;
+  max-width: 80px;
   margin-right: 10px;
   margin-top: 3px;
 `
@@ -21,10 +21,12 @@ const AnswerContainer = styled.div`
   border: 1px solid;
   border-radius: 5px;
   margin-bottom: 0.5em;
-  margin: 0px auto 5px auto;
+  margin-left: 0px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   cursor: default;
+
 `
 
 const AnswerBody = styled.div`
@@ -32,9 +34,9 @@ const AnswerBody = styled.div`
 `
 
 const Helpful = styled.div`
+  display: incline;
   text-align: right;
   font-size: 12px;
-  margin-right: 15px;
 `
 
 const Yes = styled.button`
@@ -74,8 +76,8 @@ const User = styled.div`
 const Size = styled.span`
   text-size: 8px;
 `
-// handleHelpful, handleReported, (missing)
-function AnswersList ({answer, id, productName, question_id, aRerender, setARerender}) {
+
+function AnswersList ({answer, id, productName, question_id, aRerender, setARerender, handleHelpful, handleReported}) {
   let {answer_id, body, date, answerer_name, helpfulness, photos} = answer;
   let [modal, setModal] = useState(false);
   let [url, setUrl] = useState('');
@@ -83,7 +85,6 @@ function AnswersList ({answer, id, productName, question_id, aRerender, setARere
   let [aReported, setAReported] = useState(false);
 
   const toggleModal = (e) => {
-    // console.log(e.target.currentSrc);
     setUrl(e.target.currentSrc);
     setModal(!modal);
   }
@@ -121,22 +122,19 @@ function AnswersList ({answer, id, productName, question_id, aRerender, setARere
               <Size>by <b>Seller</b>, </Size> :
               <Size>by {answerer_name}, </Size>
             }
-            <span> {format(parseISO(date), 'MMMM dd, yyyy')} </span>
-          </div>
-        </div>
-        <Helpful>
+            <span> {format(parseISO(date), 'MMMM dd, yyyy')}&emsp;|&emsp;</span>
           Helpful?
-          <Yes //onClick={() =>
-            // handleHelpful(
-            //   aHelpful,
-            //   'answers',
-            //   answer_id,
-            //   'helpful',
-            //   setAHelpful,
-            //   aRerender,
-            //   setARerender)}
+          <Yes onClick={() =>
+            handleHelpful(
+              aHelpful,
+              'answers',
+              answer_id,
+              'helpful',
+              setAHelpful,
+              aRerender,
+              setARerender)}
           >Yes &#40;{helpfulness}&#41;
-          </Yes> |
+          </Yes>&emsp;|&emsp;
           <Report onClick={() =>
             handleReported(
               aReported,
@@ -145,7 +143,8 @@ function AnswersList ({answer, id, productName, question_id, aRerender, setARere
               'report',
               setAReported
             )}> {aReported ? 'Reported' : 'Report'} </Report>
-        </Helpful>
+          </div>
+        </div>
       </User>
       </AnswerBody>
     </AnswerContainer>
