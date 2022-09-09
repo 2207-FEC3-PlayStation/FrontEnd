@@ -73,7 +73,7 @@ const User = styled.div`
 const Size = styled.span`
   text-size: 8px;
 `
-// handleHelpful, handleReported, (missing)
+
 function AnswersList ({answer, id, productName, question_id, aRerender, setARerender, handleHelpful, handleReported}) {
   let {answer_id, body, date, answerer_name, helpfulness, photos} = answer;
   let [modal, setModal] = useState(false);
@@ -82,7 +82,6 @@ function AnswersList ({answer, id, productName, question_id, aRerender, setARere
   let [aReported, setAReported] = useState(false);
 
   const toggleModal = (e) => {
-    // console.log(e.target.currentSrc);
     setUrl(e.target.currentSrc);
     setModal(!modal);
   }

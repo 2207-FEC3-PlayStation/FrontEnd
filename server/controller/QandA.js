@@ -66,8 +66,6 @@ module.exports = {
   },
 
   report: (id) => {
-    console.log('report');
-    console.log('put(',process.env.DB_API + '/qa/answers/' + id.answer_id + '/report')
     return axios.put(process.env.DB_API + '/qa/answers/' + id.answer_id + '/report', null, {
       headers: {'Authorization': process.env.GIT_TOKEN}
     })

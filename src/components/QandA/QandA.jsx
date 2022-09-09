@@ -227,9 +227,3 @@ function QandA({ prod }) {
 }
 
 export default QandA;
-
-
-/*
-<button id="load" onClick={loadMoreAnswers}>
-          <b>LOAD MORE ANSWERS</b></button><br></br><br></br>
-*/

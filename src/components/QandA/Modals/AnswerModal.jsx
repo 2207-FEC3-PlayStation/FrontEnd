@@ -43,7 +43,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
     e.preventDefault();
     server.post('/qa/answers', data, {'question_id': question_id})
       .then(response => {
-        swal("🎉 Success! 🎉", "Thank you for your answer!");
+        swal("🏆 Success! 🏆", "Thank you for your answer!");
         onClose();
       })
       .catch(err => {
@@ -130,14 +130,13 @@ export default function AnswerModal ({id, productName, question_id, question_bod
               {Answer}
               {photos.length < 5 &&
                 <div>
-                  <label htmlFor="photos">Not yet implemented: Upload your photos</label> <br></br>
+                  <label htmlFor="photos">Upload your photos</label> <br></br>
                   <input
                     type="file"
                     name="files"
                     accept="image/png, image/jpeg"
                     multiple
                     onChange={(e) => {
-                      console.log('NOT AVAILABLE ATM');
                       //let files = e.target.files;
                       //photoUrlsToArray(files, setPhotos);
                     }}

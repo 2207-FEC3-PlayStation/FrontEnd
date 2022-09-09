@@ -49,6 +49,7 @@ app.post('/qa/answers', (req, res) => {models.QandA.addAnswer(req, res)});
 
 // Mark Question as Helpful
 app.put('/qa/questions/helpful', (req, res) => {models.QandA.helpful(req, res)});
+
 // Report Question --------- NOT REQUIRED
 //app.put('/qa/questions/report'), (req, res) => {models.QandA.report('/questions', req, res)};
 

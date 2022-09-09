@@ -42,7 +42,7 @@ export default function QuestionModal ({productID, productName, onClose, showQMo
     e.preventDefault();
     server.post('/qa/questions', data)
       .then(response => {
-        swal("🎉 Success! 🎉", "Thank you for your question!");
+        swal("🏆 Success! 🏆", "Thank you for your question!");
         onClose();
       })
       .catch(err => {
