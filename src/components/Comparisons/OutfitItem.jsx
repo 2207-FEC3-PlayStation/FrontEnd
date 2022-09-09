@@ -5,7 +5,8 @@ import StarRating from '../../components/RandR/RatingBreakdown/StarRating.jsx';
 import server from '../../serverRequests.js';
 
 const Card = styled.div`
-  border: #494848 2px solid;
+  border: #eceaea 2px solid;
+  border-radius: 5px;
   color: black;
   font-size: 20px;
   margin: 3%;
@@ -14,6 +15,10 @@ const Card = styled.div`
   margin-bottom: 15px;
   margin-right: 5%;
   margin-top: 0px;
+  background-color: #eceaea;
+  &:hover {
+    box-shadow: 0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5);
+  }
 `
 const Text = styled.small`
   color: rgb(57, 57, 57);
@@ -28,6 +33,7 @@ const Img = styled.img`
   width:180px;
   height:220px;
   opacity: 0.9;
+  border-radius: 5px;
 `
 const Button = styled.button`
   background: transparent url(${xbutton}) no-repeat top;
@@ -37,6 +43,14 @@ const Button = styled.button`
   position: absolute;
   top: 3%;
   right: 5%;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
+`
+const Prices = styled.small`
+display: inline-block;
+margin: 0px;
+padding-left: 5%;
 `
 
 function OutfitItem (props) {
@@ -46,6 +60,9 @@ function OutfitItem (props) {
   const [reviews, setReviews] = useState({});
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
+  const [price, setPrice] = useState();
+  const [saleprice, setSalePrice] = useState();
+  const [onSale, setOnSale] = useState(false);
 
 
   useEffect(() => {
@@ -58,11 +75,27 @@ function OutfitItem (props) {
             if (results[i]['default?'] === true) {
               thumbnail = results[i].photos[0].thumbnail_url;
               setImage(thumbnail);
+              if (results[i].sale_price === null) {
+                setPrice(results[i].original_price);
+                setSalePrice();
+              } else {
+                setPrice(results[i].original_price);
+                setSalePrice(results[i].sale_price);
+                setOnSale(true);
+              }
             }
           }
           if (thumbnail === '') {
             thumbnail = data.data.results[0].photos[0].thumbnail_url
             setImage(thumbnail);
+            if (results[0].sale_price === null) {
+              setPrice(results[0].original_price);
+              setSalePrice();
+            } else {
+              setPrice(results[0].original_price);
+              setSalePrice(results[0].sale_price);
+              setOnSale(true);
+            }
           }
         })
         .catch((err) => {
@@ -103,12 +136,20 @@ function OutfitItem (props) {
     }, [reviews])
 
   return (
-      <Card>
-      <Img src={image}></Img><br></br>
+      <Card onClick={props.handleProduct}>
+      <Img src={image} alt={props.item.id}></Img><br></br>
       <Button onClick={props.handleDelete} value={props.item} name={props.item.name}></Button>
       <SmallText>{props.item.category.toUpperCase()}</SmallText><br></br>
       <Text>{props.item.name}</Text><br></br>
       <SmallText>${props.item.default_price}</SmallText><br></br>
+      {/* <Prices>
+          <span className={
+            onSale ? 'price-onsale': 'price'
+          }>{'$' + price}</span>
+          <span className={
+            onSale ? 'saleprice-onsale': 'saleprice'
+          }>{'$'+ saleprice}</span>
+        </Prices> */}
       <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )

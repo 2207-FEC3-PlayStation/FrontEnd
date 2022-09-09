@@ -7,7 +7,8 @@ import server from '../../serverRequests.js';
 
 
 const Card = styled.div`
-  border: #494848 2px solid;
+  border: #eceaea 2px solid;
+  border-radius: 5px;
   color: black;
   font-size: 20px;
   margin: 3%;
@@ -16,6 +17,10 @@ const Card = styled.div`
   padding-bottom: 2%;
   margin-left: 0;
   margin-right: 4%;
+  background-color: #eceaea;
+  &:hover {
+    box-shadow: 0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5);
+  }
 `
 const Button = styled.button`
   background: transparent url(${starbutton}) no-repeat top;
@@ -25,6 +30,9 @@ const Button = styled.button`
   position: absolute;
   top: 2%;
   right: 5%;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `
 const Text = styled.small`
   color: rgb(57, 57, 57);
@@ -37,6 +45,12 @@ const Img = styled.img`
   width:180px;
   height:220px;
   opacity: 0.9;
+  border-radius: 5px;
+`
+const Prices = styled.small`
+display: inline-block;
+margin: 0px;
+padding-left: 5%;
 `
 function RelatedItem (props) {
 
@@ -45,6 +59,9 @@ function RelatedItem (props) {
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
   const [image, setImage] = useState();
+  let [price, setPrice] = useState();
+  let [saleprice, setSalePrice] = useState();
+  let [onSale, setOnSale] = useState(false);
 
 
   // gets styles of the related product and adds the default thumbnail picture to the image source
@@ -59,11 +76,27 @@ function RelatedItem (props) {
             if (results[i]['default?'] === true) {
               thumbnail = results[i].photos[0].thumbnail_url;
               setImage(thumbnail);
+              if (results[i].sale_price === null) {
+                setPrice(results[i].original_price);
+                setSalePrice();
+              } else {
+                setPrice(results[i].original_price);
+                setSalePrice(results[i].sale_price);
+                setOnSale(true);
+              }
             }
           }
           if (thumbnail === '') {
             thumbnail = data.data.results[0].photos[0].thumbnail_url
             setImage(thumbnail);
+            if (results[0].sale_price === null) {
+              setPrice(results[0].original_price);
+              setSalePrice();
+            } else {
+              setPrice(results[0].original_price);
+              setSalePrice(results[0].sale_price);
+              setOnSale(true);
+            }
           }
         })
         .catch((err) => {
@@ -124,6 +157,14 @@ function RelatedItem (props) {
         <br></br>
         <Text data-testid="relatedItemName">{props.item.name}</Text><br></br>
         <SmallText>${props.item.default_price}</SmallText><br></br>
+        {/* <Prices>
+          <span className={
+            onSale ? 'price-onsale': 'price'
+          }>{'$' + price}</span>
+          <span className={
+            onSale ? 'saleprice-onsale': 'saleprice'
+          }>{'$'+saleprice}</span>
+        </Prices> */}
         <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )

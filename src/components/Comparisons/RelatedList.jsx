@@ -21,6 +21,7 @@ const Carousel = styled.div`
   margin-right: auto;
   scroll-behavior: smooth;
   padding-left: 0;
+  padding-bottom: 2%;
 `
 var RelatedList = (props) => (
   <Related>

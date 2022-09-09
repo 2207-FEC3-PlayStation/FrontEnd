@@ -8,7 +8,7 @@ function Thumbnail (props) {
     <img className={
       props.url === props.mainUrl ? 'thumbnail-active' : 'thumbnail'
   } src={props.url} onClick={(e) => {
-    props.handleImage(e)}}></img>
+    props.handleImage(e)}} alt={props.index}></img>
   )
 }
 

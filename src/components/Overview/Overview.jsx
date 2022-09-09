@@ -19,7 +19,6 @@ font-family: Arial, Helvetica, sans-serif;
 `
 
 const FlexContainer = styled.div`
-/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin-bottom: 0;
@@ -37,7 +36,7 @@ position: absolute;
 left: 750px;
 word-wrap: break-word;
 width: 420px;
-padding-left: 40px;
+padding-left: 60px;
 `;
 
 const ProdDet = styled.div`
@@ -51,14 +50,14 @@ justify-content: flex-start;
 const ProdDescr = styled.div`
 padding: 10px;
 padding-left: 120px;
-margin-top: 60px;
+margin-top: 100px;
 margin-bottom: 30px;
 width: 55%;
 `;
 
 const ProdChar = styled.div`
 padding: 10px;
-margin-top: 60px;
+margin-top: 100px;
 margin-bottom: 30px;
 padding-left: 30px;
 border-left: 3px solid grey;
@@ -90,9 +89,15 @@ function Overview (props) {
   const [checked, setChecked] = useState(true);
   const [checkedID, setCheckedID] = useState();
   const [skus, setSkus] = useState();
-  const [quantity, setQuantity] = useState('-');
   const [size, setSize] = useState();
   const [sku, setSku] = useState();
+  const [sizeSelected, setSizeSelected] = useState(false);
+  let [index, setIndex] = useState(1);
+  let [price, setPrice] = useState();
+  let [saleprice, setSalePrice] = useState();
+  let [onSale, setOnSale] = useState(false);
+  const [hideR, setHideR] = useState(false);
+  const [clickedR, setClickedR] = useState(false);
 
   // gets the related styles and sets the main photo as the default style's first photo
   // if there is no default photo, it sets the main photo as the first style's first photo
@@ -117,6 +122,14 @@ function Overview (props) {
               setImage(mainPhoto);
               setdefaultPhotos(results[i].photos);
               setCurrentStyle(results[i]);
+              if (results[i].sale_price === null) {
+                setPrice(results[i].original_price);
+                setSalePrice();
+              } else {
+                setPrice(results[i].original_price);
+                setSalePrice(results[i].sale_price);
+                setOnSale(true);
+              }
             }
           }
           if (mainPhoto === '') {
@@ -125,6 +138,14 @@ function Overview (props) {
             setdefaultPhotos(data.data.results[0].photos);
             setFinished(true);
             setCurrentStyle(results[0]);
+            if (results[0].sale_price === null) {
+              setPrice(results[0].original_price);
+              setSalePrice();
+            } else {
+              setPrice(results[0].original_price);
+              setSalePrice(results[0].sale_price);
+              setOnSale(true);
+            }
           }
         })
         .catch((err) => {
@@ -138,15 +159,25 @@ function Overview (props) {
   }, [currentStyle])
 
   function handleImage(e) {
-    setImage(e.target.src);
+    setImage(defaultPhotos[e.target.alt].url);
+    setIndex(e.target.alt);
   }
 
   function changeStyle(e) {
-    var style = JSON.parse(e.currentTarget.value)
+    var style = JSON.parse(e.currentTarget.value);
     setImage(style.photos[0].url);
     setdefaultPhotos(style.photos);
     setCurrentStyle(style);
     setSkus(style.skus);
+    if (style.sale_price === null) {
+      setPrice(style.original_price);
+      setSalePrice();
+      setOnSale(false);
+    } else {
+      setPrice(style.original_price);
+      setSalePrice(style.sale_price);
+      setOnSale(true);
+    }
     var array = [];
     for (var sku in style.skus) {
         array.push(style.skus[sku].size)
@@ -155,11 +186,10 @@ function Overview (props) {
       array.push('OUT OF STOCK')
     }
     setSizes(array);
-    setQuantity(1);
   }
 
   function changeQuantity(e) {
-    setQuantity(1);
+    setSizeSelected(true);
     var size = e.currentTarget.value;
     setSize(size);
     var max = 0;
@@ -173,7 +203,7 @@ function Overview (props) {
     if (max > 15) {
       max = 15;
     }
-    setmaxQuantity([...Array(max+1).keys()]);
+    setmaxQuantity(Array.from({length: max}, (_, i) => i + 1))
     setSku(currentSku);
   }
 
@@ -223,21 +253,10 @@ function Overview (props) {
   }
 
   // found out this method with js is now deprecated and doesn't work with chrome. might have to use jquery for this
+  // doesn't specify quantity correctly yet
   function handleAdd() {
-    // if (size === undefined) {
-    // //   // open size dropdown
-    // //   var dropdown = document.getElementById('size-select');
-    // //   console.log(dropdown);
-    // //   var event = new MouseEvent('mousedown')
-    // //   // console.log(event);
-    // //   // console.log(event.initMouseEvent('mousedown', true, true, window));
-    // //   dropdown.dispatchEvent(event);
-
-    // //   // show message "Please select size" above dropdown
-    // }
-
     var body = {"sku_id": sku}
-    if (size && quantity && sku) {
+    if (size && sku) {
       server.post('/cart', body)
         .then((data) => {
           console.log(data);
@@ -249,13 +268,14 @@ function Overview (props) {
   }
 
   return (
+
   <Top>
     <Title />
-    <Announce><em>SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE / DISCOUNT <strong>OFFER</strong> - <u>NEW PRODUCT HIGHLIGHT</u></em></Announce>
+    <Announce><strong><em>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT OFFER - NEW PRODUCT HIGHLIGHT</em></strong></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter} index={index}/>
       <ProdInfo>
-        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews}/>}
+        {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews} price={price} saleprice={saleprice} onSale={onSale}/>}
         {styles && currentStyle &&
         <React.Fragment>
         <StyleSelected><strong>STYLE > </strong>{currentStyle.name}</StyleSelected>
@@ -263,7 +283,7 @@ function Overview (props) {
         {styles.map((style, index) => (<StyleSelect checked={checked} handleCheck={handleCheck} currentStyle={currentStyle} images={style} key={index} changeStyle={changeStyle} prod={props.prod} checkedID={style.style_id}/>))}
         </Styles>
         </React.Fragment>}
-        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} quantity={quantity} handleAdd={handleAdd}/>
+        <CheckOut sizes={sizes} maxQuantity={maxQuantity} changeQuantity={changeQuantity} handleAdd={handleAdd} sizeSelected={sizeSelected}/>
       </ProdInfo>
     </FlexContainer>
     {props.prod && <ProdDet>
