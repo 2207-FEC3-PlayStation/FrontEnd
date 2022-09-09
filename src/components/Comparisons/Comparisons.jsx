@@ -46,6 +46,7 @@ function Comparisons (props) {
 
 
 
+
   // gets related products for the current product and removes any duplicates and if it also contains itself as related
   useEffect(() => {
     if (props.prod) {
@@ -120,8 +121,6 @@ function Comparisons (props) {
   }, [products])
 
   // clicking the card will navigate to the product detail page
-
-  // sale prices should be in red with original crossed out - I haven't seen any sale prices in the API request?
 
   function scrollL () {
     const element = document.getElementById("RelatedListCarousel");

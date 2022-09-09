@@ -47,6 +47,11 @@ const Img = styled.img`
   opacity: 0.9;
   border-radius: 5px;
 `
+const Prices = styled.small`
+display: inline-block;
+margin: 0px;
+padding-left: 5%;
+`
 function RelatedItem (props) {
 
   const [starClick, setStarClick] = useState(false);
@@ -54,6 +59,9 @@ function RelatedItem (props) {
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
   const [image, setImage] = useState();
+  let [price, setPrice] = useState();
+  let [saleprice, setSalePrice] = useState();
+  let [onSale, setOnSale] = useState(false);
 
 
   // gets styles of the related product and adds the default thumbnail picture to the image source
@@ -68,11 +76,27 @@ function RelatedItem (props) {
             if (results[i]['default?'] === true) {
               thumbnail = results[i].photos[0].thumbnail_url;
               setImage(thumbnail);
+              if (results[i].sale_price === null) {
+                setPrice(results[i].original_price);
+                setSalePrice();
+              } else {
+                setPrice(results[i].original_price);
+                setSalePrice(results[i].sale_price);
+                setOnSale(true);
+              }
             }
           }
           if (thumbnail === '') {
             thumbnail = data.data.results[0].photos[0].thumbnail_url
             setImage(thumbnail);
+            if (results[0].sale_price === null) {
+              setPrice(results[0].original_price);
+              setSalePrice();
+            } else {
+              setPrice(results[0].original_price);
+              setSalePrice(results[0].sale_price);
+              setOnSale(true);
+            }
           }
         })
         .catch((err) => {
@@ -133,6 +157,14 @@ function RelatedItem (props) {
         <br></br>
         <Text data-testid="relatedItemName">{props.item.name}</Text><br></br>
         <SmallText>${props.item.default_price}</SmallText><br></br>
+        {/* <Prices>
+          <span className={
+            onSale ? 'price-onsale': 'price'
+          }>{'$' + price}</span>
+          <span className={
+            onSale ? 'saleprice-onsale': 'saleprice'
+          }>{'$'+saleprice}</span>
+        </Prices> */}
         <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )

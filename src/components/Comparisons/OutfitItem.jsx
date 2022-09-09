@@ -47,6 +47,11 @@ const Button = styled.button`
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
   }
 `
+const Prices = styled.small`
+display: inline-block;
+margin: 0px;
+padding-left: 5%;
+`
 
 function OutfitItem (props) {
 
@@ -55,6 +60,9 @@ function OutfitItem (props) {
   const [reviews, setReviews] = useState({});
   const [avgRating, setAvgRating] = useState(0);
   const [ratingToTenth, setRatingToTenth] = useState(0);
+  const [price, setPrice] = useState();
+  const [saleprice, setSalePrice] = useState();
+  const [onSale, setOnSale] = useState(false);
 
 
   useEffect(() => {
@@ -67,11 +75,27 @@ function OutfitItem (props) {
             if (results[i]['default?'] === true) {
               thumbnail = results[i].photos[0].thumbnail_url;
               setImage(thumbnail);
+              if (results[i].sale_price === null) {
+                setPrice(results[i].original_price);
+                setSalePrice();
+              } else {
+                setPrice(results[i].original_price);
+                setSalePrice(results[i].sale_price);
+                setOnSale(true);
+              }
             }
           }
           if (thumbnail === '') {
             thumbnail = data.data.results[0].photos[0].thumbnail_url
             setImage(thumbnail);
+            if (results[0].sale_price === null) {
+              setPrice(results[0].original_price);
+              setSalePrice();
+            } else {
+              setPrice(results[0].original_price);
+              setSalePrice(results[0].sale_price);
+              setOnSale(true);
+            }
           }
         })
         .catch((err) => {
@@ -118,6 +142,14 @@ function OutfitItem (props) {
       <SmallText>{props.item.category.toUpperCase()}</SmallText><br></br>
       <Text>{props.item.name}</Text><br></br>
       <SmallText>${props.item.default_price}</SmallText><br></br>
+      {/* <Prices>
+          <span className={
+            onSale ? 'price-onsale': 'price'
+          }>{'$' + price}</span>
+          <span className={
+            onSale ? 'saleprice-onsale': 'saleprice'
+          }>{'$'+ saleprice}</span>
+        </Prices> */}
       <Text><StarRating avgRating={avgRating}/></Text>
       </Card>
   )
