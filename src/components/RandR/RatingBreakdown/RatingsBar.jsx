@@ -25,7 +25,7 @@ flex-basis: 42.5%
 `
 
 const OutterBar = styled.div`
-  background: #646464;
+  background: #8a8a8a;
   display: flex;
   justify-content: flex-start;
   flex-basis: 8px;

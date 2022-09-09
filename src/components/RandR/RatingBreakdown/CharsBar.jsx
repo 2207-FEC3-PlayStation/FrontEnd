@@ -34,7 +34,7 @@ const SubHolder = styled.div`
 `
 
 const OutterBar = styled.div`
-  background: #646464;
+  background: #8a8a8a;
   display: flex;
   justify-content: flex-start;
   margin-bottom: 5px;
