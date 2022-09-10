@@ -58,6 +58,7 @@ function ReviewTile({data}) {
   const [modalImgDisplay, setModalImageDisplay] = useState(false)
   const [showBody, setShowBody] = useState(250)
   const [ellipsis, setEllipsis] = useState('...');
+  const [showMore, setShowMore] = useState('showMore')
 
 
 //-----------conditional rendering variables-----
@@ -99,6 +100,7 @@ function ReviewTile({data}) {
       setHelpfulness(data.helpfulness);
       if (data.body.length < 250 || showBody === data.body.length) {
         setEllipsis('');
+        setShowMore('moreShown')
       }
     }
   }, [data, data.helpfulness, showBody]);
@@ -153,7 +155,7 @@ function ReviewTile({data}) {
       <h3 style={{margin: '5px 0'}}>{data.summary}</h3>
 
       <p style={{margin: '5px, 0'}}>{data.body.substring(0, showBody) + `${ellipsis}`}</p>
-      <Button className='showMore' onClick={expandBody}>Show More</Button>
+      <Button className={showMore} onClick={expandBody}>Show More</Button>
 
       <span style={{display: 'block'}}>
         {data.photos.map((photo) => {
