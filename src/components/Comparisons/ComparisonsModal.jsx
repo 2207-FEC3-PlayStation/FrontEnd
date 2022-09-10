@@ -20,7 +20,8 @@ const Modal = styled.div`
 const ModalContent = styled.div`
   position: relative;
   background: white;
-  border: 1px solid gray;
+  border: #006FCD 3px solid;
+  border-radius: 10px;
   top: 25%;
   left: 15%;
   padding: 10px;

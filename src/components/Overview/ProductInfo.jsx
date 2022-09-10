@@ -14,12 +14,10 @@ display: flex;
 flex-direction: row;
 `
 const Category = styled.p`
-font-family: Arial, Helvetica, sans-serif;
 font-size: 15px;
 margin-bottom: 3px;
 `
 const Reviews = styled.p`
-font-family: Arial, Helvetica, sans-serif;
 font-size: 13px;
 margin: 0px;
 padding-left: 10px;
