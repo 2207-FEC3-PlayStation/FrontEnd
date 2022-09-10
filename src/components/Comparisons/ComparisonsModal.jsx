@@ -17,7 +17,6 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
 `
-
 const ModalContent = styled.div`
   position: relative;
   background: white;
@@ -31,50 +30,36 @@ const ModalContent = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
 `
-
 const ModalBody = styled.div`
   padding: 10px;
   background: white;
 `
-
 const TC = styled.td`
   text-align: center;
   padding: 15px 0px 15px 0px;
 `
-
 const TL = styled.td`
   text-align: left;
   padding: 15px 120px 15px 50px;
 `
-
 const TR = styled.td`
   text-align: right;
   padding: 15px 120px 15px 50px;
 `
-const Span = styled.span`
-`
 const CL = styled.div`
-height: 64px;
+  height: 64px;
 `
 const Column = styled.div`
-display: flex;
-justify-content: space-between;
-flex-direction: column;
-position: absolute;
-margin-left: 42px;
-margin-top: 47px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: absolute;
+  margin-left: 42px;
+  margin-top: 47px;
 `
-const Column2 = styled.div`
-display: flex;
-justify-content: space-between;
-flex-direction: column;
-position: absolute;
-margin-left: 490px;
-margin-top: 47px;
-`
-
-const Table = styled.table`
-
+const Column2 = styled(Column)`
+  margin-left: 490px;
+  margin-top: 47px;
 `
 
 function ComparisonsModal (props) {
@@ -100,10 +85,7 @@ function ComparisonsModal (props) {
     setCharacteristics(unique);
 
     // for the current product, loop through the characteristics and check if the current
-    // has that characteristic. if it does, push a check mark to the array. This array is
-    // my column of checkmarks for the current product that lays on top of the table.
-    // I had to do it this way since I couldn't figure out how to do it correctly within
-    // the table tags and structure using html.
+    // has that characteristic.
     var array = [];
     currentProd.forEach((object, index) => {
       currentProd[index] = JSON.stringify(object)
@@ -127,7 +109,6 @@ function ComparisonsModal (props) {
       }
     })
     setCheck2(array2);
-
   }, [props.prod])
 
   return (
@@ -145,7 +126,7 @@ function ComparisonsModal (props) {
             return <CL key={index}>{check}</CL>
           })}
         </Column2>
-        <Table>
+        <table>
           <tbody>
           <tr>
             <th >{props.prod.name}</th>
@@ -160,7 +141,7 @@ function ComparisonsModal (props) {
             </tr>
           })}
           </tbody>
-        </Table>
+        </table>
     </ModalBody>
     </ModalContent>
   </Modal>

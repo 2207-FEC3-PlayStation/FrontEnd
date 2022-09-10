@@ -17,14 +17,12 @@ const Carousel = styled.div`
   margin-right: auto;
   scroll-behavior: smooth;
 `
-
 const Outfits = styled.div`
   margin-bottom: 4%;
   padding-top: 35px;
   display: flex;
   flex-direction: row;
 `
-
 const AddCard = styled.div`
   background-color: #eceaea;
   border: #eceaea 2px solid;
@@ -41,11 +39,9 @@ const AddCard = styled.div`
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
   }
 `
-
 const Addtext = styled.p`
 margin-block-start: 0em;
 `
-
 const PlusButton = styled.button`
   background: #eceaea url(${plusbutton}) no-repeat top;
   border-radius: 90px;
@@ -79,22 +75,20 @@ const RightButton = styled(LeftButton)`
   left: 88%;
   width: 120px;
 `
-
 function OutfitList (props) {
-  // const [cookie, setCookie] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [outfitItems, setOutfitItems] = useState([]);
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
 
-  // retrieves the outfitlist from the user's local storage which is saved on the client side and will persist until deleted by the user such as clearing the cache (I think!)
+  // retrieves the outfitlist from the user's local storage which is saved on the client side and will persist until deleted by the user
   useEffect(() => {
     var outfitlist = JSON.parse(localStorage.getItem("outfits"));
     outfitlist = outfitlist || []
     setOutfitItems(outfitlist);
   }, [loaded])
 
-  // need this use effect to re-render the outfitItems after one has been deleted and saves the outfitItems to the local storage any time there is a change.
+  // re-render the outfitItems after one has been deleted and saves the outfitItems to the local storage any time there is a change.
   useEffect(() => {
     var list = JSON.stringify(outfitItems);
     localStorage.setItem("outfits", `${list}`);
@@ -110,7 +104,7 @@ function OutfitList (props) {
     setOutfitItems(uniqueOutfits);
   }
 
-  // searches a copy of the outfititems by name for an index since I can't use indexof with objects. then I use that index to splice a copy of outfititems and set outfititems to that copy.
+  // searches a copy of the outfititems by name for an index since indexOf cannot be used with objects. That index is used to splice a copy of outfititems and set outfititems to that copy.
   function handleDelete(e) {
     var original = outfitItems.slice();
     var outfits = outfitItems.slice();
@@ -163,6 +157,5 @@ function OutfitList (props) {
     </React.Fragment>
   )
 }
-
 
 export default OutfitList;

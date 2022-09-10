@@ -9,18 +9,15 @@ margin-bottom: 0px;
 margin-top: 0px;
 word-wrap: break-word;
 `
-
 const ReviewSection = styled.div`
 display: flex;
 flex-direction: row;
 `
-
 const Category = styled.p`
 font-family: Arial, Helvetica, sans-serif;
 font-size: 15px;
 margin-bottom: 3px;
 `
-
 const Reviews = styled.p`
 font-family: Arial, Helvetica, sans-serif;
 font-size: 13px;
@@ -30,14 +27,10 @@ a:active, a:visited {
     color: blue;
   }
 `
-
 const Prices = styled.p`
 display: inline-block;
 `
-
-
 var ProductInfo = (props) => {
-
   return (
       <React.Fragment>
       <ReviewSection>
