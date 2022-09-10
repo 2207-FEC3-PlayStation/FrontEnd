@@ -40,7 +40,6 @@ padding-left: 60px;
 `;
 
 const ProdDet = styled.div`
-/* background-color: #d4b37711; */
 display: flex;
 flex-direction: row;
 margin: 0px;

@@ -49,9 +49,6 @@ h1, h2, h3, h4 {
   color: #006FCD;
 }
 
-/* .checkMark {
-} */
-
 .checkMark::before {
   content: "\f00c";
   font-family: 'FontAwesome';
@@ -95,7 +92,6 @@ h1, h2, h3, h4 {
   left: 40px;
   z-index: 1;
   background: transparent;
-  /* border-radius: 50% */
 }
 
 .active {
@@ -141,7 +137,6 @@ h1, h2, h3, h4 {
 }
 
 .main-image {
-  /* display: block; */
   width: 410px;
   max-height: 540px;
   margin-right: 98px;
@@ -278,7 +273,6 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }

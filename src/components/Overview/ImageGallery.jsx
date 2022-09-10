@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import server from '../../serverRequests.js';
 import Thumbnail from './Thumbnail.jsx';
 import fullscreen from '../../assets/fullscreen.png';
-// import ReactImageMagnify from 'react-image-magnify';
 
 const Thumbnails = styled.div`
 display: flex;
