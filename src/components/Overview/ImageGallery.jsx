@@ -3,72 +3,68 @@ import styled from 'styled-components';
 import server from '../../serverRequests.js';
 import Thumbnail from './Thumbnail.jsx';
 import fullscreen from '../../assets/fullscreen.png';
-// import ReactImageMagnify from 'react-image-magnify';
 
 const Thumbnails = styled.div`
-display: flex;
-flex-direction: column;
-left: -650px;
+  display: flex;
+  flex-direction: column;
+  left: -650px;
 `
-
 const ThumbnailList = styled.div`
-display: flex;
-flex-direction: column;
-align-items: left;
-margin-bottom: 0;
-margin-left: 40px;
-margin-top: 40px;
-height: 500px;
-overflow-y: hidden;
-overflow-x: hidden;
-position: absolute;
-left: 5px;
-scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 40px;
+  margin-top: 40px;
+  height: 500px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: absolute;
+  left: 5px;
+  scroll-behavior: smooth;
 `;
 
 const DownButton = styled.button`
-left: 60px;
-top: 670px;
-position: absolute;
-background: transparent;
-border: none;
-width: 50px;
-font-size: 50px;
-padding: 0px;
-z-index: 30;
-&:hover {
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-  }
+  left: 60px;
+  top: 670px;
+  position: absolute;
+  background: transparent;
+  border: none;
+  width: 50px;
+  font-size: 50px;
+  padding: 0px;
+  z-index: 30;
+  &:hover {
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    }
 `
-
 const UpButton = styled(DownButton)`
-top: 140px;
-left: 60px;
-font-size: 50px;
-position: absolute;
-&:hover {
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-  }
+  top: 140px;
+  left: 60px;
+  font-size: 50px;
+  position: absolute;
+  &:hover {
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    }
 `
-
 const LeftArrow = styled.button`
-background: transparent;
-position: relative;
-left: -69%;
-font-size: 40px;
-border: none;
-z-index: 15;
-&:hover {
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-  }
+  background: transparent;
+  position: relative;
+  left: -69%;
+  font-size: 40px;
+  border: none;
+  z-index: 15;
+  &:hover {
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    }
 `
 const RightArrow = styled(LeftArrow)`
-background: transparent;
-position: relative;
-left: -1%;
-&:hover {
-    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-  }
+  background: transparent;
+  position: relative;
+  left: -1%;
+  &:hover {
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    }
 `
 const Button = styled.button`
   background: transparent url(${fullscreen}) no-repeat top;

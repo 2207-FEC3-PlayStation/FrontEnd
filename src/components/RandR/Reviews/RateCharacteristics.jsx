@@ -8,6 +8,12 @@ const Row = styled.div`
   align-items: center;
   width: 60%
 `
+
+const Selected = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
 const Box = styled.div`
   flex-basis: 15%;
 `
@@ -19,6 +25,8 @@ const P = styled.div`
 function RateCharacteristics({char, updateChar, selected}) {
 
   const [selection, setSelection] = useState([]);
+
+  //------------Use Effect------------
 
   useEffect(() => {
     if (char) {
@@ -47,33 +55,36 @@ function RateCharacteristics({char, updateChar, selected}) {
     }
   }, [char])
 
+  //------------Return------------
+
   return (
     <React.Fragment>
-      <Row style={{justifyContent: 'center'}}>
-        <P style={{marginBottom: '2px', color: '#006FCD'}}>{selection[selected.value - 1]}</P>
+      <Row>
+        <Box> </Box>
+          <P style={{marginBottom: '2px', color: '#006FCD', flexGrow: '5', textAlign: 'center'}}>{selection[selected.value - 1]}</P>
       </Row>
       <Row>
         <Box>
           <P>{char}</P>
         </Box>
         <Box>
-          <input style={{display: 'inline-block'}} type='radio' id={selection[0]} name={char} value={1} onClick={updateChar} required></input>
+          <input type='radio' id={selection[0]} name={char} value={1} onClick={updateChar} required></input>
           <label htmlFor={selection[0]}></label>
         </Box>
         <Box>
-          <input style={{display: 'inline-block'}} type='radio' id={selection[1]} name={char} value={2} onClick={updateChar}></input>
+          <input type='radio' id={selection[1]} name={char} value={2} onClick={updateChar}></input>
           <label htmlFor={selection[0]}></label>
         </Box>
         <Box>
-          <input style={{display: 'inline-block'}} type='radio' id={selection[2]} name={char} value={3} onClick={updateChar}></input>
+          <input type='radio' id={selection[2]} name={char} value={3} onClick={updateChar}></input>
           <label htmlFor={selection[0]}></label>
         </Box>
         <Box>
-          <input style={{display: 'inline-block'}} type='radio' id={selection[3]} name={char} value={4} onClick={updateChar}></input>
+          <input type='radio' id={selection[3]} name={char} value={4} onClick={updateChar}></input>
           <label htmlFor={selection[0]}></label>
         </Box>
         <Box>
-          <input style={{display: 'inline-block'}} type='radio' id={selection[4]} name={char} value={5} onClick={updateChar}></input>
+          <input type='radio' id={selection[4]} name={char} value={5} onClick={updateChar}></input>
           <label htmlFor={selection[0]}></label>
         </Box>
       </Row>

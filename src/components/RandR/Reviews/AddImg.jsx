@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 
@@ -20,9 +20,8 @@ const Modal = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
-  margin-bottom: auto
+  margin-bottom: auto;
 `
-
 const ModalInput = styled.div`
   position: absolute;
   padding: 5%;
@@ -48,23 +47,26 @@ const Buttons = styled.div`
 const Button = styled.button`
   color: white;
   background-color: #006FCD;
+  height: 20%;
+  margin-left: 5px;
 `
-
 const AddedImage = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   height: 150px;
+  width: 50%;
 `
-
-const Thumbnail = styled.div`
-  height: 10%;
-  width: auto
+const Thumbnail = styled.img`
+  height: 100px;
+  width: auto;
 `
-
-function AddImg ({display, displayAddImage, addPhotos}) {
+function AddImg({ display, displayAddImage, addPhotos }) {
 
   const [addedImages, setAddedImages] = useState(['enterImg'])
+
+  //------------Event Handlers------------
 
   let updatePhotos = (e) => {
     e.preventDefault();
@@ -96,6 +98,8 @@ function AddImg ({display, displayAddImage, addPhotos}) {
     displayAddImage();
   }
 
+  //------------Return------------
+
   if (!display) {
     return null;
   }
@@ -107,8 +111,8 @@ function AddImg ({display, displayAddImage, addPhotos}) {
           if (imageField !== 'enterImg') {
             return (
               <AddedImage key={imageField}>
-                <img src={imageField} style={{height: '100px', width: 'auto'}}></img>
-                <Button style={{height: '20%', marginLeft: '5px'}} onClick={deleteEntry}>Delete</Button>
+                <Thumbnail src={imageField} />
+                <Button onClick={deleteEntry}>Delete</Button>
               </AddedImage>
             )
           } else if (addedImages.length === 6) {
@@ -116,15 +120,15 @@ function AddImg ({display, displayAddImage, addPhotos}) {
           } else {
             return (
               <form key={imageField}>
-              <label htmlFor={'image' + imageField}>Add an Image</label>
-              <input type='url' className='inputField' id={'image' + imageField} placeholder='Enter image URL here' required></input>
-              <Button type='submit' onClick={updatePhotos}>ADD PHOTO</Button>
+                <label htmlFor={'image' + imageField}>Add an Image</label>
+                <input type='url' className='inputField' id={'image' + imageField} placeholder='Enter image URL here' required></input>
+                <Button type='submit' onClick={updatePhotos}>ADD PHOTO</Button>
               </form>
             )
           }
         })}
         <Buttons>
-          <Button style={{marginRight: '10px'}}onClick={submit}>CONFIRM</Button>
+          <Button style={{ marginRight: '10px' }} onClick={submit}>CONFIRM</Button>
           <Button onClick={close}>CANCEL</Button>
         </Buttons>
       </ModalInput>

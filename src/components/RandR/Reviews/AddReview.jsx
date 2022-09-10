@@ -25,7 +25,6 @@ const Modal = styled.div`
   margin-top: auto;
   margin-bottom: auto
 `
-
 const ModalInput = styled.div`
   position: absolute;
   padding: 3%;
@@ -44,17 +43,14 @@ const ModalInput = styled.div`
   overflow-x: hidden;
   background-color: white
 `
-
 const StarHolder = styled.div`
 `
-
 const StarClicks = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 30px;
 `
-
 const Star = styled.div`
   display: flex;
   position: relative;
@@ -64,34 +60,28 @@ const RecHolder = styled.div`
   flex-direction: row;
   align-items: center;
 `
-
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
   margin: 5px 0;
 `
-
 const SummaryAndBody = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
   margin-top: 25px;
 `
-
 const SubText = styled.div`
   font-size: 10px;
 `
 const P = styled.div`
   font-size: 16px;
-  margin: 5px 0;
+  margin: 5px;
 `
-
 const Button = styled.button`
   color: white;
   background-color: #006FCD;
 `
-
-
 function AddReview({ display, product_id, close }) {
 
   const [product, setProduct] = useState();
@@ -108,7 +98,7 @@ function AddReview({ display, product_id, close }) {
   const [minChars, setMinChars] = useState('Minimum required characters left: 50');
   const [addImgDisplay, setAddImgDisplay] = useState(false);
 
-  //--------UseEffects--------
+  //------------Use Effects------------
 
   useEffect(() => {
     if (product_id) {
@@ -149,7 +139,7 @@ function AddReview({ display, product_id, close }) {
     }
   }, [product])
 
-  //-------------Event Handlers----------
+  //------------Event Handlers------------
 
   let selectStar = (e) => {
     let clicked = e.target.id;
@@ -255,7 +245,7 @@ function AddReview({ display, product_id, close }) {
     data.characteristics = chars;
     if (rating === 0) {
       alert('Please make a selection of 1-5 stars')
-    } else {}
+    } else { }
     server.post('/reviews', data)
       .then(() => {
         close();
@@ -265,15 +255,18 @@ function AddReview({ display, product_id, close }) {
       })
   }
 
+  //------------Return ------------
+
   if (display) {
     return (
       <Modal>
         <AddImg display={addImgDisplay} addPhotos={addPhotos} displayAddImage={displayAddImage}></AddImg>
         <ModalInput>
           <form onSubmit={submit}>
-
-            <h2 style={{color: '#006FCD', margin: '8px 0' }}>WRITE YOUR REVIEW</h2>
-            <h3 style={{color: '#006FCD', margin: '8px 0' }}>About {product.name}</h3>
+            {/*HEADERS*/}
+            <h2 style={{ color: '#006FCD', margin: '8px 0' }}>WRITE YOUR REVIEW</h2>
+            <h3 style={{ color: '#006FCD', margin: '8px 0' }}>About {product.name}</h3>
+            {/*STARS*/}
             <StarClicks>
               <Star className={starFills[0]} id={1} onClick={selectStar}></Star>
               <Star className={starFills[1]} id={2} onClick={selectStar}></Star>
@@ -282,19 +275,22 @@ function AddReview({ display, product_id, close }) {
               <Star className={starFills[4]} id={5} onClick={selectStar}></Star>
               <P>{'\t' + ratingDesc}</P>
             </StarClicks>
+            {/*RECOMMEND*/}
             <RecHolder>
               <P>Do you recommend this product?</P>
-              <input style={{ display: 'inline-block' }} type='radio' id='yes' name='recommend' value='yes' required onClick={recommend}></input>
+              <input type='radio' id='yes' name='recommend' value='yes' required onClick={recommend}></input>
               <label htmlFor='yes'>Yes</label>
-              <input style={{ display: 'inline-block' }} type='radio' id='no' name='recommend' value='no' onClick={recommend}></input>
+              <input type='radio' id='no' name='recommend' value='no' onClick={recommend}></input>
               <label htmlFor='no'>No</label>
             </RecHolder>
+            {/*CHARACTERISTICS*/}
             <h5>Characteristics</h5>
             {Object.keys(characteristics).map((char) => {
               return (
                 <RateCharacteristics key={char} char={char} selected={characteristics[char]} updateChar={updateChar}></RateCharacteristics>
               )
             })}
+            {/*TEXT FIELDS*/}
             <SummaryAndBody>
               <label htmlFor='summary'>Review Summary</label>
               <input id='summary' className='inputField' type='text' maxLength='60' size='150' onChange={updateSummary} required></input>
@@ -302,14 +298,17 @@ function AddReview({ display, product_id, close }) {
               <textarea id='reviewBody' className='inputField' rows='5' minLength='50' maxLength='1000' size='150' onChange={updateBody} required></textarea>
               <SubText>{minChars}</SubText>
             </SummaryAndBody>
-            <Button style={{margin: '10px 0'}} onClick={displayAddImage}>ADD PICTURES</Button><br></br>
+            {/*ADD PHOTO BUTTON*/}
+            <Button style={{ margin: '10px 0' }} onClick={displayAddImage}>ADD PICTURES</Button><br></br>
+            {/*USER INFO*/}
             <label htmlFor='nickname'>Nickname</label><br></br>
             <input className='inputField' id='nickname' placeholder='Example: jackson11!' maxLength='60' size='150' onChange={updateNickname} required></input> <br></br>
             <label htmlFor='email'>Email</label><br></br>
             <input type='email' className='inputField' id='email' placeholder='Example: jackson11@email.com' maxLength='60' size='150' onChange={updateEmail} required></input>
             <SubText>For authentication reasons, you will not be emailed</SubText>
+            {/*SUBMIT/CLOSE BUTTONS*/}
             <ButtonHolder>
-              <Button style={{marginRight: '10px'}} >SUBMIT</Button>
+              <Button style={{ marginRight: '10px' }} >SUBMIT</Button>
               <Button onClick={close}>CANCEL</Button>
             </ButtonHolder>
           </form>
