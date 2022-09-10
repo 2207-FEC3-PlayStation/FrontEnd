@@ -7,76 +7,66 @@ import Title from './Title.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import server from '../../serverRequests.js';
-import $ from "jquery";
 
 const Top = styled.div`
-max-width: 1200;
+  max-width: 1200;
 `
 const Announce = styled.div`
-text-align: center;
-padding: 20px;
-font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding: 20px;
 `
-
 const FlexContainer = styled.div`
-display: flex;
-flex-direction: row;
-margin-bottom: 0;
-justify-content: flex-start;
-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0;
+  justify-content: flex-start;
+  width: 1200px;
 `;
 
 const ProdInfo = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-margin-right: 0px;
-margin-top: 30px;
-position: absolute;
-left: 750px;
-word-wrap: break-word;
-width: 420px;
-padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-right: 0px;
+  margin-top: 30px;
+  position: absolute;
+  left: 750px;
+  width: 420px;
+  padding-left: 60px;
 `;
 
 const ProdDet = styled.div`
-/* background-color: #d4b37711; */
-display: flex;
-flex-direction: row;
-margin: 0px;
-justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  justify-content: flex-start;
 `;
 
 const ProdDescr = styled.div`
-padding: 10px;
-padding-left: 120px;
-margin-top: 100px;
-margin-bottom: 30px;
-width: 55%;
+  padding: 10px;
+  padding-left: 120px;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  width: 55%;
 `;
 
 const ProdChar = styled.div`
-padding: 10px;
-margin-top: 100px;
-margin-bottom: 30px;
-padding-left: 30px;
-border-left: 3px solid grey;
+  padding: 10px;
+  margin-top: 100px;
+  margin-bottom: 30px;
+  padding-left: 30px;
+  border-left: 3px solid grey;
 `
-
 const StyleSelected = styled.div`
-margin-top: 15px;
-margin-bottom: 13px;
-font-family: Arial, Helvetica, sans-serif;
+  margin-top: 15px;
+  margin-bottom: 13px;
 `
-
 const Styles = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-max-width: 360px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 360px;
 `
-
-
 function Overview (props) {
   const [image, setImage] = useState();
   const [defaultPhotos, setdefaultPhotos] = useState(null);
@@ -92,10 +82,9 @@ function Overview (props) {
   const [size, setSize] = useState();
   const [sku, setSku] = useState();
   const [sizeSelected, setSizeSelected] = useState(false);
-  let [index, setIndex] = useState(1);
-  let [price, setPrice] = useState();
-  let [saleprice, setSalePrice] = useState();
-  let [onSale, setOnSale] = useState(false);
+  const [price, setPrice] = useState();
+  const [saleprice, setSalePrice] = useState();
+  const [onSale, setOnSale] = useState(false);
   const [hideR, setHideR] = useState(false);
   const [clickedR, setClickedR] = useState(false);
 
@@ -160,7 +149,6 @@ function Overview (props) {
 
   function handleImage(e) {
     setImage(defaultPhotos[e.target.alt].url);
-    setIndex(e.target.alt);
   }
 
   function changeStyle(e) {
@@ -273,7 +261,7 @@ function Overview (props) {
     <Title />
     <Announce><strong><em>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT OFFER - NEW PRODUCT HIGHLIGHT</em></strong></Announce>
     <FlexContainer>
-      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter} index={index}/>
+      <ImageGallery prod={props.prod} photos={defaultPhotos} image={image} handleImage={handleImage} leftClick={leftClick} rightClick={rightClick} counter={counter}/>
       <ProdInfo>
         {props.prod && <ProductInfo info={props.prod} avgRating={props.avgRating} numReviews={props.numReviews} price={price} saleprice={saleprice} onSale={onSale}/>}
         {styles && currentStyle &&
@@ -303,5 +291,3 @@ function Overview (props) {
 }
 
 export default Overview;
-
-
