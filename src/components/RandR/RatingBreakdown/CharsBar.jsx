@@ -9,7 +9,6 @@ const CharsContainer = styled.div`
   max-height: 100px;
   box-sizing: border-box;
 `
-
 const CharLabel = styled.h6`
   display: flex;
   font-size: 12px;
@@ -26,13 +25,11 @@ const SliderHolder = styled.div`
 const BarSpacer = styled.div`
   flex-basis: 10%
 `
-
 const SubHolder = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 90%
 `
-
 const OutterBar = styled.div`
   background: #8a8a8a;
   display: flex;
@@ -40,7 +37,6 @@ const OutterBar = styled.div`
   margin-bottom: 5px;
   flex-basis: 8px
 `
-
 const Indicator = styled.div`
   display: flex;
   flex-direction: row;
@@ -49,14 +45,12 @@ const Indicator = styled.div`
   box-sizing: border-box;
   width: 100%;
 `
-
 const Endpoints = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-sizing: border-box;
   flex-basis: 12px;
-
 `
 const CharEndpoint = styled.h6`
   box-sizing: border-box;
@@ -66,47 +60,49 @@ const CharEndpoint = styled.h6`
   color: #006FCD
 `
 
-function CharsBar({char, thisRating}) {
+function CharsBar({ char, thisRating }) {
 
-const [endpoints, setEndpoints] = useState([]);
-const [ratingWidth, setRatingWidth] = useState(0);
+  const [endpoints, setEndpoints] = useState([]);
+  const [ratingWidth, setRatingWidth] = useState(0);
 
-useEffect(() => {
-  if (char) {
-    if (char === 'Size' || char === 'Width' || char === length) {
-      setEndpoints(["Too Small", "Perfect", "Too Big"]);
-    } else if (char === 'Comfort' || char === 'Fit' || char === 'Quality') {
-      setEndpoints(["Poor", "Great"])
+  //------------Use Effect------------
+
+  useEffect(() => {
+    if (char) {
+      if (char === 'Size' || char === 'Width' || char === length) {
+        setEndpoints(["Too Small", "Perfect", "Too Big"]);
+      } else if (char === 'Comfort' || char === 'Fit' || char === 'Quality') {
+        setEndpoints(["Poor", "Great"])
+      }
     }
-  }
-}, [char])
+  }, [char])
 
-useEffect(() => {
-  if (thisRating) {
-    //252 is the width of the bar
-    setRatingWidth(((thisRating / 5) * 100).toFixed(1) + '%');
-  }
-}, [thisRating])
+  useEffect(() => {
+    if (thisRating) {
+      //252 is the width of the bar
+      setRatingWidth(((thisRating / 5) * 100).toFixed(1) + '%');
+    }
+  }, [thisRating])
 
-
+  //------------Return------------
 
   return (
     <CharsContainer>
       <SliderHolder>
         <SubHolder>
-          <Indicator>
-            <CharLabel style={{flexBasis: `${ratingWidth}`}}>{char}</CharLabel>
+          <Indicator> {/*i.e. checkmark*/}
+            <CharLabel style={{ flexBasis: `${ratingWidth}` }}>{char}</CharLabel>
             <div className='checkMark'></div>
           </Indicator>
           <OutterBar>
           </OutterBar>
           <Endpoints>
             {endpoints.map((endpoint) => {
-              return <CharEndpoint style={{fontWeight: 'normal'}} key={endpoint}>{endpoint}</CharEndpoint>
+              return <CharEndpoint style={{ fontWeight: 'normal' }} key={endpoint}>{endpoint}</CharEndpoint>
             })}
           </Endpoints>
         </SubHolder>
-        <BarSpacer/>
+        <BarSpacer /> {/*Adds spacing between Ratings and Reviews */}
       </SliderHolder>
     </CharsContainer>
   )

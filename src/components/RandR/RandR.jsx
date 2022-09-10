@@ -27,7 +27,7 @@ const ReviewsComp = styled.div`
   max-height: 75%;
 `
 
-function RandR ({prod}) {
+function RandR({ prod }) {
 
   const [product_id, setProduct_id] = useState(null);
   const [reviews, setReviews] = useState({});
@@ -38,6 +38,8 @@ function RandR ({prod}) {
   const [ratingFilter, setRatingFilter] = useState([]);
   const [filtersApplied, setFiltersApplied] = useState('none');
 
+  //------------Use Effect------------
+
   useEffect(() => {
     if (prod) {
       setProduct_id(prod.id)
@@ -47,13 +49,13 @@ function RandR ({prod}) {
   useEffect(() => {
     if (product_id) {
       setProduct_id
-      server.get('/reviews/meta', {'product_id': product_id})
-      .then((data) => {
-        setReviews(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      server.get('/reviews/meta', { 'product_id': product_id })
+        .then((data) => {
+          setReviews(data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     }
   }, [product_id])
 
@@ -61,7 +63,7 @@ function RandR ({prod}) {
     if (reviews) {
       let sum = 0;
       let reviewCount = 0;
-      for(var key in reviews.ratings) {
+      for (var key in reviews.ratings) {
         let thisKey = parseInt(key);
         let thisVal = parseInt(reviews.ratings[key]);
         reviewCount += thisVal;
@@ -87,10 +89,12 @@ function RandR ({prod}) {
     if (reviews.recommended) {
       let recc = parseInt(reviews.recommended.true);
       let noRecc = parseInt(reviews.recommended.false);
-      let recommended =  100 * (recc / (recc  + noRecc));
+      let recommended = 100 * (recc / (recc + noRecc));
       setRecommendedPerc(recommended.toFixed(0));
     }
   }, [reviews.recommended])
+
+  //------------Event Handlers------------
 
   let updateRatingFilter = (value) => {
     let newRatingFilter = [...ratingFilter];
@@ -102,14 +106,14 @@ function RandR ({prod}) {
     }
     setRatingFilter(newRatingFilter);
   }
-
+  //------------Return------------
   return (
     <RandRComp>
       <RatingsComp>
-        <RatingBreakdown update={updateRatingFilter} filtersApplied={filtersApplied} ratingFilter={ratingFilter} reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count}/>
+        <RatingBreakdown update={updateRatingFilter} filtersApplied={filtersApplied} ratingFilter={ratingFilter} reviews={reviews} avgRating={avgRating} ratingToTenth={ratingToTenth} recommended={recommendedPerc} count={count} />
       </RatingsComp>
       <ReviewsComp>
-        <Reviews ratingFilter={ratingFilter} product_id={product_id} count={count}/>
+        <Reviews ratingFilter={ratingFilter} product_id={product_id} count={count} />
       </ReviewsComp>
     </RandRComp>
   )

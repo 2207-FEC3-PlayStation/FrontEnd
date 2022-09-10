@@ -48,32 +48,31 @@ const BottomRow = styled.div`
   max-height: 25px
 `
 
-function ReviewTile({data}) {
+function ReviewTile({ data }) {
 
-  const [date, setDate] = useState();
-  const [helpfulness, setHelpfulness] = useState();
-  const [addedHelpful, setAddedHelpful] = useState(false);
-  const [report, setReport] = useState({text: 'Report', reported: false})
+  const [date, setDate] = useState()
+  const [helpfulness, setHelpfulness] = useState()
+  const [addedHelpful, setAddedHelpful] = useState(false)
+  const [report, setReport] = useState({ text: 'Report', reported: false })
   const [modalImg, setModalImg] = useState()
   const [modalImgDisplay, setModalImageDisplay] = useState(false)
   const [showBody, setShowBody] = useState(250)
-  const [ellipsis, setEllipsis] = useState('...');
+  const [ellipsis, setEllipsis] = useState('...')
   const [showMore, setShowMore] = useState('showMore')
+  const [recommend, setRecommend] = useState('none')
+  const [response, setResponse] = useState('none')
 
 
-//-----------conditional rendering variables-----
+  //------------useEffect methods------------
 
-  let recommend = 'none';
-  if (data.recommend === true) {
-    recommend = 'block';
-  }
-
-  let response = 'none';
-  if (data.response !== null) {
-    response = 'block';
-  }
-
-//------------useEffect methods -------
+  useEffect(() => {
+    if (data.recommend === true) {
+      setRecommend('block')
+    }
+    if (data.response !== null) {
+      setResponse('block');
+    }
+  }, [data])
 
   useEffect(() => {
     let year = data.date.substring(0, 4);
@@ -90,7 +89,7 @@ function ReviewTile({data}) {
       day = "0" + day
     }
     let date = new Date(Date.UTC(year, month, day, 0, 0, 0));
-    date = date.toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'});
+    date = date.toLocaleString('en-US', { month: 'long', day: '2-digit', year: 'numeric' });
     date = date.split(',');
     setDate(date[0] + ',' + date[1])
   }, [data]);
@@ -106,12 +105,12 @@ function ReviewTile({data}) {
   }, [data, data.helpfulness, showBody]);
 
 
-//----------Event Handlers--------------
+  //------------Event Handlers------------
 
   let increaseHelpful = (e) => {
     if (addedHelpful === false) {
-      server.put('/reviews/helpful', {review_id: data.review_id})
-        .then(() => {})
+      server.put('/reviews/helpful', { review_id: data.review_id })
+        .then(() => { })
         .catch((err) => {
           console.log('error: ', err)
         })
@@ -121,8 +120,8 @@ function ReviewTile({data}) {
   }
 
   let reportReview = (e) => {
-    server.put('/reviews/report', {review_id: data.review_id});
-    setReport({text: 'Reported', reported: true});
+    server.put('/reviews/report', { review_id: data.review_id });
+    setReport({ text: 'Reported', reported: true });
   }
 
   let displayImg = (e) => {
@@ -140,40 +139,40 @@ function ReviewTile({data}) {
     e.target.className = 'moreShown';
   }
 
-
   return (
     <Tile>
+      {/*Thumbnail photo modals*/}
       <ImageModal image={modalImg} display={modalImgDisplay} closeImg={closeImg}></ImageModal>
+      {/*Stars and user data*/}
       <TopRow>
-        <StarRating rating={data.rating}/>
+        <StarRating rating={data.rating} />
         <UserData>
-        <h6 style={{marginRight: '5px'}}>{data.reviewer_name}</h6>
-        <h6>{date}</h6>
+          <h6 style={{ marginRight: '5px' }}>{data.reviewer_name}</h6>
+          <h6>{date}</h6>
         </UserData>
       </TopRow>
-
-      <h3 style={{margin: '5px 0'}}>{data.summary}</h3>
-
-      <p style={{margin: '5px, 0'}}>{data.body.substring(0, showBody) + `${ellipsis}`}</p>
+      {/*Summary*/}
+      <h3 style={{ margin: '5px 0' }}>{data.summary}</h3>
+      {/*Body*/}
+      <p style={{ margin: '5px, 0' }}>{data.body.substring(0, showBody) + `${ellipsis}`}</p>
       <Button className={showMore} onClick={expandBody}>Show More</Button>
-
-      <span style={{display: 'block'}}>
+      {/*Photo Thumbnails*/}
+      <span style={{ display: 'block' }}>
         {data.photos.map((photo) => {
-          return <img key={photo.id} src={photo.url} onClick={displayImg} style={{height: '35px', width: 'auto', margin: '3px'}}></img>
+          return <img key={photo.id} src={photo.url} onClick={displayImg} style={{ height: '35px', width: 'auto', margin: '3px' }}></img>
         })}
       </span>
-
-      <p className='checkMark' style={{fontSize: '12px', display: recommend}}>I recommend this product!</p>
-
-      <Response style={{display: response}} >Response from seller:{'\n' + data.response}</Response>
-
+      {/*Recommend*/}
+      <p className='checkMark' style={{ fontSize: '12px', display: recommend }}>I recommend this product!</p>
+      {/*Seller Response*/}
+      <Response style={{ display: response }} >Response from seller:{'\n' + data.response}</Response>
+      {/*User interaction*/}
       <BottomRow>
-        <h6 style={{display: 'inline-block'}}>Was this review helpful?</h6>
+        <h6 style={{ display: 'inline-block' }}>Was this review helpful?</h6>
         <Button onClick={increaseHelpful} >Yes</Button>
         <Button>{'(' + helpfulness + ')'}</Button>
         <Button onClick={reportReview}>{report.text}</Button>
       </BottomRow>
-
     </Tile>
   )
 }
