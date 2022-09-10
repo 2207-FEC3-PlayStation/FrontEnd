@@ -16,3 +16,5 @@ The Related Products carousel displays a list of products related to the main pr
 # Questions and Answers
 
 # Ratings and Reviews
+
+![Alt Text] (https://media.giphy.com/media/LhA6YSSa1JDrTot1Kt/giphy.gif)
