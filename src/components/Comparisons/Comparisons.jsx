@@ -44,9 +44,6 @@ function Comparisons (props) {
   const [product, setProduct] = useState(props.prod);
   const [related, setRelated] = useState([]);
 
-
-
-
   // gets related products for the current product and removes any duplicates and if it also contains itself as related
   useEffect(() => {
     if (props.prod) {
@@ -97,8 +94,7 @@ function Comparisons (props) {
     }
   }, [related])
 
-  // checks if related item is out of stock. If it is, delete that item from related products
-  // works but if you click on too many items it'll max out the requests to the API... don't click on too many related products in a short time frame.
+  // checks if related item is out of stock. If it is, delete that item from related products.
   useEffect(() => {
     if (products) {
       related.forEach((item) => {
@@ -119,8 +115,6 @@ function Comparisons (props) {
       })
     }
   }, [products])
-
-  // clicking the card will navigate to the product detail page
 
   function scrollL () {
     const element = document.getElementById("RelatedListCarousel");
