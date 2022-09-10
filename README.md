@@ -16,3 +16,8 @@ The Related Products carousel displays a list of products related to the main pr
 # Questions and Answers
 
 # Ratings and Reviews
+
+The ratings and reviews section displays relevant consumer feedback about the current product. The most impactful components will have the user's eye drawn to them with the popping blue theme color.
+The reviews section can be sorted, filted, and extended by the user through various buttons and selections in a way that feels smooth and seemless. The ability add a new review with modal pop-ups is clean and simple to follow.
+
+![Alt Text] (https://media.giphy.com/media/LhA6YSSa1JDrTot1Kt/giphy.gif)

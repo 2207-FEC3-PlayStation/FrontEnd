@@ -24,7 +24,7 @@ const List = styled.div`
   display: flex;
   position: absolute;
   flex-direction: column;
-  margin-top: 25px;
+  margin: 25px 0;
   min-width: 700px;
   max-height: 600px;
   flex-basis: 80%;
@@ -38,6 +38,7 @@ const ButtonHolder = styled.div`
   display: flex;
   position: absolute;
   margin-top: 635px;
+  margin-bottom: 25px;
   flex-direction: row;
   min-width: 700px;
 `
