@@ -104,7 +104,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
         rows="10"
         cols="65"
         maxLength={1000}
-        placeholder="Enter your answers here..."
+        placeholder="Enter your answer here..."
         value={body}
         onChange={e => {
           //e.stopPropagation();
