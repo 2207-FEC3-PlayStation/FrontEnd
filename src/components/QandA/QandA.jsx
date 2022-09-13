@@ -26,7 +26,7 @@ const Button = styled.button`
 `;
 
 const Questions = styled.section`
-  overflow: auto;
+  overflow: scroll;
   height: 100%;
   max-height: 85vh;
   width: 1000px;
@@ -95,7 +95,6 @@ function QandA({ prod }) {
     * }
     *************************************/
   ]);
-  const [shownQuestions, setShownQuestions] = useState([]);
   const [showQModel, setShowQModel] = useState(false);
   const [qRerender, setQRerender] = useState(0);
   const [questionCount, setQuestionCount] = useState(4);
@@ -122,22 +121,20 @@ function QandA({ prod }) {
           console.log(err);
         })
     }
-  }, [productID])
+  }, [productID, qRerender])
 
   useEffect(() => {
-    // console.log('UseEffect (data)')
     if (results) {
       setShowData([]);
       for (let i = 0; i < results.length; i++) {
         setShowData(showData => [...showData, {
           questionID: results[i].question_id,
           questionHelp: results[i].question_helpfulness,
-          question: results[i].question_body,
-          answers: Object.values(results[i].answers)
+          question: results[i].question_body
         }])
       }
     }
-  }, [results, showQModel])
+  }, [results, showQModel, qRerender])
 
   // ==================================== Question Modal =============================
   if (showQModel) {
@@ -181,7 +178,7 @@ function QandA({ prod }) {
         </Search>
         <br/>
         {showData.length > 0 ?
-          <p>Click on a question to view the answers</p> :
+          <p></p> :
           <React.Fragment>
             <p>There are no questions for this product. Click "Add a Question" to add a question.</p>
             <Button onClick={() => setShowQModel(true)}>

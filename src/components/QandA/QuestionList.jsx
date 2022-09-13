@@ -149,7 +149,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
       .catch(err => {
         console.error('Unable to get answers. Sorry...', err);
       })
-  }, [question.questionID, id, reload]);
+  }, [question.questionID, id, reload, aRerender]);
 
   const handleShowingAnswers = () => {
     if (questionClicked) {
@@ -172,26 +172,26 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
       server.put(`/qa/${qOrA}/helpful`, x)
         .then(response => {
           swal("Thank You", 'Your feedback has been noted.', "success")
-          return setStateVariable(true)
+          setStateVariable(true)
         })
         .catch(err => console.error(err))
         .then(() => {
-          setRerender(rerender + 1)
+          return setRerender(rerender + 1)
         })
     }
   }
 
   const handleReported = (stateVariable, qOrA, id, report, setStateVariable) => {
     if (stateVariable) {
-      swal("Helpful?", "We only allow fone click of 'Reported'. We will review this as soon as possible.", "error");
+      swal("Sorry", "You can only click 'Reported' once", "error");
     } else {
       server.put('/qa/answers/report', { 'answer_id': id })
-        .then(() => {
-          setStateVariable(true);
-          swal("Thank You", 'We have marked this answer as "Reported" and will be reviewed soon.Your report has been noted', "success");
+        .then(response => {
+          swal("Reported!", 'Your report has been noted', "Thank you")
+          setStateVariable(true)
         })
         .catch(err => {
-          swal('Yikes...', 'There was an error on our side. Try again later.', 'error');
+          swal('Yikes...', 'There was an error on our side. Try again later.', 'error')
         })
     }
   }
@@ -230,7 +230,7 @@ function QuestionList ({question, id, productName, qRerender, setQRerender}) {
         <Helpful>
           Helpful?
           <Yes onClick={(e) => {
-            //e.stopPropagation();
+            e.stopPropagation();
             handleHelpful(
               qHelpful,
               'questions',
