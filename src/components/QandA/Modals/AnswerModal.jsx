@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./QuestionModal.css";
 import server from '../../../serverRequests.js';
+import photoUrlsToArray from './ConvertPhoto.jsx'
 import swal from 'sweetalert';
 
 
@@ -128,7 +129,7 @@ export default function AnswerModal ({id, productName, question_id, question_bod
               {Username}
               {Email}
               {Answer}
-              {/* {photos.length < 5 &&
+              {photos.length < 5 &&
                 <div>
                   <label htmlFor="photos">Upload your photos</label> <br></br>
                   <input style={{color: 'white', backgroundColor: '#006FCD'}}
@@ -137,12 +138,12 @@ export default function AnswerModal ({id, productName, question_id, question_bod
                     accept="image/png, image/jpeg"
                     multiple
                     onChange={(e) => {
-                      //let files = e.target.files;
-                      //photoUrlsToArray(files, setPhotos);
+                      let files = e.target.files;
+                      photoUrlsToArray(files, setPhotos);
                     }}
                   ></input>
                 </div>
-              } */}
+              }
               {photos.length >= 5 &&
                 <div>
                   <span>Max 5 photo uploads reached</span>

@@ -14,10 +14,13 @@ The Related Products carousel displays a list of products related to the main pr
 ![Alt Text](https://media.giphy.com/media/DhFERT16Qij8Li6PyW/giphy.gif)
 
 # Questions and Answers
+Based on the selected product, Questions and Answers displays a list of questions sorted by helpfulness. If the questions have answers, they will also be sorted by helpfulness, but you can only see two. If you select the "SEE MORE ANSWERS" text (button), you will see the remaining answers. To see more questions, select the "MORE ANSWERED QUESTIONS." There are also ways to add questions and answers by their coresponding buttons (Add A Question and Add Answer). Reporting an answer will remove the answer after returning to the website.
+
+![Alt Text](https://media.giphy.com/media/x9wBv4kC0PKN16LUsX/giphy.gif)
 
 # Ratings and Reviews
 
 The ratings and reviews section displays relevant consumer feedback about the current product. The most impactful components will have the user's eye drawn to them with the popping blue theme color.
 The reviews section can be sorted, filted, and extended by the user through various buttons and selections in a way that feels smooth and seemless. The ability add a new review with modal pop-ups is clean and simple to follow.
 
-![Alt Text] (https://media.giphy.com/media/LhA6YSSa1JDrTot1Kt/giphy.gif) 
+![Alt Text](https://media.giphy.com/media/LhA6YSSa1JDrTot1Kt/giphy.gif)

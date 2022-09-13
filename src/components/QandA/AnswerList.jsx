@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { format, parseISO } from 'date-fns';
 import styled from 'styled-components';
-import ImageModal from './Modals/PhotoModal.jsx';
+import PhotoModal from './Modals/PhotoModal.jsx';
 import axios from 'axios';
 import server from '../../serverRequests.js';
 import swal from 'sweetalert';
@@ -107,7 +107,7 @@ function AnswersList ({answer, id, productName, question_id, aRerender, setARere
                     </Image>
           })}
           {modal && (
-            <ImageModal
+            <PhotoModal
               key={url}
               url={url}
               toggleModal={toggleModal}
